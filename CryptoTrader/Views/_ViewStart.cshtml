@@ -1,0 +1,17 @@
+﻿@{
+    if( this.User.Identity.IsAuthenticated )
+    {
+        if( this.User.IsInRole( "Admin" ) )
+        {
+            Layout = "~/Views/Shared/_LayoutAuthAdmin.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_LayoutAuthUser.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
