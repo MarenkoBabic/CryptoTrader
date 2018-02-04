@@ -33,7 +33,6 @@ namespace CryptoTrader.Controllers
             }
             else
             {
-                ModelState.AddModelError( "LogOnError", "Benutzername oder Password falsch" );
                 return View();
             }
         }

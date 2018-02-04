@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using CryptoTrader.Manager;
-using CryptoTrader.Models.DbModel;
-namespace CryptoTrader.Controllers
+﻿namespace CryptoTrader.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using CryptoTrader.Manager;
+    using CryptoTrader.Models.DbModel;
+
     public class ValidationController : Controller
     {
         /// <summary>
         /// Prüft bei der Registrierung ob Email schon vorhanden
         /// </summary>
-        /// <param name="email">Input Email</param>
+        /// <param name = "email" > Input Email</param>
         /// <returns>bool</returns>
         public ActionResult IsMailExistToRegister( string RegisterEmail )
         {
@@ -32,8 +30,8 @@ namespace CryptoTrader.Controllers
         /// <summary>
         /// Prüft ob EMail und password übereinstimmen
         /// </summary>
-        /// <param name="email">Input Email</param>
-        /// <param name="password">Input Password</param>
+        /// <param name = "email" > Input Email</param>
+        /// <param name = "password" > Input Password</param>
         /// <returns>bool</returns>
         public ActionResult IsPasswordTrue( string LoginEmail, string LoginPassword )
         {
@@ -58,9 +56,9 @@ namespace CryptoTrader.Controllers
                 }
                 else
                 {
-                    return Json( !result, JsonRequestBehavior.AllowGet );
+                    return Json( result, JsonRequestBehavior.AllowGet );
                 }
-                return Json( !result, JsonRequestBehavior.AllowGet );
+                return Json( result, JsonRequestBehavior.AllowGet );
             }
         }
     }

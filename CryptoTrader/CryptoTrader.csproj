@@ -167,55 +167,56 @@
     <Compile Include="Manager\LoginManager.cs" />
     <Compile Include="Manager\SendMail.cs" />
     <Compile Include="Models\DbModel\Address.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Balance.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\BankAccount.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\BankTransferHistory.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\City.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Country.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\CryptoTrader.Context.cs">
+    <Compile Include="Models\DbModel\DataBaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoTrader.Context.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\CryptoTrader.cs">
+    <Compile Include="Models\DbModel\DataBaseModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\CryptoTrader.Designer.cs">
+    <Compile Include="Models\DbModel\DataBaseModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoTrader.edmx</DependentUpon>
+      <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Person.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Ticker.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\TradeHistory.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Upload.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AutoMapperProfile.cs" />
     <Compile Include="Models\ViewModel\EmailSendViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\PersonVerificationViewModel.cs" />
     <Compile Include="Models\ViewModel\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModel\test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -269,27 +270,27 @@
     <Content Include="Image\background-navbar.jpg" />
     <Content Include="Image\background.jpg" />
     <Content Include="Image\backgroundBitEth.jpg" />
-    <Content Include="Models\DbModel\CryptoTrader.Context.tt">
+    <Content Include="Models\DbModel\DataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CryptoTrader.edmx</DependentUpon>
-      <LastGenOutput>CryptoTrader.Context.cs</LastGenOutput>
+      <DependentUpon>DataBaseModel.edmx</DependentUpon>
+      <LastGenOutput>DataBaseModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DbModel\CryptoTrader.tt">
+    <Content Include="Models\DbModel\DataBaseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CryptoTrader.edmx</DependentUpon>
-      <LastGenOutput>CryptoTrader.cs</LastGenOutput>
+      <DependentUpon>DataBaseModel.edmx</DependentUpon>
+      <LastGenOutput>DataBaseModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\DbModel\CryptoTrader.edmx">
+    <EntityDeploy Include="Models\DbModel\DataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CryptoTrader.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataBaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DbModel\CryptoTrader.edmx.diagram">
-      <DependentUpon>CryptoTrader.edmx</DependentUpon>
+    <Content Include="Models\DbModel\DataBaseModel.edmx.diagram">
+      <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />

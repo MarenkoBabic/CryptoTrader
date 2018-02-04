@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using CryptoTrader.Manager;
-using CryptoTrader.Models.DbModel;
-namespace CryptoTrader.Manager
+﻿namespace CryptoTrader.Manager
 {
+    using System.Linq;
+    using CryptoTrader.Models.DbModel;
+
+
     public class LoginManager
     {
         public static bool Login( string email, string password )

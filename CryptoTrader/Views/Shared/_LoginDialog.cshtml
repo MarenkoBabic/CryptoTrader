@@ -43,6 +43,7 @@
                     <div class="input-group">
                         @Html.LabelFor( a => a.LoginEmail, " ", new { @class = "input-group-addon glyphicon glyphicon-user" } )
                         @Html.EditorFor( a => a.LoginEmail, new { htmlAttributes = new { @class = "form-control" } } )
+                        @Html.ValidationMessageFor(a => a.LoginEmail,"",new {@class = "text-danger" })
                     </div>
 
                     <div class="input-group">

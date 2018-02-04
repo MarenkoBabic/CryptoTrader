@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+namespace CryptoTrader.Manager
+{using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CryptoTrader.Models.DbModel;
 
-namespace CryptoTrader.Manager
-{
     public class CountryList
     {
         /// <summary>

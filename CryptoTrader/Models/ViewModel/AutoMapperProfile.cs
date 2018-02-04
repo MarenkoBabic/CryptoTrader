@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
+﻿using AutoMapper;
 using CryptoTrader.Models.DbModel;
 
 namespace CryptoTrader.Models.ViewModel
@@ -32,9 +28,9 @@ namespace CryptoTrader.Models.ViewModel
 
 
                 CreateMap<Address, PersonVerificationViewModel>()
-                    .ForMember( a => a.Address_id,conf => conf.MapFrom(a => a.id));
+                    .ForMember( a => a.Address_id, conf => conf.MapFrom( a => a.id ) );
                 CreateMap<PersonVerificationViewModel, Address>()
-                    .ForMember(a => a.id,conf => conf.MapFrom(a => a.Address_id));
+                    .ForMember( a => a.id, conf => conf.MapFrom( a => a.Address_id ) );
 
 
                 CreateMap<City, PersonVerificationViewModel>()

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using CryptoTrader.Manager;
-using CryptoTrader.Models.ViewModel;
-using CryptoTrader.Models.DbModel;
-using AutoMapper;
-
-namespace CryptoTrader.Controllers
+﻿namespace CryptoTrader.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using AutoMapper;
+    using CryptoTrader.Manager;
+    using CryptoTrader.Models.DbModel;
+    using CryptoTrader.Models.ViewModel;
+
     public class RegisterController : Controller
     {
         public ActionResult Register()
@@ -72,6 +69,7 @@ namespace CryptoTrader.Controllers
         {
             Address dbAddress = Mapper.Map<Address>( vm );
             City dbCity = Mapper.Map<City>( vm );
+            Upload dbUpload = Mapper.Map<Upload>( vm );
             using( var db = new CryptoTraderEntities() )
             {
                 Country dbCountry = db.Country.Where( a => a.countryName == vm.CountryName ).FirstOrDefault();
@@ -84,6 +82,9 @@ namespace CryptoTrader.Controllers
                 dbAddress.city_id = dbCity.id;
                 dbAddress.person_id = dbPerson.id;
                 db.Address.Add( dbAddress );
+
+                dbUpload.person_id = dbPerson.id;
+                db.Upload.Add( dbUpload );
 
                 db.SaveChanges();
             }

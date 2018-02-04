@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CryptoTrader.Models.DbModel;
+using CryptoTrader.Models.ViewModel;
 
 namespace CryptoTrader.Controllers
 {
@@ -15,9 +17,16 @@ namespace CryptoTrader.Controllers
 
         public ActionResult About()
         {
+            test t = new test();
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            using(var db = new CryptoTraderEntities() )
+            {
+                Upload u = new Upload();
+                t.testt = u.path;
+            }
+
+            return View(t);
         }
 
         public ActionResult Contact()

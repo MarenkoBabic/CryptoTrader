@@ -11,6 +11,8 @@ namespace CryptoTrader.Models.ViewModel
     {
         public int Person_id { get; set; }
 
+        public DateTime Created { get; set; } = DateTime.Now;
+
         public int Address_id { get; set; }
 
         [Required( AllowEmptyStrings = false )]
