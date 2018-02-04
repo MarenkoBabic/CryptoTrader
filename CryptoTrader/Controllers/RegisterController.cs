@@ -6,11 +6,17 @@ using System.Web.Mvc;
 using CryptoTrader.Manager;
 using CryptoTrader.Models.ViewModel;
 using CryptoTrader.Models.DbModel;
+using AutoMapper;
 
 namespace CryptoTrader.Controllers
 {
     public class RegisterController : Controller
     {
+        public ActionResult Register()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Speichert den Benutzer wenn die Daten stimmen
         /// </summary>
@@ -20,22 +26,16 @@ namespace CryptoTrader.Controllers
         [HttpPost]
         public ActionResult ToRegister( RegisterViewModel vm )
         {
-            Person dbperson = new Person();
-            dbperson.created = vm.Created;
-            dbperson.firstname = vm.FirstName;
-            dbperson.lastname = vm.LastName;
-            dbperson.email = vm.RegisterEmail;
-            dbperson.salt = Hashen.SaltErzeugen();
-            dbperson.password = Hashen.HashBerechnen( vm.RegisterPassword + dbperson.salt );
-            dbperson.active = vm.Active;
-            dbperson.role = vm.Role;
-            dbperson.status = vm.Status;
-            //SendMail.SendEmail(vm.Email);
+
+            Person dbPerson = Mapper.Map<Person>( vm );
+            dbPerson.salt = Hashen.SaltErzeugen();
+            dbPerson.password = Hashen.HashBerechnen( vm.RegisterPassword + dbPerson.salt );
+
             if( ModelState.IsValid )
             {
                 using( var db = new CryptoTraderEntities() )
                 {
-                    db.Person.Add( dbperson );
+                    db.Person.Add( dbPerson );
                     db.SaveChanges();
                 }
                 return RedirectToAction( "Index", "Home" );
@@ -70,29 +70,21 @@ namespace CryptoTrader.Controllers
         [HttpPost]
         public ActionResult PersonVerification( PersonVerificationViewModel vm )
         {
-            Address dbAddress = new Address();
-            City dbCity = new City();
+            Address dbAddress = Mapper.Map<Address>( vm );
+            City dbCity = Mapper.Map<City>( vm );
             using( var db = new CryptoTraderEntities() )
             {
-                Country dbCountry = db.Country.Where( a => a.name == vm.Country_Name ).FirstOrDefault();
+                Country dbCountry = db.Country.Where( a => a.countryName == vm.CountryName ).FirstOrDefault();
                 Person dbPerson = db.Person.Where( a => a.email == User.Identity.Name ).FirstOrDefault();
-                vm.Person_id = dbPerson.id;
+                dbPerson.status = vm.Status;
 
-                dbCity.city1 = vm.CityName;
                 dbCity.country_id = dbCountry.id;
-                dbCity.created = vm.City_created;
-                dbCity.zip = vm.Zip;
                 db.City.Add( dbCity );
 
-                dbAddress.created = vm.Address_created;
-                dbAddress.person_id = vm.Person_id;
-                dbAddress.street = vm.Street;
-                dbAddress.numbers = vm.Number;
                 dbAddress.city_id = dbCity.id;
-
+                dbAddress.person_id = dbPerson.id;
                 db.Address.Add( dbAddress );
 
-                dbPerson.status = vm.Status;
                 db.SaveChanges();
             }
             return RedirectToAction( "Index", "Home" );

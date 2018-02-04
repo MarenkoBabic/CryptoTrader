@@ -23,7 +23,7 @@ namespace CryptoTrader.Manager
 
                 foreach( Country country in dbCountry )
                 {
-                    countryList.Add( new SelectListItem() { Text = country.name } );
+                    countryList.Add( new SelectListItem() { Text = country.countryName } );
                 }
             }
             return countryList;

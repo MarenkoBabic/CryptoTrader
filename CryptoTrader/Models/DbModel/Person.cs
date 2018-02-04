@@ -17,6 +17,7 @@ namespace CryptoTrader.Models.DbModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
+            this.role = "User";
             this.Address = new HashSet<Address>();
             this.Balance = new HashSet<Balance>();
             this.BankAccount = new HashSet<BankAccount>();
@@ -30,11 +31,11 @@ namespace CryptoTrader.Models.DbModel
         public string email { get; set; }
         public string password { get; set; }
         public string salt { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
         public string role { get; set; }
         public bool active { get; set; }
-        public decimal status { get; set; }
+        public bool status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Address { get; set; }

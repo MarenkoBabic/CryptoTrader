@@ -35,15 +35,5 @@ namespace CryptoTrader.Models.ViewModel
 
 
         public string Salt { get; set; }
-
-
-        public bool Active { get; set; } = true;
-
-
-        public string Role { get; set; } = "User";
-
-
-        public decimal Status { get; set; } = 0;
-
     }
 }

@@ -24,8 +24,8 @@ namespace CryptoTrader.Manager
                     //Hashes vergleichen
                     if( eingegPWHash == dbPerson.password )
                     {
-                        string firstName = dbPerson.firstname;
-                        string lastName = dbPerson.lastname;
+                        string firstName = dbPerson.firstName;
+                        string lastName = dbPerson.lastName;
                         string role = dbPerson.role;
                         Cookies.CreateCookies( email, role, firstName, lastName );
                         result = true;

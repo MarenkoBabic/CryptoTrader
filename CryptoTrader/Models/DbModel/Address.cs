@@ -18,7 +18,7 @@ namespace CryptoTrader.Models.DbModel
         public System.DateTime created { get; set; }
         public int person_id { get; set; }
         public string street { get; set; }
-        public string numbers { get; set; }
+        public string number { get; set; }
         public int city_id { get; set; }
     
         public virtual City City { get; set; }

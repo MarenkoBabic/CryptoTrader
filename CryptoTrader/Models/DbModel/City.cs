@@ -23,7 +23,7 @@ namespace CryptoTrader.Models.DbModel
         public int id { get; set; }
         public System.DateTime created { get; set; }
         public string zip { get; set; }
-        public string city1 { get; set; }
+        public string cityName { get; set; }
         public int country_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

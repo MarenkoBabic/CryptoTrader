@@ -13,7 +13,7 @@
           <Property Name="created" Type="datetime" Nullable="false" />
           <Property Name="person_id" Type="int" Nullable="false" />
           <Property Name="street" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="numbers" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="city_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Balance">
@@ -53,7 +53,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="created" Type="datetime" Nullable="false" />
           <Property Name="zip" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="city" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="cityName" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="country_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
@@ -62,7 +62,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="created" Type="datetime" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="128" />
+          <Property Name="countryName" Type="varchar" MaxLength="128" />
           <Property Name="iso" Type="char" MaxLength="3" />
         </EntityType>
         <EntityType Name="Person">
@@ -74,11 +74,11 @@
           <Property Name="email" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="password" Type="char" MaxLength="64" Nullable="false" />
           <Property Name="salt" Type="char" MaxLength="64" Nullable="false" />
-          <Property Name="firstname" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="lastname" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="role" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
-          <Property Name="status" Type="decimal" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Ticker">
           <Key>
@@ -278,7 +278,7 @@
           <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="person_id" Type="Int32" Nullable="false" />
           <Property Name="street" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="numbers" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="city_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="City" Relationship="Self.fk_Address_City" FromRole="Address" ToRole="City" />
           <NavigationProperty Name="Person" Relationship="Self.fk_Address_Person" FromRole="Address" ToRole="Person" />
@@ -323,7 +323,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="zip" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="city1" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cityName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="country_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="Self.fk_Address_City" FromRole="City" ToRole="Address" />
           <NavigationProperty Name="Country" Relationship="Self.fk_City_Country" FromRole="City" ToRole="Country" />
@@ -334,7 +334,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="countryName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="iso" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="City" Relationship="Self.fk_City_Country" FromRole="Country" ToRole="City" />
         </EntityType>
@@ -347,11 +347,11 @@
           <Property Name="email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="salt" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="firstname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lastname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="role" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" DefaultValue="User" />
           <Property Name="active" Type="Boolean" Nullable="false" />
-          <Property Name="status" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="Self.fk_Address_Person" FromRole="Person" ToRole="Address" />
           <NavigationProperty Name="Balance" Relationship="Self.fk_Balance_User" FromRole="Person" ToRole="Balance" />
           <NavigationProperty Name="BankAccount" Relationship="Self.fk_BankAccount_User" FromRole="Person" ToRole="BankAccount" />
@@ -561,7 +561,7 @@
                 <ScalarProperty Name="created" ColumnName="created" />
                 <ScalarProperty Name="person_id" ColumnName="person_id" />
                 <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="numbers" ColumnName="numbers" />
+                <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="city_id" ColumnName="city_id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -605,7 +605,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
                 <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="city1" ColumnName="city" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
                 <ScalarProperty Name="country_id" ColumnName="country_id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -615,7 +615,7 @@
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="countryName" ColumnName="countryName" />
                 <ScalarProperty Name="iso" ColumnName="iso" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -628,8 +628,8 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="salt" ColumnName="salt" />
-                <ScalarProperty Name="firstname" ColumnName="firstname" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
                 <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="status" ColumnName="status" />

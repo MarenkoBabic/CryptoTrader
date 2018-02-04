@@ -13,8 +13,6 @@ namespace CryptoTrader.Models.ViewModel
 
         public int Address_id { get; set; }
 
-        public DateTime Address_created { get; set; } = DateTime.Now;
-
         [Required( AllowEmptyStrings = false )]
         public string Street { get; set; }
 
@@ -22,8 +20,6 @@ namespace CryptoTrader.Models.ViewModel
         public string Number { get; set; }
 
         public int City_id { get; set; }
-
-        public DateTime City_created { get; set; } = DateTime.Now;
 
         [Required( AllowEmptyStrings = false )]
         public string Zip { get; set; }
@@ -33,13 +29,15 @@ namespace CryptoTrader.Models.ViewModel
 
         public int Country_id { get; set; }
 
-        public string Country_Name { get; set; }
+        public string CountryName { get; set; }
 
         public List<SelectListItem> CountryList { get; set; }
 
         public string Country_Iso { get; set; }
 
-        public decimal Status { get; set; } = 1;
+        public bool Status { get; set; } = true;
+
+        public HttpPostedFileBase Path { get; set; }
 
     }
 }

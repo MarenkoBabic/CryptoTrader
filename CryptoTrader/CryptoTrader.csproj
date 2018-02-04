@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -208,6 +211,7 @@
     <Compile Include="Models\DbModel\Upload.cs">
       <DependentUpon>CryptoTrader.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\AutoMapperProfile.cs" />
     <Compile Include="Models\ViewModel\EmailSendViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\PersonVerificationViewModel.cs" />
@@ -267,8 +271,8 @@
     <Content Include="Image\backgroundBitEth.jpg" />
     <Content Include="Models\DbModel\CryptoTrader.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CryptoTrader.Context.cs</LastGenOutput>
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
+      <LastGenOutput>CryptoTrader.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\DbModel\CryptoTrader.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -322,11 +326,12 @@
     <Content Include="Views\Shared\_RegisterDialog.cshtml" />
     <Content Include="Views\Shared\LayoutUser.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
+    <Content Include="Views\Register\Register.cshtml" />
+    <Content Include="Views\Register\PersonVerification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Login\" />
-    <Folder Include="Views\Register\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>

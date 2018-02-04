@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
+using CryptoTrader.Models.ViewModel;
 
 namespace CryptoTrader
 {
@@ -14,6 +15,7 @@ namespace CryptoTrader
     {
         protected void Application_Start()
         {
+            AutoMapper.Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters( GlobalFilters.Filters );
             RouteConfig.RegisterRoutes( RouteTable.Routes );
