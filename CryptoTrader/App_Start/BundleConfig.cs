@@ -14,6 +14,12 @@ namespace CryptoTrader
             bundles.Add( new ScriptBundle( "~/bundles/jqueryval" ).Include(
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/jquery.avlidate.min.js" ) );
+
+            bundles.Add( new ScriptBundle( "~/bundles/jqueryui" ).Include(
+                        "~/Scripts/jquery-ui-{version}.js",
+                        "~/Scripts/jquery-ui-{version}.min.js") );
+
+
             // Verwenden Sie die Entwicklungsversion von Modernizr zum Entwickeln und Erweitern Ihrer Kenntnisse. Wenn Sie dann
             // bereit ist für die Produktion, verwenden Sie das Buildtool unter https://modernizr.com, um nur die benötigten Tests auszuwählen.
             bundles.Add( new ScriptBundle( "~/bundles/modernizr" ).Include(

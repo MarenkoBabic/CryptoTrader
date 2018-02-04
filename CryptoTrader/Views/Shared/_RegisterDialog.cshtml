@@ -29,7 +29,7 @@
 </script>
 
 
-<div class="modal fade" id="toRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="RegisterDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content width-toRegister">
             <div class="modal-header">
@@ -58,30 +58,30 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                            @Html.LabelFor( a => a.Email, "Email", new { htmlAttributes = new { @class = "form-control" } } )
-                            @Html.EditorFor( a => a.Email, new { htmlAttributes = new { @class = "form-control" } } )
-                            @Html.ValidationMessageFor( a => a.Email, null, new { @class = "text-danger" } )
+                            @Html.LabelFor( a => a.RegisterEmail, "Email", new { htmlAttributes = new { @class = "form-control" } } )
+                            @Html.EditorFor( a => a.RegisterEmail, new { htmlAttributes = new { @class = "form-control" } } )
+                            @Html.ValidationMessageFor( a => a.RegisterEmail, null, new { @class = "text-danger" } )
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-lg-12">
-                            @Html.LabelFor( a => a.Password, "Password", new { htmlAttributes = new { @class = "form-control" } } )
-                            @Html.EditorFor( a => a.Password, new { htmlAttributes = new { @class = "form-control" } } )
-                            @Html.ValidationMessageFor( a => a.Password, null, new { @class = "text-danger" } )
+                            @Html.LabelFor( a => a.RegisterPassword, "Password", new { htmlAttributes = new { @class = "form-control" } } )
+                            @Html.EditorFor( a => a.RegisterPassword, new { htmlAttributes = new { @class = "form-control" } } )
+                            @Html.ValidationMessageFor( a => a.RegisterPassword, null, new { @class = "text-danger" } )
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="list-inline pull-right">
+                                <li><button type="submit">Senden</button>
+                            </ul>
                         </div>
                     </div>
                 }
-
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul class="list-inline pull-right">
-                            <li><button type="submit">Senden</button>
-                        </ul>
-                    </div>
-                </div>
 
             </div>
         </div>

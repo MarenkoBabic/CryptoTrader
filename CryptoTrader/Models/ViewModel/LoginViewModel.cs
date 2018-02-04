@@ -10,11 +10,12 @@ namespace CryptoTrader.Models.ViewModel
     public class LoginViewModel
     {
         [Required]
+        [EmailAddress(ErrorMessage ="Email nicht vorhanden")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Remote("IsPasswordTrue","Validation",ErrorMessage ="Benutzername oder Kennwort nicht korrekt",AdditionalFields ="Email")]
+        [Remote( "IsPasswordTrue", "Validation", ErrorMessage = "Benutzername oder Kennwort nicht korrekt", AdditionalFields = "Email" )]
         public string Password { get; set; }
 
         public string FirstName { get; set; }

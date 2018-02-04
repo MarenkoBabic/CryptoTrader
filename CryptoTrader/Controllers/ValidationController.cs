@@ -14,7 +14,7 @@ namespace CryptoTrader.Controllers
         /// </summary>
         /// <param name="email">Input Email</param>
         /// <returns>bool</returns>
-        public JsonResult IsMailExistToRegister( string email )
+        public ActionResult IsMailExistToRegister( string RegisterEmail )
         {
             using( var db = new CryptoTraderEntities() )
             {
@@ -22,7 +22,7 @@ namespace CryptoTrader.Controllers
 
 
                 bool isExist = PersonList.Where(
-                    a => a.email.ToLowerInvariant().Equals( email.ToLower() )
+                    a => a.email.ToLowerInvariant().Equals( RegisterEmail.ToLower() )
                     ).FirstOrDefault() != null;
                 return Json( !isExist, JsonRequestBehavior.AllowGet );
             }
@@ -35,12 +35,11 @@ namespace CryptoTrader.Controllers
         /// <param name="email">Input Email</param>
         /// <param name="password">Input Password</param>
         /// <returns>bool</returns>
-        public JsonResult IsPasswordTrue( string email, string password )
+        public ActionResult IsPasswordTrue( string email, string password )
         {
             using( var db = new CryptoTraderEntities() )
             {
                 Person dbPerson = db.Person.Where( a => a.email == email ).FirstOrDefault();
-
                 var personList = db.Person.ToList();
                 string passwordHash = Hashen.HashBerechnen( password + dbPerson.salt );
 
@@ -51,6 +50,5 @@ namespace CryptoTrader.Controllers
                 return Json( isTrue, JsonRequestBehavior.AllowGet );
             }
         }
-
     }
 }

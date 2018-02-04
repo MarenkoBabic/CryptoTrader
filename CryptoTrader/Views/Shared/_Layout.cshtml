@@ -30,7 +30,7 @@
                         <li>@Html.ActionLink( "Kontakt", "Contact", "Home" )</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink( "Registrieren", "nix", "nix", new { data_toggle = "modal", data_target = "#_RegisterDialog" } )</li>
+                        <li>@Html.ActionLink( "Regestrieren", "nix", "nix", new { data_toggle = "modal", data_target = "#RegisterDialog" } )</li>
                         <li>@Html.ActionLink( "Login", "nix", "nix", new { data_toggle = "modal", data_target = "#Login" } )</li>
                     </ul>
                 </div>
@@ -40,9 +40,9 @@
     <div class="container body-content">
         @RenderBody()
 
-        @Html.Partial( "~/Views/Login/_LoginDialog.cshtml" )
+        @Html.Partial( "~/Views/Shared/_LoginDialog.cshtml" )
 
-        @*@Html.Partial( "~/Views/Register/_RegisterDialog.cshtml" )*@
+        @Html.Partial( "~/Views/Shared/_RegisterDialog.cshtml" )
 
 
 

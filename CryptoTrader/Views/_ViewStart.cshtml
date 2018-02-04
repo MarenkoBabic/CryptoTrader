@@ -3,11 +3,11 @@
     {
         if( this.User.IsInRole( "Admin" ) )
         {
-            Layout = "~/Views/Shared/_LayoutAuthAdmin.cshtml";
+            Layout = "~/Views/Shared/LayoutAdmin.cshtml";
         }
         else
         {
-            Layout = "~/Views/Shared/_LayoutAuthUser.cshtml";
+            Layout = "~/Views/Shared/LayoutUser.cshtml";
         }
     }
     else

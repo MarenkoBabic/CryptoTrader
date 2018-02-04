@@ -24,9 +24,9 @@ namespace CryptoTrader.Controllers
             dbperson.created = vm.Created;
             dbperson.firstname = vm.FirstName;
             dbperson.lastname = vm.LastName;
-            dbperson.email = vm.Email;
+            dbperson.email = vm.RegisterEmail;
             dbperson.salt = Hashen.SaltErzeugen();
-            dbperson.password = Hashen.HashBerechnen( vm.Password + dbperson.salt );
+            dbperson.password = Hashen.HashBerechnen( vm.RegisterPassword + dbperson.salt );
             dbperson.active = vm.Active;
             dbperson.role = vm.Role;
             dbperson.status = vm.Status;
@@ -38,10 +38,9 @@ namespace CryptoTrader.Controllers
                     db.Person.Add( dbperson );
                     db.SaveChanges();
                 }
-                TempData["Message"] = "Regestrieren erfolgreich";
                 return RedirectToAction( "Index", "Home" );
             }
-            return View( "_Register" );
+            return View();
         }
 
         /// <summary>

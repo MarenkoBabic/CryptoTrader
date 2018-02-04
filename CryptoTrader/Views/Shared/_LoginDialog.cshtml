@@ -2,29 +2,29 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        $('.modal-footer button').click(function () {
-            var button = $(this); if (button.attr("data-dismiss") != "modal") {
-                var title = $('.modal-title');
-                var progress = $('.progress');
-                var progressBar = $('.progress-bar');
+    //$(document).ready(function () {
+    //    $('.modal-footer button').click(function () {
+    //        var button = $(this); if (button.attr("data-dismiss") != "modal") {
+    //            var title = $('.modal-title');
+    //            var progress = $('.progress');
+    //            var progressBar = $('.progress-bar');
 
-                inputs.attr("disabled", "disabled");
+    //            inputs.attr("disabled", "disabled");
 
-                button.hide();
+    //            button.hide();
 
-                button.text("Close")
-                    .removeClass("btn-primary")
-                    .addClass("btn-success")
-                    .blur()
-                    .delay(1600)
-                    .fadeIn(function () {
-                        title.text("Log in is successful");
-                        button.attr("data-dismiss", "modal");
-                    });
-            }
-        })
-    });
+    //            button.text("Close")
+    //                .removeClass("btn-primary")
+    //                .addClass("btn-success")
+    //                .blur()
+    //                .delay(1600)
+    //                .fadeIn(function () {
+    //                    title.text("Log in is successful");
+    //                    button.attr("data-dismiss", "modal");
+    //                });
+    //        }
+    //    })
+    //});
 
 </script>
 
@@ -41,7 +41,6 @@
                 {
 
                     <div class="input-group">
-                        @Html.ValidationMessage( "LogOnError" )
 
                         @Html.EditorFor( a => a.Email, new { htmlAttributes = new { @class = "form-control" } } )
                         @Html.ValidationMessageFor( a => a.Email, null, new { @class = "text-danger", } )
@@ -49,6 +48,7 @@
                     </div>
 
                     <div class="input-group">
+
                         @Html.EditorFor( a => a.Password, new { htmlAttributes = new { @class = "form-control" } } )
                         @Html.ValidationMessageFor( a => a.Password, null, new { @class = "text-danger", } )
 
@@ -60,17 +60,18 @@
                             <input type="checkbox"> Angemeldet bleiben
                         </label>
                     </div>
-                }
 
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="form-control btn btn-primary">Ok</button>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
-                        <span class="sr-only">progress</span>
+                    <div class="modal-footer">
+                        <input type="submit" class="form-control btn btn-primary" />
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+                                <span class="sr-only">progress</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
+
         </div>
     </div>
 </div>

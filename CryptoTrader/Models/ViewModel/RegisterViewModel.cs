@@ -23,16 +23,15 @@ namespace CryptoTrader.Models.ViewModel
         public string LastName { get; set; }
 
 
-        [Required( AllowEmptyStrings = false )]
         [EmailAddress]
-        [Remote( "IsMailExistToRegister", "Validation", ErrorMessage = "Email schon vorhanden" )]
-        public string Email { get; set; }
+        [Remote( "IsMailExistToRegister", "Validation", ErrorMessage = "Email schon vorhanden")]
+        public string RegisterEmail { get; set; }
 
 
         [Required( AllowEmptyStrings = false )]
         [MinLength( 8, ErrorMessage = "Min 8 Zeichen" )]
         [DataType( DataType.Password )]
-        public string Password { get; set; }
+        public string RegisterPassword { get; set; }
 
 
         public string Salt { get; set; }
