@@ -2,29 +2,29 @@
 
 <script type="text/javascript">
 
-    //$(document).ready(function () {
-    //    $('.modal-footer button').click(function () {
-    //        var button = $(this); if (button.attr("data-dismiss") != "modal") {
-    //            var title = $('.modal-title');
-    //            var progress = $('.progress');
-    //            var progressBar = $('.progress-bar');
+        //$(document).ready(function () {
+        //    $('.modal-footer button').click(function () {
+        //        var button = $(this); if (button.attr("data-dismiss") != "modal") {
+        //            var title = $('.modal-title');
+        //            var progress = $('.progress');
+        //            var progressBar = $('.progress-bar');
 
-    //            inputs.attr("disabled", "disabled");
+        //            inputs.attr("disabled", "disabled");
 
-    //            button.hide();
+        //            button.hide();
 
-    //            button.text("Close")
-    //                .removeClass("btn-primary")
-    //                .addClass("btn-success")
-    //                .blur()
-    //                .delay(1600)
-    //                .fadeIn(function () {
-    //                    title.text("Log in is successful");
-    //                    button.attr("data-dismiss", "modal");
-    //                });
-    //        }
-    //    })
-    //});
+        //            button.text("Close")
+        //                .removeClass("btn-primary")
+        //                .addClass("btn-success")
+        //                .blur()
+        //                .delay(1600)
+        //                .fadeIn(function () {
+        //                    title.text("Log in is successful");
+        //                    button.attr("data-dismiss", "modal");
+        //                });
+        //        }
+        //    })
+        //});
 
 </script>
 
@@ -41,19 +41,15 @@
                 {
 
                     <div class="input-group">
-
-                        @Html.EditorFor( a => a.Email, new { htmlAttributes = new { @class = "form-control" } } )
-                        @Html.ValidationMessageFor( a => a.Email, null, new { @class = "text-danger", } )
-                        <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+                        @Html.LabelFor( a => a.LoginEmail, " ", new { @class = "input-group-addon glyphicon glyphicon-user" } )
+                        @Html.EditorFor( a => a.LoginEmail, new { htmlAttributes = new { @class = "form-control" } } )
                     </div>
 
                     <div class="input-group">
-
-                        @Html.EditorFor( a => a.Password, new { htmlAttributes = new { @class = "form-control" } } )
-                        @Html.ValidationMessageFor( a => a.Password, null, new { @class = "text-danger", } )
-
-                        <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+                        @Html.LabelFor( a => a.LoginPassword, " ", new { @class = "input-group-addon glyphicon glyphicon-lock" } )
+                        @Html.EditorFor( a => a.LoginPassword, new { htmlAttributes = new { @class = "form-control" } } )
                     </div>
+                    @Html.ValidationMessageFor( a => a.LoginPassword, null, new { @class = "text-danger", } )
 
                     <div class="checkbox">
                         <label>

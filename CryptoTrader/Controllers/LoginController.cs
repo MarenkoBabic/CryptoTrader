@@ -26,7 +26,7 @@ namespace CryptoTrader.Controllers
         [AllowAnonymous]
         public ActionResult Login( LoginViewModel vm )
         {
-            bool result = LoginManager.Login( vm.Email, vm.Password );
+            bool result = LoginManager.Login( vm.LoginEmail, vm.LoginPassword );
             if( result )
             {
                 return RedirectToAction( "Index", "Home" );
