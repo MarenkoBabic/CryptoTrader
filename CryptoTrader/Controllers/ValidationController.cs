@@ -14,7 +14,7 @@
         /// <returns>bool</returns>
         public ActionResult IsMailExistToRegister( string RegisterEmail )
         {
-            using( var db = new CryptoEntities() )
+            using( var db = new CryptoTraderEntities() )
             {
                 var PersonList = db.Person.ToList();
 
@@ -37,7 +37,7 @@
         {
             bool result = false;
 
-            using( var db = new CryptoEntities() )
+            using( var db = new CryptoTraderEntities() )
             {
                 Person dbPerson = db.Person.Where( a => a.email == LoginEmail ).FirstOrDefault();
                 if( !string.IsNullOrEmpty( LoginEmail ) && !string.IsNullOrEmpty( LoginPassword ) )

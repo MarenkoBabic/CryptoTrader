@@ -169,22 +169,22 @@
     <Compile Include="Manager\SendMail.cs" />
     <Compile Include="Manager\Generator.cs" />
     <Compile Include="Models\DbModel\Address.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Balance.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\BankAccount.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\BankTransferHistory.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\City.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Country.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\CryptoBBRZ.Context.cs">
       <AutoGen>True</AutoGen>
@@ -217,16 +217,16 @@
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Person.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Ticker.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\TradeHistory.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Upload.cs">
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AutoMapperProfile.cs" />
     <Compile Include="Models\ViewModel\BankDataViewModel.cs" />

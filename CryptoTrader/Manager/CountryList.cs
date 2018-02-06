@@ -15,7 +15,7 @@ using CryptoTrader.Models.DbModel;
         public static List<SelectListItem> FilCountryList()
         {
             List<SelectListItem> countryList = new List<SelectListItem>();
-            using( var db = new CryptoEntities() )
+            using( var db = new CryptoTraderEntities() )
             {
                 var dbCountry = db.Country.ToList();
 

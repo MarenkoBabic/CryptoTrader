@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CryptoTraderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CryptoTraderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="id" />
@@ -79,6 +79,7 @@
           <Property Name="role" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="reference" Type="varchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="Ticker">
           <Key>
@@ -265,8 +266,7 @@
             <End Role="Upload" EntitySet="Upload" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CryptoTraderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -349,8 +349,8 @@
           <Property Name="salt" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="firstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="role" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" DefaultValue="User" />
+          <Property Name="active" Type="Boolean" Nullable="false" DefaultValue="True" />
           <Property Name="status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="Self.fk_Address_Person" FromRole="Person" ToRole="Address" />
           <NavigationProperty Name="Balance" Relationship="Self.fk_Balance_User" FromRole="Person" ToRole="Balance" />
@@ -358,6 +358,7 @@
           <NavigationProperty Name="BankTransferHistory" Relationship="Self.fk_BankTransferHistory_User" FromRole="Person" ToRole="BankTransferHistory" />
           <NavigationProperty Name="TradeHistory" Relationship="Self.fk_TradeHistory_User" FromRole="Person" ToRole="TradeHistory" />
           <NavigationProperty Name="Upload" Relationship="Self.fk_Upload_User" FromRole="Person" ToRole="Upload" />
+          <Property Name="reference" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Ticker">
           <Key>
@@ -623,6 +624,7 @@
           <EntitySetMapping Name="Person">
             <EntityTypeMapping TypeName="CryptoTraderModel.Person">
               <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="reference" ColumnName="reference" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
                 <ScalarProperty Name="email" ColumnName="email" />

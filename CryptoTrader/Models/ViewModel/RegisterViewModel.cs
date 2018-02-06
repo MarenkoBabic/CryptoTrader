@@ -36,5 +36,7 @@ namespace CryptoTrader.Models.ViewModel
 
         public string Salt { get; set; }
 
+        public bool Activ { get; set; } = true;
+
     }
 }

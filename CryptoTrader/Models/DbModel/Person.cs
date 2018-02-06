@@ -18,6 +18,7 @@ namespace CryptoTrader.Models.DbModel
         public Person()
         {
             this.role = "User";
+            this.active = true;
             this.Address = new HashSet<Address>();
             this.Balance = new HashSet<Balance>();
             this.BankAccount = new HashSet<BankAccount>();
