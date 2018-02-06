@@ -27,10 +27,9 @@
             Person dbPerson = Mapper.Map<Person>( vm );
             dbPerson.salt = Hashen.SaltErzeugen();
             dbPerson.password = Hashen.HashBerechnen( vm.RegisterPassword + dbPerson.salt );
-
             if( ModelState.IsValid )
             {
-                using( var db = new CryptoTraderEntities() )
+                using( var db = new CryptoEntities() )
                 {
                     db.Person.Add( dbPerson );
                     db.SaveChanges();
@@ -70,11 +69,12 @@
             Address dbAddress = Mapper.Map<Address>( vm );
             City dbCity = Mapper.Map<City>( vm );
             Upload dbUpload = Mapper.Map<Upload>( vm );
-            using( var db = new CryptoTraderEntities() )
+            using( var db = new CryptoEntities() )
             {
                 Country dbCountry = db.Country.Where( a => a.countryName == vm.CountryName ).FirstOrDefault();
                 Person dbPerson = db.Person.Where( a => a.email == User.Identity.Name ).FirstOrDefault();
                 dbPerson.status = vm.Status;
+                dbPerson.reference = Generator.ReferencGenerator(dbPerson.id);
 
                 dbCity.country_id = dbCountry.id;
                 db.City.Add( dbCity );
@@ -83,8 +83,8 @@
                 dbAddress.person_id = dbPerson.id;
                 db.Address.Add( dbAddress );
 
-                dbUpload.person_id = dbPerson.id;
-                db.Upload.Add( dbUpload );
+                //dbUpload.person_id = dbPerson.id;
+                //db.Upload.Add( dbUpload );
 
                 db.SaveChanges();
             }

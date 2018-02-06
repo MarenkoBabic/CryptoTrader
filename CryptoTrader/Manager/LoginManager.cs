@@ -9,7 +9,7 @@
         public static bool Login( string email, string password )
         {
             bool result = false;
-            using( var db = new CryptoTraderEntities() )
+            using( var db = new CryptoEntities() )
             {
                 // Existiert der Login ?
                 if( db.Person.Any( a => a.email == email ) )

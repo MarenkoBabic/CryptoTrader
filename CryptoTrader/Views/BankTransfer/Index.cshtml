@@ -1,0 +1,143 @@
+﻿@model CryptoTrader.Models.ViewModel.BankDataViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@ViewBag.Message
+<h2>Kontodaten</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-6">
+            @Html.LabelFor(a => a.BankName, "Bank")
+        </div>
+        <div class="col col-lg-6">
+            @Model.BankName
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
+            @Html.LabelFor(a => a.ZipBank,"Postleitzahl")
+        </div>
+        <div class="col col-lg-6">
+            @Model.ZipBank
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
+            @Html.LabelFor(a => a.Bic,"BIC")
+        </div>
+        <div class="col col-lg-6">
+            @Model.Bic
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
+            @Html.LabelFor(a => a.Iban,"Kontonummer")
+        </div>
+        <div class="col col-lg-6">
+            @Model.Iban
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
+            @Html.LabelFor(a => a.FirstName, "Vorname")
+        </div>
+        <div class="col col-lg-6">
+            @Model.FirstName
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
+            @Html.LabelFor(a => a.LastName, "Nachname")
+        </div>
+        <div class="col col-lg-6">
+            @Model.LastName
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
+            @Html.LabelFor(a => a.Reference, "Verwendungszweck")
+        </div>
+        <div class="col col-lg-6">
+            @Model.Reference
+        </div>
+    </div>
+
+</div>
+
+<hr />
+
+<h2>Geld auszahlen</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.FirstName, "Vorname")
+            </div>
+            <div class="col col-lg-6">
+                @Model.FirstName
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.LastName, "Nachname")
+            </div>
+            <div class="col col-lg-6">
+                @Model.LastName
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.PersonIban, "Iban")
+            </div>
+            <div class="col col-lg-6">
+                @Html.EditorFor(a => a.PersonIban)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.PersonBic, "BIC")
+            </div>
+            <div class="col col-lg-6">
+                @Html.EditorFor(a => a.PersonBic)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.Amount, "Betrag")
+            </div>
+            <div class="col col-lg-6">
+                @Html.EditorFor(a => a.Amount)
+            </div>
+        </div>
+
+                <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.Currency, "Währung")
+            </div>
+            <div class="col col-lg-6">
+                @Html.EditorFor(a => a.Currency)
+            </div>
+        </div>
+
+
+        <input type="submit" />
+
+
+    </div>
+}
+
+

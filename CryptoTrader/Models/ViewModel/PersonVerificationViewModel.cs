@@ -41,5 +41,8 @@ namespace CryptoTrader.Models.ViewModel
 
         public HttpPostedFileBase Path { get; set; }
 
+        public string Reference { get; set; }
+
+
     }
 }

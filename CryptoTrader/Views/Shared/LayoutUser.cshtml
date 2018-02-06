@@ -41,7 +41,7 @@
                     <li>@Html.ActionLink( "Startseite", "Index", "Home" )</li>
                     <li>@Html.ActionLink( "Info", "About", "Home" )</li>
                     <li>@Html.ActionLink( "Kontakt", "Contact", "Home" )</li>
-                    <li>@Html.ActionLink( "Geld buchen", "PersonVerification", "Register" )</li>
+                    <li>@Html.ActionLink( "Geld buchen", "Index", "BankTransfer" )</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -91,10 +91,6 @@
 
 
 
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Meine ASP.NET-Anwendung</p>
-        </footer>
     </div>
 
     @Scripts.Render( "~/bundles/bootstrap" )

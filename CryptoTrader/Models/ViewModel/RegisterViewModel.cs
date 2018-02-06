@@ -35,5 +35,6 @@ namespace CryptoTrader.Models.ViewModel
 
 
         public string Salt { get; set; }
+
     }
 }

@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CryptoTrader</RootNamespace>
     <AssemblyName>CryptoTrader</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -26,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,6 +62,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -68,11 +70,8 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -114,6 +113,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -153,6 +153,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BankData.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -166,23 +167,39 @@
     <Compile Include="Manager\Hashen.cs" />
     <Compile Include="Manager\LoginManager.cs" />
     <Compile Include="Manager\SendMail.cs" />
+    <Compile Include="Manager\Generator.cs" />
     <Compile Include="Models\DbModel\Address.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Balance.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\BankAccount.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\BankTransferHistory.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\City.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Country.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel\CryptoBBRZ.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CryptoBBRZ.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel\CryptoBBRZ.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel\CryptoBBRZ.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CryptoBBRZ.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\DataBaseModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -200,18 +217,19 @@
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Person.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Ticker.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\TradeHistory.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Upload.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AutoMapperProfile.cs" />
+    <Compile Include="Models\ViewModel\BankDataViewModel.cs" />
     <Compile Include="Models\ViewModel\EmailSendViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\PersonVerificationViewModel.cs" />
@@ -270,6 +288,16 @@
     <Content Include="Image\background-navbar.jpg" />
     <Content Include="Image\background.jpg" />
     <Content Include="Image\backgroundBitEth.jpg" />
+    <Content Include="Models\DbModel\CryptoBBRZ.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CryptoBBRZ.edmx</DependentUpon>
+      <LastGenOutput>CryptoBBRZ.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DbModel\CryptoBBRZ.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CryptoBBRZ.edmx</DependentUpon>
+      <LastGenOutput>CryptoBBRZ.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\DbModel\DataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
@@ -291,6 +319,13 @@
     </EntityDeploy>
     <Content Include="Models\DbModel\DataBaseModel.edmx.diagram">
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DbModel\CryptoBBRZ.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CryptoBBRZ.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DbModel\CryptoBBRZ.edmx.diagram">
+      <DependentUpon>CryptoBBRZ.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
@@ -329,6 +364,7 @@
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Register\PersonVerification.cshtml" />
+    <Content Include="Views\BankTransfer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
