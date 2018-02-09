@@ -236,6 +236,7 @@
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AdminViewModel.cs" />
+    <Compile Include="Models\ViewModel\ApiViewModel.cs" />
     <Compile Include="Models\ViewModel\AutoMapperProfile.cs" />
     <Compile Include="Models\ViewModel\BankDataViewModel.cs" />
     <Compile Include="Models\ViewModel\EmailSendViewModel.cs" />
@@ -380,6 +381,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

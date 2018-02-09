@@ -1,10 +1,7 @@
 ﻿namespace CryptoTrader.Manager
 {
-    using Jayrock.Json;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
+    using Jayrock.Json;
     using KrakenClient;
 
     public class ApiKraken
@@ -12,7 +9,7 @@
         public static JsonObject TickerInfo()
         {
             KrakenClient client = new KrakenClient();
-            JsonObject ticker = client.GetTicker(new List<string> { "XXBTZEUR" });
+            JsonObject ticker = client.GetTicker( new List<string> { "XXBTZEUR" } );
             return ticker;
         }
 
@@ -20,7 +17,7 @@
         {
             var client = new KrakenClient();
 
-            JsonObject tradesHistory = client.GetTradesHistory(string.Empty);
+            JsonObject tradesHistory = client.GetTradesHistory( string.Empty );
         }
 
     }

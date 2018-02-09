@@ -18,212 +18,357 @@
 <script src="https://www.amcharts.com/lib/3/amstock.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
-<div id="chartdiv"></div>
-@{
 
-    var test = ViewBag.ticker;
+
+
+@*<div id="chartdiv">
+
+    </div>*@
+
 }
+
+
+<div onload="JavaScript:timedRefresh(50);">@ViewBag.a asfdasdfafafd</div>
+
+<div class="dataTables_table_wrapper" style="min-height: 486px;">
+    <table class="table table-hover table-striped dataTable" name="table-tradehist" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+        <thead>
+            <tr role="row">
+                <th class="nw sorting_desc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="descending" aria-label="Time: activate to sort column ascending" style="width: 100px;">Time</th>
+                <th class="ralign lalign sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Order: activate to sort column ascending" style="width: 40px;">Order</th>
+                <th class="ralign sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">Price</th>
+                <th class="ralign sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Volume: activate to sort column ascending">Volume</th>
+            </tr>
+        </thead>
+
+        <tbody role="alert" aria-live="polite" aria-relevant="all">
+            <tr class="odd">
+                <td class="nw">20:57:22 +00:00</td>
+                <td class="lalign pos">buy</td>
+                <td class="ralign">€6,974.9</td>
+                <td class="ralign">
+                    0.02
+                    <span class="deczeros">000000</span>
+                </td>
+            </tr>
+            <tr class="even">
+                <td class="nw">20:57:20 +00:00</td>
+                <td class="lalign pos">buy</td>
+                <td class="ralign">€6,975.0</td>
+                <td class="ralign">
+                    0.0079
+                    <span class="deczeros">0000</span>
+                </td>
+            </tr>
+            <tr class="odd">
+                <td class="nw">20:57:19 +00:00</td>
+                <td class="lalign pos">buy</td>
+                <td class="ralign">€6,975.0</td>
+                <td class="ralign">
+                    0.068936
+                    <span class="deczeros">00</span>
+                </td>
+            </tr>
+            <tr class="even">
+                <td class="nw">20:57:17 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,964.9</td>
+                <td class="ralign">
+                    0.02
+                    <span class="deczeros">000000</span>
+                </td>
+            </tr>
+            <tr class="odd">
+                <td class="nw">20:57:17 +00:00</td>
+                <td class="lalign pos">buy</td>
+                <td class="ralign">€6,975.9</td>
+                <td class="ralign">
+                    0.004
+                    <span class="deczeros">00000</span>
+                </td>
+            </tr>
+            <tr class="even">
+                <td class="nw">20:57:16 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,964.9</td>
+                <td class="ralign">
+                    0.02
+                    <span class="deczeros">000000</span>
+                </td>
+            </tr>
+            <tr class="odd">
+                <td class="nw">20:57:14 +00:00</td>
+                <td class="lalign pos">buy</td>
+                <td class="ralign">€6,975.9</td>
+                <td class="ralign">
+                    0.0616
+                    <span class="deczeros">0000</span>
+                </td>
+            </tr>
+            <tr class="even">
+                <td class="nw">20:57:14 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,962.2</td>
+                <td class="ralign">0.00000001</td>
+            </tr>
+            <tr class="odd">
+                <td class="nw">20:57:14 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,962.2</td>
+                <td class="ralign">0.11796675</td>
+            </tr>
+            <tr class="even">
+                <td class="nw">20:57:14 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,964.8</td>
+                <td class="ralign">0.05005847</td>
+            </tr>
+            <tr class="odd">
+                <td class="nw">20:57:12 +00:00</td>
+                <td class="lalign pos">buy</td>
+                <td class="ralign">€6,975.9</td>
+                <td class="ralign">
+                    0.004
+                    <span class="deczeros">00000</span>
+                </td>
+            </tr>
+            <tr class="even">
+                <td class="nw">20:57:12 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,962.1</td>
+                <td class="ralign">0.01669698</td>
+            </tr>
+            <tr class="odd">
+                <td class="nw">20:57:12 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,963.6</td>
+                <td class="ralign">0.01688867</td>
+            </tr>
+            <tr class="even">
+                <td class="nw">20:57:12 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,965.0</td>
+                <td class="ralign">0.00001435</td>
+            </tr>
+            <tr class="odd">
+                <td class="nw">20:57:12 +00:00</td>
+                <td class="lalign neg">sell</td>
+                <td class="ralign">€6,967.7</td>
+                <td class="ralign">
+                    0.0044
+                    <span class="deczeros">0000</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <script>
+        function timedRefresh(timeoutPeriod) {
+            setTimeout(function () {
+                location.reload(true);
+            }, timeoutPeriod);
+        }
+
     var ticker = @ViewBag.cTicker;
     var chart = AmCharts.makeChart("chartdiv", {
-        "type": "stock",
-        "theme": "dark",
+    "type": "stock",
+    "theme": "dark",
 
-        //"color": "#fff",
-        "dataSets": [{
-            "title": "Bitcoin",
+    //"color": "#fff",
+    "dataSets": [{
+    "title": "Bitcoin",
 
-            "fieldMappings": [{
-                "fromField": "Open",
-                "toField": "open"
-            }, {
-                "fromField": "High",
-                "toField": "high"
-            }, {
-                "fromField": "Low",
-                "toField": "low"
-            }, {
-                "fromField": "Close",
-                "toField": "close"
-            }, {
-                "fromField": "Volume",
-                "toField": "volume"
-            }],
-            "compared": false,
-            "categoryField": "Date",
+    "fieldMappings": [{
+    "fromField": "Open",
+    "toField": "open"
+    }, {
+    "fromField": "High",
+    "toField": "high"
+    }, {
+    "fromField": "Low",
+    "toField": "low"
+    }, {
+    "fromField": "Close",
+    "toField": "close"
+    }, {
+    "fromField": "Volume",
+    "toField": "volume"
+    }],
+    "compared": false,
+    "categoryField": "Date",
 
-            "dataLoader": {
+    "dataLoader": {
 
-                "url": ticker ,
-                "format": "json",
-                "postProcess": function (data, config, chart) {
-                    var newData = [];
-                    for (var i = 0; i < data.rows.length; i++) {
-                        var dataPoint = {};
-                        for (var c = 0; c < data.columns.length; c++) {
-                            dataPoint[data.columns[c]] = data.rows[i][c];
-                        }
-                        newData.push(dataPoint);
-                    }
-                    return newData;
-                },
-                "reload": 10
-            }
-        }],
+    "url": ticker ,
+    "format": "json",
+    "postProcess": function (data, config, chart) {
+    var newData = [];
+    for (var i = 0; i < data.rows.length; i++) {
+    var dataPoint = {};
+    for (var c = 0; c < data.columns.length; c++) {
+    dataPoint[data.columns[c]] = data.rows[i][c];
+    }
+    newData.push(dataPoint);
+    }
+    return newData;
+    },
+    "reload": 10
+    }
+    }],
 
-        //"dataDateFormat": "YYYY-MM-DD",
+    //"dataDateFormat": "YYYY-MM-DD",
 
-        "panels": [{
-            "title": "Value",
-            "percentHeight": 70,
+    "panels": [{
+    "title": "Value",
+    "percentHeight": 70,
 
-            "stockGraphs": [{
-                "type": "candlestick",
-                "id": "g1",
-                "openField": "open",
-                "closeField": "close",
-                "highField": "high",
-                "lowField": "low",
-                "valueField": "close",
-                "lineColor": "#fff",
-                "fillColors": "#fff",
-                "negativeLineColor": "#db4c3c",
-                "negativeFillColors": "#db4c3c",
-                "fillAlphas": 1,
-                "comparedGraphLineThickness": 2,
-                "columnWidth": 0.7,
-                "useDataSetColors": false,
-                "comparable": true,
-                "compareField": "close",
-                "showBalloon": false,
-                "proCandlesticks": true
-            }],
+    "stockGraphs": [{
+    "type": "candlestick",
+    "id": "g1",
+    "openField": "open",
+    "closeField": "close",
+    "highField": "high",
+    "lowField": "low",
+    "valueField": "close",
+    "lineColor": "#fff",
+    "fillColors": "#fff",
+    "negativeLineColor": "#db4c3c",
+    "negativeFillColors": "#db4c3c",
+    "fillAlphas": 1,
+    "comparedGraphLineThickness": 2,
+    "columnWidth": 0.7,
+    "useDataSetColors": false,
+    "comparable": true,
+    "compareField": "close",
+    "showBalloon": false,
+    "proCandlesticks": true
+    }],
 
-            "stockLegend": {
-                "valueTextRegular": undefined,
-                "periodValueTextComparing": "[[percents.value.close]]%"
-            }
+    "stockLegend": {
+    "valueTextRegular": undefined,
+    "periodValueTextComparing": "[[percents.value.close]]%"
+    }
 
-        },
+    },
 
-        {
-            "title": "Volume",
-            "percentHeight": 30,
-            "marginTop": 1,
-            "columnWidth": 0.6,
-            "showCategoryAxis": false,
+    {
+    "title": "Volume",
+    "percentHeight": 30,
+    "marginTop": 1,
+    "columnWidth": 0.6,
+    "showCategoryAxis": false,
 
-            "stockGraphs": [{
-                "valueField": "volume",
-                "openField": "open",
-                "type": "column",
-                "showBalloon": false,
-                "fillAlphas": 1,
-                "lineColor": "#fff",
-                "fillColors": "#fff",
-                "negativeLineColor": "#db4c3c",
-                "negativeFillColors": "#db4c3c",
-                "useDataSetColors": false
-            }],
+    "stockGraphs": [{
+    "valueField": "volume",
+    "openField": "open",
+    "type": "column",
+    "showBalloon": false,
+    "fillAlphas": 1,
+    "lineColor": "#fff",
+    "fillColors": "#fff",
+    "negativeLineColor": "#db4c3c",
+    "negativeFillColors": "#db4c3c",
+    "useDataSetColors": false
+    }],
 
-            "stockLegend": {
-                "markerType": "none",
-                "markerSize": 0,
-                "labelText": "",
-                "periodValueTextRegular": "[[value.close]]"
-            },
+    "stockLegend": {
+    "markerType": "none",
+    "markerSize": 0,
+    "labelText": "",
+    "periodValueTextRegular": "[[value.close]]"
+    },
 
-            "valueAxes": [{
-                "usePrefixes": true
-            }]
-        }
-        ],
+    "valueAxes": [{
+    "usePrefixes": true
+    }]
+    }
+    ],
 
-        "panelsSettings": {
-            //    "color": "#fff",
-            "plotAreaFillColors": "#333",
-            "plotAreaFillAlphas": 1,
-            "marginLeft": 60,
-            "marginTop": 5,
-            "marginBottom": 5
-        },
+    "panelsSettings": {
+    //    "color": "#fff",
+    "plotAreaFillColors": "#333",
+    "plotAreaFillAlphas": 1,
+    "marginLeft": 60,
+    "marginTop": 5,
+    "marginBottom": 5
+    },
 
-        "chartScrollbarSettings": {
-            "graph": "g1",
-            "graphType": "line",
-            "usePeriod": "WW",
-            "backgroundColor": "#333",
-            "graphFillColor": "#666",
-            "graphFillAlpha": 0.5,
-            "gridColor": "#555",
-            "gridAlpha": 1,
-            "selectedBackgroundColor": "#444",
-            "selectedGraphFillAlpha": 1
-        },
+    "chartScrollbarSettings": {
+    "graph": "g1",
+    "graphType": "line",
+    "usePeriod": "WW",
+    "backgroundColor": "#333",
+    "graphFillColor": "#666",
+    "graphFillAlpha": 0.5,
+    "gridColor": "#555",
+    "gridAlpha": 1,
+    "selectedBackgroundColor": "#444",
+    "selectedGraphFillAlpha": 1
+    },
 
-        "categoryAxesSettings": {
-            "equalSpacing": true,
-            "gridColor": "#555",
-            "gridAlpha": 1
-        },
+    "categoryAxesSettings": {
+    "equalSpacing": true,
+    "gridColor": "#555",
+    "gridAlpha": 1
+    },
 
-        "valueAxesSettings": {
-            "gridColor": "#555",
-            "gridAlpha": 1,
-            "inside": false,
-            "showLastLabel": true
-        },
+    "valueAxesSettings": {
+    "gridColor": "#555",
+    "gridAlpha": 1,
+    "inside": false,
+    "showLastLabel": true
+    },
 
-        "chartCursorSettings": {
-            "pan": true,
-            "valueLineEnabled": true,
-            "valueLineBalloonEnabled": true
-        },
+    "chartCursorSettings": {
+    "pan": true,
+    "valueLineEnabled": true,
+    "valueLineBalloonEnabled": true
+    },
 
-        "legendSettings": {
-            //"color": "#fff"
-        },
+    "legendSettings": {
+    //"color": "#fff"
+    },
 
-        "stockEventsSettings": {
-            "showAt": "high",
-            "type": "pin"
-        },
+    "stockEventsSettings": {
+    "showAt": "high",
+    "type": "pin"
+    },
 
-        "balloon": {
-            "textAlign": "left",
-            "offsetY": 10
-        },
+    "balloon": {
+    "textAlign": "left",
+    "offsetY": 10
+    },
 
-        "periodSelector": {
-            "position": "bottom",
-            "periods": [{
-                "period": "DD",
-                "count": 10,
-                "label": "10D"
-            }, {
-                "period": "MM",
-                "count": 1,
-                "label": "1M"
-            }, {
-                "period": "MM",
-                "count": 6,
-                "label": "6M"
-            }, {
-                "period": "YYYY",
-                "count": 1,
-                "label": "1Y"
-            }, {
-                "period": "YYYY",
-                "count": 2,
-                "selected": true,
-                "label": "2Y"
-            }, {
-                "period": "YTD",
-                "label": "YTD"
-            }, {
-                "period": "MAX",
-                "label": "MAX"
-            }]
-        }
+    "periodSelector": {
+    "position": "bottom",
+    "periods": [{
+    "period": "DD",
+    "count": 10,
+    "label": "10D"
+    }, {
+    "period": "MM",
+    "count": 1,
+    "label": "1M"
+    }, {
+    "period": "MM",
+    "count": 6,
+    "label": "6M"
+    }, {
+    "period": "YYYY",
+    "count": 1,
+    "label": "1Y"
+    }, {
+    "period": "YYYY",
+    "count": 2,
+    "selected": true,
+    "label": "2Y"
+    }, {
+    "period": "YTD",
+    "label": "YTD"
+    }, {
+    "period": "MAX",
+    "label": "MAX"
+    }]
+    }
     });
 </script>
