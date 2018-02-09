@@ -1,9 +1,10 @@
 ﻿
 namespace CryptoTrader.Manager
-{using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using CryptoTrader.Models.DbModel;
+{
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+    using CryptoTrader.Models.DbModel;
 
     public class CountryList
     {
@@ -12,17 +13,12 @@ using CryptoTrader.Models.DbModel;
         /// </summary>        
         /// <param name="auswahl">Ausgewähltes Land</param>        
         /// <returns>Liste mit Länder</returns>
-        public static List<SelectListItem> FilCountryList()
+        public static List<SelectListItem> FilCountryList(List<Country> Countries)
         {
             List<SelectListItem> countryList = new List<SelectListItem>();
-            using( var db = new CryptoTraderEntities() )
+            foreach (Country country in Countries)
             {
-                var dbCountry = db.Country.ToList();
-
-                foreach( Country country in dbCountry )
-                {
-                    countryList.Add( new SelectListItem() { Text = country.countryName } );
-                }
+                countryList.Add(new SelectListItem() { Text = country.countryName });
             }
             return countryList;
         }

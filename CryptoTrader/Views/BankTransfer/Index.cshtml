@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Index";
 }
-@ViewBag.Message
 
+toastr.error(@ViewBag.Message)
 <br />
 <br />
 <br />
@@ -17,64 +17,64 @@
             <br />
             <div class="row">
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.BankName, "Bank" )
+                    @Html.LabelFor(a => a.BankName, "Bank")
                 </div>
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.BankName, Model.BankName )
+                    @Html.LabelFor(a => a.BankName, Model.BankName)
                 </div>
             </div>
 
             <div class="row ">
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.ZipBank, "Postleitzahl" )
+                    @Html.LabelFor(a => a.ZipBank, "Postleitzahl")
                 </div>
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.ZipBank, Model.ZipBank )
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.Bic, "BIC" )
-                </div>
-                <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.Bic, Model.Bic )
+                    @Html.LabelFor(a => a.ZipBank, Model.ZipBank)
                 </div>
             </div>
 
             <div class="row">
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.Iban, "Kontonummer" )
+                    @Html.LabelFor(a => a.Bic, "BIC")
                 </div>
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.Iban, Model.Iban )
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.FirstName, "Vorname" )
-                </div>
-                <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.FirstName, Model.FirstName )
+                    @Html.LabelFor(a => a.Bic, Model.Bic)
                 </div>
             </div>
 
             <div class="row">
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.LastName, "Nachname" )
+                    @Html.LabelFor(a => a.Iban, "Kontonummer")
                 </div>
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.LastName, Model.LastName )
+                    @Html.LabelFor(a => a.Iban, Model.Iban)
                 </div>
             </div>
 
             <div class="row">
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.Reference, "Verwendungszweck" )
+                    @Html.LabelFor(a => a.FirstName, "Vorname")
                 </div>
                 <div class="col col-lg-6">
-                    @Html.LabelFor( a => a.Reference, Model.Reference )
+                    @Html.LabelFor(a => a.FirstName, Model.FirstName)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.LastName, "Nachname")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.LastName, Model.LastName)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.Reference, "Verwendungszweck")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.Reference, Model.Reference)
                 </div>
             </div>
             <div class="row">
@@ -89,7 +89,7 @@
 
 
 
-        @using( Html.BeginForm() )
+        @using (Html.BeginForm())
         {
             <main class="col-lg-5 well" style="height:600px;">
                 <h2>Geld auszahlen</h2>
@@ -97,75 +97,78 @@
                 <br />
                 <div class="row">
                     <div class="col col-lg-6">
-                        @Html.LabelFor( a => a.FirstName, "Vorname" )
+                        @Html.LabelFor(a => a.FirstName, "Vorname")
                     </div>
                     <div class="col col-lg-6">
-                        @Html.LabelFor( a => a.FirstName, Model.FirstName )
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col col-lg-6">
-                        @Html.LabelFor( a => a.LastName, "Nachname" )
-                    </div>
-                    <div class="col col-lg-6">
-                        @Html.LabelFor( a => a.LastName, Model.LastName )
+                        @Html.LabelFor(a => a.FirstName, Model.FirstName)
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col col-lg-6">
-                        @Html.LabelFor( a => a.PersonIban, "Iban" )
+                        @Html.LabelFor(a => a.LastName, "Nachname")
                     </div>
                     <div class="col col-lg-6">
-                        @if( Model.PersonIban == null )
+                        @Html.LabelFor(a => a.LastName, Model.LastName)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-lg-6">
+                        @Html.LabelFor(a => a.PersonIban, "Iban")
+                    </div>
+                    <div class="col col-lg-6">
+                        @if (Model.PersonIban == null)
                         {
-                            @Html.EditorFor( a => a.PersonIban, new { htmlAttributes = new { @class = "form-control" } } )
+                            @Html.EditorFor(a => a.PersonIban, new { htmlAttributes = new { @class = "form-control" } })
                         }
                         else
                         {
-                            @Html.LabelFor( a => a.PersonIban, Model.PersonIban )
+                            @Html.LabelFor(a => a.PersonIban, Model.PersonIban)
                         }
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col col-lg-6">
-                        @Html.LabelFor( a => a.PersonBic, "BIC" )
+                        @Html.LabelFor(a => a.PersonBic, "BIC")
                     </div>
                     <div class="col col-lg-6">
-                        @if( Model.PersonBic == null )
+                        @if (Model.PersonBic == null)
                         {
-                            @Html.EditorFor( a => a.PersonBic, new { htmlAttributes = new { @class = "form-control" } } )
+                            @Html.EditorFor(a => a.PersonBic, new { htmlAttributes = new { @class = "form-control" } })
                         }
                         else
                         {
-                            @Html.LabelFor( a => a.PersonBic, Model.PersonBic )
+                            @Html.LabelFor(a => a.PersonBic, Model.PersonBic)
                         }
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col col-lg-6">
-                        @Html.LabelFor( a => a.Amount, "Betrag" )
+                        @Html.LabelFor(a => a.Amount, "Betrag")
                     </div>
                     <div class="col col-lg-6">
-                        @Html.EditorFor( a => a.Amount, new { htmlAttributes = new { @class = "form-control" } } )
+                        @Html.EditorFor(a => a.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(a => a.Amount,"",new { htmlAttributes = new { @class = "text-danger" } })
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col col-lg-6">
-                        @Html.LabelFor( a => a.Currency, "Währung" )
+                        @Html.LabelFor(a => a.Currency, "Währung")
                     </div>
                     <div class="col col-lg-6">
-                        @if( Model.Currency == null )
+                        @if (Model.Currency == null)
                         {
-                            @Html.EditorFor( a => a.Currency, new { htmlAttributes = new { @class = "form-control" } } )
+                            @Html.EditorFor(a => a.Currency, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(a => a.Currency, "", new { htmlAttributes = new { @class = "text-danger" } })
+
                         }
                         else
                         {
-                            @Html.LabelFor( a => a.Currency, Model.Currency )
+                            @Html.LabelFor(a => a.Currency, Model.Currency)
                         }
                     </div>
                 </div>
@@ -180,6 +183,7 @@
 
             </main>
         }
+        
     </div>
 </div>
 

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using CryptoTrader.Manager;
 using CryptoTrader.Models.ViewModel;
+using CryptoTrader.Models.DbModel;
 
 namespace CryptoTrader.Controllers
 {
@@ -24,16 +25,27 @@ namespace CryptoTrader.Controllers
         /// <returns>Startseite</returns>
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login( LoginViewModel vm )
+        public ActionResult Login(LoginViewModel vm)
         {
-            bool result = LoginManager.Login( vm.LoginEmail, vm.LoginPassword );
-            if( result )
+            using (var db = new CryptoEntities())
             {
-                return RedirectToAction( "Index", "Home" );
-            }
-            else
-            {
-                return View();
+                var dbPersonList = new List<Person>();
+
+                foreach (var item in db.Person)
+                {
+                    dbPersonList.Add(item);
+                }
+                bool result = LoginManager.Login(vm.LoginEmail, vm.LoginPassword, dbPersonList);
+                if (result)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.Message = "Fehlgeschlagen, entweder Benutzername oder Password falsch , oder ihr Konto ist gesperrt";
+                    return View();
+                }
+
             }
         }
 
@@ -44,7 +56,7 @@ namespace CryptoTrader.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction( "Index", "Home" );
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -2,37 +2,38 @@
 {
     using System.Linq;
     using CryptoTrader.Models.DbModel;
-
+    using System.Collections.Generic;
+    using System.Web.Security;
 
     public class LoginManager
     {
-        public static bool Login( string email, string password )
+        public static bool Login(string email, string password, List<Person> personList)
         {
             bool result = false;
-            using( var db = new CryptoTraderEntities() )
-            {
-                // Existiert der Login ?
-                if( db.Person.Any( a => a.email == email ) )
-                {   //User aus der Db holen
-                    Person dbPerson = db.Person.Where( a => a.email == email ).FirstOrDefault();
+            // Existiert der Login ?
+            if (personList.Any(a => a.email.Equals(email, System.StringComparison.CurrentCultureIgnoreCase)))
+            {   //User aus der Db holen
+                var person = personList.Where(a => a.email.Equals(email, System.StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                //if (person.active == true)
+                //{
                     //Salt an das eingegebenen Pw anhängen
-                    password += dbPerson.salt;
+                    password += person.salt;
                     //PW+salt hashen
-                    string eingegPWHash = Hashen.HashBerechnen( password );
+                    string eingegPWHash = Hashen.HashBerechnen(password);
                     //Hashes vergleichen
-                    if( eingegPWHash == dbPerson.password )
+                    if (eingegPWHash == person.password)
                     {
-                        string firstName = dbPerson.firstName;
-                        string lastName = dbPerson.lastName;
-                        string role = dbPerson.role;
-                        Cookies.CreateCookies( email, role, firstName, lastName );
-                        result = true;
+                        string firstName = person.firstName;
+                        string lastName = person.lastName;
+                        string role = person.role;
+
+                    Cookies.CreateCookies(email, role, firstName, lastName);
+                    result = true;
                     }
-                    return result;
-                }
+                //}
+                return result;
             }
             return result;
-
         }
     }
 }

@@ -6,6 +6,7 @@
     using CryptoTrader.Manager;
     using CryptoTrader.Models.DbModel;
     using CryptoTrader.Models.ViewModel;
+    using System.Collections.Generic;
 
     public class RegisterController : Controller
     {
@@ -29,7 +30,7 @@
             dbPerson.password = Hashen.HashBerechnen( vm.RegisterPassword + dbPerson.salt );
             if( ModelState.IsValid )
             {
-                using( var db = new CryptoTraderEntities() )
+                using( var db = new CryptoEntities() )
                 {
                     db.Person.Add( dbPerson );
                     db.SaveChanges();
@@ -55,7 +56,11 @@
         public ActionResult PersonVerification()
         {
             PersonVerificationViewModel personVerificationVM = new PersonVerificationViewModel();
-            personVerificationVM.CountryList = CountryList.FilCountryList();
+            using(var db = new CryptoEntities())
+            {
+                var countries = db.Country.ToList();
+                personVerificationVM.CountryList = CountryList.FilCountryList(countries);
+            }
             return View( personVerificationVM );
         }
         /// <summary>
@@ -69,7 +74,7 @@
             Address dbAddress = Mapper.Map<Address>( vm );
             City dbCity = Mapper.Map<City>( vm );
             Upload dbUpload = Mapper.Map<Upload>( vm );
-            using( var db = new CryptoTraderEntities() )
+            using( var db = new CryptoEntities() )
             {
                 Country dbCountry = db.Country.Where( a => a.countryName == vm.CountryName ).FirstOrDefault();
                 Person dbPerson = db.Person.Where( a => a.email == User.Identity.Name ).FirstOrDefault();

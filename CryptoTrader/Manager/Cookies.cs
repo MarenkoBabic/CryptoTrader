@@ -20,7 +20,6 @@ namespace CryptoTrader.Manager
                 Role//Userdata
                 );
 
-
             string encryptedTicket = FormsAuthentication.Encrypt( authTicket );
 
             var authCookie = new HttpCookie( FormsAuthentication.FormsCookieName, encryptedTicket );

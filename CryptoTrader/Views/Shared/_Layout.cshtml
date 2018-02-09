@@ -5,13 +5,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
-    @Styles.Render( "~/Content/css" )
-    @Scripts.Render( "~/bundles/modernizr" )
-    @Scripts.Render( "~/bundles/jquery" )
-    @Scripts.Render( "~/bundles/jqueryui" )
-    @Scripts.Render( "~/bundles/jqueryval" )
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
 </head>
 <body>
+    
     <nav class="navbar navbar-inverse navbar-fixed-top eingestanzt">
         <div class="container" style="max-width:1500px">
             <div class="navbar-header">
@@ -20,18 +21,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink( " CryptoCoinCompany ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" } )
+                @Html.ActionLink(" CryptoCoinCompany ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="row">
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink( "Startseite", "Index", "Home" )</li>
-                        <li>@Html.ActionLink( "Info", "About", "Home" )</li>
-                        <li>@Html.ActionLink( "Kontakt", "Contact", "Home" )</li>
+                        <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Info", "About", "Home")</li>
+                        <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink( "Regestrieren", "nix", "nix", new { data_toggle = "modal", data_target = "#RegisterDialog" } )</li>
-                        <li>@Html.ActionLink( "Login", "nix", "nix", new { data_toggle = "modal", data_target = "#Login" } )</li>
+                        <li>@Html.ActionLink("Regestrieren", "nix", "nix", new { data_toggle = "modal", data_target = "#RegisterDialog" })</li>
+                        <li>@Html.ActionLink("Login", "nix", "nix", new { data_toggle = "modal", data_target = "#Login" })</li>
                     </ul>
                 </div>
             </div>
@@ -39,16 +40,21 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
+        @Html.Partial("~/Views/Shared/_LoginDialog.cshtml")
 
-        @Html.Partial( "~/Views/Shared/_LoginDialog.cshtml" )
+        @Html.Partial("~/Views/Shared/_RegisterDialog.cshtml")
+        <div>
+            @ViewBag.Message
 
-        @Html.Partial( "~/Views/Shared/_RegisterDialog.cshtml" )
+
+        </div>
+
 
 
 
     </div>
 
-    @Scripts.Render( "~/bundles/bootstrap" )
-    @RenderSection( "scripts", required: false )
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
