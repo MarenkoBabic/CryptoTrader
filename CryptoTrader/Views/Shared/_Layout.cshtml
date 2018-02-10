@@ -1,20 +1,21 @@
 ﻿<!DOCTYPE html>
+
+
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render( "~/Content/css" )
+    @Scripts.Render( "~/bundles/modernizr" )
+    @Scripts.Render( "~/bundles/jquery" )
+    @Scripts.Render( "~/bundles/jqueryui" )
+    @Scripts.Render( "~/bundles/jqueryval" )
+    @Scripts.Render( "~/bundles/toastr" )
 </head>
 <body>
-    <header>
-        @Html.
-    </header>
     <nav class="navbar navbar-inverse navbar-fixed-top eingestanzt">
         <div class="container" style="max-width:1500px">
             <div class="navbar-header">
@@ -23,29 +24,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(" CryptoCoinCompany ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink( " CryptoCoinCompany ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" } )
             </div>
             <div class="row">
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>q</li>
-                        <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Info", "About", "Home")</li>
-                        <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                        <li>@Html.ActionLink( "Startseite", "Index", "Home" )</li>
+                        <li>@Html.ActionLink( "Info", "About", "Home" )</li>
+                        <li>@Html.ActionLink( "Kontakt", "Contact", "Home" )</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Regestrieren", "nix", "nix", new { data_toggle = "modal", data_target = "#RegisterDialog" })</li>
-                        <li>@Html.ActionLink("Login", "nix", "nix", new { data_toggle = "modal", data_target = "#Login" })</li>
+                        <li>@Html.ActionLink( "Regestrieren", "nix", "nix", new { data_toggle = "modal", data_target = "#RegisterDialog" } )</li>
+                        <li>@Html.ActionLink( "Login", "nix", "nix", new { data_toggle = "modal", data_target = "#Login" } )</li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
     <div class="container body-content">
-        @RenderBody()
-        @Html.Partial("~/Views/Shared/_LoginDialog.cshtml")
 
-        @Html.Partial("~/Views/Shared/_RegisterDialog.cshtml")
+        @RenderBody()
+        @Html.Partial( "~/Views/Shared/_LoginDialog.cshtml" )
+
+        @Html.Partial( "~/Views/Shared/_RegisterDialog.cshtml" )
         <div>
             @ViewBag.Message
 
@@ -57,7 +59,39 @@
 
     </div>
 
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @Scripts.Render( "~/bundles/bootstrap" )
+    @RenderSection( "scripts", required: false )
 </body>
 </html>
+<script type="text/javascript">
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        $(document).ready(function () {
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>
+            toastr.error("", "@TempData["ErrorMessage"]");
+            </text>
+            }
+
+            @if (TempData["ConfirmMessage"] != null)
+            {
+                <text>
+            toastr.success("", "@TempData["ConfirmMessage"]");
+            </text>
+            }
+
+            });
+</script>

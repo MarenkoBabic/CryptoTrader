@@ -13,6 +13,7 @@
         height: 500px;
     }
 </style>
+
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/amstock.js"></script>
@@ -27,147 +28,31 @@
 
 }
 
-
 <div onload="JavaScript:timedRefresh(50);">@ViewBag.a asfdasdfafafd</div>
 
-<div class="dataTables_table_wrapper" style="min-height: 486px;">
-    <table class="table table-hover table-striped dataTable" name="table-tradehist" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
-        <thead>
-            <tr role="row">
-                <th class="nw sorting_desc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="descending" aria-label="Time: activate to sort column ascending" style="width: 100px;">Time</th>
-                <th class="ralign lalign sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Order: activate to sort column ascending" style="width: 40px;">Order</th>
-                <th class="ralign sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">Price</th>
-                <th class="ralign sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Volume: activate to sort column ascending">Volume</th>
-            </tr>
-        </thead>
-
-        <tbody role="alert" aria-live="polite" aria-relevant="all">
-            <tr class="odd">
-                <td class="nw">20:57:22 +00:00</td>
-                <td class="lalign pos">buy</td>
-                <td class="ralign">€6,974.9</td>
-                <td class="ralign">
-                    0.02
-                    <span class="deczeros">000000</span>
-                </td>
-            </tr>
-            <tr class="even">
-                <td class="nw">20:57:20 +00:00</td>
-                <td class="lalign pos">buy</td>
-                <td class="ralign">€6,975.0</td>
-                <td class="ralign">
-                    0.0079
-                    <span class="deczeros">0000</span>
-                </td>
-            </tr>
-            <tr class="odd">
-                <td class="nw">20:57:19 +00:00</td>
-                <td class="lalign pos">buy</td>
-                <td class="ralign">€6,975.0</td>
-                <td class="ralign">
-                    0.068936
-                    <span class="deczeros">00</span>
-                </td>
-            </tr>
-            <tr class="even">
-                <td class="nw">20:57:17 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,964.9</td>
-                <td class="ralign">
-                    0.02
-                    <span class="deczeros">000000</span>
-                </td>
-            </tr>
-            <tr class="odd">
-                <td class="nw">20:57:17 +00:00</td>
-                <td class="lalign pos">buy</td>
-                <td class="ralign">€6,975.9</td>
-                <td class="ralign">
-                    0.004
-                    <span class="deczeros">00000</span>
-                </td>
-            </tr>
-            <tr class="even">
-                <td class="nw">20:57:16 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,964.9</td>
-                <td class="ralign">
-                    0.02
-                    <span class="deczeros">000000</span>
-                </td>
-            </tr>
-            <tr class="odd">
-                <td class="nw">20:57:14 +00:00</td>
-                <td class="lalign pos">buy</td>
-                <td class="ralign">€6,975.9</td>
-                <td class="ralign">
-                    0.0616
-                    <span class="deczeros">0000</span>
-                </td>
-            </tr>
-            <tr class="even">
-                <td class="nw">20:57:14 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,962.2</td>
-                <td class="ralign">0.00000001</td>
-            </tr>
-            <tr class="odd">
-                <td class="nw">20:57:14 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,962.2</td>
-                <td class="ralign">0.11796675</td>
-            </tr>
-            <tr class="even">
-                <td class="nw">20:57:14 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,964.8</td>
-                <td class="ralign">0.05005847</td>
-            </tr>
-            <tr class="odd">
-                <td class="nw">20:57:12 +00:00</td>
-                <td class="lalign pos">buy</td>
-                <td class="ralign">€6,975.9</td>
-                <td class="ralign">
-                    0.004
-                    <span class="deczeros">00000</span>
-                </td>
-            </tr>
-            <tr class="even">
-                <td class="nw">20:57:12 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,962.1</td>
-                <td class="ralign">0.01669698</td>
-            </tr>
-            <tr class="odd">
-                <td class="nw">20:57:12 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,963.6</td>
-                <td class="ralign">0.01688867</td>
-            </tr>
-            <tr class="even">
-                <td class="nw">20:57:12 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,965.0</td>
-                <td class="ralign">0.00001435</td>
-            </tr>
-            <tr class="odd">
-                <td class="nw">20:57:12 +00:00</td>
-                <td class="lalign neg">sell</td>
-                <td class="ralign">€6,967.7</td>
-                <td class="ralign">
-                    0.0044
-                    <span class="deczeros">0000</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 <script>
-        function timedRefresh(timeoutPeriod) {
-            setTimeout(function () {
-                location.reload(true);
-            }, timeoutPeriod);
-        }
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+     $(document).ready(function () {
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>toastr.error("", "@TempData["ErrorMessage"]");</text>
+            }
+
+            });
 
     var ticker = @ViewBag.cTicker;
     var chart = AmCharts.makeChart("chartdiv", {

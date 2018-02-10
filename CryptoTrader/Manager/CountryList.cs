@@ -6,14 +6,14 @@ namespace CryptoTrader.Manager
     using System.Web.Mvc;
     using CryptoTrader.Models.DbModel;
 
-    public class CountryList
+    public class FillList
     {
         /// <summary>
         /// Befüllt die Liste für land
         /// </summary>        
         /// <param name="auswahl">Ausgewähltes Land</param>        
         /// <returns>Liste mit Länder</returns>
-        public static List<SelectListItem> FilCountryList(List<Country> Countries)
+        public static List<SelectListItem> FillCountryList(List<Country> Countries)
         {
             List<SelectListItem> countryList = new List<SelectListItem>();
             foreach (Country country in Countries)

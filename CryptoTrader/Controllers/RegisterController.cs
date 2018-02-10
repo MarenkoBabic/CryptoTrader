@@ -24,13 +24,13 @@
         [HttpPost]
         public ActionResult ToRegister( RegisterViewModel vm )
         {
+            vm.Salt = Hashen.SaltErzeugen();
+            vm.RegisterPassword = Hashen.HashBerechnen( vm.RegisterPassword + vm.Salt );
 
             Person dbPerson = Mapper.Map<Person>( vm );
-            dbPerson.salt = Hashen.SaltErzeugen();
-            dbPerson.password = Hashen.HashBerechnen( vm.RegisterPassword + dbPerson.salt );
             if( ModelState.IsValid )
             {
-                using( var db = new CryptoEntities() )
+                using( var db = new CryptoTraderEntities() )
                 {
                     db.Person.Add( dbPerson );
                     db.SaveChanges();
@@ -56,10 +56,10 @@
         public ActionResult PersonVerification()
         {
             PersonVerificationViewModel personVerificationVM = new PersonVerificationViewModel();
-            using(var db = new CryptoEntities())
+            using( var db = new CryptoTraderEntities() )
             {
                 var countries = db.Country.ToList();
-                personVerificationVM.CountryList = CountryList.FilCountryList(countries);
+                personVerificationVM.CountryList = FillList.FillCountryList( countries );
             }
             return View( personVerificationVM );
         }
@@ -74,12 +74,12 @@
             Address dbAddress = Mapper.Map<Address>( vm );
             City dbCity = Mapper.Map<City>( vm );
             Upload dbUpload = Mapper.Map<Upload>( vm );
-            using( var db = new CryptoEntities() )
+            using( var db = new CryptoTraderEntities() )
             {
                 Country dbCountry = db.Country.Where( a => a.countryName == vm.CountryName ).FirstOrDefault();
                 Person dbPerson = db.Person.Where( a => a.email == User.Identity.Name ).FirstOrDefault();
                 dbPerson.status = vm.Status;
-                dbPerson.reference = Generator.ReferencGenerator(dbPerson.id);
+                dbPerson.reference = Generator.ReferencGenerator( dbPerson.id );
 
                 dbCity.country_id = dbCountry.id;
                 db.City.Add( dbCity );
@@ -90,8 +90,14 @@
 
                 //dbUpload.person_id = dbPerson.id;
                 //db.Upload.Add( dbUpload );
-
-                db.SaveChanges();
+                if( ModelState.IsValid )
+                {
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return View();
+                }
             }
             return RedirectToAction( "Index", "Home" );
         }

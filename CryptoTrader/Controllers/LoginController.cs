@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
-using CryptoTrader.Manager;
-using CryptoTrader.Models.ViewModel;
-using CryptoTrader.Models.DbModel;
-
-namespace CryptoTrader.Controllers
+﻿namespace CryptoTrader.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using System.Web.Security;
+    using CryptoTrader.Manager;
+    using CryptoTrader.Models.DbModel;
+    using CryptoTrader.Models.ViewModel;
+
     public class LoginController : Controller
     {
         // GET: Login
@@ -25,20 +22,20 @@ namespace CryptoTrader.Controllers
         /// <returns>Startseite</returns>
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(LoginViewModel vm)
+        public ActionResult Login( LoginViewModel vm )
         {
-            using (var db = new CryptoEntities())
+            using( var db = new CryptoTraderEntities() )
             {
                 var dbPersonList = new List<Person>();
 
-                foreach (var item in db.Person)
+                foreach( var item in db.Person )
                 {
-                    dbPersonList.Add(item);
+                    dbPersonList.Add( item );
                 }
-                bool result = LoginManager.Login(vm.LoginEmail, vm.LoginPassword, dbPersonList);
-                if (result)
+                bool result = LoginManager.Login( vm.LoginEmail, vm.LoginPassword, dbPersonList );
+                if( result )
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction( "Index", "Home" );
                 }
                 else
                 {
@@ -56,7 +53,7 @@ namespace CryptoTrader.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction( "Index", "Home" );
         }
     }
 }

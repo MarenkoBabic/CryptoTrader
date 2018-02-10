@@ -11,7 +11,7 @@
     {
         public ActionResult Index()
         {
-
+            TempData["ErrorMessage"] = "fuckYou";
 
             return View();
         }
@@ -30,9 +30,9 @@
             return View();
         }
 
-        public ActionResult Test()
+        [ChildActionOnly]
+        public ActionResult Test(ApiViewModel vm)
         {
-            ApiViewModel vm = new ApiViewModel();
             JsonObject cTicker = ApiKraken.TickerInfo();
 
             var test1 = JObject.Parse( cTicker.ToString() );
@@ -43,7 +43,7 @@
             }
 
 
-            return PartialView( "_Header", vm );
+            return PartialView(vm );
         }
     }
 }
