@@ -25,23 +25,24 @@
 
             JsonObject tradesHistory = client.GetTradesHistory( string.Empty );
         }
+
         /// <summary>
         /// Holt sich den Letzen wert vom BTC-Kurs
         /// </summary>
         /// <returns>BTC -Kurs</returns>
-        public static string ShowRate()
+        public static decimal GetTicker()
         {
-            string tickerRate = "";
+            dynamic test = 0.0;
             JsonObject apiTicker = ApiKraken.TickerInfo();
 
             var getTicker = JObject.Parse( apiTicker.ToString() );
 
             foreach( JToken item in getTicker["result"] )
             {
-                tickerRate = item.Last["c"][0].ToString();
+                test = item.Last["c"][0];
             }
-            string test = string.Format( "{1: 0.##}", tickerRate);
             return test;
         }
+
     }
 }

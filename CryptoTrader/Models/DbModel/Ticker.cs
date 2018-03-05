@@ -14,6 +14,8 @@ namespace CryptoTrader.Models.DbModel
     
     public partial class Ticker
     {
+        internal object data_create;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ticker()
         {
