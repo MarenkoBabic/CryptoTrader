@@ -27,7 +27,7 @@ namespace CryptoTrader.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginViewModel vm)
         {
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 var dbPersonList = new List<Person>();
 

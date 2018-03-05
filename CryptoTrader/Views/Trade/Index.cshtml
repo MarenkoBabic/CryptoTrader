@@ -1,0 +1,18 @@
+﻿@model CryptoTrader.Models.ViewModel.TradeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    @foreach( var item in Model.HistoryList )
+    {
+        <div>
+            @item.person_id
+            @item.created
+            @item.ticker_id
+            @item.amount
+        </div>
+    }
+</div>

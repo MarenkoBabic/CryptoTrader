@@ -18,7 +18,7 @@
         {
             ApiKraken.TickerInfo();
             BankDataViewModel vm = new BankDataViewModel();
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
@@ -51,11 +51,11 @@
         [HttpPost]
         public ActionResult Index(BankDataViewModel vm)
         {
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = new Person();
-                var BankAccountModel = Mapper.Map<BankAccount>(vm);
-                var PersonModel = Mapper.Map<BankDataViewModel>(dbPerson);
+                BankAccount BankAccountModel = Mapper.Map<BankAccount>(vm);
+                BankDataViewModel PersonModel = Mapper.Map<BankDataViewModel>(dbPerson);
                 BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(vm);
 
                 dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();

@@ -6,14 +6,14 @@
     <edmx:Diagrams>
       <Diagram DiagramId="5cb8571055b442299f54fe0de8bf58d7" Name="Diagram1">
         <EntityTypeShape EntityType="CryptoTraderModel1.Address" Width="1.5" PointX="4.625" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderModel1.Balance" Width="1.5" PointX="12" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderModel1.BankAccount" Width="1.5" PointX="9.875" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderModel1.BankTransferHistory" Width="1.5" PointX="3.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel1.Balance" Width="1.5" PointX="12.125" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel1.BankAccount" Width="1.5" PointX="2.125" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel1.BankTransferHistory" Width="2.125" PointX="4.125" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderModel1.City" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderModel1.Country" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderModel1.Person" Width="1.5" PointX="6.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderModel1.Ticker" Width="1.5" PointX="13.875" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderModel1.TradeHistory" Width="1.5" PointX="13.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel1.Ticker" Width="1.5" PointX="13.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel1.TradeHistory" Width="1.5" PointX="11.75" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderModel1.Upload" Width="1.5" PointX="0.5" PointY="3.25" IsExpanded="true" />
         <AssociationConnector Association="CryptoTraderModel1.fk_Address_City" ManuallyRouted="false" />
         <AssociationConnector Association="CryptoTraderModel1.fk_Address_Person" ManuallyRouted="false" />

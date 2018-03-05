@@ -9,7 +9,41 @@
     @Scripts.Render( "~/bundles/modernizr" )
     @Scripts.Render( "~/bundles/jquery" )
     @Scripts.Render( "~/bundles/jqueryui" )
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetRate();
+        });
 
+        function GetRate() {
+            $.ajax({ url: "/Validation/ShowRate" })
+                .done(function (response) {
+                    console.log("GetRate")
+                    var result = "";
+                    var rate_old = ($("#rate").html());
+                    var rate_current = (response);
+
+                    $("#rate").html(rate_current);
+
+                    if (rate_current > rate_old) {
+                        result = ($(".rate").html("▲"));
+                        $(".rate").css("color", "green");
+                        $("#rate").css("color", "green");
+                    }
+                    else if (rate_current < rate_old) {
+                        result = ($(".rate").html("▼"));
+                        $(".rate").css("color", "red");
+                        $("#rate").css("color", "red");
+                    }
+                    else if (rate_current == rate_old) {
+                        result = ($(".rate").html(""));
+                        $(".rate").css("color", "goldenrod");
+                        $("#rate").css("color", "goldenrod");
+                    }
+
+                    setTimeout(function () { GetRate(); }, 2000);
+                });
+        }
+    </script>
 </head>
 <body>
     @{
@@ -27,6 +61,7 @@
 
     }
     <nav class="navbar navbar-inverse navbar-fixed-top">
+        <span class="btc">BTC <span class="rate"></span><span id="rate"></span></span>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
