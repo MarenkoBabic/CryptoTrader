@@ -1,5 +1,6 @@
 ﻿namespace CryptoTrader.Models.ViewModel
 {
+    using System;
     using System.Collections.Generic;
     using CryptoTrader.Models.DbModel;
 
@@ -8,12 +9,9 @@
         public int PersonId { get; set; }
         public int TickerId { get; set; }
         public decimal TickerRate { get; set; }
-        public string Currency_src { get; set; }
-        public string Currency_trg { get; set; }
-        public int MyProperty { get; set; }
         public decimal TradeAmount { get; set; }
         public List<TradeHistory> HistoryList { get; set; }
-
+        public DateTime Created { get; set; } = DateTime.Now;
         public TradeViewModel()
         {
             HistoryList = new List<TradeHistory>();

@@ -237,7 +237,6 @@
       <DependentUpon>CryptoBBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AdminViewModel.cs" />
-    <Compile Include="Models\ViewModel\ApiViewModel.cs" />
     <Compile Include="Models\ViewModel\AutoMapperProfile.cs" />
     <Compile Include="Models\ViewModel\BankDataViewModel.cs" />
     <Compile Include="Models\ViewModel\EmailSendViewModel.cs" />
@@ -248,10 +247,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Database1.mdf" />
-    <Content Include="App_Data\Database1_log.ldf">
-      <DependentUpon>Database1.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -393,6 +388,7 @@
     <Content Include="Views\Trade\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>

@@ -40,7 +40,8 @@
             {
                 tickerRate = item.Last["c"][0].ToString();
             }
-            return tickerRate;
+            string test = string.Format( "{1: 0.##}", tickerRate);
+            return test;
         }
     }
 }
