@@ -30,12 +30,12 @@ namespace CryptoTrader.Models.ViewModel
         public string PersonBic { get; set; }
 
         [Required]
-        [MinLength(2,ErrorMessage ="Minbetrag 10 Euro")]
-        [MaxLength(9,ErrorMessage ="Max 1 Milliarde")]
-        [RegularExpression("^[0 - 9]*$",ErrorMessage ="Nur Zahlen erlaubt")]
+        //[MinLength(2,ErrorMessage ="Minbetrag 10 Euro")]
+        //[MaxLength(9,ErrorMessage ="Max 1 Milliarde")]
+        //[RegularExpression("^[0 - 9]*$",ErrorMessage ="Nur Zahlen erlaubt")]
         public decimal Amount { get; set; }
 
-        [StringLength(4, ErrorMessage="Maximale Länge",MinimumLength =2)]
+        [StringLength(3, ErrorMessage="Maximale Länge",MinimumLength =2)]
         public string Currency { get; set; }
 
     }

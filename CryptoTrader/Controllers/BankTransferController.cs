@@ -1,9 +1,9 @@
 ﻿namespace CryptoTrader.Controllers
 {
     using AutoMapper;
-    using CryptoTrader.Manager;
     using CryptoTrader.Models.DbModel;
     using CryptoTrader.Models.ViewModel;
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -17,7 +17,7 @@
         public ActionResult Index()
         {
             BankDataViewModel vm = new BankDataViewModel();
-            using (var db = new CryptoTraderEntities())
+            using (var db = new CryptoEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
@@ -32,7 +32,6 @@
                         vm.PersonBic = dbBankAccount.bic;
                         vm.PersonIban = dbBankAccount.iban;
                     }
-                    ViewBag.Message = "HUHUHU";
                     return View(vm);
                 }
                 else
@@ -57,9 +56,10 @@
                 var PersonModel = Mapper.Map<BankDataViewModel>(dbPerson);
                 BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(vm);
 
+
                 dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-
+                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                 if (dbBankAccount == null)
                 {
                     db.BankAccount.Add(BankAccountModel);
@@ -69,6 +69,8 @@
                     vm.PersonBic = dbBankAccount.bic;
                     vm.PersonIban = dbBankAccount.iban;
                 }
+                dbBalance.created = DateTime.Now;
+                dbBalance.amount = -vm.Amount;
                 dbBankTransferHistory.person_id = dbPerson.id;
                 db.BankTransferHistory.Add(dbBankTransferHistory);
 

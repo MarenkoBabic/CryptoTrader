@@ -3,17 +3,74 @@
     using CryptoTrader.Models.DbModel;
     using CryptoTrader.Models.ViewModel;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
-    using AutoMapper;
     using System.Web.Mvc;
-    using CryptoTrader.Models;
 
     public class AdminController : Controller
     {
         // GET: Admin
         public ActionResult Index()
         {
+            AdminViewModel vm = new AdminViewModel();
+            using (var db = new CryptoEntities())
+            {
+                var dbPerson = new Person();
+                vm.personList = db.Person.ToList();
+            }
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Index(int? id, AdminViewModel vm)
+        {
+            using (var db = new CryptoEntities())
+            {
+                var dbPerson = db.Person.Find(id);
+
+                BankTransferHistory history = new BankTransferHistory();
+                history.created = vm.Created;
+                history.person_id = dbPerson.id;
+                history.amount = vm.Amount;
+                history.currency = vm.Currency;
+                db.BankTransferHistory.Add(history);
+
+                Balance dbBalance = new Balance();
+                dbBalance.created = vm.Created;
+                dbBalance.person_id = dbPerson.id;
+                dbBalance.currency = vm.Currency;
+                dbBalance.amount = vm.Amount;
+                db.Balance.Add(dbBalance);
+
+                if (ModelState.IsValid)
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
             return View();
+        }
+
+
+
+        public ActionResult Modify(int? id, AdminViewModel vm)
+        {
+            using (var db = new CryptoEntities())
+            {
+                var dbPerson = db.Person.Find(id);
+
+                if (dbPerson.active == true)
+                {
+                    dbPerson.active = false;
+                }
+                else
+                {
+                    dbPerson.active = true;
+                }
+                db.Entry(dbPerson).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", vm.personList);
         }
     }
 }

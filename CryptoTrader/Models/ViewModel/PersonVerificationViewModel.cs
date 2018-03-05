@@ -39,7 +39,12 @@ namespace CryptoTrader.Models.ViewModel
 
         public bool Status { get; set; } = true;
 
-        public HttpPostedFileBase Path { get; set; }
+        public HttpPostedFileBase Upload { get; set; }
+
+        [StringLength(64)]
+        public string Path { get; set; }
+
+        public string FileName { get; set; }
 
         public string Reference { get; set; }
 

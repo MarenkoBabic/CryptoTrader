@@ -5,28 +5,56 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
-    @Styles.Render( "~/Content/css" )
-    @Scripts.Render( "~/bundles/modernizr" )
-    @Scripts.Render( "~/bundles/jquery" )
-    @Scripts.Render( "~/bundles/jqueryui" )
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GetRate();
+        });
+        
+        function GetRate() {
+            console.log("GetRate");
+            $.ajax({ url: "/Ticker/ShowRate" }).done(function (response) {
+                $("#rate").html(response);
+            });
+            $.ajax({ url: "/Ticker/Index" }).done(function (response) {
+            });
+            setTimeout(function () { GetRate(); }, 10000);
+        }
+
+        $(document).ready(function () {
+            ShowBalance();
+        });
+        function ShowBalance() {
+            console.log("ShowBalance");
+            $.ajax({ url: "/Validation/ShowBalance" }).done(function (response) {
+                $("#balance").html(response);
+            });
+        }
+
+    </script>
 </head>
 <body>
     @{
         string firstName = "";
-        if( Request.Cookies["firstName"] != null )
+        if (Request.Cookies["firstName"] != null)
         {
             firstName = Request.Cookies["firstName"].Value;
         }
 
         string lastName = "";
-        if( Request.Cookies["lastName"] != null )
+        if (Request.Cookies["lastName"] != null)
         {
             lastName = Request.Cookies["lastName"].Value;
         }
-
     }
     <nav class="navbar navbar-inverse navbar-fixed-top">
+        <span class="navbar-left"><img src="~/Image/bitcoin.png" /></span>
+        <span class="navbar-left bitcoin glyphicon glyphicon-euro" id="rate"></span>
+
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,19 +62,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink( "CryptoTrader", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" } )
+
+                @Html.ActionLink("CryptoTrader", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink( "Startseite", "Index", "Home" )</li>
-                    <li>@Html.ActionLink( "Info", "About", "Home" )</li>
-                    <li>@Html.ActionLink( "Kontakt", "Contact", "Home" )</li>
-                    <li>@Html.ActionLink( "Geld buchen", "Index", "BankTransfer" )</li>
+                    <li>@Html.ActionLink("Geld buchen", "Index", "BankTransfer")</li>
+                    <li>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-user">@lastName</span>
+                            <span id="balance"></span>
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -72,7 +101,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p>
-                                                @Html.ActionLink( "Logout", "Logout", "Login", null, new { @class = "btn btn-danger btn-block" } )
+                                                @Html.ActionLink("Logout", "Logout", "Login", null, new { @class = "btn btn-danger btn-block" })
                                             </p>
                                         </div>
                                     </div>
@@ -93,7 +122,8 @@
 
     </div>
 
-    @Scripts.Render( "~/bundles/bootstrap" )
-    @RenderSection( "scripts", required: false )
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
+
 </html>

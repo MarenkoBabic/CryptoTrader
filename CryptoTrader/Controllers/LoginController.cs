@@ -1,11 +1,12 @@
 ﻿namespace CryptoTrader.Controllers
 {
-    using System.Collections.Generic;
-    using System.Web.Mvc;
-    using System.Web.Security;
     using CryptoTrader.Manager;
     using CryptoTrader.Models.DbModel;
     using CryptoTrader.Models.ViewModel;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using System.Web.Security;
+    using System.Linq;
 
     public class LoginController : Controller
     {
@@ -24,16 +25,15 @@
         [AllowAnonymous]
         public ActionResult Login( LoginViewModel vm )
         {
-            using( var db = new CryptoTraderEntities() )
+            using( var db = new CryptoEntities() )
             {
                 var dbPersonList = new List<Person>();
-
                 foreach( var item in db.Person )
                 {
                     dbPersonList.Add( item );
                 }
                 bool result = LoginManager.Login( vm.LoginEmail, vm.LoginPassword, dbPersonList );
-                if( result )
+                if( result)
                 {
                     return RedirectToAction( "Index", "Home" );
                 }

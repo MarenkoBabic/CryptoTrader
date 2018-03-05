@@ -3,8 +3,34 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-
-@Html.LabelFor(a => a.Active , Model.Active)
-@Html.LabelFor(a => a.FirstName,Model.FirstName)
+<div class="container">
+    <table class="table well">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Verwendungszweck</th>
+                <th>Active</th>
+                <th>Geld betrag</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.personList)
+            {
+                using (Html.BeginForm("Index", "Admin", new { id = @item.id }))
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.firstName</td>
+                        <td>@item.lastName</td>
+                        <td>@item.reference</td>
+                        <td>@Html.CheckBoxFor(a => item.active) @Html.ActionLink("Bestätigen", "Modify", new { id = item.id })</td>
+                        <td>@Html.EditorFor(a => a.Amount)</td>
+                        <td><input type="submit" value="Gutschreiben" /></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

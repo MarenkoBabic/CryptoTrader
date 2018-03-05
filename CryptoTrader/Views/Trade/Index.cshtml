@@ -1,0 +1,57 @@
+﻿@model CryptoTrader.Models.ViewModel.TradeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container">
+    <div class="row">
+
+        <main class="col-lg-12 well">
+            <div class="row">
+
+                <div class="col-lg-6 well wellcolor">
+                    <h2 class="text-center">Kaufen</h2>
+                    <div class="col-lg-4">
+                        @Html.LabelFor(a => a.BuyAmount, "Betrag")
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.EditorFor(a => a.BuyAmount, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.LabelFor(a => a.Currency_Src_Buy, "Währung")
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.EditorFor(a => a.Currency_Src_Buy, new { htmlAttributes = new { @class = "form-control" } })
+                        <input type="submit" />
+                    </div>
+                </div>
+
+                <div class="col-lg-6 well wellcolor">
+                    <h2 class="text-center">Verkaufen</h2>
+                    <div class="col-lg-4">
+                        @Html.LabelFor(a => a.SellAmount, "Betrag")
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.EditorFor(a => a.SellAmount, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.LabelFor(a => a.Currency_Src_Sell, "Währung")
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.EditorFor(a => a.Currency_Src_Sell, new { htmlAttributes = new { @class = "form-control" } })
+                        <input type="submit" />
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <div class="row well">
+        
+    </div>
+
+
+</div>
+

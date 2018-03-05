@@ -1,6 +1,4 @@
 ﻿@model CryptoTrader.Models.ViewModel.PersonVerificationViewModel
-    ViewBag.Title = "PersonVerification";
-}
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -93,8 +91,6 @@
     }
 </script>
 
-
-<h2>Registrieren</h2>
 <div class="container">
     <div class="row">
         <section>
@@ -211,8 +207,7 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <h5><strong>Ausweis hochladen</strong></h5>
-                                        @Html.TextBoxFor( m => m.Path, new { type = "file" })
-                                        <input type='file' onchange="readURL(this);" />
+                                        @Html.TextBoxFor( m => m.Upload, new { type = "file",@id = "#imgShow", @onchange = "readURL(this);" })
                                     </div>
                                     <div class="col-lg-9">
                                         <img id="imgShow" />

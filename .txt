@@ -2,7 +2,7 @@ public class Ticker
 {
 	public string Call(){
 	
-	var json = new WebClient().DownloadString("https://api.kraken.com/0/public/Ticker?pari=XXBTZEUR");
+	var json = new WebClient().DownloadString("https://api.kraken.com/0/public/Ticker?pari=XXBTZEUR[c]");
 	dynamic jsonToObject = Newtonsoft.Json.Linq.JObject.Parse(json);
 
 	return JsonToObject.result.XXBTZEUR.c[0];

@@ -14,8 +14,8 @@
             if (personList.Any(a => a.email.Equals(email, System.StringComparison.CurrentCultureIgnoreCase)))
             {   //User aus der Db holen
                 var person = personList.Where(a => a.email.Equals(email, System.StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-                //if (person.active == true)
-                //{
+                if (person.active == true)
+                {
                     //Salt an das eingegebenen Pw anhängen
                     password += person.salt;
                     //PW+salt hashen
@@ -30,7 +30,7 @@
                     Cookies.CreateCookies(email, role, firstName, lastName);
                     result = true;
                     }
-                //}
+                }
                 return result;
             }
             return result;

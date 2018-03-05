@@ -19,6 +19,5 @@
 
             JsonObject tradesHistory = client.GetTradesHistory( string.Empty );
         }
-
     }
 }

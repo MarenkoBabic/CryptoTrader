@@ -7,6 +7,10 @@ namespace CryptoTrader.Models.ViewModel
 {
     public class ApiViewModel
     {
-        public string TickerC { get; set; }
+        public DateTime created { get; set; } = DateTime.Now;
+        public decimal Rate { get; set; }
+        public string Currency_src { get; set; } = "Eur";
+        public string Currency_trg { get; set; } = "BTC";
+
     }
 }

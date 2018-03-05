@@ -3,10 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-toastr.error(@ViewBag.Message)
-<br />
-<br />
-<br />
+
 <div class="container">
     <div class="row">
 
@@ -89,7 +86,7 @@ toastr.error(@ViewBag.Message)
 
 
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Index","BankTransfer",FormMethod.Post))
         {
             <main class="col-lg-5 well" style="height:600px;">
                 <h2>Geld auszahlen</h2>
@@ -151,7 +148,7 @@ toastr.error(@ViewBag.Message)
                     </div>
                     <div class="col col-lg-6">
                         @Html.EditorFor(a => a.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(a => a.Amount,"",new { htmlAttributes = new { @class = "text-danger" } })
+                        @Html.ValidationMessageFor(a => a.Amount, "", new { htmlAttributes = new { @class = "text-danger" } })
                     </div>
                 </div>
 
@@ -164,7 +161,6 @@ toastr.error(@ViewBag.Message)
                         {
                             @Html.EditorFor(a => a.Currency, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(a => a.Currency, "", new { htmlAttributes = new { @class = "text-danger" } })
-
                         }
                         else
                         {
@@ -183,8 +179,7 @@ toastr.error(@ViewBag.Message)
 
             </main>
         }
-        
+
     </div>
 </div>
-
 

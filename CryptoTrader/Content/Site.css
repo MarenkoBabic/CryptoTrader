@@ -1,11 +1,21 @@
 ﻿
 body {
-    padding: 50px;
-    background-color: dimgray;
+    margin: 100px;
+    background-image: url('../Image/background.jpg');
 }
-
-
-
+.wellcolor{
+    background-color: gray;
+}
+/*#region SelfCss*/
+.bitcoin{
+    color: white;
+    float: left;
+    font-size: 40px;
+    line-height: 20px;
+    font-family: 'Facebook Letter Faces';
+    margin: 15px;
+}
+/*#endregion */
 
 /*#region NavBar */
 .navbar {
@@ -38,6 +48,8 @@ body {
     color: black;
     background: #3276B1;
 }
+
+
 
 .navbar-brand {
     color: red;
@@ -347,6 +359,10 @@ span.round-tab:hover {
     }
 
 
+.row {
+    margin-right: 15px;
+    margin-left: 15px;
+}
 
 @media( max-width : 585px ) {
 

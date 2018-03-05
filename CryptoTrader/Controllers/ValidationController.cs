@@ -4,6 +4,7 @@
     using System.Web.Mvc;
     using CryptoTrader.Manager;
     using CryptoTrader.Models.DbModel;
+    using System;
 
     public class ValidationController : Controller
     {
@@ -12,17 +13,17 @@
         /// </summary>
         /// <param name = "email" > Input Email</param>
         /// <returns>bool</returns>
-        public ActionResult IsMailExistToRegister( string RegisterEmail )
+        public ActionResult IsMailExistToRegister(string RegisterEmail)
         {
-            using( var db = new CryptoTraderEntities() )
+            using (var db = new CryptoEntities())
             {
                 var PersonList = db.Person.ToList();
 
 
                 bool isExist = PersonList.Where(
-                    a => a.email.ToLowerInvariant().Equals( RegisterEmail.ToLower() )
+                    a => a.email.ToLowerInvariant().Equals(RegisterEmail.ToLower())
                     ).FirstOrDefault() != null;
-                return Json( !isExist, JsonRequestBehavior.AllowGet );
+                return Json(!isExist, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -33,32 +34,43 @@
         /// <param name = "email" > Input Email</param>
         /// <param name = "password" > Input Password</param>
         /// <returns>bool</returns>
-        public ActionResult IsPasswordTrue( string LoginEmail, string LoginPassword )
+        public ActionResult IsPasswordTrue(string LoginEmail, string LoginPassword)
         {
             bool result = false;
 
-            using( var db = new CryptoTraderEntities() )
+            using (var db = new CryptoEntities())
             {
-                Person dbPerson = db.Person.Where( a => a.email == LoginEmail ).FirstOrDefault();
-                if( !string.IsNullOrEmpty( LoginEmail ) && !string.IsNullOrEmpty( LoginPassword ) )
+                Person dbPerson = db.Person.Where(a => a.email == LoginEmail).FirstOrDefault();
+                if (!string.IsNullOrEmpty(LoginEmail) && !string.IsNullOrEmpty(LoginPassword))
                 {
-                    if( dbPerson != null )
+                    if (dbPerson != null)
                     {
                         var personList = db.Person.ToList();
-                        string passwordHash = Hashen.HashBerechnen( LoginPassword + dbPerson.salt );
+                        string passwordHash = Hashen.HashBerechnen(LoginPassword + dbPerson.salt);
 
                         //Prüft ob Email und Password überein stimmen
                         result = personList.Where(
-                            a => a.email.ToLowerInvariant().Equals( LoginEmail, System.StringComparison.CurrentCultureIgnoreCase ) &&
-                            (a.password).Equals( passwordHash ) ).FirstOrDefault() != null;
-                        return Json( result, JsonRequestBehavior.AllowGet );
+                            a => a.email.ToLowerInvariant().Equals(LoginEmail, System.StringComparison.CurrentCultureIgnoreCase) &&
+                            (a.password).Equals(passwordHash)).FirstOrDefault() != null;
+                        return Json(result, JsonRequestBehavior.AllowGet);
                     }
                 }
                 else
                 {
-                    return Json( result, JsonRequestBehavior.AllowGet );
+                    return Json(result, JsonRequestBehavior.AllowGet);
                 }
-                return Json( result, JsonRequestBehavior.AllowGet );
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public string ShowBalance()
+        {
+            using (var db = new CryptoEntities())
+            {
+                var dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                decimal amount = db.Balance.Where(a => a.person_id == dbPerson.id).Sum(a => a.amount);
+
+                return Math.Round(amount,2).ToString();
             }
         }
     }

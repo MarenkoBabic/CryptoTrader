@@ -3,16 +3,14 @@
     using CryptoTrader.Manager;
     using CryptoTrader.Models.ViewModel;
     using Jayrock.Json;
-    using Jayrock.Json.Conversion;
     using Newtonsoft.Json.Linq;
+    using System.Collections.Generic;
     using System.Web.Mvc;
 
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            TempData["ErrorMessage"] = "fuckYou";
-
             return View();
         }
 
@@ -28,22 +26,6 @@
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        [ChildActionOnly]
-        public ActionResult Test(ApiViewModel vm)
-        {
-            JsonObject cTicker = ApiKraken.TickerInfo();
-
-            var test1 = JObject.Parse( cTicker.ToString() );
-
-            foreach( JToken item in test1["result"] )
-            {
-                vm.TickerC = item.Last["c"].ToString();
-            }
-
-
-            return PartialView(vm );
         }
     }
 }

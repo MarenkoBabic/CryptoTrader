@@ -164,6 +164,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\TickerController.cs" />
+    <Compile Include="Controllers\TradeController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -175,38 +177,40 @@
     <Compile Include="Manager\Hashen.cs" />
     <Compile Include="Manager\LoginManager.cs" />
     <Compile Include="Manager\SendMail.cs" />
+    <Compile Include="Manager\TickerManager.cs" />
+    <Compile Include="Manager\UploadImage.cs" />
     <Compile Include="Models\DbModel\Address.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Balance.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\BankAccount.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\BankTransferHistory.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel\BBRZ.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BBRZ.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel\BBRZ.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BBRZ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModel\BBRZ.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BBRZ.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\City.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Country.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel\CryptoBBRZ.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoBBRZ.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel\CryptoBBRZ.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoBBRZ.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel\CryptoBBRZ.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoBBRZ.edmx</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\DataBaseModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -224,16 +228,16 @@
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Person.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Ticker.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\TradeHistory.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel\Upload.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+      <DependentUpon>BBRZ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AdminViewModel.cs" />
     <Compile Include="Models\ViewModel\ApiViewModel.cs" />
@@ -243,6 +247,7 @@
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\PersonVerificationViewModel.cs" />
     <Compile Include="Models\ViewModel\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModel\TradeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -298,15 +303,16 @@
     <Content Include="Image\background-navbar.jpg" />
     <Content Include="Image\background.jpg" />
     <Content Include="Image\backgroundBitEth.jpg" />
-    <Content Include="Models\DbModel\CryptoBBRZ.Context.tt">
+    <Content Include="Image\bitcoin.png" />
+    <Content Include="Models\DbModel\BBRZ.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CryptoBBRZ.edmx</DependentUpon>
-      <LastGenOutput>CryptoBBRZ.Context.cs</LastGenOutput>
+      <DependentUpon>BBRZ.edmx</DependentUpon>
+      <LastGenOutput>BBRZ.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DbModel\CryptoBBRZ.tt">
+    <Content Include="Models\DbModel\BBRZ.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CryptoBBRZ.edmx</DependentUpon>
-      <LastGenOutput>CryptoBBRZ.cs</LastGenOutput>
+      <DependentUpon>BBRZ.edmx</DependentUpon>
+      <LastGenOutput>BBRZ.cs</LastGenOutput>
     </Content>
     <Content Include="Models\DbModel\DataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -330,15 +336,15 @@
     <Content Include="Models\DbModel\DataBaseModel.edmx.diagram">
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\DbModel\CryptoBBRZ.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CryptoBBRZ.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DbModel\CryptoBBRZ.edmx.diagram">
-      <DependentUpon>CryptoBBRZ.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <EntityDeploy Include="Models\DbModel\BBRZ.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BBRZ.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DbModel\BBRZ.edmx.diagram">
+      <DependentUpon>BBRZ.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -371,7 +377,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Register\PersonVerification.cshtml" />
-    <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\LayoutUser.cshtml" />
@@ -381,9 +386,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Ticker\Index.cshtml" />
+    <Content Include="Views\Trade\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Image\UserImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

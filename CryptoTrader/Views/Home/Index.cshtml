@@ -2,258 +2,98 @@
     ViewBag.Title = "Home Page";
 }
 
-<style>
-    body {
-        background: #111;
-        font-family: Verdana;
-    }
-
-    #chartdiv {
-        width: 100%;
-        height: 500px;
-    }
-</style>
-
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/amstock.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js"></script>
-<script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
-
-
-
-@*<div id="chartdiv">
-
-    </div>*@
-
-}
-
-<div onload="JavaScript:timedRefresh(50);">@ViewBag.a asfdasdfafafd</div>
-
 <script>
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "positionClass": "toast-top-right",
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "3000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
+    //toastr.options = {
+    //    "closeButton": true,
+    //    "debug": false,
+    //    "positionClass": "toast-top-full-width",
+    //    "onclick": null,
+    //    "showDuration": "300",
+    //    "hideDuration": "1000",
+    //    "timeOut": "3000",
+    //    "extendedTimeOut": "1000",
+    //    "showEasing": "swing",
+    //    "showMethod": "fadeIn",
+    //    "hideMethod": "fadeOut"
+    //}
+     @*$(document).ready(function () {
 
-     $(document).ready(function () {
-
-            @if (TempData["ErrorMessage"] != null)
+            @if (TempData["Message"] != null)
             {
-                <text>toastr.error("", "@TempData["ErrorMessage"]");</text>
+                <text>toastr.error("", "@TempData["Message"]");</text>
             }
+    });*@
 
-            });
+    
 
-    var ticker = @ViewBag.cTicker;
-    var chart = AmCharts.makeChart("chartdiv", {
-    "type": "stock",
-    "theme": "dark",
+$.getJSON(
+    'https://api.kraken.com/0/public/Trades?pair=XXBTZEUR&since=0',
+    function (data) {
 
-    //"color": "#fff",
-    "dataSets": [{
-    "title": "Bitcoin",
+        Highcharts.chart('container', {
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: 'USD to EUR exchange rate over time'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: 'Exchange rate'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
 
-    "fieldMappings": [{
-    "fromField": "Open",
-    "toField": "open"
-    }, {
-    "fromField": "High",
-    "toField": "high"
-    }, {
-    "fromField": "Low",
-    "toField": "low"
-    }, {
-    "fromField": "Close",
-    "toField": "close"
-    }, {
-    "fromField": "Volume",
-    "toField": "volume"
-    }],
-    "compared": false,
-    "categoryField": "Date",
-
-    "dataLoader": {
-
-    "url": ticker ,
-    "format": "json",
-    "postProcess": function (data, config, chart) {
-    var newData = [];
-    for (var i = 0; i < data.rows.length; i++) {
-    var dataPoint = {};
-    for (var c = 0; c < data.columns.length; c++) {
-    dataPoint[data.columns[c]] = data.rows[i][c];
+            series: [{
+                type: 'area',
+                name: 'USD to EUR',
+                data: data
+            }]
+        });
     }
-    newData.push(dataPoint);
-    }
-    return newData;
-    },
-    "reload": 10
-    }
-    }],
-
-    //"dataDateFormat": "YYYY-MM-DD",
-
-    "panels": [{
-    "title": "Value",
-    "percentHeight": 70,
-
-    "stockGraphs": [{
-    "type": "candlestick",
-    "id": "g1",
-    "openField": "open",
-    "closeField": "close",
-    "highField": "high",
-    "lowField": "low",
-    "valueField": "close",
-    "lineColor": "#fff",
-    "fillColors": "#fff",
-    "negativeLineColor": "#db4c3c",
-    "negativeFillColors": "#db4c3c",
-    "fillAlphas": 1,
-    "comparedGraphLineThickness": 2,
-    "columnWidth": 0.7,
-    "useDataSetColors": false,
-    "comparable": true,
-    "compareField": "close",
-    "showBalloon": false,
-    "proCandlesticks": true
-    }],
-
-    "stockLegend": {
-    "valueTextRegular": undefined,
-    "periodValueTextComparing": "[[percents.value.close]]%"
-    }
-
-    },
-
-    {
-    "title": "Volume",
-    "percentHeight": 30,
-    "marginTop": 1,
-    "columnWidth": 0.6,
-    "showCategoryAxis": false,
-
-    "stockGraphs": [{
-    "valueField": "volume",
-    "openField": "open",
-    "type": "column",
-    "showBalloon": false,
-    "fillAlphas": 1,
-    "lineColor": "#fff",
-    "fillColors": "#fff",
-    "negativeLineColor": "#db4c3c",
-    "negativeFillColors": "#db4c3c",
-    "useDataSetColors": false
-    }],
-
-    "stockLegend": {
-    "markerType": "none",
-    "markerSize": 0,
-    "labelText": "",
-    "periodValueTextRegular": "[[value.close]]"
-    },
-
-    "valueAxes": [{
-    "usePrefixes": true
-    }]
-    }
-    ],
-
-    "panelsSettings": {
-    //    "color": "#fff",
-    "plotAreaFillColors": "#333",
-    "plotAreaFillAlphas": 1,
-    "marginLeft": 60,
-    "marginTop": 5,
-    "marginBottom": 5
-    },
-
-    "chartScrollbarSettings": {
-    "graph": "g1",
-    "graphType": "line",
-    "usePeriod": "WW",
-    "backgroundColor": "#333",
-    "graphFillColor": "#666",
-    "graphFillAlpha": 0.5,
-    "gridColor": "#555",
-    "gridAlpha": 1,
-    "selectedBackgroundColor": "#444",
-    "selectedGraphFillAlpha": 1
-    },
-
-    "categoryAxesSettings": {
-    "equalSpacing": true,
-    "gridColor": "#555",
-    "gridAlpha": 1
-    },
-
-    "valueAxesSettings": {
-    "gridColor": "#555",
-    "gridAlpha": 1,
-    "inside": false,
-    "showLastLabel": true
-    },
-
-    "chartCursorSettings": {
-    "pan": true,
-    "valueLineEnabled": true,
-    "valueLineBalloonEnabled": true
-    },
-
-    "legendSettings": {
-    //"color": "#fff"
-    },
-
-    "stockEventsSettings": {
-    "showAt": "high",
-    "type": "pin"
-    },
-
-    "balloon": {
-    "textAlign": "left",
-    "offsetY": 10
-    },
-
-    "periodSelector": {
-    "position": "bottom",
-    "periods": [{
-    "period": "DD",
-    "count": 10,
-    "label": "10D"
-    }, {
-    "period": "MM",
-    "count": 1,
-    "label": "1M"
-    }, {
-    "period": "MM",
-    "count": 6,
-    "label": "6M"
-    }, {
-    "period": "YYYY",
-    "count": 1,
-    "label": "1Y"
-    }, {
-    "period": "YYYY",
-    "count": 2,
-    "selected": true,
-    "label": "2Y"
-    }, {
-    "period": "YTD",
-    "label": "YTD"
-    }, {
-    "period": "MAX",
-    "label": "MAX"
-    }]
-    }
-    });
+);
 </script>
+
+
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+

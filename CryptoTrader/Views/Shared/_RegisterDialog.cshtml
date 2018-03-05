@@ -1,32 +1,5 @@
 ﻿@model  CryptoTrader.Models.ViewModel.RegisterViewModel
 
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $('.modal-footer button').click(function () {
-            var button = $(this); if (button.attr("data-dismiss") != "modal") {
-                var title = $('.modal-title');
-                var progress = $('.progress');
-                var progressBar = $('.progress-bar');
-
-                inputs.attr("disabled", "disabled");
-
-                button.hide();
-
-                button.text("Close")
-                    .removeClass("btn-primary")
-                    .addClass("btn-success")
-                    .blur()
-                    .delay(1600)
-                    .fadeIn(function () {
-                        title.text("Log in is successful");
-                        button.attr("data-dismiss", "modal");
-                    });
-            }
-        })
-    });
-
-</script>
 
 
 <div class="modal fade" id="RegisterDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
