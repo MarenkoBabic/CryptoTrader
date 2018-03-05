@@ -124,15 +124,15 @@
             
             byte[] base64DecodedSecred = Convert.FromBase64String(_secret);
 
-            var np = nonce + Convert.ToChar(0) + props;
+            string np = nonce + Convert.ToChar(0) + props;
 
-            var pathBytes = Encoding.UTF8.GetBytes(path);
-            var hash256Bytes = sha256_hash(np);
-            var z = new byte[pathBytes.Count() + hash256Bytes.Count()];
+            byte[] pathBytes = Encoding.UTF8.GetBytes(path);
+            byte[] hash256Bytes = sha256_hash(np);
+            byte[] z = new byte[pathBytes.Count() + hash256Bytes.Count()];
             pathBytes.CopyTo(z, 0);
             hash256Bytes.CopyTo(z, pathBytes.Count());
 
-            var signature = getHash(base64DecodedSecred, z);
+            byte[] signature = getHash(base64DecodedSecred, z);
 
             webRequest.Headers.Add("API-Sign", Convert.ToBase64String(signature));
 

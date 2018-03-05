@@ -8,7 +8,7 @@ namespace CryptoTrader.Manager
 {
     public class Generator
     {
-        public static string ReferencGenerator(int id)
+        public static string ReferencGenerator()
         {
             Random rnd = new Random();
             string temp = "";

@@ -8,6 +8,8 @@
     using System.Web.Security;
     using System.Linq;
 
+namespace CryptoTrader.Controllers
+{
     public class LoginController : Controller
     {
         // GET: Login

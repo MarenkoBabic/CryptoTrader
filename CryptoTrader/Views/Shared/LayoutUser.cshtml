@@ -5,36 +5,44 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-
+    @Styles.Render( "~/Content/css" )
+    @Scripts.Render( "~/bundles/modernizr" )
+    @Scripts.Render( "~/bundles/jquery" )
+    @Scripts.Render( "~/bundles/jqueryui" )
     <script type="text/javascript">
         $(document).ready(function () {
             GetRate();
         });
-        
+
         function GetRate() {
-            console.log("GetRate");
-            $.ajax({ url: "/Ticker/ShowRate" }).done(function (response) {
-                $("#rate").html(response);
-            });
-            $.ajax({ url: "/Ticker/Index" }).done(function (response) {
-            });
-            setTimeout(function () { GetRate(); }, 10000);
-        }
+            $.ajax({ url: "/Validation/ShowRate" })
+                .done(function (response) {
+                    console.log("GetRate")
+                    var result = "";
+                    var rate_old = ($("#rate").html());
+                    var rate_current = (response);
 
-        $(document).ready(function () {
-            ShowBalance();
-        });
-        function ShowBalance() {
-            console.log("ShowBalance");
-            $.ajax({ url: "/Validation/ShowBalance" }).done(function (response) {
-                $("#balance").html(response);
-            });
-        }
+                    $("#rate").html(rate_current);
 
+                    if (rate_current > rate_old) {
+                        result = ($(".rate").html("▲"));
+                        $(".rate").css("color", "green");
+                        $("#rate").css("color", "green");
+                    }
+                    else if (rate_current < rate_old) {
+                        result = ($(".rate").html("▼"));
+                        $(".rate").css("color", "red");
+                        $("#rate").css("color", "red");
+                    }
+                    else if (rate_current == rate_old) {
+                        result = ($(".rate").html(""));
+                        $(".rate").css("color", "goldenrod");
+                        $("#rate").css("color", "goldenrod");
+                    }
+
+                    setTimeout(function () { GetRate(); }, 2000);
+                });
+        }
     </script>
 </head>
 <body>
@@ -52,6 +60,7 @@
         }
     }
     <nav class="navbar navbar-inverse navbar-fixed-top">
+        <span class="btc">BTC <span class="rate"></span><span id="rate"></span></span>
         <span class="navbar-left"><img src="~/Image/bitcoin.png" /></span>
         <span class="navbar-left bitcoin glyphicon glyphicon-euro" id="rate"></span>
 

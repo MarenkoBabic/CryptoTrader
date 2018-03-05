@@ -7,7 +7,7 @@ namespace CryptoTrader.Models.ViewModel
     {
         public AutoMapperProfile()
         {
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 //RegisterViewModel
                 CreateMap<Person, RegisterViewModel>()
