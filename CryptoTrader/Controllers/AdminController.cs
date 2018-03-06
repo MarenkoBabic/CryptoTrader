@@ -1,22 +1,22 @@
 ﻿namespace CryptoTrader.Controllers
 {
-    using CryptoTrader.Models.DbModel;
-    using CryptoTrader.Models.ViewModel;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Models.ViewModel;
 
     public class AdminController : Controller
     {
         // GET: Admin
         public ActionResult Index()
         {
+
             AdminViewModel vm = new AdminViewModel();
             using (var db = new CryptoEntities())
             {
                 var dbPerson = new Person();
-                vm.personList = db.Person.ToList();
+                vm.PersonList = db.Person.ToList();
             }
             return View(vm);
         }
@@ -70,7 +70,7 @@
                 db.Entry(dbPerson).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index", vm.personList);
+            return RedirectToAction("Index", vm.PersonList);
         }
     }
 }

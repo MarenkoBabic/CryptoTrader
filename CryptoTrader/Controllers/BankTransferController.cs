@@ -1,11 +1,11 @@
 ﻿namespace CryptoTrader.Controllers
 {
-    using AutoMapper;
-    using CryptoTrader.Models.DbModel;
-    using CryptoTrader.Models.ViewModel;
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using AutoMapper;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Models.ViewModel;
 
     public class BankTransferController : Controller
     {
@@ -17,7 +17,7 @@
         public ActionResult Index()
         {
             BankDataViewModel vm = new BankDataViewModel();
-            using (var db = new CryptoTraderEntities())
+            using (var db = new CryptoEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
@@ -49,7 +49,7 @@
         [HttpPost]
         public ActionResult Index(BankDataViewModel vm)
         {
-            using (var db = new CryptoTraderEntities())
+            using (var db = new CryptoEntities())
             {
                 Person dbPerson = new Person();
                 BankAccount BankAccountModel = Mapper.Map<BankAccount>(vm);

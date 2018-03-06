@@ -5,17 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
-    @Styles.Render( "~/Content/css" )
-    @Scripts.Render( "~/bundles/modernizr" )
-    @Scripts.Render( "~/bundles/jquery" )
-    @Scripts.Render( "~/bundles/jqueryui" )
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
     <script type="text/javascript">
         $(document).ready(function () {
             GetRate();
         });
 
+
         function GetRate() {
-            $.ajax({ url: "/Validation/ShowRate" })
+            $.ajax({ url: "/Ticker/ShowRate" })
                 .done(function (response) {
                     console.log("GetRate")
                     var result = "";
@@ -40,7 +41,7 @@
                         $("#rate").css("color", "goldenrod");
                     }
 
-                    setTimeout(function () { GetRate(); }, 2000);
+                    setTimeout(function () { GetRate(); UpdateChart(); }, 2000);
                 });
         }
     </script>
@@ -60,11 +61,13 @@
         }
     }
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <span class="btc">BTC <span class="rate"></span><span id="rate"></span></span>
         <span class="navbar-left"><img src="~/Image/bitcoin.png" /></span>
-        <span class="navbar-left bitcoin glyphicon glyphicon-euro" id="rate"></span>
+        <span class="rate bitcoin"></span>
+        <span id="rate" class="bitcoin"></span>
 
         <div class="container">
+
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>

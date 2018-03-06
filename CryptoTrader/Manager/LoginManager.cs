@@ -1,9 +1,8 @@
 ﻿namespace CryptoTrader.Manager
 {
-    using System.Linq;
-    using CryptoTrader.Models.DbModel;
     using System.Collections.Generic;
-    using System.Web.Security;
+    using System.Linq;
+    using CryptoTrader.Model.DbModel;
 
     public class LoginManager
     {

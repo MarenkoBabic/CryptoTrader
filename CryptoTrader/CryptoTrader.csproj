@@ -177,78 +177,65 @@
     <Compile Include="Manager\Hashen.cs" />
     <Compile Include="Manager\LoginManager.cs" />
     <Compile Include="Manager\SendMail.cs" />
-    <Compile Include="Manager\TickerManager.cs" />
     <Compile Include="Manager\UploadImage.cs" />
-    <Compile Include="Models\DbModel\Address.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
+    <Compile Include="Model\DbModel\Address.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\Balance.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel\BankAccount.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel\BankTransferHistory.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel\BBRZ.Context.cs">
+    <Compile Include="Model\DbModel\asdff.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BBRZ.Context.tt</DependentUpon>
+      <DependentUpon>asdff.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\BBRZ.cs">
+    <Compile Include="Model\DbModel\asdff.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BBRZ.tt</DependentUpon>
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\BBRZ.Designer.cs">
+    <Compile Include="Model\DbModel\asdff.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BBRZ.edmx</DependentUpon>
+      <DependentUpon>asdff.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\City.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
+    <Compile Include="Model\DbModel\Balance.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\Country.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
+    <Compile Include="Model\DbModel\BankAccount.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\DataBaseModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBaseModel.Context.tt</DependentUpon>
+    <Compile Include="Model\DbModel\BankTransferHistory.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\DataBaseModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    <Compile Include="Model\DbModel\City.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\DataBaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBaseModel.edmx</DependentUpon>
+    <Compile Include="Model\DbModel\Country.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\Person.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
+    <Compile Include="Model\DbModel\Person.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\Ticker.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
+    <Compile Include="Model\DbModel\Ticker.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\TradeHistory.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
+    <Compile Include="Model\DbModel\TradeHistory.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModel\Upload.cs">
-      <DependentUpon>BBRZ.tt</DependentUpon>
+    <Compile Include="Model\DbModel\Upload.cs">
+      <DependentUpon>asdff.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModel\AdminViewModel.cs" />
-    <Compile Include="Models\ViewModel\ApiViewModel.cs" />
-    <Compile Include="Models\ViewModel\AutoMapperProfile.cs" />
-    <Compile Include="Models\ViewModel\BankDataViewModel.cs" />
-    <Compile Include="Models\ViewModel\EmailSendViewModel.cs" />
-    <Compile Include="Models\ViewModel\LoginViewModel.cs" />
-    <Compile Include="Models\ViewModel\PersonVerificationViewModel.cs" />
-    <Compile Include="Models\ViewModel\RegisterViewModel.cs" />
-    <Compile Include="Models\ViewModel\TickerChartViewModel.cs" />
-    <Compile Include="Models\ViewModel\TradeViewModel.cs" />
+    <Compile Include="Model\ViewModel\AdminViewModel.cs" />
+    <Compile Include="Model\ViewModel\ApiViewModel.cs" />
+    <Compile Include="Model\ViewModel\AutoMapperProfile.cs" />
+    <Compile Include="Model\ViewModel\BankDataViewModel.cs" />
+    <Compile Include="Model\ViewModel\TradeViewModel.cs" />
+    <Compile Include="Model\ViewModel\EmailSendViewModel.cs" />
+    <Compile Include="Model\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Model\ViewModel\PersonVerificationViewModel.cs" />
+    <Compile Include="Model\ViewModel\RegisterViewModel.cs" />
+    <Compile Include="Model\ViewModel\TickerChartViewModel.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,51 +292,41 @@
     <Content Include="Image\background.jpg" />
     <Content Include="Image\backgroundBitEth.jpg" />
     <Content Include="Image\bitcoin.png" />
-    <Content Include="Models\DbModel\BBRZ.Context.tt">
+    <Content Include="Model\DbModel\asdff.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BBRZ.edmx</DependentUpon>
-      <LastGenOutput>BBRZ.Context.cs</LastGenOutput>
+      <DependentUpon>asdff.edmx</DependentUpon>
+      <LastGenOutput>asdff.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DbModel\BBRZ.tt">
+    <Content Include="Model\DbModel\asdff.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BBRZ.edmx</DependentUpon>
-      <LastGenOutput>BBRZ.cs</LastGenOutput>
+      <DependentUpon>asdff.edmx</DependentUpon>
+      <LastGenOutput>asdff.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DbModel\DataBaseModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataBaseModel.edmx</DependentUpon>
-      <LastGenOutput>DataBaseModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbModel\DataBaseModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataBaseModel.edmx</DependentUpon>
-      <LastGenOutput>DataBaseModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbModel\LocalDb.sql" />
     <Content Include="New Text Document.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\DbModel\DataBaseModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataBaseModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DbModel\DataBaseModel.edmx.diagram">
-      <DependentUpon>DataBaseModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <EntityDeploy Include="Models\DbModel\BBRZ.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BBRZ.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DbModel\BBRZ.edmx.diagram">
-      <DependentUpon>BBRZ.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="obj\Debug\CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\BBRZ.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\BBRZ.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\BBRZ.ssdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.ssdl" />
+    <EntityDeploy Include="Model\DbModel\asdff.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>asdff.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model\DbModel\asdff.edmx.diagram">
+      <DependentUpon>asdff.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\highstock\2.1.8\adapters\standalone-framework.js" />
     <Content Include="Scripts\highstock\2.1.8\adapters\standalone-framework.src.js" />
@@ -442,6 +419,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Image\UserImages\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

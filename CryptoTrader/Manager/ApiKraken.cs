@@ -19,5 +19,10 @@
 
             JsonObject tradesHistory = client.GetTradesHistory( string.Empty );
         }
+        /// <summary>
+        /// Holt den letzten Wert vom Ticker
+        /// </summary>
+        /// <returns>Tickerwert</returns>
+
     }
 }

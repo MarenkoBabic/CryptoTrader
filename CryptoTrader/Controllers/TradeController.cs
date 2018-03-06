@@ -1,9 +1,9 @@
 ﻿namespace CryptoTrader.Controllers
 {
-    using System.Web.Mvc;
-    using CryptoTrader.Models.DbModel;
     using System.Linq;
-    using CryptoTrader.Models.ViewModel;
+    using System.Web.Mvc;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Model.ViewModel;
 
     public class TradeController : Controller
     {
@@ -12,13 +12,13 @@
         {
             Ticker dbTicker = new Ticker();
             TradeViewModel vm = new TradeViewModel();
-            using(var db = new CryptoTraderEntities() )
+            using (var db = new CryptoEntities())
             {
-                Person dbPerson = db.Person.Where( a => a.email == User.Identity.Name ).FirstOrDefault();
+                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
-
-
             }
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Index(TradeViewModel vm)
@@ -29,8 +29,6 @@
                 var dbBalanace = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                 var dbtradeHistroy = new TradeHistory();
 
-                dbtradeHistroy.amount= vm.SellAmount;
-                dbBalanace.currency = vm.Currency_Src_Buy;
                 
 
 

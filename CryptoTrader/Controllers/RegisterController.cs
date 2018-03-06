@@ -1,11 +1,11 @@
 ﻿namespace CryptoTrader.Controllers
 {
-    using AutoMapper;
-    using CryptoTrader.Manager;
-    using CryptoTrader.Models.DbModel;
-    using CryptoTrader.Models.ViewModel;
     using System.Linq;
     using System.Web.Mvc;
+    using AutoMapper;
+    using CryptoTrader.Manager;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Models.ViewModel;
 
     public class RegisterController : Controller
     {
@@ -30,7 +30,7 @@
             dbPerson.role = "User";
             if( ModelState.IsValid )
             {
-                using( var db = new CryptoTraderEntities() )
+                using( var db = new CryptoEntities() )
                 {
                     db.Person.Add( dbPerson );
                     db.SaveChanges();
@@ -76,7 +76,7 @@
             Address dbAddress = Mapper.Map<Address>( vm );
             City dbCity = Mapper.Map<City>( vm );
             Upload dbUpload = Mapper.Map<Upload>( vm );
-            using( var db = new CryptoTraderEntities() )
+            using( var db = new CryptoEntities() )
             {
                 Country dbCountry = db.Country.Where( a => a.countryName == vm.CountryName ).FirstOrDefault();
                 Person dbPerson = db.Person.Where( a => a.email == User.Identity.Name ).FirstOrDefault();

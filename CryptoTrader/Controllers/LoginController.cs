@@ -1,15 +1,12 @@
 ﻿namespace CryptoTrader.Controllers
 {
-    using CryptoTrader.Manager;
-    using CryptoTrader.Models.DbModel;
-    using CryptoTrader.Models.ViewModel;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using System.Web.Security;
-    using System.Linq;
-
-namespace CryptoTrader.Controllers
-{
+    using CryptoTrader.Manager;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Models.ViewModel;
     public class LoginController : Controller
     {
         // GET: Login
@@ -25,19 +22,15 @@ namespace CryptoTrader.Controllers
         /// <returns>Startseite</returns>
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login( LoginViewModel vm )
+        public ActionResult Login(LoginViewModel vm)
         {
-            using( var db = new CryptoEntities() )
+            using (var db = new CryptoEntities())
             {
-                var dbPersonList = new List<Person>();
-                foreach( var item in db.Person )
+                List<Person> dbPersonList = db.Person.ToList();
+                bool result = LoginManager.Login(vm.LoginEmail, vm.LoginPassword, dbPersonList);
+                if (result)
                 {
-                    dbPersonList.Add( item );
-                }
-                bool result = LoginManager.Login( vm.LoginEmail, vm.LoginPassword, dbPersonList );
-                if( result)
-                {
-                    return RedirectToAction( "Index", "Home" );
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -55,7 +48,7 @@ namespace CryptoTrader.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction( "Index", "Home" );
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -2,19 +2,21 @@
     ViewBag.Title = "Home Page";
 }
 <script src="~/Scripts/highstock/Test/highstock.js"></script>
-<script src="~/Scripts/highstock/Test/exporting.js"></script>
+<script src="~/Scripts/highstock/2.1.8/themes/dark-unica.js"></script>
+<script src="~/Scripts/highstock/2.1.8/highcharts-3d.js"></script>
 <style>
     body {
         background: #111;
         font-family: Verdana;
     }
 
-    #chartdiv {
+    .chartdiv {
         width: 100%;
-        height: 500px;
+        min-height: 700px;
     }
 </style>
-<div id="Chart" style="height: 400px; min-width: 100%; margin-top: 20px;"></div>
+
+<div id="Chart" class="chartdiv"></div>
 
 
 <script>
@@ -25,7 +27,7 @@
     function UpdateChart() {
         if ($("collapseExample").hasClass("in") == false) {
             $.ajax({
-                url: '/Validation/LoadChartData',
+                url: '/Ticker/LoadChartData',
                 success: function (json) {
                     CreateChart(json);
                 },
@@ -36,7 +38,6 @@
         }
     }
 
-    //Create the chart
     function CreateChart(jsonData) {
         Highcharts.stockChart('Chart', {
             rangeSelector: {
@@ -48,11 +49,53 @@
             series: [{
                 name: 'BTC/EUR',
                 data: jsonData,
+                type: 'area',
                 tooltip: {
                     valueDecimals: 2
                 }
-            }]
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        chart: {
+                            height: 300
+                        },
+                        subtitle: {
+                            text: null
+                        },
+                        navigator: {
+                            enabled: false
+                        }
+                    }
+                }]
+            }
         });
     }
-</script>
 
+
+
+    //Create the chart
+    //function CreateChart(jsonData) {
+    //    Highcharts.stockChart('Chart', {
+    //        rangeSelector: {
+    //            selected: 1
+    //        },
+    //        title: {
+    //            text: 'Aktueller BitCoin Kurs'
+    //        },
+    //        series: [{
+    //            name: 'BTC/EUR',
+    //            data: jsonData,
+    //            tooltip: {
+    //                valueDecimals: 2
+    //            }
+    //        }]
+    //    });
+    //}
+
+
+
+</script>

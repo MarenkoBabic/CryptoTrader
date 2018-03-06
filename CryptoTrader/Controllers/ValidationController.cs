@@ -3,8 +3,10 @@
     using System.Linq;
     using System.Web.Mvc;
     using CryptoTrader.Manager;
-    using CryptoTrader.Models.DbModel;
     using System;
+    using System.Collections.Generic;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Model.ViewModel;
 
     public class ValidationController : Controller
     {
@@ -60,56 +62,6 @@
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        public string ShowRate()
-        {
-            var dbTicker = new Ticker();
-            using( var db = new CryptoTraderEntities() )
-            {
-                dbTicker.created = DateTime.Now;
-                dbTicker.currency_src = "Eur";
-                dbTicker.currency_trg = "BTC";
-                dbTicker.rate = Manager.ApiKraken.GetTicker();
-                db.Ticker.Add( dbTicker );
-                db.SaveChanges();
-            }
-
-            return ApiKraken.GetTicker().ToString();
-        }
-        public JsonResult LoadChartData()
-        {
-            List<TickerChartViewModel> result = TickerList();
-            return Json( TickerChartViewModel.GetList( result ), JsonRequestBehavior.AllowGet );
-        }
-
-        private static List<TickerChartViewModel> TickerList()
-        {
-            using( var db = new CryptoTraderEntities() )
-            {
-                List<TickerChartViewModel> getTickerList = new List<TickerChartViewModel>();
-
-                var dbTickerList = db.Ticker.Where( x => x.currency_trg == "BTC" ).ToList();
-
-                foreach( Ticker x in dbTickerList )
-                {
-                    getTickerList.Add( new TickerChartViewModel {
-                        UnixTime = Manager.DateTimeHelper.ConvertToUnixTimeMs( x.created ).ToString(),
-                        Value = x.rate.ToString()
-                    }
-                    );
-                }
-                return getTickerList;
-            }
-        public string ShowBalance()
-        {
-            using (var db = new CryptoEntities())
-            {
-                var dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                decimal amount = db.Balance.Where(a => a.person_id == dbPerson.id).Sum(a => a.amount);
-
-                return Math.Round(amount,2).ToString();
             }
         }
 
