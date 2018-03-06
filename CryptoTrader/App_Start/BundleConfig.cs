@@ -20,7 +20,8 @@ namespace CryptoTrader
                 "~/Scripts/jquery-ui-{version}.min.js" ) );
 
             bundles.Add( new ScriptBundle( "~/bundles/toastr" ).Include(
-                "~/Scripts/toastr.js" ) );
+                "~/Scripts/toastr.js",
+                "~/Scripts/toastr.min.js" ) );
 
 
 
@@ -37,6 +38,10 @@ namespace CryptoTrader
                 "~/Content/bootstrap.css",
                 "~/Content/site.css",
                 "~/Content/toastr.css" ) );
+            bundles.Add( new ScriptBundle( "~/bundles/highstock" ).Include(
+                     "~/Scripts/Highstock/exporting.js",
+                     "~/Scripts/Highstock/highstock.js" ) );
+
 
         }
     }

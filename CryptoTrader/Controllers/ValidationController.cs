@@ -63,6 +63,45 @@
             }
         }
 
+        public string ShowRate()
+        {
+            var dbTicker = new Ticker();
+            using( var db = new CryptoTraderEntities() )
+            {
+                dbTicker.created = DateTime.Now;
+                dbTicker.currency_src = "Eur";
+                dbTicker.currency_trg = "BTC";
+                dbTicker.rate = Manager.ApiKraken.GetTicker();
+                db.Ticker.Add( dbTicker );
+                db.SaveChanges();
+            }
+
+            return ApiKraken.GetTicker().ToString();
+        }
+        public JsonResult LoadChartData()
+        {
+            List<TickerChartViewModel> result = TickerList();
+            return Json( TickerChartViewModel.GetList( result ), JsonRequestBehavior.AllowGet );
+        }
+
+        private static List<TickerChartViewModel> TickerList()
+        {
+            using( var db = new CryptoTraderEntities() )
+            {
+                List<TickerChartViewModel> getTickerList = new List<TickerChartViewModel>();
+
+                var dbTickerList = db.Ticker.Where( x => x.currency_trg == "BTC" ).ToList();
+
+                foreach( Ticker x in dbTickerList )
+                {
+                    getTickerList.Add( new TickerChartViewModel {
+                        UnixTime = Manager.DateTimeHelper.ConvertToUnixTimeMs( x.created ).ToString(),
+                        Value = x.rate.ToString()
+                    }
+                    );
+                }
+                return getTickerList;
+            }
         public string ShowBalance()
         {
             using (var db = new CryptoEntities())
@@ -73,5 +112,6 @@
                 return Math.Round(amount,2).ToString();
             }
         }
+
     }
 }

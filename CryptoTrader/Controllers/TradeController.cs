@@ -10,8 +10,15 @@
         // GET: Trade
         public ActionResult Index()
         {
-            return View();
-        }
+            Ticker dbTicker = new Ticker();
+            TradeViewModel vm = new TradeViewModel();
+            using(var db = new CryptoTraderEntities() )
+            {
+                Person dbPerson = db.Person.Where( a => a.email == User.Identity.Name ).FirstOrDefault();
+                vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
+
+
+            }
 
         [HttpPost]
         public ActionResult Index(TradeViewModel vm)
