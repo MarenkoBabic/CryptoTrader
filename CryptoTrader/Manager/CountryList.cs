@@ -17,7 +17,7 @@ namespace CryptoTrader.Manager
             List<SelectListItem> countryList = new List<SelectListItem>();
             foreach (Country country in Countries)
             {
-                countryList.Add(new SelectListItem() { Text = country.countryName,Value = country.id.ToString() });
+                countryList.Add(new SelectListItem() { Text = country.countryName});
             }
             return countryList;
         }

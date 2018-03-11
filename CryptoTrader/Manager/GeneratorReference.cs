@@ -6,7 +6,7 @@ using System.Web;
 
 namespace CryptoTrader.Manager
 {
-    public class Generator
+    public class GeneratorReference
     {
         public static string ReferencGenerator()
         {

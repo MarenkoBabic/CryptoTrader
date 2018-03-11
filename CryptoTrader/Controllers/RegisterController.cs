@@ -21,22 +21,22 @@
         ///<return>ErrorSeite</return>
         /// <returns>Index Home</returns>
         [HttpPost]
-        public ActionResult ToRegister( RegisterViewModel vm )
+        public ActionResult ToRegister(RegisterViewModel vm)
         {
             vm.Salt = Hashen.SaltErzeugen();
-            vm.RegisterPassword = Hashen.HashBerechnen( vm.RegisterPassword + vm.Salt );
+            vm.RegisterPassword = Hashen.HashBerechnen(vm.RegisterPassword + vm.Salt);
 
-            Person dbPerson = Mapper.Map<Person>( vm );
+            Person dbPerson = Mapper.Map<Person>(vm);
             dbPerson.role = "User";
-            if( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
-                using( var db = new CryptoEntities() )
+                using (var db = new CryptoTraderEntities())
                 {
-                    db.Person.Add( dbPerson );
+                    db.Person.Add(dbPerson);
                     db.SaveChanges();
                 }
                 object message = TempData["OkMessage"] = "Erfolgreich Regestiert";
-                return RedirectToAction( "Index", "Home",message );
+                return RedirectToAction("Index", "Home", message);
             }
             return View();
         }
@@ -57,12 +57,12 @@
         public ActionResult PersonVerification()
         {
             PersonVerificationViewModel personVerificationVM = new PersonVerificationViewModel();
-            using( var db = new CryptoEntities() )
+            using (var db = new CryptoTraderEntities())
             {
                 var countries = db.Country.ToList();
-                personVerificationVM.CountryList = FillList.FillCountryList( countries );
+                personVerificationVM.CountryList = FillList.FillCountryList(countries);
             }
-            return View( personVerificationVM );
+            return View(personVerificationVM);
         }
 
         /// <summary>
@@ -71,31 +71,33 @@
         /// <param name="vm">ViewModel</param>
         /// <returns>View</returns>
         [HttpPost]
-        public ActionResult PersonVerification( PersonVerificationViewModel vm )
+        public ActionResult PersonVerification(PersonVerificationViewModel vm)
         {
-            Address dbAddress = Mapper.Map<Address>( vm );
-            City dbCity = Mapper.Map<City>( vm );
-            Upload dbUpload = Mapper.Map<Upload>( vm );
-            using( var db = new CryptoEntities() )
+
+            Address dbAddress = Mapper.Map<Address>(vm);
+            City dbCity = Mapper.Map<City>(vm);
+            Upload dbUpload = Mapper.Map<Upload>(vm);
+            using (var db = new CryptoTraderEntities())
             {
-                Country dbCountry = db.Country.Where( a => a.countryName == vm.CountryName ).FirstOrDefault();
-                Person dbPerson = db.Person.Where( a => a.email == User.Identity.Name ).FirstOrDefault();
+                Country dbCountry = db.Country.Where(a => a.countryName.Equals(vm.CountryName)).FirstOrDefault();
+                Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
+
                 dbPerson.status = vm.Status;
-                dbPerson.reference = Generator.ReferencGenerator();
+                dbPerson.reference = GeneratorReference.ReferencGenerator();
 
                 dbCity.country_id = dbCountry.id;
-                db.City.Add( dbCity );
+                db.City.Add(dbCity);
 
                 dbAddress.city_id = dbCity.id;
                 dbAddress.person_id = dbPerson.id;
-                db.Address.Add( dbAddress );
+                db.Address.Add(dbAddress);
 
-                dbUpload.created = vm.Created;
+                //dbUpload.created = vm.Created;
                 dbUpload.person_id = dbPerson.id;
-                dbUpload.path = UploadImage.ImageUploadPath(vm,dbPerson.id);
+                dbUpload.path = UploadImage.ImageUploadPath(vm, dbPerson.id);
                 db.Upload.Add(dbUpload);
 
-                if ( ModelState.IsValid )
+                if (ModelState.IsValid)
                 {
                     db.SaveChanges();
                 }
@@ -104,7 +106,7 @@
                     return View();
                 }
             }
-            return RedirectToAction( "Index", "Home" );
+            return RedirectToAction("Index", "Home");
         }
     }
 }

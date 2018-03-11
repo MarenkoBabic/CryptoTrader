@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.personList)
+            @foreach (var item in Model.PersonList)
             {
                 using (Html.BeginForm("Index", "Admin", new { id = @item.id }))
                 {

@@ -173,55 +173,56 @@
     <Compile Include="Manager\Cookies.cs" />
     <Compile Include="Manager\CountryList.cs" />
     <Compile Include="Manager\DateTimeHelper.cs" />
-    <Compile Include="Manager\Generator.cs" />
+    <Compile Include="Manager\GeneratorReference.cs" />
     <Compile Include="Manager\Hashen.cs" />
     <Compile Include="Manager\LoginManager.cs" />
     <Compile Include="Manager\SendMail.cs" />
+    <Compile Include="Manager\TradeManager.cs" />
     <Compile Include="Manager\UploadImage.cs" />
     <Compile Include="Model\DbModel\Address.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DbModel\asdff.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>asdff.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DbModel\asdff.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>asdff.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DbModel\asdff.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>asdff.edmx</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Balance.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\BankAccount.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\BankTransferHistory.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\City.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Country.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DbModel\CryptoTraderModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CryptoTraderModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DbModel\CryptoTraderModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DbModel\CryptoTraderModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CryptoTraderModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Person.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Ticker.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\TradeHistory.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Upload.cs">
-      <DependentUpon>asdff.tt</DependentUpon>
+      <DependentUpon>CryptoTraderModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ViewModel\AdminViewModel.cs" />
     <Compile Include="Model\ViewModel\ApiViewModel.cs" />
@@ -239,6 +240,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\CryptoTrader.mdf" />
+    <Content Include="App_Data\CryptoTrader_log.ldf">
+      <DependentUpon>CryptoTrader.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -292,15 +297,15 @@
     <Content Include="Image\background.jpg" />
     <Content Include="Image\backgroundBitEth.jpg" />
     <Content Include="Image\bitcoin.png" />
-    <Content Include="Model\DbModel\asdff.Context.tt">
+    <Content Include="Model\DbModel\CryptoTraderModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>asdff.edmx</DependentUpon>
-      <LastGenOutput>asdff.Context.cs</LastGenOutput>
+      <DependentUpon>CryptoTraderModel.edmx</DependentUpon>
+      <LastGenOutput>CryptoTraderModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\DbModel\asdff.tt">
+    <Content Include="Model\DbModel\CryptoTraderModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>asdff.edmx</DependentUpon>
-      <LastGenOutput>asdff.cs</LastGenOutput>
+      <DependentUpon>CryptoTraderModel.edmx</DependentUpon>
+      <LastGenOutput>CryptoTraderModel.cs</LastGenOutput>
     </Content>
     <Content Include="New Text Document.txt" />
     <Content Include="Scripts\bootstrap.js" />
@@ -320,12 +325,12 @@
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.csdl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.msl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.ssdl" />
-    <EntityDeploy Include="Model\DbModel\asdff.edmx">
+    <EntityDeploy Include="Model\DbModel\CryptoTraderModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>asdff.Designer.cs</LastGenOutput>
+      <LastGenOutput>CryptoTraderModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Model\DbModel\asdff.edmx.diagram">
-      <DependentUpon>asdff.edmx</DependentUpon>
+    <Content Include="Model\DbModel\CryptoTraderModel.edmx.diagram">
+      <DependentUpon>CryptoTraderModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\highstock\2.1.8\adapters\standalone-framework.js" />
@@ -417,7 +422,6 @@
     <Content Include="Views\Trade\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Image\UserImages\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>

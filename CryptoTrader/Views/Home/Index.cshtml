@@ -35,17 +35,17 @@
                     console.log(errorData);
                 }
             });
+            setTimeout(function () { UpdateChart(); }, 10000);
+
         }
     }
 
     function CreateChart(jsonData) {
         Highcharts.stockChart('Chart', {
-            rangeSelector: {
-                selected: 1
-            },
             title: {
                 text: 'Aktueller BitCoin Kurs'
             },
+            rangeSelector: false,
             series: [{
                 name: 'BTC/EUR',
                 data: jsonData,
@@ -54,48 +54,7 @@
                     valueDecimals: 2
                 }
             }],
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        chart: {
-                            height: 300
-                        },
-                        subtitle: {
-                            text: null
-                        },
-                        navigator: {
-                            enabled: false
-                        }
-                    }
-                }]
-            }
         });
     }
-
-
-
-    //Create the chart
-    //function CreateChart(jsonData) {
-    //    Highcharts.stockChart('Chart', {
-    //        rangeSelector: {
-    //            selected: 1
-    //        },
-    //        title: {
-    //            text: 'Aktueller BitCoin Kurs'
-    //        },
-    //        series: [{
-    //            name: 'BTC/EUR',
-    //            data: jsonData,
-    //            tooltip: {
-    //                valueDecimals: 2
-    //            }
-    //        }]
-    //    });
-    //}
-
-
 
 </script>

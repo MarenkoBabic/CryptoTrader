@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="03ac1afe165241f8851b9406768eab4e" Name="Diagram1">
+      <Diagram DiagramId="9e3fd13ec71145f0b5c68324a1526dcf" Name="Diagram1">
         <EntityTypeShape EntityType="CryptoTraderModel.Address" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderModel.Balance" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderModel.BankAccount" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />

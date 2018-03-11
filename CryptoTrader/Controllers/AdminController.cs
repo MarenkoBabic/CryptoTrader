@@ -13,7 +13,7 @@
         {
 
             AdminViewModel vm = new AdminViewModel();
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 var dbPerson = new Person();
                 vm.PersonList = db.Person.ToList();
@@ -24,7 +24,7 @@
         [HttpPost]
         public ActionResult Index(int? id, AdminViewModel vm)
         {
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 var dbPerson = db.Person.Find(id);
 
@@ -55,7 +55,7 @@
 
         public ActionResult Modify(int? id, AdminViewModel vm)
         {
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 var dbPerson = db.Person.Find(id);
 

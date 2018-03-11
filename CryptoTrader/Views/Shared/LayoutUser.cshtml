@@ -9,12 +9,25 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/toastr")
+    @Scripts.Render("~/bundles/bootstrap")
+
     <script type="text/javascript">
+
+
         $(document).ready(function () {
             GetRate();
         });
+        $(document).ready(function () {
+            ShowBalance();
+        });
 
-
+        function ShowBalance() {
+            console.log("ShowBalance");
+            $.ajax({ url: "/Ticker/ShowBalance" }).done(function (response) {
+                $("#balance").html(response);
+            });
+        }
         function GetRate() {
             $.ajax({ url: "/Ticker/ShowRate" })
                 .done(function (response) {
@@ -41,11 +54,40 @@
                         $("#rate").css("color", "goldenrod");
                     }
 
-                    setTimeout(function () { GetRate(); UpdateChart(); }, 2000);
+                    setTimeout(function () { GetRate();}, 2000);
                 });
         }
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-bottom-left",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "width":"100%"
+        }
+        $(document).ready(function () {
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>toastr.error("", "@TempData["ErrorMessage"]").attr('style','width:500px');</text>
+            }
+
+            @if (TempData["ConfirmMessage"] != null)
+            {
+                <text>toastr.success("", "@TempData["ConfirmMessage"]").attr('style', 'width:100%');</text>
+            }
+
+            });
     </script>
 </head>
+
 <body>
     @{
         string firstName = "";
@@ -80,14 +122,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Geld buchen", "Index", "BankTransfer")</li>
-                    <li>
-                    </li>
+                    <li>@Html.ActionLink("Handeln", "Index", "Trade")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
+                        <span id="balance" class="bitcoin glyphicon glyphicon-euro"></span>
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-user">@lastName</span>
-                            <span id="balance"></span>
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -133,8 +174,6 @@
 
 
     </div>
-
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 

@@ -10,41 +10,37 @@
     using CryptoTrader.Models.ViewModel;
     using Jayrock.Json;
     using Newtonsoft.Json.Linq;
+    using AutoMapper;
 
     public class TickerController : Controller
     {
-        // GET: Ticker
-        public static decimal GetTicker()
-        {
-            using (var db = new CryptoEntities())
-            {
-                var ticker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
-                return Math.Round(ticker, 2);
-            }
-        }
-
-        public string ShowRate()
+        public ActionResult SaveTickertoDB()
         {
             ApiViewModel vm = new ApiViewModel();
             JsonObject cTicker = ApiKraken.TickerInfo();
-
             dynamic rate = JObject.Parse(cTicker.ToString());
             foreach (JToken item in rate["result"])
             {
                 vm.Rate = (decimal)item.Last["c"][0];
             }
-            using (var db = new CryptoEntities())
-            {
-                Ticker dbTicker = new Ticker();
+            Ticker dbTicker = Mapper.Map<Ticker>(vm);
 
-                dbTicker.created = vm.created;
-                dbTicker.rate = vm.Rate;
-                dbTicker.currency_src = vm.Currency_src;
-                dbTicker.currency_trg = vm.Currency_trg;
-                db.Ticker.Add(dbTicker);
-                db.SaveChanges();
+            using (var db = new CryptoTraderEntities())
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Ticker.Add(dbTicker);
+                    db.SaveChanges();
+                }
             }
 
+            return null;
+        }
+
+
+        public string ShowRate()
+        {
+            SaveTickertoDB();
             return GetTicker().ToString();
         }
 
@@ -54,9 +50,33 @@
             return Json(TickerChartViewModel.GetList(result), JsonRequestBehavior.AllowGet);
         }
 
+
+        public string ShowBalance()
+        {
+            using (var db = new CryptoTraderEntities())
+            {
+                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                decimal amount = db.Balance.Where(a => a.person_id == dbPerson.id).Sum(a => a.amount);
+                if (amount != 0.0m)
+                {
+                    return Math.Round(amount, 2).ToString();
+                }
+                return null;
+            }
+        }
+
+        private static decimal GetTicker()
+        {
+            using (var db = new CryptoTraderEntities())
+            {
+                decimal ticker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+                return Math.Round(ticker, 2);
+            }
+        }
+
         private static List<TickerChartViewModel> TickerList()
         {
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 List<TickerChartViewModel> getTickerList = new List<TickerChartViewModel>();
 
@@ -72,17 +92,6 @@
                     );
                 }
                 return getTickerList;
-            }
-        }
-
-        public string ShowBalance()
-        {
-            using (var db = new CryptoEntities())
-            {
-                var dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                decimal amount = db.Balance.Where(a => a.person_id == dbPerson.id).Sum(a => a.amount);
-
-                return Math.Round(amount, 2).ToString();
             }
         }
 

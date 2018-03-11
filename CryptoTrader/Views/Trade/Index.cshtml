@@ -1,18 +1,48 @@
-﻿@model CryptoTrader.Models.ViewModel.TradeViewModel
+﻿@model CryptoTrader.Model.ViewModel.TradeViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Handel</h2>
 
-<div>
-    @foreach( var item in Model.HistoryList )
-    {
-        <div>
-            @item.person_id
-            @item.created
-            @item.ticker_id
-            @item.amount
-        </div>
-    }
+<div class="container">
+    <div class="row">
+        <main class="col btn-lg 6 well">
+            <div class="col btn-lg 12">
+                @using (Html.BeginForm("Index", "Trade", new { id = 1 }))
+                {
+                    @Html.LabelFor(a => a.TradeAmountBTC, "Bitcoin kaufen")
+                    @Html.EditorFor(a => a.TradeAmountBTC)
+                    <input type="submit" value="Kaufen" />
+                }
+                @using (Html.BeginForm("Index", "Trade", new { id = 2 }))
+                {
+                    @Html.LabelFor(a => a.TradeAmountBTC, "Bitcoin verkaufen")
+                    @Html.EditorFor(a => a.TradeAmountBTC)
+                    <input type="submit" value="Kaufen" />
+                }
+
+            </div>
+        </main>
+        <main class="col col-lg-6 well">
+            @using (Html.BeginForm("Index", "Trade", new { id = 3 }))
+            {
+                @Html.LabelFor(a => a.TradeAmountBTC, "Per Euro Bitcoin kaufen")
+                @Html.EditorFor(a => a.TradeAmountBTC)
+                <input type="submit" value="Kaufen" />
+            }
+            @using (Html.BeginForm("Index", "Trade", new { id = 4 }))
+            {
+                @Html.LabelFor(a => a.TradeAmountBTC, "Per Euro Bitcoin verkaufen")
+                @Html.EditorFor(a => a.TradeAmountBTC)
+                <input type="submit" value="Kaufen" />
+            }
+
+
+
+        </main>
+    </div>
 </div>
+
+
+

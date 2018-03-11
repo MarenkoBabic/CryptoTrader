@@ -17,7 +17,7 @@
         public ActionResult Index()
         {
             BankDataViewModel vm = new BankDataViewModel();
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
@@ -49,7 +49,7 @@
         [HttpPost]
         public ActionResult Index(BankDataViewModel vm)
         {
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = new Person();
                 BankAccount BankAccountModel = Mapper.Map<BankAccount>(vm);

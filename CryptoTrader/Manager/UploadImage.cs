@@ -8,9 +8,10 @@
     {
         public static string ImageUploadPath(PersonVerificationViewModel vm, int id)
         {
-            vm.Path = vm.Upload.FileName;
             if (vm.Upload != null && vm.Upload.ContentLength > 0)
             {
+                vm.Path = vm.Upload.FileName;
+
                 //Prüft ob der Pfad vorhanden ist
                 bool exists = Directory.Exists(HttpContext.Current.Server.MapPath("~/Image/ab"));
                 //Falls nicht vorhanden Neuerstellen
@@ -18,7 +19,7 @@
                     Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Image/ab"));
 
 
-                var userImagePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Image/ab"), vm.Path);
+                string userImagePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Image/ab"), vm.Path);
 
 
                 vm.Upload.SaveAs(userImagePath);

@@ -13,10 +13,10 @@ namespace CryptoTrader.Model.DbModel
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CryptoEntities : DbContext
+    public partial class CryptoTraderEntities : DbContext
     {
-        public CryptoEntities()
-            : base("name=CryptoEntities")
+        public CryptoTraderEntities()
+            : base("name=CryptoTraderEntities")
         {
         }
     
