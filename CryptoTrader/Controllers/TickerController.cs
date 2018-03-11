@@ -51,19 +51,6 @@
         }
 
 
-        public string ShowBalance()
-        {
-            using (var db = new CryptoTraderEntities())
-            {
-                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                decimal amount = db.Balance.Where(a => a.person_id == dbPerson.id).Sum(a => a.amount);
-                if (amount != 0.0m)
-                {
-                    return Math.Round(amount, 2).ToString();
-                }
-                return null;
-            }
-        }
 
         private static decimal GetTicker()
         {

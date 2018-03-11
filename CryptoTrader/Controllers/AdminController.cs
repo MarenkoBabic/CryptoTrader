@@ -26,20 +26,24 @@
         {
             using (var db = new CryptoTraderEntities())
             {
-                var dbPerson = db.Person.Find(id);
+                Person dbPerson = db.Person.Find(id);
 
-                BankTransferHistory history = new BankTransferHistory();
-                history.created = vm.Created;
-                history.person_id = dbPerson.id;
-                history.amount = vm.Amount;
-                history.currency = vm.Currency;
+                BankTransferHistory history = new BankTransferHistory
+                {
+                    created = vm.Created,
+                    person_id = dbPerson.id,
+                    amount = vm.Amount,
+                    currency = vm.Currency
+                };
                 db.BankTransferHistory.Add(history);
 
-                Balance dbBalance = new Balance();
-                dbBalance.created = vm.Created;
-                dbBalance.person_id = dbPerson.id;
-                dbBalance.currency = vm.Currency;
-                dbBalance.amount = vm.Amount;
+                Balance dbBalance = new Balance
+                {
+                    created = vm.Created,
+                    person_id = dbPerson.id,
+                    currency = vm.Currency,
+                    amount = vm.Amount
+                };
                 db.Balance.Add(dbBalance);
 
                 if (ModelState.IsValid)
@@ -57,7 +61,7 @@
         {
             using (var db = new CryptoTraderEntities())
             {
-                var dbPerson = db.Person.Find(id);
+                Person dbPerson = db.Person.Find(id);
 
                 if (dbPerson.active == true)
                 {

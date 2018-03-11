@@ -6,7 +6,6 @@
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress(ErrorMessage = "Email nicht vorhanden")]
         public string LoginEmail { get; set; }
 
         [Required]

@@ -227,8 +227,10 @@
     <Compile Include="Model\ViewModel\AdminViewModel.cs" />
     <Compile Include="Model\ViewModel\ApiViewModel.cs" />
     <Compile Include="Model\ViewModel\AutoMapperProfile.cs" />
-    <Compile Include="Model\ViewModel\BankDataViewModel.cs" />
-    <Compile Include="Model\ViewModel\TradeViewModel.cs" />
+    <Compile Include="Model\ViewModel\PayOutViewModel.cs" />
+    <Compile Include="Model\ViewModel\PayInViewModel.cs" />
+    <Compile Include="Model\ViewModel\BuyBitCoinViewModel.cs" />
+    <Compile Include="Model\ViewModel\SellBitCoinViewModel.cs" />
     <Compile Include="Model\ViewModel\EmailSendViewModel.cs" />
     <Compile Include="Model\ViewModel\LoginViewModel.cs" />
     <Compile Include="Model\ViewModel\PersonVerificationViewModel.cs" />
@@ -246,6 +248,8 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom\DashBoard.css" />
+    <Content Include="Content\Custom\UserVerification.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -403,7 +407,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\BankTransfer\Index.cshtml" />
+    <Content Include="Views\BankTransfer\PayIn.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -420,6 +424,9 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Ticker\Index.cshtml" />
     <Content Include="Views\Trade\Index.cshtml" />
+    <Content Include="Views\BankTransfer\PayOut.cshtml" />
+    <Content Include="Views\Trade\BuyBitCoin.cshtml" />
+    <Content Include="Views\Trade\SellBitCoin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Image\UserImages\" />

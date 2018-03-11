@@ -11,9 +11,9 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/toastr")
     @Scripts.Render("~/bundles/bootstrap")
+    <link href="~/Content/Custom/DashBoard.css" rel="stylesheet" />
 
     <script type="text/javascript">
-
 
         $(document).ready(function () {
             GetRate();
@@ -22,9 +22,19 @@
             ShowBalance();
         });
 
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".side-nav .collapse").on("hide.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
+            });
+            $('.side-nav .collapse').on("show.bs.collapse", function () {
+                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+        })
+
         function ShowBalance() {
             console.log("ShowBalance");
-            $.ajax({ url: "/Ticker/ShowBalance" }).done(function (response) {
+            $.ajax({ url: "/BankTransfer/ShowBalance" }).done(function (response) {
                 $("#balance").html(response);
             });
         }
@@ -49,7 +59,7 @@
                         $("#rate").css("color", "red");
                     }
                     else if (rate_current == rate_old) {
-                        result = ($(".rate").html(""));
+                        result = ($(".rate").html("-"));
                         $(".rate").css("color", "goldenrod");
                         $("#rate").css("color", "goldenrod");
                     }
@@ -102,79 +112,101 @@
             lastName = Request.Cookies["lastName"].Value;
         }
     }
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <span class="navbar-left"><img src="~/Image/bitcoin.png" /></span>
-        <span class="rate bitcoin"></span>
-        <span id="rate" class="bitcoin"></span>
-
-        <div class="container">
-
-
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Überschrift -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                @Html.ActionLink("CryptoTrader", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(" CryptoCoin", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Geld buchen", "Index", "BankTransfer")</li>
-                    <li>@Html.ActionLink("Handeln", "Index", "Trade")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <span id="balance" class="bitcoin glyphicon glyphicon-euro"></span>
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user">@lastName</span>
-                            <span class="glyphicon glyphicon-chevron-down"></span>
+
+            <!--Benutzer Dropdown-->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span id="balance"></span>
+                        <span class="glyphicon glyphicon-user">@lastName</span>
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="text-center">
+                                            <span class="glyphicon glyphicon-user icon-size"></span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="text-left small">@firstName  @lastName</p>
+                                        <p class="text-left small">@User.Identity.Name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="navbar-login navbar-login-session">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            @Html.ActionLink("Logout", "Logout", "Login", null, new { @class = "btn btn-danger btn-block" })
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <!-- Sidebar Menu Items-->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        @Html.ActionLink("Verifizieren", "PersonVerification", "Register")
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" data-target="#MoneyTransfer">
+                            <i class="glyphicon glyphicon-euro"></i>
+                            Geld Transfer
+                            <i class="fa fa-fw fa-angle-down pull-right"></i>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="navbar-login">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <p class="text-center">
-                                                <span class="glyphicon glyphicon-user icon-size"></span>
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <p class="text-left small">@firstName  @lastName</p>
-                                            <p class="text-left small">@User.Identity.Name</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="navbar-login navbar-login-session">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <p>
-                                                @Html.ActionLink("Logout", "Logout", "Login", null, new { @class = "btn btn-danger btn-block" })
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
+                        <ul id="MoneyTransfer" class="collapse">
+                            <li>@Html.ActionLink("Geld einzahlen", "PayIn", "BankTransfer")</li>
+                            <li>@Html.ActionLink("Geld auszahlen", "PayOut", "BankTransfer")</li>
                         </ul>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" data-target="#TradeBitCoin">
+                            <i class="glyphicon glyphicon-euro"></i>
+                            Handeln
+                            <i class="fa fa-fw fa-angle-down pull-right"></i>
+                        </a>
+                        <ul id="TradeBitCoin" class="collapse">
+                            <li>@Html.ActionLink("Bitcoin kaufen", "BuyBitcoin", "Trade")</li>
+                            <li>@Html.ActionLink("Bitcoin verkaufen", "SellBitCoin", "Trade")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="sugerencias"><i class="fa fa-fw fa-paper-plane-o"></i> MENU 4</a>
+                    </li>
+                    <li>
+                        <a href="faq"><i class="fa fa-fw fa fa-question-circle"></i> MENU 5</a>
                     </li>
                 </ul>
             </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div>
+            <div class="container-fluid">
+            </div>
         </div>
-    </nav>
+    </div><!-- /#wrapper -->
 
-    <div class="container body-content">
-        @RenderBody()
-
-
-
-    </div>
+    <div class="container body-content">@RenderBody()</div>
     @RenderSection("scripts", required: false)
-</body>
 
+</body>
 </html>

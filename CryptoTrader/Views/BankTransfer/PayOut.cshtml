@@ -1,0 +1,100 @@
+﻿@model CryptoTrader.Models.ViewModel.PayOutViewModel
+@{
+    ViewBag.Title = "PayOut";
+}
+
+<h2>Auszahlung</h2>
+
+@using (Html.BeginForm("PayOut", "BankTransfer", FormMethod.Post))
+{
+    <main class="col-lg-5 well" style="height:600px;">
+        <h2>Geld auszahlen</h2>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.FirstName, "Vorname")
+            </div>
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.FirstName, Model.FirstName)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.LastName, "Nachname")
+            </div>
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.LastName, Model.LastName)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.PersonIban, "Iban")
+            </div>
+            <div class="col col-lg-6">
+                @if (Model.PersonIban == null)
+                {
+                    @Html.EditorFor(a => a.PersonIban, new { htmlAttributes = new { @class = "form-control" } })
+                }
+                else
+                {
+                    @Html.LabelFor(a => a.PersonIban, Model.PersonIban)
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.PersonBic, "BIC")
+            </div>
+            <div class="col col-lg-6">
+                @if (Model.PersonBic == null)
+                {
+                    @Html.EditorFor(a => a.PersonBic, new { htmlAttributes = new { @class = "form-control" } })
+                }
+                else
+                {
+                    @Html.LabelFor(a => a.PersonBic, Model.PersonBic)
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.Amount, "Betrag")
+            </div>
+            <div class="col col-lg-6">
+                @Html.EditorFor(a => a.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(a => a.Amount, "", new { htmlAttributes = new { @class = "text-danger" } })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                @Html.LabelFor(a => a.Currency, "Währung")
+            </div>
+            <div class="col col-lg-6">
+                @if (Model.Currency == null)
+                {
+                    @Html.EditorFor(a => a.Currency, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(a => a.Currency, "", new { htmlAttributes = new { @class = "text-danger" } })
+                }
+                else
+                {
+                    @Html.LabelFor(a => a.Currency, Model.Currency)
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-9"></div>
+            <div class="col-lg-2">
+                <button type="submit" class="ui-button-icon-only btn-success">Auszahlen</button>
+            </div>
+        </div>
+
+
+    </main>
+}

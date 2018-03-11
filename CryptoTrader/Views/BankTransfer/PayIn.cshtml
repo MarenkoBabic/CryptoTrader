@@ -1,0 +1,87 @@
+﻿@model CryptoTrader.Models.ViewModel.PayInViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+
+        <main class="col-lg-8 well">
+            <h2 style=text-align:center;>Kontodaten</h2>
+
+            <br />
+
+            <div class="row">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.BankName, "Bank")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.BankName, Model.BankName)
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.ZipBank, "Postleitzahl")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.ZipBank, Model.ZipBank)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.Bic, "BIC")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.Bic, Model.Bic)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.Iban, "Kontonummer")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.Iban, Model.Iban)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.FirstName, "Vorname")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.FirstName, Model.FirstName)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.LastName, "Nachname")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.LastName, Model.LastName)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.Reference, "Verwendungszweck")
+                </div>
+                <div class="col col-lg-6">
+                    @Html.LabelFor(a => a.Reference, Model.Reference)
+                </div>
+            </div>
+
+        </main>
+
+        <div class="col-lg-2"></div>
+
+
+
+
+    </div>
+</div>
+

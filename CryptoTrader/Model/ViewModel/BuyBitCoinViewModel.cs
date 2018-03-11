@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using CryptoTrader.Model.DbModel;
 
-    public class TradeViewModel
+    public class BuyBitCoinViewModel
     {
         public int PersonId { get; set; }
         public string FirstName { get; set; }
@@ -16,7 +16,7 @@
         public List<TradeHistory> HistoryList { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public decimal BalanceAmount { get; set; }
-        public TradeViewModel()
+        public BuyBitCoinViewModel()
         {
             HistoryList = new List<TradeHistory>();
         }

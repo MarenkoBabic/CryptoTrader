@@ -23,7 +23,6 @@ namespace CryptoTrader.Manager
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
 
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-            authCookie.Expires = DateTime.Now.AddMinutes(30);
 
             HttpCookie CookieLastName = new HttpCookie("lastName")
             {

@@ -14,6 +14,7 @@
 
     public class KrakenClient : IDisposable
     {
+        private const string Format = "&userref={1}";
         string _url;
         int _version;
         string _key;
@@ -259,7 +260,7 @@
             {
                 pairString.Append("pair=");
 
-                foreach (var item in pairs)
+                foreach (string item in pairs)
                 {
                     pairString.Append(item + ",");
                 }
@@ -317,7 +318,7 @@
             }
 
             StringBuilder pairString = new StringBuilder("pair=");
-            foreach (var item in pairs)
+            foreach (string item in pairs)
             {
                 pairString.Append(item + ",");
             }
@@ -500,7 +501,7 @@
             string reqs = string.Format("&trades={0}", true);
             
             if (!string.IsNullOrEmpty(userref))
-                reqs += string.Format("&userref={1}", userref);
+                reqs += string.Format(Format, userref);
             
             return QueryPrivate("OpenOrders", reqs) as JsonObject;
         }

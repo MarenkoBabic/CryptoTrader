@@ -14,9 +14,8 @@
         /// </summary>
         /// <param name="vm">ViewModel Bankdaten</param>
         /// <returns>View Index</returns>
-        public ActionResult Index()
+        public ActionResult PayIn()
         {
-            BankDataViewModel vm = new BankDataViewModel();
             using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
@@ -24,11 +23,13 @@
 
                 if (dbPerson.status == true)
                 {
+                    PayInViewModel vm = Mapper.Map<PayInViewModel>(dbPerson);
+                    //vm.FirstName = dbPerson.firstName;
+                    //vm.LastName = dbPerson.lastName;
+                    //vm.Reference = dbPerson.reference;
+
                     if (dbBankAccount != null)
                     {
-                        vm.FirstName = dbPerson.firstName;
-                        vm.LastName = dbPerson.lastName;
-                        vm.Reference = dbPerson.reference;
                         vm.PersonBic = dbBankAccount.bic;
                         vm.PersonIban = dbBankAccount.iban;
                     }
@@ -41,19 +42,39 @@
             }
         }
 
+
+        public ActionResult PayOut()
+        {
+            PayOutViewModel vm = new PayOutViewModel();
+            using (var db = new CryptoTraderEntities())
+            {
+                Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
+                BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+               
+                vm.FirstName = dbPerson.firstName;
+                vm.LastName = dbPerson.lastName;
+                if (db.BankAccount.Any())
+                {
+                    vm.PersonIban = dbBankAccount.iban;
+                    vm.PersonBic = dbBankAccount.bic;
+                }
+            }
+            return View(vm);
+        }
+
         /// <summary>
         /// Geld auszahlung
         /// </summary>
-        /// <param name="vm">ViewModel BankData</param>
+        /// <param name="vm">ViewModel Payout</param>
         /// <returns>View mit ViewModel</returns>
         [HttpPost]
-        public ActionResult Index(BankDataViewModel vm)
+        public ActionResult PayOut(PayOutViewModel vm)
         {
             using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = new Person();
                 BankAccount BankAccountModel = Mapper.Map<BankAccount>(vm);
-                BankDataViewModel PersonModel = Mapper.Map<BankDataViewModel>(dbPerson);
+                PayOutViewModel PersonModel = Mapper.Map<PayOutViewModel>(dbPerson);
                 BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(vm);
 
 
@@ -66,6 +87,8 @@
                 }
                 else
                 {
+                    vm.FirstName = dbPerson.firstName;
+                    vm.LastName = dbPerson.lastName;
                     vm.PersonBic = dbBankAccount.bic;
                     vm.PersonIban = dbBankAccount.iban;
                 }
@@ -80,8 +103,24 @@
                     db.SaveChanges();
                 }
             }
-            ViewBag.Message = "Auftrag erteilt";
+            TempData["ConfirmMessage"]= "Auftrag erteilt";
             return View("Index", vm);
         }
+
+        public string ShowBalance()
+        {
+            using (var db = new CryptoTraderEntities())
+            {
+                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+                if (db.Balance.Any())
+                {
+                    decimal amount = dbBalance.amount;
+                    return Math.Round((decimal)amount, 2).ToString();
+                }
+                return "00,00";
+            }
+        }
+
     }
 }

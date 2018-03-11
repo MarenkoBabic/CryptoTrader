@@ -71,7 +71,6 @@
             get; set;
         }
 
-        [Required]
         public string Path
         {
             get; set;

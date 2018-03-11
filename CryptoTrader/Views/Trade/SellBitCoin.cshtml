@@ -1,0 +1,21 @@
+﻿@model CryptoTrader.Model.ViewModel.SellBitCoinViewModel
+@{
+    ViewBag.Title = "SellBitCoin";
+}
+
+<h2>SellBitCoin</h2>
+
+@using (Html.BeginForm("SellBitCoin", "Trade", new { id = 1 }))
+{
+    @Html.LabelFor(a => a.TradeAmount, "Bitcoin verkaufen")
+    @Html.EditorFor(a => a.TradeAmount)
+    <input type="submit" value="Kaufen" />
+}
+@using (Html.BeginForm("SellBitCoin", "Trade", new { id = 4 }))
+{
+    @Html.LabelFor(a => a.TradeAmount, "Per Euro Bitcoin verkaufen")
+    @Html.EditorFor(a => a.TradeAmount)
+    <input type="submit" value="Kaufen" />
+}
+
+

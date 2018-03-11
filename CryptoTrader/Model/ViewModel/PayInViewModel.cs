@@ -6,7 +6,7 @@ using System.Web;
 
 namespace CryptoTrader.Models.ViewModel
 {
-    public class BankDataViewModel
+    public class PayInViewModel
     {
         public string BankName { get; set; } = "BawagPSK";
 

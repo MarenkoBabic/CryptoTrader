@@ -13,13 +13,13 @@
                 vm.Path = vm.Upload.FileName;
 
                 //Prüft ob der Pfad vorhanden ist
-                bool exists = Directory.Exists(HttpContext.Current.Server.MapPath("~/Image/ab"));
+                bool exists = Directory.Exists(HttpContext.Current.Server.MapPath("~/Image/UserImages"));
                 //Falls nicht vorhanden Neuerstellen
                 if (!exists)
-                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Image/ab"));
+                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Image/UserImages"));
 
 
-                string userImagePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Image/ab"), vm.Path);
+                string userImagePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Image/UserImages"), vm.Path);
 
 
                 vm.Upload.SaveAs(userImagePath);

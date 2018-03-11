@@ -12,7 +12,7 @@
             // Existiert der Login ?
             if (personList.Any(a => a.email.Equals(email, System.StringComparison.CurrentCultureIgnoreCase)))
             {   //User aus der Db holen
-                var person = personList.Where(a => a.email.Equals(email, System.StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                Person person = personList.Where(a => a.email.Equals(email, System.StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
                 if (person.active == true)
                 {
                     //Salt an das eingegebenen Pw anhängen

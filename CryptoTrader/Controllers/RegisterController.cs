@@ -103,7 +103,10 @@
                 }
                 else
                 {
-                    return View();
+                    TempData["ErrorMessage"] = "Fehlgeschlagen";
+                    var countries = db.Country.ToList();
+                    vm.CountryList = FillList.FillCountryList(countries);
+                    return View(vm);
                 }
             }
             return RedirectToAction("Index", "Home");

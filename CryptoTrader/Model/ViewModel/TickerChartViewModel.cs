@@ -14,7 +14,7 @@
         {
             List<decimal[]> result = new List<decimal[]>();
             int i = 0;
-            foreach (var item in list)
+            foreach (TickerChartViewModel item in list)
             {
                 result.Add(new decimal[2]);
                 result.Last()[0] = decimal.Parse(item.UnixTime);

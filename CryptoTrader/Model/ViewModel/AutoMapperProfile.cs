@@ -8,7 +8,7 @@
     {
         public AutoMapperProfile()
         {
-            using (var db = new CryptoEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 #region Register / Login
                 //RegisterViewModel
@@ -61,49 +61,46 @@
                 #endregion
 
 
-                #region MyRegion
-                //BankDataViewModel
-                CreateMap<BankTransferHistory, BankDataViewModel>()
-                    .ForMember(a => a.Created, opt => opt.MapFrom(a => a.created))
-                    .ForMember(a => a.Currency, opt => opt.MapFrom(a => a.currency))
-                    .ForMember(a => a.Amount, opt => opt.MapFrom(a => a.amount));
-                CreateMap<BankDataViewModel, BankTransferHistory>()
-                    .ForMember(a => a.created, opt => opt.MapFrom(a => a.Created))
-                    .ForMember(a => a.currency, opt => opt.MapFrom(a => a.Currency))
-                    .ForMember(a => a.amount, opt => opt.MapFrom(a => a.Amount));
+                #region BankTransfer
+                //PayIn    
+                CreateMap<PayInViewModel, Person>();
+                CreateMap<Person, PayInViewModel>();
 
-                CreateMap<BankDataViewModel, Person>()
-                    .ForMember(a => a.firstName, opt => opt.MapFrom(a => a.FirstName))
-                    .ForMember(a => a.lastName, opt => opt.MapFrom(a => a.LastName));
+                //PayOut
+                CreateMap<BankTransferHistory, PayOutViewModel>();
+                CreateMap<PayOutViewModel, BankTransferHistory>();
 
-                CreateMap<Person, BankDataViewModel>()
-                .ForMember(a => a.FirstName, opt => opt.MapFrom(a => a.firstName))
-                .ForMember(a => a.LastName, opt => opt.MapFrom(a => a.lastName));
+                CreateMap<PayOutViewModel, Person>();
+                CreateMap<Person, PayOutViewModel>();
 
-                CreateMap<BankAccount, BankDataViewModel>()
+                CreateMap<BankAccount, PayOutViewModel>()
                     .ForMember(a => a.PersonBic, opt => opt.MapFrom(a => a.bic))
                     .ForMember(a => a.PersonIban, opt => opt.MapFrom(a => a.iban));
-                CreateMap<BankDataViewModel, BankAccount>()
+                CreateMap<PayOutViewModel, BankAccount>()
                     .ForMember(a => a.bic, opt => opt.MapFrom(a => a.PersonBic))
                     .ForMember(a => a.iban, opt => opt.MapFrom(a => a.PersonIban));
 
+                CreateMap<PayOutViewModel, Balance>();
 
-                CreateMap<TradeHistory, TradeViewModel>()
-                    .ForMember(a => a.Created, opt => opt.MapFrom(a => a.created))
+                #endregion
+
+                #region TradeBTC
+
+                CreateMap<TradeHistory, SellBitCoinViewModel>()
                     .ForMember(a => a.PersonId, opt => opt.MapFrom(a => a.person_id))
-                    .ForMember(a => a.TradeAmountBTC, opt => opt.MapFrom(a => a.amount))
+                    .ForMember(a => a.TradeAmount, opt => opt.MapFrom(a => a.amount))
                     .ForMember(a => a.TickerId, opt => opt.MapFrom(a => a.ticker_id));
 
-                CreateMap<TradeViewModel, TradeHistory>()
-                    .ForMember(a => a.created, opt => opt.MapFrom(a => a.Created))
+                CreateMap<SellBitCoinViewModel, TradeHistory>()
                     .ForMember(a => a.person_id, opt => opt.MapFrom(a => a.PersonId))
-                    .ForMember(a => a.amount, opt => opt.MapFrom(a => a.TradeAmountBTC))
+                    .ForMember(a => a.amount, opt => opt.MapFrom(a => a.TradeAmount))
                     .ForMember(a => a.ticker_id, opt => opt.MapFrom(a => a.TickerId));
 
                 CreateMap<Ticker, ApiViewModel>();
                 CreateMap<ApiViewModel, Ticker>();
 
                 #endregion
+
 
 
             }
