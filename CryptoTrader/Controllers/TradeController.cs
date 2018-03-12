@@ -1,5 +1,6 @@
 ﻿namespace CryptoTrader.Controllers
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
@@ -45,13 +46,14 @@
         [HttpPost]
         public ActionResult BuyBitCoin(SellBitCoinViewModel vm, int id)
         {
-            TradeHistory dbTradeHistory = Mapper.Map<TradeHistory>(vm);
 
             using (var db = new JaroshEntities())
             {
-                Ticker Ticker = db.Ticker.FirstOrDefault();
+                vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+                vm.TickerId = db.Ticker.OrderByDescending(a => a.created).Select(a => a.id).First();
                 Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
                 Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+                TradeHistory dbTradeHistory = Mapper.Map<TradeHistory>(vm);
 
                 //Kontostand
                 if (db.Balance.Any())
@@ -62,47 +64,37 @@
                 {
                     vm.BalanceAmount = 0.0m;
                 }
-                //Bitcoin Kurs
-                vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
 
-                dbTradeHistory.person_id = dbPerson.id;
-                dbTradeHistory.ticker_id = Ticker.id;
                 if (id == 1)
                 {
                     bool result = TradeManager.HaveEnoughMoney(vm.BalanceAmount, vm.TickerRate, vm.TradeAmount);
                     if (result)
                     {
-                        decimal tempAmount = TradeManager.BuyBitCoin(vm.BalanceAmount, vm.TickerRate, vm.TradeAmount);
-                        dbBalance.amount = vm.BalanceAmount + (tempAmount);
-                        var dbBalance2 = new Balance()
-                        {
-                            created = vm.Created,
-                            amount = tempAmount,
-                            currency = "Eur",
-                            person_id = dbPerson.id,
+                        decimal resultAmount = TradeManager.BuyBitCoin(vm.TickerRate, vm.TradeAmount);
+                        dbBalance.amount -= resultAmount * (-1);
 
+                        dbTradeHistory.person_id = dbPerson.id;
 
-
-                        };
                         if (ModelState.IsValid)
                         {
                             db.Entry(dbBalance).State = EntityState.Modified;
-                            db.Balance.Add(dbBalance2);
                             db.TradeHistory.Add(dbTradeHistory);
                             db.SaveChanges();
                         }
-                        return View(vm);
+                        return RedirectToAction("BuyBitCoin");
                     }
                     TempData["ErrorMessage"] = "Limit überschritten laden sie Ihr Konto auf";
                 }
+
                 else
                 {
-                    bool result = TradeManager.HaveEnoughMoney(dbTradeHistory.amount, vm.TickerRate, vm.EuroAmount);
-                    if (result)
+                    if (dbBalance.amount >= vm.EuroAmount)
                     {
-                        vm.BalanceAmount = TradeManager.BuyBitCoinPerEuro(vm.BalanceAmount, vm.TickerRate, dbTradeHistory.amount);
+                        decimal btcAmount = TradeManager.BuyBitCoinPerEuro(vm.TickerRate, vm.EuroAmount);
+                        dbTradeHistory.person_id = dbPerson.id;
 
-
+                        dbBalance.amount -= vm.EuroAmount;
+                        dbBalance.created = vm.Created;
                         if (ModelState.IsValid)
                         {
                             db.Entry(dbBalance).State = EntityState.Modified;
@@ -112,7 +104,7 @@
                         return View(vm);
                     }
                     TempData["ErrorMessage"] = "Limit überschritten laden sie Ihr Konto auf";
-                    return View("Index", vm);
+                    return RedirectToAction("BuyBitCoin");
                 }
                 return View();
             }
@@ -155,35 +147,36 @@
         [HttpPost]
         public ActionResult SellBitCoin(SellBitCoinViewModel vm, int id)
         {
-            TradeHistory dbTradeHistory = Mapper.Map<TradeHistory>(vm);
 
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
+                vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+                vm.TickerId = db.Ticker.OrderByDescending(a => a.created).Select(a => a.id).First();
                 Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
                 Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+                TradeHistory dbTradeHistory = Mapper.Map<TradeHistory>(vm);
 
-                vm.BalanceAmount = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault().amount;
-
-
-                Ticker Ticker = db.Ticker.FirstOrDefault();
-                dbTradeHistory.person_id = dbPerson.id;
-                dbTradeHistory.ticker_id = Ticker.id;
-                vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
 
                 if (id == 1)
                 {
-                    bool result = TradeManager.HaveEnoughBTC(dbTradeHistory.amount, vm.TradeAmount);
+                    bool result = TradeManager.HaveEnoughBTC(ShowBitCoin(), vm.TradeAmount);
                     if (result)
                     {
-                        vm.BalanceAmount = TradeManager.SellBitCoin(vm.BalanceAmount, vm.TickerRate, vm.TradeAmount);
-                        dbBalance.amount = vm.BalanceAmount;
+                        decimal resultAmount = TradeManager.SellBitCoin(vm.TickerRate, vm.TradeAmount);
+                        
+                        dbBalance.amount -= resultAmount * (-1);
+
+                        dbTradeHistory.amount = vm.TradeAmount *(-1);
+                        dbTradeHistory.person_id = dbPerson.id;
+
                         if (ModelState.IsValid)
                         {
                             db.Entry(dbBalance).State = EntityState.Modified;
                             db.TradeHistory.Add(dbTradeHistory);
                             db.SaveChanges();
                         }
-                        return View(vm);
+                        return RedirectToAction("SellBitCoin");
+
                     }
                     TempData["ErrorMessage"] = "Nicht genug BitCoin vorhanden";
                 }
@@ -192,14 +185,14 @@
                     bool result = TradeManager.HaveEnoughBTC(dbTradeHistory.amount, vm.EuroAmount);
                     if (result)
                     {
-                        vm.BalanceAmount = TradeManager.SellBitCoinPerEuro(vm.BalanceAmount, vm.TickerRate, dbTradeHistory.amount);
+                        vm.BalanceAmount = TradeManager.SellBitCoinPerEuro(vm.TickerRate, dbTradeHistory.amount);
                         if (ModelState.IsValid)
                         {
                             db.Entry(dbBalance).State = EntityState.Modified;
                             db.TradeHistory.Add(dbTradeHistory);
                             db.SaveChanges();
                         }
-                        return View(vm);
+                        return RedirectToAction("SellBitCoin");
                     }
                     TempData["ErrorMessage"] = "Nicht genug BitCoin vorhanden";
                 }
@@ -207,5 +200,27 @@
 
             return View();
         }
+
+        public decimal ShowBitCoin()
+        {
+            SellBitCoinViewModel vm = new SellBitCoinViewModel();
+            using (var db = new JaroshEntities())
+            {
+                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                bool result = db.TradeHistory.Any(a => a.person_id == dbPerson.id);
+                if (result)
+                {
+
+                    var history = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
+                    foreach (TradeHistory item in history)
+                    {
+                        vm.BitCoinAmount += item.amount;
+                    }
+                    return Math.Round(vm.BitCoinAmount, 2);
+                }
+                return 00.00m;
+            }
+        }
+
     }
 }

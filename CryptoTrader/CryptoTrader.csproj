@@ -317,10 +317,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Image\background-navbar.jpg" />
-    <Content Include="Image\background.jpg" />
     <Content Include="Image\backgroundBitEth.jpg" />
-    <Content Include="Image\bitcoin.png" />
+    <Content Include="Image\bitcoin-1.jpg" />
     <Content Include="Model\DbModel\CryptoTraderModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CryptoTraderModel.edmx</DependentUpon>
@@ -341,7 +339,6 @@
       <DependentUpon>Jarosh.edmx</DependentUpon>
       <LastGenOutput>Jarosh.cs</LastGenOutput>
     </Content>
-    <Content Include="New Text Document.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

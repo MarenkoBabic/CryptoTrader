@@ -11,10 +11,10 @@
     @Html.EditorFor(a => a.TradeAmount)
     <input type="submit" value="Kaufen" />
 }
-@using (Html.BeginForm("SellBitCoin", "Trade", new { id = 4 }))
+@using (Html.BeginForm("SellBitCoin", "Trade", new { id = 2 }))
 {
-    @Html.LabelFor(a => a.TradeAmount, "Per Euro Bitcoin verkaufen")
-    @Html.EditorFor(a => a.TradeAmount)
+    @Html.LabelFor(a => a.EuroAmount, "Per Euro Bitcoin verkaufen")
+    @Html.EditorFor(a => a.EuroAmount)
     <input type="submit" value="Kaufen" />
 }
 

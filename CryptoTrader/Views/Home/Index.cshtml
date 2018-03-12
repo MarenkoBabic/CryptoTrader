@@ -11,13 +11,43 @@
     .container {
         padding-top: 25px;
     }
+
+    .background-Body {
+        padding-left: 0px;
+        background-image: url("../Image/bitcoin-1.jpg");
+    }
 </style>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <main id="Chart" class="chartdiv col-lg-12"></main>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <main id="Chart" class="chartdiv col-lg-12"></main>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <body class="background-Body">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div style="color:black;">
+                        <h1>Nehmen Sie Teil An Der Spannenden Krypto-Trading Welt</h1>
+                        <h2>Traden Sie Die Beliebtesten Kryptowährungen Auf Der Plattform</h2>
+                        <H4>
+                            CFDs sind gehebelte Produkte, die ein hohes Risiko beinhalten und zum Verlust Ihres gesamten Guthabens führen könnten.<br />
+                            Kryptowährungen zeichnen sich durch hohe Volatilität aus und der Handel mit ihnen kann signifikante Verluste innerhalb kurzer Zeit zur Fo
+                        </H4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+
+}
 
 
 <script>

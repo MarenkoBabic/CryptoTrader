@@ -29,62 +29,6 @@
                 <li>@Html.ActionLink("Login", "nix", "nix", new { data_toggle = "modal", data_target = "#Login" })</li>
             </ul>
 
-            <!-- Sidebar Menu Items-->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-
-                    <!--BitCoin Kurs-->
-                    <li>
-                        <a>
-                            <i class="glyphicon glyphicon-bitcoin"></i>
-                            <span class="my-span">BitCoin</span>
-
-                        </a>
-                        <ul id="MoneyTransfer">
-                            <li><a>1 Bitcoin =<span id="rate" class="glyphicon glyphicon-euro"></span></a></li>
-
-                        </ul>
-                    </li>
-
-                    <!--User Verifiziren-->
-                    <li>
-                        <a>
-                            <i class="glyphicon glyphicon-user"></i>
-                            <span class="my-span">Verifiziren</span>
-                        </a>
-                        <ul id="MoneyTransfer">
-                            <li>@Html.ActionLink("Verifiziren", "PersonVerification", "Register")</li>
-                        </ul>
-                    </li>
-                    
-                    <!--Money Transfer-->
-                    <li>
-                        <a>
-                            <i class="glyphicon glyphicon-euro"></i>
-                            <span class="my-span">Geld Transfer</span>
-                        </a>
-                        <ul id="MoneyTransfer">
-                            <li>@Html.ActionLink("Geld einzahlen", "PayIn", "BankTransfer")</li>
-                            <li>@Html.ActionLink("Geld auszahlen", "PayOut", "BankTransfer")</li>
-                        </ul>
-                    </li>
-
-                    <!--Trade-->
-                    <li>
-                        <a>
-                            <i class="glyphicon glyphicon-euro"></i>
-                            <span class="my-span">Handeln</span>
-                        </a>
-                        <ul id="TradeBitCoin">
-                            <li>@Html.ActionLink("Bitcoin kaufen", "BuyBitcoin", "Trade")</li>
-                            <li>@Html.ActionLink("Bitcoin verkaufen", "SellBitCoin", "Trade")</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- /.navbar-collapse -->
-        </nav>
 
     </div><!-- /#wrapper -->
     @Html.Partial("~/Views/Shared/_LoginDialog.cshtml")
@@ -158,7 +102,7 @@
                     $("#rate").css("color", "goldenrod");
                 }
 
-                setTimeout(function () { GetRate(); }, 2000);
+                setTimeout(function () { GetRate(); }, 10000);
             });
     }
 

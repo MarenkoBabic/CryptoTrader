@@ -14,19 +14,7 @@
 
 @using (Html.BeginForm("BuyBitCoin", "Trade", new { id = 3 }))
 {
-    @Html.LabelFor(a => a.TradeAmount, "Per Euro Bitcoin kaufen")
-    @Html.EditorFor(a => a.TradeAmount)
+    @Html.LabelFor(a => a.EuroAmount, "Per Euro Bitcoin kaufen")
+    @Html.EditorFor(a => a.EuroAmount)
     <input type="submit" value="Kaufen" />
-}
-@if (Model.HistoryList.Count < 0)
-{
-    foreach (var item in Model.HistoryList)
-    {
-        @item.person_id
-        @item.ticker_id
-        @item.Person.firstName
-        @item.Person.lastName
-        @item.amount
-
-    }
 }

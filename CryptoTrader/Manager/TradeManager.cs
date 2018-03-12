@@ -10,52 +10,48 @@
         /// <summary>
         /// Bitcoin kauf
         /// </summary>
-        /// <param name="amount">Kontostand</param>
         /// <param name="rate">TickerRate</param>
         /// <param name="amountBTC">BitconAnzahl</param>
         /// <returns>aktuellen Kontostand</returns>
-        public static decimal BuyBitCoin(decimal amount, decimal rate, decimal amountBTC)
+        public static decimal BuyBitCoin(decimal rate, decimal amountBTC)
         {
-            decimal tempAmount = amount -( rate * amountBTC);
-            tempAmount = tempAmount * (-1);
-            return tempAmount;
+            decimal amount = rate * amountBTC *(-1);
+            return amount;
+        }
+
+        /// <summary>
+        /// Bitcoin kauf per Euros
+        /// </summary>
+        /// <param name="rate">TickerRate</param>
+        /// <param name="amountMoney">Euros</param>
+        /// <returns>aktuellen Kontostand</returns>
+        public static decimal BuyBitCoinPerEuro(decimal rate, decimal amountMoney)
+        {
+            decimal amount = amountMoney / rate;
+            return amount;
         }
 
         /// <summary>
         /// Bitcoin verkaufen
         /// </summary>
-        /// <param name="amount">Kontostand</param>
         /// <param name="rate">TickerRate</param>
         /// <param name="amountBTC">BitconAnzahl</param>
         /// <returns>aktuellen Kontostand</returns>
-        public static decimal SellBitCoin(decimal amount, decimal rate, decimal amountBTC)
+        public static decimal SellBitCoin(decimal rate, decimal amountBTC)
         {
-            amount += rate * amountBTC;
-            return amount;
-        }
-        /// <summary>
-        /// Bitcoin kauf per Anzahl an Euros
-        /// </summary>
-        /// <param name="amount">Kontostand</param>
-        /// <param name="rate">TickerRate</param>
-        /// <param name="amountBTC">BitconAnzahl</param>
-        /// <returns>aktuellen Kontostand</returns>
-        public static decimal BuyBitCoinPerEuro(decimal amount, decimal rate, decimal amountBTC)
-        {
-            amount -= rate * amountBTC;
+            decimal amount = rate * amountBTC;
             return amount;
         }
 
         /// <summary>
         /// Bitcoin verkaufen an Anzahl an Euros
         /// </summary>
-        /// <param name="amount">Kontostand</param>
         /// <param name="rate">TickerRate</param>
         /// <param name="amountBTC">BitconAnzahl</param>
         /// <returns>aktuellen Kontostand</returns>
-        public static decimal SellBitCoinPerEuro(decimal amount, decimal rate, decimal amountBTC)
+        public static decimal SellBitCoinPerEuro(decimal rate, decimal amountBTC)
         {
-            amount += rate * amountBTC;
+            decimal amount = rate * amountBTC;
             return amount;
         }
 
@@ -78,7 +74,7 @@
             }
         }
 
-        public static bool HaveEnoughBTC(decimal SellBitCoin,decimal amountBTC)
+        public static bool HaveEnoughBTC(decimal amountBTC,decimal SellBitCoin)
         {
             if (amountBTC < SellBitCoin)
             {

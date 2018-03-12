@@ -1,6 +1,7 @@
 ﻿namespace CryptoTrader.Controllers
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
@@ -61,10 +62,10 @@
                 {
                     Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
                     BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-
+                    bool checkBankAccount = db.BankAccount.Any(a => a.person_id == dbPerson.id);
                     vm.FirstName = dbPerson.firstName;
                     vm.LastName = dbPerson.lastName;
-                    if (db.BankAccount.Any())
+                    if (checkBankAccount)
                     {
                         vm.PersonIban = dbBankAccount.iban;
                         vm.PersonBic = dbBankAccount.bic;
@@ -102,6 +103,7 @@
                 Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                 if (dbBankAccount == null)
                 {
+                    BankAccountModel.person_id = dbPerson.id;
                     db.BankAccount.Add(BankAccountModel);
                 }
                 else
@@ -111,11 +113,14 @@
                     vm.PersonBic = dbBankAccount.bic;
                     vm.PersonIban = dbBankAccount.iban;
                 }
-                dbBalance.created = DateTime.Now;
-                dbBalance.amount = -vm.Amount;
+
                 dbBankTransferHistory.person_id = dbPerson.id;
+                dbBankTransferHistory.amount = vm.Amount * (-1);
+                dbBankTransferHistory.currency = "Eur";
                 db.BankTransferHistory.Add(dbBankTransferHistory);
 
+                dbBalance.amount -= dbBankTransferHistory.amount * (-1);
+                db.Entry(dbBalance).State = EntityState.Modified;
 
                 if (ModelState.IsValid)
                 {
@@ -123,9 +128,13 @@
                 }
             }
             TempData["ConfirmMessage"] = "Auftrag erteilt";
-            return View("Index", vm);
+            return View("PayOut", vm);
         }
 
+        /// <summary>
+        /// KontostandAnzeige
+        /// </summary>
+        /// <returns>Kontostand oder "00.00"</returns>
         public string ShowBalance()
         {
             using (var db = new JaroshEntities())

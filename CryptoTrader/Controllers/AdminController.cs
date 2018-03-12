@@ -33,39 +33,22 @@
         [HttpPost]
         public ActionResult Index(int? id, AdminViewModel vm)
         {
-            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
-            if (result)
-            {
-
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
-                return RedirectToAction("Index", "Home");
-            }
-
             using (var db = new JaroshEntities())
             {
                 Person dbPerson = db.Person.Find(id);
+                Balance dbBalance = db.Balance.Where(a => a.id ==dbPerson.id).FirstOrDefault();
 
-                BankTransferHistory history = new BankTransferHistory
+                BankTransferHistory dbHistory = new BankTransferHistory
                 {
                     created = vm.Created,
                     person_id = dbPerson.id,
                     amount = vm.Amount,
                     currency = vm.Currency
                 };
-                db.BankTransferHistory.Add(history);
-
-                Balance dbBalance = new Balance
-                {
-                    created = vm.Created,
-                    person_id = dbPerson.id,
-                    currency = vm.Currency,
-                    amount = vm.Amount
-                };
-                db.Balance.Add(dbBalance);
-
+                db.BankTransferHistory.Add(dbHistory);
+                dbBalance.amount += vm.Amount;
+                dbBalance.created = vm.Created;
+                db.Entry(dbBalance).State = EntityState.Modified;
                 if (ModelState.IsValid)
                 {
                     db.SaveChanges();

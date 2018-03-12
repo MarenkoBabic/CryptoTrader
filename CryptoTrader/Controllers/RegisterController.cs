@@ -1,5 +1,6 @@
 ﻿namespace CryptoTrader.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
@@ -61,6 +62,12 @@
                 PersonVerificationViewModel personVerificationVM = new PersonVerificationViewModel();
                 using (var db = new JaroshEntities())
                 {
+                    Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name,StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                    if (dbPerson.status == true)
+                    {
+                        TempData["ErrorMessage"] = "Sie sind bereits Verifiziert";
+                        return RedirectToAction("Index", "Home");
+                    }
                     var countries = db.Country.ToList();
                     personVerificationVM.CountryList = FillList.FillCountryList(countries);
                 }

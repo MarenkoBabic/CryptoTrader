@@ -96,6 +96,17 @@
                     .ForMember(a => a.amount, opt => opt.MapFrom(a => a.TradeAmount))
                     .ForMember(a => a.ticker_id, opt => opt.MapFrom(a => a.TickerId));
 
+                CreateMap<TradeHistory, BuyBitCoinViewModel>()
+                    .ForMember(a => a.PersonId, opt => opt.MapFrom(a => a.person_id))
+                    .ForMember(a => a.TradeAmountBTC, opt => opt.MapFrom(a => a.amount))
+                    .ForMember(a => a.TickerId, opt => opt.MapFrom(a => a.ticker_id));
+
+                CreateMap<BuyBitCoinViewModel, TradeHistory>()
+                    .ForMember(a => a.person_id, opt => opt.MapFrom(a => a.PersonId))
+                    .ForMember(a => a.amount, opt => opt.MapFrom(a => a.TradeAmountBTC))
+                    .ForMember(a => a.ticker_id, opt => opt.MapFrom(a => a.TickerId));
+
+
                 CreateMap<Ticker, ApiViewModel>();
                 CreateMap<ApiViewModel, Ticker>();
 
