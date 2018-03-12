@@ -15,7 +15,7 @@ namespace CryptoTrader.Manager
                 1,  //Ticketversion
                 email, //Useridentifizierung
                 DateTime.Now, //Zeitpunkt der Erstellung
-                DateTime.Now.AddMinutes(30), //Wann das Ticket ablaeuft
+                DateTime.Now.AddMinutes(0), //Wann das Ticket ablaeuft
                 false,//Persistentes Ticket?
                 Role//Userdata
                 );

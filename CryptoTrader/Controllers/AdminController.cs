@@ -9,22 +9,42 @@
     public class AdminController : Controller
     {
         // GET: Admin
+        [Authorize(Roles ="Admin")]
         public ActionResult Index()
         {
-
-            AdminViewModel vm = new AdminViewModel();
-            using (var db = new CryptoTraderEntities())
+            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
+            if (result)
             {
-                var dbPerson = new Person();
-                vm.PersonList = db.Person.ToList();
+                AdminViewModel vm = new AdminViewModel();
+                using (var db = new JaroshEntities())
+                {
+                    var dbPerson = new Person();
+                    vm.PersonList = db.Person.ToList();
+                }
+                return View(vm);
             }
-            return View(vm);
+            else
+            {
+                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
         public ActionResult Index(int? id, AdminViewModel vm)
         {
-            using (var db = new CryptoTraderEntities())
+            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
+            if (result)
+            {
+
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
+                return RedirectToAction("Index", "Home");
+            }
+
+            using (var db = new JaroshEntities())
             {
                 Person dbPerson = db.Person.Find(id);
 
@@ -59,7 +79,7 @@
 
         public ActionResult Modify(int? id, AdminViewModel vm)
         {
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
                 Person dbPerson = db.Person.Find(id);
 

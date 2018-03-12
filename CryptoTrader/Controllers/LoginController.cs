@@ -24,7 +24,7 @@
         [AllowAnonymous]
         public ActionResult Login(LoginViewModel vm)
         {
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
                 List<Person> dbPersonList = db.Person.ToList();
                 bool result = LoginManager.Login(vm.LoginEmail, vm.LoginPassword, dbPersonList);

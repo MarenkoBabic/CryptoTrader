@@ -14,69 +14,78 @@
     <link href="~/Content/Custom/DashBoard.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="throbber" style="display:none; min-height:120px;"></div>
-    <div id="noty-holder"></div>
     <div id="wrapper">
+
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+            <!-- Überschrift -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar">a</span>
-                    <span class="icon-bar">b</span>
-                    <span class="icon-bar">c</span>
-                </button>
                 @Html.ActionLink(" CryptoCoinCompany ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+
+            <!--Benutzer-->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                        <li>@Html.ActionLink("Regestrieren", "nix", "nix", new { data_toggle = "modal", data_target ="#RegisterDialog" })</li>
-                        <li>@Html.ActionLink("Login", "nix", "nix", new { data_toggle = "modal", data_target = "#Login" })</li>
+                <li>@Html.ActionLink("Regestrieren", "nix", "nix", new { data_toggle = "modal", data_target = "#RegisterDialog" })</li>
+                <li>@Html.ActionLink("Login", "nix", "nix", new { data_toggle = "modal", data_target = "#Login" })</li>
             </ul>
+
+            <!-- Sidebar Menu Items-->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li>
 
-                        <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-fw fa-search"></i> MENU 1 <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-1" class="collapse">
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 1.1</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 1.2</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 1.3</a></li>
+                    <!--BitCoin Kurs-->
+                    <li>
+                        <a>
+                            <i class="glyphicon glyphicon-bitcoin"></i>
+                            <span class="my-span">BitCoin</span>
+
+                        </a>
+                        <ul id="MoneyTransfer">
+                            <li><a>1 Bitcoin =<span id="rate" class="glyphicon glyphicon-euro"></span></a></li>
+
                         </ul>
                     </li>
+
+                    <!--User Verifiziren-->
                     <li>
-                        <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-fw fa-star"></i>  MENU 2 <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-2" class="collapse">
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 2.1</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 2.2</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> SUBMENU 2.3</a></li>
+                        <a>
+                            <i class="glyphicon glyphicon-user"></i>
+                            <span class="my-span">Verifiziren</span>
+                        </a>
+                        <ul id="MoneyTransfer">
+                            <li>@Html.ActionLink("Verifiziren", "PersonVerification", "Register")</li>
                         </ul>
                     </li>
+                    
+                    <!--Money Transfer-->
                     <li>
-                        <a href="investigaciones/favoritas"><i class="fa fa-fw fa-user-plus"></i>  MENU 3</a>
+                        <a>
+                            <i class="glyphicon glyphicon-euro"></i>
+                            <span class="my-span">Geld Transfer</span>
+                        </a>
+                        <ul id="MoneyTransfer">
+                            <li>@Html.ActionLink("Geld einzahlen", "PayIn", "BankTransfer")</li>
+                            <li>@Html.ActionLink("Geld auszahlen", "PayOut", "BankTransfer")</li>
+                        </ul>
                     </li>
+
+                    <!--Trade-->
                     <li>
-                        <a href="sugerencias"><i class="fa fa-fw fa-paper-plane-o"></i> MENU 4</a>
-                    </li>
-                    <li>
-                        <a href="faq"><i class="fa fa-fw fa fa-question-circle"></i> MENU 5</a>
+                        <a>
+                            <i class="glyphicon glyphicon-euro"></i>
+                            <span class="my-span">Handeln</span>
+                        </a>
+                        <ul id="TradeBitCoin">
+                            <li>@Html.ActionLink("Bitcoin kaufen", "BuyBitcoin", "Trade")</li>
+                            <li>@Html.ActionLink("Bitcoin verkaufen", "SellBitCoin", "Trade")</li>
+                        </ul>
                     </li>
                 </ul>
             </div>
+
             <!-- /.navbar-collapse -->
         </nav>
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <!-- Page Heading -->
-                <div class="row" id="main">
-                    <div class="col-sm-12 col-md-12 well" id="content">
-                        <h1>Welcome Admin!</h1>
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /#page-wrapper -->
+
     </div><!-- /#wrapper -->
     @Html.Partial("~/Views/Shared/_LoginDialog.cshtml")
     @Html.Partial("~/Views/Shared/_RegisterDialog.cshtml")

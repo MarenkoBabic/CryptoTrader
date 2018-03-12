@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CryptoTraderJaroshModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="street" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="city_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Balance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="currency" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="16" Scale="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="iban" Type="varchar" MaxLength="34" Nullable="false" />
+          <Property Name="bic" Type="varchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankTransferHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="16" Scale="8" Nullable="false" />
+          <Property Name="currency" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="zip" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="cityName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="country_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="countryName" Type="varchar" MaxLength="128" />
+          <Property Name="iso" Type="char" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="password" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="salt" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="reference" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Ticker">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="rate" Type="decimal" Precision="16" Scale="8" Nullable="false" />
+          <Property Name="currency_src" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="currency_trg" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TradeHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="16" Scale="8" Nullable="false" />
+          <Property Name="ticker_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Upload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="path" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Address_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Address_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Balance_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Balance" Type="Self.Balance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Balance">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BankAccount_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BankAccount">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BankTransferHistory_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="BankTransferHistory" Type="Self.BankTransferHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BankTransferHistory">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TradeHistory_Ticker">
+          <End Role="Ticker" Type="Self.Ticker" Multiplicity="1" />
+          <End Role="TradeHistory" Type="Self.TradeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticker">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TradeHistory">
+              <PropertyRef Name="ticker_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TradeHistory_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="TradeHistory" Type="Self.TradeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TradeHistory">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Upload_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Upload" Type="Self.Upload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Upload">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CryptoTraderJaroshModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Balance" EntityType="Self.Balance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankTransferHistory" EntityType="Self.BankTransferHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticker" EntityType="Self.Ticker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TradeHistory" EntityType="Self.TradeHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Upload" EntityType="Self.Upload" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Address_City" Association="Self.fk_Address_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Address_Person" Association="Self.fk_Address_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Balance_User" Association="Self.fk_Balance_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Balance" EntitySet="Balance" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BankAccount_User" Association="Self.fk_BankAccount_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="BankAccount" EntitySet="BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BankTransferHistory_User" Association="Self.fk_BankTransferHistory_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="BankTransferHistory" EntitySet="BankTransferHistory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_City_Country" Association="Self.fk_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TradeHistory_Ticker" Association="Self.fk_TradeHistory_Ticker">
+            <End Role="Ticker" EntitySet="Ticker" />
+            <End Role="TradeHistory" EntitySet="TradeHistory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TradeHistory_User" Association="Self.fk_TradeHistory_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="TradeHistory" EntitySet="TradeHistory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Upload_User" Association="Self.fk_Upload_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Upload" EntitySet="Upload" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CryptoTraderJaroshModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.fk_Address_City" FromRole="Address" ToRole="City" />
+          <NavigationProperty Name="Person" Relationship="Self.fk_Address_Person" FromRole="Address" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Balance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="currency" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="16" Scale="8" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.fk_Balance_User" FromRole="Balance" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="iban" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bic" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.fk_BankAccount_User" FromRole="BankAccount" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="BankTransferHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="16" Scale="8" Nullable="false" />
+          <Property Name="currency" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.fk_BankTransferHistory_User" FromRole="BankTransferHistory" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="zip" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cityName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="country_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.fk_Address_City" FromRole="City" ToRole="Address" />
+          <NavigationProperty Name="Country" Relationship="Self.fk_City_Country" FromRole="City" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="countryName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="iso" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="City" Relationship="Self.fk_City_Country" FromRole="Country" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="salt" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" DefaultValue="User" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="reference" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Address" Relationship="Self.fk_Address_Person" FromRole="Person" ToRole="Address" />
+          <NavigationProperty Name="Balance" Relationship="Self.fk_Balance_User" FromRole="Person" ToRole="Balance" />
+          <NavigationProperty Name="BankAccount" Relationship="Self.fk_BankAccount_User" FromRole="Person" ToRole="BankAccount" />
+          <NavigationProperty Name="BankTransferHistory" Relationship="Self.fk_BankTransferHistory_User" FromRole="Person" ToRole="BankTransferHistory" />
+          <NavigationProperty Name="TradeHistory" Relationship="Self.fk_TradeHistory_User" FromRole="Person" ToRole="TradeHistory" />
+          <NavigationProperty Name="Upload" Relationship="Self.fk_Upload_User" FromRole="Person" ToRole="Upload" />
+        </EntityType>
+        <EntityType Name="Ticker">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rate" Type="Decimal" Precision="16" Scale="8" Nullable="false" />
+          <Property Name="currency_src" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="currency_trg" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TradeHistory" Relationship="Self.fk_TradeHistory_Ticker" FromRole="Ticker" ToRole="TradeHistory" />
+        </EntityType>
+        <EntityType Name="TradeHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="16" Scale="8" Nullable="false" />
+          <Property Name="ticker_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.fk_TradeHistory_User" FromRole="TradeHistory" ToRole="Person" />
+          <NavigationProperty Name="Ticker" Relationship="Self.fk_TradeHistory_Ticker" FromRole="TradeHistory" ToRole="Ticker" />
+        </EntityType>
+        <EntityType Name="Upload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.fk_Upload_User" FromRole="Upload" ToRole="Person" />
+        </EntityType>
+        <Association Name="fk_Address_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Address_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Balance_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Balance" Type="Self.Balance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Balance">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BankAccount_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BankAccount">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BankTransferHistory_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="BankTransferHistory" Type="Self.BankTransferHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BankTransferHistory">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TradeHistory_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="TradeHistory" Type="Self.TradeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TradeHistory">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Upload_User">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Upload" Type="Self.Upload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Upload">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TradeHistory_Ticker">
+          <End Role="Ticker" Type="Self.Ticker" Multiplicity="1" />
+          <End Role="TradeHistory" Type="Self.TradeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticker">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TradeHistory">
+              <PropertyRef Name="ticker_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JaroshEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="Self.Address" />
+          <EntitySet Name="Balance" EntityType="Self.Balance" />
+          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" />
+          <EntitySet Name="BankTransferHistory" EntityType="Self.BankTransferHistory" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="Ticker" EntityType="Self.Ticker" />
+          <EntitySet Name="TradeHistory" EntityType="Self.TradeHistory" />
+          <EntitySet Name="Upload" EntityType="Self.Upload" />
+          <AssociationSet Name="fk_Address_City" Association="Self.fk_Address_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Address_Person" Association="Self.fk_Address_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Balance_User" Association="Self.fk_Balance_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Balance" EntitySet="Balance" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BankAccount_User" Association="Self.fk_BankAccount_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="BankAccount" EntitySet="BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BankTransferHistory_User" Association="Self.fk_BankTransferHistory_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="BankTransferHistory" EntitySet="BankTransferHistory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_City_Country" Association="Self.fk_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TradeHistory_User" Association="Self.fk_TradeHistory_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="TradeHistory" EntitySet="TradeHistory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Upload_User" Association="Self.fk_Upload_User">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Upload" EntitySet="Upload" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TradeHistory_Ticker" Association="Self.fk_TradeHistory_Ticker">
+            <End Role="Ticker" EntitySet="Ticker" />
+            <End Role="TradeHistory" EntitySet="TradeHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CryptoTraderJaroshModelStoreContainer" CdmEntityContainer="JaroshEntities">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Balance">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.Balance">
+              <MappingFragment StoreEntitySet="Balance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="currency" ColumnName="currency" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankAccount">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.BankAccount">
+              <MappingFragment StoreEntitySet="BankAccount">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="iban" ColumnName="iban" />
+                <ScalarProperty Name="bic" ColumnName="bic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankTransferHistory">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.BankTransferHistory">
+              <MappingFragment StoreEntitySet="BankTransferHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="currency" ColumnName="currency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="countryName" ColumnName="countryName" />
+                <ScalarProperty Name="iso" ColumnName="iso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticker">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.Ticker">
+              <MappingFragment StoreEntitySet="Ticker">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="currency_src" ColumnName="currency_src" />
+                <ScalarProperty Name="currency_trg" ColumnName="currency_trg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TradeHistory">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.TradeHistory">
+              <MappingFragment StoreEntitySet="TradeHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="ticker_id" ColumnName="ticker_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Upload">
+            <EntityTypeMapping TypeName="CryptoTraderJaroshModel.Upload">
+              <MappingFragment StoreEntitySet="Upload">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="path" ColumnName="path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -17,7 +17,7 @@
         /// <returns>bool</returns>
         public ActionResult IsMailExistToRegister(string RegisterEmail)
         {
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
                 var PersonList = db.Person.ToList();
 
@@ -40,7 +40,7 @@
         {
             bool result = false;
 
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == LoginEmail).FirstOrDefault();
                 if (!string.IsNullOrEmpty(LoginEmail) && !string.IsNullOrEmpty(LoginPassword))
@@ -65,5 +65,17 @@
             }
         }
 
+
+        public static bool IsUserAuthenticated(bool result)
+        {
+            if (result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

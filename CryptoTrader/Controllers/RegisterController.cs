@@ -27,10 +27,9 @@
             vm.RegisterPassword = Hashen.HashBerechnen(vm.RegisterPassword + vm.Salt);
 
             Person dbPerson = Mapper.Map<Person>(vm);
-            dbPerson.role = "User";
             if (ModelState.IsValid)
             {
-                using (var db = new CryptoTraderEntities())
+                using (var db = new JaroshEntities())
                 {
                     db.Person.Add(dbPerson);
                     db.SaveChanges();
@@ -56,13 +55,23 @@
         /// <returns>View mit CountryList</returns>
         public ActionResult PersonVerification()
         {
-            PersonVerificationViewModel personVerificationVM = new PersonVerificationViewModel();
-            using (var db = new CryptoTraderEntities())
+            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
+            if (result)
             {
-                var countries = db.Country.ToList();
-                personVerificationVM.CountryList = FillList.FillCountryList(countries);
+                PersonVerificationViewModel personVerificationVM = new PersonVerificationViewModel();
+                using (var db = new JaroshEntities())
+                {
+                    var countries = db.Country.ToList();
+                    personVerificationVM.CountryList = FillList.FillCountryList(countries);
+                }
+                return View(personVerificationVM);
             }
-            return View(personVerificationVM);
+            else
+            {
+                TempData["ErrorMessage"] = "Sie müssen sich einloggen";
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         /// <summary>
@@ -77,7 +86,7 @@
             Address dbAddress = Mapper.Map<Address>(vm);
             City dbCity = Mapper.Map<City>(vm);
             Upload dbUpload = Mapper.Map<Upload>(vm);
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
                 Country dbCountry = db.Country.Where(a => a.countryName.Equals(vm.CountryName)).FirstOrDefault();
                 Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
@@ -104,9 +113,7 @@
                 else
                 {
                     TempData["ErrorMessage"] = "Fehlgeschlagen";
-                    var countries = db.Country.ToList();
-                    vm.CountryList = FillList.FillCountryList(countries);
-                    return View(vm);
+                    return RedirectToAction("PersonVerification");
                 }
             }
             return RedirectToAction("Index", "Home");

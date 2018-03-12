@@ -16,50 +16,69 @@
         /// <returns>View Index</returns>
         public ActionResult PayIn()
         {
-            using (var db = new CryptoTraderEntities())
+            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
+            if (result)
             {
-                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-
-                if (dbPerson.status == true)
+                using (var db = new JaroshEntities())
                 {
-                    PayInViewModel vm = Mapper.Map<PayInViewModel>(dbPerson);
-                    //vm.FirstName = dbPerson.firstName;
-                    //vm.LastName = dbPerson.lastName;
-                    //vm.Reference = dbPerson.reference;
+                    Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                    BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
 
-                    if (dbBankAccount != null)
+                    if (dbPerson.status == true)
                     {
-                        vm.PersonBic = dbBankAccount.bic;
-                        vm.PersonIban = dbBankAccount.iban;
+                        PayInViewModel vm = Mapper.Map<PayInViewModel>(dbPerson);
+
+                        if (dbBankAccount != null)
+                        {
+                            vm.PersonBic = dbBankAccount.bic;
+                            vm.PersonIban = dbBankAccount.iban;
+                        }
+                        return View(vm);
                     }
-                    return View(vm);
+                    else
+                    {
+                        return RedirectToAction("PersonVerification", "Register");
+                    }
                 }
-                else
-                {
-                    return RedirectToAction("PersonVerification", "Register");
-                }
+
             }
+            else
+            {
+                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
 
         public ActionResult PayOut()
         {
-            PayOutViewModel vm = new PayOutViewModel();
-            using (var db = new CryptoTraderEntities())
+            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
+            if (result)
             {
-                Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
-                BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-               
-                vm.FirstName = dbPerson.firstName;
-                vm.LastName = dbPerson.lastName;
-                if (db.BankAccount.Any())
+                PayOutViewModel vm = new PayOutViewModel();
+                using (var db = new JaroshEntities())
                 {
-                    vm.PersonIban = dbBankAccount.iban;
-                    vm.PersonBic = dbBankAccount.bic;
+                    Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
+                    BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+
+                    vm.FirstName = dbPerson.firstName;
+                    vm.LastName = dbPerson.lastName;
+                    if (db.BankAccount.Any())
+                    {
+                        vm.PersonIban = dbBankAccount.iban;
+                        vm.PersonBic = dbBankAccount.bic;
+                    }
                 }
+                return View(vm);
+
             }
-            return View(vm);
+            else
+            {
+                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         /// <summary>
@@ -70,7 +89,7 @@
         [HttpPost]
         public ActionResult PayOut(PayOutViewModel vm)
         {
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
                 Person dbPerson = new Person();
                 BankAccount BankAccountModel = Mapper.Map<BankAccount>(vm);
@@ -103,18 +122,19 @@
                     db.SaveChanges();
                 }
             }
-            TempData["ConfirmMessage"]= "Auftrag erteilt";
+            TempData["ConfirmMessage"] = "Auftrag erteilt";
             return View("Index", vm);
         }
 
         public string ShowBalance()
         {
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-                if (db.Balance.Any())
+                bool result = db.Balance.Any(a => a.person_id == dbPerson.id);
+                if (result)
                 {
+                    Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                     decimal amount = dbBalance.amount;
                     return Math.Round((decimal)amount, 2).ToString();
                 }

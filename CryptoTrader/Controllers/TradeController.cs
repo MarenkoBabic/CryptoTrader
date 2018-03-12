@@ -13,16 +13,27 @@
         // GET: Ansicht
         public ActionResult BuyBitCoin()
         {
-            Ticker dbTicker = new Ticker();
-            SellBitCoinViewModel vm = new SellBitCoinViewModel();
-            using (var db = new CryptoTraderEntities())
+            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
+            if (result)
             {
-                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
-                vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
-                vm.BitCoinAmount = vm.HistoryList.Sum(a => a.amount);
+                Ticker dbTicker = new Ticker();
+                SellBitCoinViewModel vm = new SellBitCoinViewModel();
+                using (var db = new JaroshEntities())
+                {
+                    Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                    vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
+                    vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+                    vm.BitCoinAmount = vm.HistoryList.Sum(a => a.amount);
+                }
+                return View(vm);
+
             }
-            return View(vm);
+            else
+            {
+                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         /// <summary>
@@ -36,7 +47,7 @@
         {
             TradeHistory dbTradeHistory = Mapper.Map<TradeHistory>(vm);
 
-            using (var db = new CryptoTraderEntities())
+            using (var db = new JaroshEntities())
             {
                 Ticker Ticker = db.Ticker.FirstOrDefault();
                 Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
@@ -107,22 +118,32 @@
             }
         }
 
-
         public ActionResult SellBitCoin()
         {
-            Ticker dbTicker = new Ticker();
-            SellBitCoinViewModel vm = new SellBitCoinViewModel();
-            using (var db = new CryptoTraderEntities())
+            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
+            if (result)
             {
-                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                if (db.TradeHistory.Any())
+                Ticker dbTicker = new Ticker();
+                SellBitCoinViewModel vm = new SellBitCoinViewModel();
+                using (var db = new JaroshEntities())
                 {
-                    vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
+                    Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                    if (db.TradeHistory.Any())
+                    {
+                        vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
+                    }
+                    vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+
                 }
-                vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+                return View(vm);
 
             }
-            return View(vm);
+            else
+            {
+                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         /// <summary>
