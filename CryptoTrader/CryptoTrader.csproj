@@ -172,7 +172,7 @@
     <Compile Include="Manager\ApiKraken.cs" />
     <Compile Include="Manager\Authenticated.cs" />
     <Compile Include="Manager\Cookies.cs" />
-    <Compile Include="Manager\CountryList.cs" />
+    <Compile Include="Manager\FillList.cs" />
     <Compile Include="Manager\DateTimeHelper.cs" />
     <Compile Include="Manager\GeneratorReference.cs" />
     <Compile Include="Manager\Hashen.cs" />

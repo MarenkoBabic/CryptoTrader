@@ -6,10 +6,8 @@
 <style>
     .chartdiv {
         min-width: 100% !important;
-    }
-
-    .container {
-        padding-top: 25px;
+        padding-top: 30px;
+        padding-left: 50px;
     }
 
     .background-Body {
@@ -20,12 +18,9 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <div class="container">
         <div class="row">
-            <div class="col-lg-2"></div>
-            <main id="Chart" class="chartdiv col-lg-12"></main>
+            <main id="Chart" class="chartdiv col-lg-12 col-md-12 col-sm-12 col-xs-12"></main>
         </div>
-    </div>
 }
 else
 {

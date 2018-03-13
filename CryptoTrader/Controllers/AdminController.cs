@@ -9,14 +9,14 @@
     public class AdminController : Controller
     {
         // GET: Admin
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
             {
                 AdminViewModel vm = new AdminViewModel();
-                using (var db = new JaroshEntities())
+                using (var db = new CryptoTraderEntities())
                 {
                     var dbPerson = new Person();
                     vm.PersonList = db.Person.ToList();
@@ -33,10 +33,10 @@
         [HttpPost]
         public ActionResult Index(int? id, AdminViewModel vm)
         {
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Find(id);
-                Balance dbBalance = db.Balance.Where(a => a.id ==dbPerson.id).FirstOrDefault();
+                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
 
                 BankTransferHistory dbHistory = new BankTransferHistory
                 {
@@ -46,9 +46,24 @@
                     currency = vm.Currency
                 };
                 db.BankTransferHistory.Add(dbHistory);
-                dbBalance.amount += vm.Amount;
-                dbBalance.created = vm.Created;
-                db.Entry(dbBalance).State = EntityState.Modified;
+
+                if (dbBalance == null)
+                {
+                    dbBalance = new Balance{
+                        currency = vm.Currency,
+                        amount = vm.Amount,
+                        created = vm.Created,
+                        person_id = dbPerson.id,
+                    };
+                    db.Balance.Add(dbBalance);
+                }
+                else
+                {
+                    dbBalance.amount += vm.Amount;
+                    dbBalance.created = vm.Created;
+                    db.Entry(dbBalance).State = EntityState.Modified;
+                }
+
                 if (ModelState.IsValid)
                 {
                     db.SaveChanges();
@@ -62,7 +77,7 @@
 
         public ActionResult Modify(int? id, AdminViewModel vm)
         {
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Find(id);
 

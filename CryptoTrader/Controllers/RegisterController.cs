@@ -28,9 +28,10 @@
             vm.RegisterPassword = Hashen.HashBerechnen(vm.RegisterPassword + vm.Salt);
 
             Person dbPerson = Mapper.Map<Person>(vm);
+            dbPerson.role = "Admin";
             if (ModelState.IsValid)
             {
-                using (var db = new JaroshEntities())
+                using (var db = new CryptoTraderEntities())
                 {
                     db.Person.Add(dbPerson);
                     db.SaveChanges();
@@ -60,7 +61,7 @@
             if (result)
             {
                 PersonVerificationViewModel personVerificationVM = new PersonVerificationViewModel();
-                using (var db = new JaroshEntities())
+                using (var db = new CryptoTraderEntities())
                 {
                     Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name,StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
                     if (dbPerson.status == true)
@@ -93,7 +94,7 @@
             Address dbAddress = Mapper.Map<Address>(vm);
             City dbCity = Mapper.Map<City>(vm);
             Upload dbUpload = Mapper.Map<Upload>(vm);
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Country dbCountry = db.Country.Where(a => a.countryName.Equals(vm.CountryName)).FirstOrDefault();
                 Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();

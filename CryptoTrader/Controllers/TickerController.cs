@@ -25,7 +25,7 @@
             }
             Ticker dbTicker = Mapper.Map<Ticker>(vm);
 
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 if (ModelState.IsValid)
                 {
@@ -54,7 +54,7 @@
 
         private static decimal GetTicker()
         {
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 decimal ticker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
                 return Math.Round(ticker, 2);
@@ -63,7 +63,7 @@
 
         private static List<TickerChartViewModel> TickerList()
         {
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 List<TickerChartViewModel> getTickerList = new List<TickerChartViewModel>();
 

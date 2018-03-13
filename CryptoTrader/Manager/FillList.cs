@@ -21,6 +21,5 @@ namespace CryptoTrader.Manager
             }
             return countryList;
         }
-
     }
 }

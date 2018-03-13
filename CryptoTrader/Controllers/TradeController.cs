@@ -19,7 +19,7 @@
             {
                 Ticker dbTicker = new Ticker();
                 SellBitCoinViewModel vm = new SellBitCoinViewModel();
-                using (var db = new JaroshEntities())
+                using (var db = new CryptoTraderEntities())
                 {
                     Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                     vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
@@ -47,7 +47,7 @@
         public ActionResult BuyBitCoin(SellBitCoinViewModel vm, int id)
         {
 
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
                 vm.TickerId = db.Ticker.OrderByDescending(a => a.created).Select(a => a.id).First();
@@ -117,7 +117,7 @@
             {
                 Ticker dbTicker = new Ticker();
                 SellBitCoinViewModel vm = new SellBitCoinViewModel();
-                using (var db = new JaroshEntities())
+                using (var db = new CryptoTraderEntities())
                 {
                     Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                     if (db.TradeHistory.Any())
@@ -148,7 +148,7 @@
         public ActionResult SellBitCoin(SellBitCoinViewModel vm, int id)
         {
 
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
                 vm.TickerId = db.Ticker.OrderByDescending(a => a.created).Select(a => a.id).First();
@@ -204,7 +204,7 @@
         public decimal ShowBitCoin()
         {
             SellBitCoinViewModel vm = new SellBitCoinViewModel();
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 bool result = db.TradeHistory.Any(a => a.person_id == dbPerson.id);

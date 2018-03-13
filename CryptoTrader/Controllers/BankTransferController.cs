@@ -20,7 +20,7 @@
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
             {
-                using (var db = new JaroshEntities())
+                using (var db = new CryptoTraderEntities())
                 {
                     Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                     BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
@@ -28,12 +28,7 @@
                     if (dbPerson.status == true)
                     {
                         PayInViewModel vm = Mapper.Map<PayInViewModel>(dbPerson);
-
-                        if (dbBankAccount != null)
-                        {
-                            vm.PersonBic = dbBankAccount.bic;
-                            vm.PersonIban = dbBankAccount.iban;
-                        }
+                        vm.BankHistoryList = db.BankTransferHistory.ToList();
                         return View(vm);
                     }
                     else
@@ -58,7 +53,7 @@
             if (result)
             {
                 PayOutViewModel vm = new PayOutViewModel();
-                using (var db = new JaroshEntities())
+                using (var db = new CryptoTraderEntities())
                 {
                     Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
                     BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
@@ -90,7 +85,7 @@
         [HttpPost]
         public ActionResult PayOut(PayOutViewModel vm)
         {
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = new Person();
                 BankAccount BankAccountModel = Mapper.Map<BankAccount>(vm);
@@ -137,7 +132,7 @@
         /// <returns>Kontostand oder "00.00"</returns>
         public string ShowBalance()
         {
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 bool result = db.Balance.Any(a => a.person_id == dbPerson.id);

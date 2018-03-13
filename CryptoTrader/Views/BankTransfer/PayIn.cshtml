@@ -5,10 +5,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-2"></div>
-
-        <main class="col-lg-8 well">
-            <h2 style=text-align:center;>Kontodaten</h2>
+        <main class="col-lg-6 well">
+            <h2>Kontodaten</h2>
 
             <br />
 
@@ -77,10 +75,28 @@
 
         </main>
 
-        <div class="col-lg-2"></div>
+        <div class="col-lg-1"></div>
 
+        <main class="col-lg-5 well">
+            <div class="row"ö>
+                <div class="col-lg-2">Vorname</div>
+                <div class="col-lg-2">Nachname</div>
+                <div class="col-lg-2">Betrag</div>
+                <div class="col-lg-2">Währung</div>
+                <div class="col-lg-2">Datum</div>
+            </div>
 
-
+            @foreach (var item in Model.BankHistoryList)
+            {
+                <div class="row">
+                    <div class="col-lg-2">@item.Person.firstName</div>
+                    <div class="col-lg-2">@item.Person.lastName</div>
+                    <div class="col-lg-2">@item.amount</div>
+                    <div class="col-lg-2">@item.currency</div>
+                    <div class="col-lg-2">@item.created</div>
+                </div>
+            }
+        </main>
 
     </div>
 </div>
