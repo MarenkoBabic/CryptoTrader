@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CryptoTrader.Models.ViewModel
+﻿namespace CryptoTrader.Model.ViewModel
 {
     public class EmailSendViewModel
     {

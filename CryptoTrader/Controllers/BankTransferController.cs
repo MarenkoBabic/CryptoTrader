@@ -1,12 +1,12 @@
 ﻿namespace CryptoTrader.Controllers
 {
+    using AutoMapper;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Model.ViewModel;
     using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper;
-    using CryptoTrader.Model.DbModel;
-    using CryptoTrader.Models.ViewModel;
 
     public class BankTransferController : Controller
     {

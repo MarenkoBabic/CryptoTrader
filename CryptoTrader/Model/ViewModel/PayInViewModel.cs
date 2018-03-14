@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using CryptoTrader.Model.DbModel;
-
-namespace CryptoTrader.Models.ViewModel
+﻿namespace CryptoTrader.Model.ViewModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Web;
+    using CryptoTrader.Model.DbModel;
+
     public class PayInViewModel
     {
         public string BankName { get; set; } = "BawagPSK";

@@ -6,7 +6,7 @@
     using AutoMapper;
     using CryptoTrader.Manager;
     using CryptoTrader.Model.DbModel;
-    using CryptoTrader.Models.ViewModel;
+    using CryptoTrader.Model.ViewModel;
 
     public class RegisterController : Controller
     {
@@ -28,16 +28,19 @@
             vm.RegisterPassword = Hashen.HashBerechnen(vm.RegisterPassword + vm.Salt);
 
             Person dbPerson = Mapper.Map<Person>(vm);
-            dbPerson.role = "Admin";
             if (ModelState.IsValid)
             {
                 using (var db = new CryptoTraderEntities())
                 {
                     db.Person.Add(dbPerson);
                     db.SaveChanges();
+                    TempData["ConfirmMessage"] = "Erfolgreich Regestiert";
+                    var personList = db.Person.ToList();
+                    LoginManager.FromRegisterToLogin(dbPerson.email, dbPerson.password,personList);
+                    return RedirectToAction("Index", "Home");
+
                 }
-                object message = TempData["OkMessage"] = "Erfolgreich Regestiert";
-                return RedirectToAction("Index", "Home", message);
+
             }
             return View();
         }
@@ -63,7 +66,7 @@
                 PersonVerificationViewModel personVerificationVM = new PersonVerificationViewModel();
                 using (var db = new CryptoTraderEntities())
                 {
-                    Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name,StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                    Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
                     if (dbPerson.status == true)
                     {
                         TempData["ErrorMessage"] = "Sie sind bereits Verifiziert";

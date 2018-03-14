@@ -1,6 +1,6 @@
 ﻿namespace CryptoTrader.Manager
 {
-    using CryptoTrader.Models.ViewModel;
+    using CryptoTrader.Model.ViewModel;
     using System.IO;
     using System.Web;
 

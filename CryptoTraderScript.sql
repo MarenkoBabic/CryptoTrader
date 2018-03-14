@@ -65,7 +65,7 @@ CREATE TABLE Upload (
 	id INT NOT NULL IDENTITY,
 	created DATETIME NOT NULL DEFAULT GETDATE(),
 	person_id INT NOT NULL,
-	path VARCHAR(64) NOT NULL,
+	path VARCHAR(255) NOT NULL,
 	CONSTRAINT pk_Upload PRIMARY KEY(id),
 	CONSTRAINT fk_Upload_User FOREIGN KEY(person_id) REFERENCES Person(id)
 );
@@ -95,7 +95,7 @@ CREATE TABLE Balance (
 	id INT NOT NULL IDENTITY,
 	created DATETIME NOT NULL DEFAULT GETDATE(),
 	person_id INT NOT NULL,
-	currency CHAR(3) NOT NULL,
+	currency CHAR(5) NOT NULL,
 	amount DECIMAL(16, 8) NOT NULL,
 	CONSTRAINT pk_Balance PRIMARY KEY(id),
 	CONSTRAINT fk_Balance_User FOREIGN KEY(person_id) REFERENCES Person(id),
@@ -108,7 +108,7 @@ CREATE TABLE BankTransferHistory (
 	created DATETIME NOT NULL DEFAULT GETDATE(),
 	person_id INT NOT NULL,
 	amount DECIMAL(16, 8) NOT NULL,
-	currency CHAR(3) NOT NULL,
+	currency CHAR(5) NOT NULL,
 	CONSTRAINT pk_BankTransferHistory PRIMARY KEY(id),
 	CONSTRAINT fk_BankTransferHistory_User FOREIGN KEY(person_id) REFERENCES Person(id),
 	INDEX ix_created(created),
@@ -120,8 +120,8 @@ CREATE TABLE Ticker (
 	id INT NOT NULL IDENTITY,
 	created DATETIME NOT NULL DEFAULT GETDATE(),
 	rate DECIMAL(16, 8) NOT NULL,
-	currency_src CHAR(3) NOT NULL,
-	currency_trg CHAR(3) NOT NULL,
+	currency_src CHAR(5) NOT NULL,
+	currency_trg CHAR(5) NOT NULL,
 	CONSTRAINT pk_Ticker PRIMARY KEY(id),
 	INDEX ix_created(created)
 );

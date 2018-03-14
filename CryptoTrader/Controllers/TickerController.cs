@@ -1,16 +1,15 @@
 ﻿namespace CryptoTrader.Controllers
 {
+    using AutoMapper;
+    using CryptoTrader.Manager;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Model.ViewModel;
+    using Jayrock.Json;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using CryptoTrader.Manager;
-    using CryptoTrader.Model.DbModel;
-    using CryptoTrader.Model.ViewModel;
-    using CryptoTrader.Models.ViewModel;
-    using Jayrock.Json;
-    using Newtonsoft.Json.Linq;
-    using AutoMapper;
 
     public class TickerController : Controller
     {

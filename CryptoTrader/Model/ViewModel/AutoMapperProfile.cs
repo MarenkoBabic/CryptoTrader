@@ -1,4 +1,4 @@
-﻿namespace CryptoTrader.Models.ViewModel
+﻿namespace CryptoTrader.Model.ViewModel
 {
     using AutoMapper;
     using CryptoTrader.Model.DbModel;

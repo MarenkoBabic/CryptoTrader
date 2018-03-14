@@ -1,10 +1,10 @@
 ﻿namespace CryptoTrader.Controllers
 {
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Model.ViewModel;
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
-    using CryptoTrader.Model.DbModel;
-    using CryptoTrader.Models.ViewModel;
 
     public class AdminController : Controller
     {

@@ -1,20 +1,15 @@
 ﻿namespace CryptoTrader.Controllers
 {
+    using CryptoTrader.Manager;
+    using CryptoTrader.Model.DbModel;
+    using CryptoTrader.Model.ViewModel;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Security;
-    using CryptoTrader.Manager;
-    using CryptoTrader.Model.DbModel;
-    using CryptoTrader.Models.ViewModel;
+
     public class LoginController : Controller
     {
-        // GET: Login
-        public ActionResult Login()
-        {
-            return View();
-        }
-
         /// <summary>
         /// LoginController
         /// </summary>

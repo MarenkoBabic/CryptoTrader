@@ -1,8 +1,8 @@
 ﻿namespace CryptoTrader.Manager
 {
+    using CryptoTrader.Model.DbModel;
     using System.Collections.Generic;
     using System.Linq;
-    using CryptoTrader.Model.DbModel;
 
     public class LoginManager
     {
@@ -26,13 +26,24 @@
                         string lastName = person.lastName;
                         string role = person.role;
 
-                    Cookies.CreateCookies(email, role, firstName, lastName);
-                    result = true;
+                        Cookies.CreateCookies(email, role, firstName, lastName);
+                        result = true;
                     }
                 }
                 return result;
             }
             return result;
+        }
+
+        public static void FromRegisterToLogin(string email, string password, List<Person> personList)
+        {
+            //User aus der Db holen
+            Person dbPerson = personList.Where(a => a.email.Equals(email, System.StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            string firstName = dbPerson.firstName;
+            string lastName = dbPerson.lastName;
+            string role = dbPerson.role;
+
+            Cookies.CreateCookies(email, role, firstName, lastName);
         }
     }
 }
