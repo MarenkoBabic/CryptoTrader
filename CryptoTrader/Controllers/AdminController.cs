@@ -10,7 +10,7 @@
     {
         // GET: Admin
         [Authorize(Roles = "Admin")]
-        public ActionResult Index()
+        public ActionResult AdminView()
         {
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
@@ -20,6 +20,7 @@
                 {
                     var dbPerson = new Person();
                     vm.PersonList = db.Person.ToList();
+                    TempData["QuestionMessage"] = "Wirklich Geldbetrag überweisen";
                 }
                 return View(vm);
             }
@@ -31,46 +32,53 @@
         }
 
         [HttpPost]
-        public ActionResult Index(int? id, AdminViewModel vm)
+        public ActionResult AdminView(int? id, AdminViewModel vm, bool confirm_value = true)
         {
-            using (var db = new CryptoTraderEntities())
+            if (confirm_value == true)
             {
-                Person dbPerson = db.Person.Find(id);
-                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-
-                BankTransferHistory dbHistory = new BankTransferHistory
+                ViewBag.Message = "Abgeschickt";
+                using (var db = new CryptoTraderEntities())
                 {
-                    created = vm.Created,
-                    person_id = dbPerson.id,
-                    amount = vm.Amount,
-                    currency = vm.Currency
-                };
-                db.BankTransferHistory.Add(dbHistory);
+                    Person dbPerson = db.Person.Find(id);
+                    Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
 
-                if (dbBalance == null)
-                {
-                    dbBalance = new Balance{
-                        currency = vm.Currency,
-                        amount = vm.Amount,
+                    BankTransferHistory dbHistory = new BankTransferHistory
+                    {
                         created = vm.Created,
                         person_id = dbPerson.id,
+                        amount = vm.Amount,
+                        currency = vm.Currency
                     };
-                    db.Balance.Add(dbBalance);
-                }
-                else
-                {
-                    dbBalance.amount += vm.Amount;
-                    dbBalance.created = vm.Created;
-                    db.Entry(dbBalance).State = EntityState.Modified;
-                }
+                    db.BankTransferHistory.Add(dbHistory);
 
-                if (ModelState.IsValid)
-                {
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (dbBalance == null)
+                    {
+                        dbBalance = new Balance
+                        {
+                            currency = vm.Currency,
+                            amount = vm.Amount,
+                            created = vm.Created,
+                            person_id = dbPerson.id,
+                        };
+                        db.Balance.Add(dbBalance);
+                    }
+                    else
+                    {
+                        dbBalance.amount += vm.Amount;
+                        dbBalance.created = vm.Created;
+                        db.Entry(dbBalance).State = EntityState.Modified;
+                    }
+
+                    if (ModelState.IsValid)
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("AdminView");
+                    }
                 }
             }
-            return View();
+
+            ViewBag.Message = "Abgebrochen";
+            return RedirectToAction("AdminView");
         }
 
 

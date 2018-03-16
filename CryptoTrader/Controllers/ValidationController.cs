@@ -1,12 +1,10 @@
 ﻿namespace CryptoTrader.Controllers
 {
-    using System.Linq;
-    using System.Web.Mvc;
     using CryptoTrader.Manager;
-    using System;
-    using System.Collections.Generic;
     using CryptoTrader.Model.DbModel;
-    using CryptoTrader.Model.ViewModel;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Web.Mvc;
 
     public class ValidationController : Controller
     {
@@ -28,7 +26,6 @@
                 return Json(!isExist, JsonRequestBehavior.AllowGet);
             }
         }
-
 
         /// <summary>
         /// Prüft ob EMail und password übereinstimmen
@@ -57,15 +54,19 @@
                         return Json(result, JsonRequestBehavior.AllowGet);
                     }
                 }
-                else
-                {
-                    return Json(result, JsonRequestBehavior.AllowGet);
-                }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
 
-
+        public ActionResult IsOnlyNumber(decimal TradeAmountBTC = 10.10m)
+        {
+            Regex regex = new Regex("^[0 - 9] + $");
+            if (regex.IsMatch(TradeAmountBTC.ToString()))
+            {
+                return Json(regex.IsMatch(TradeAmountBTC.ToString()), JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
         public static bool IsUserAuthenticated(bool result)
         {
             if (result)
@@ -77,5 +78,6 @@
                 return false;
             }
         }
+
     }
 }

@@ -13,34 +13,9 @@
         /// <param name="rate">TickerRate</param>
         /// <param name="amountBTC">BitconAnzahl</param>
         /// <returns>aktuellen Kontostand</returns>
-        public static decimal BuyBitCoin(decimal rate, decimal amountBTC)
+        public static decimal TradeAmountByBTC(decimal rate, decimal amountBTC)
         {
-            decimal amount = rate * amountBTC *(-1);
-            return amount;
-        }
-
-        /// <summary>
-        /// Bitcoin kauf per Euros
-        /// </summary>
-        /// <param name="rate">TickerRate</param>
-        /// <param name="amountMoney">Euros</param>
-        /// <returns>aktuellen Kontostand</returns>
-        public static decimal BuyBitCoinPerEuro(decimal rate, decimal amountMoney)
-        {
-            decimal amount = amountMoney / rate;
-            return amount;
-        }
-
-        /// <summary>
-        /// Bitcoin verkaufen
-        /// </summary>
-        /// <param name="rate">TickerRate</param>
-        /// <param name="amountBTC">BitconAnzahl</param>
-        /// <returns>aktuellen Kontostand</returns>
-        public static decimal SellBitCoin(decimal rate, decimal amountBTC)
-        {
-            decimal amount = rate * amountBTC;
-            return amount;
+            return rate * amountBTC;
         }
 
         /// <summary>
@@ -49,19 +24,18 @@
         /// <param name="rate">TickerRate</param>
         /// <param name="amountBTC">BitconAnzahl</param>
         /// <returns>aktuellen Kontostand</returns>
-        public static decimal SellBitCoinPerEuro(decimal rate, decimal amountBTC)
+        public static decimal GetBTCAmount(decimal rate, decimal amountEuro)
         {
-            decimal amount = rate * amountBTC;
-            return amount;
+            return amountEuro / rate;
         }
 
         /// <summary>
-        /// Prüft ob genug geld vorhanden ist 
+        /// Prüft ob genug Geld am Konto vorhanden ist
         /// </summary>
         /// <param name="amount"></param>
         /// <param name="rate"></param>
         /// <param name="amountBTC"></param>
-        /// <returns></returns>
+        /// <returns>Result</returns>
         public static bool HaveEnoughMoney(decimal amount, decimal rate, decimal BuyBitCoin)
         {
             if (amount < (rate * BuyBitCoin))
@@ -74,7 +48,13 @@
             }
         }
 
-        public static bool HaveEnoughBTC(decimal amountBTC,decimal SellBitCoin)
+        /// <summary>
+        /// Prüft ob genug Bitcoin am Konto vorhanden ist
+        /// </summary>
+        /// <param name="amountBTC"></param>
+        /// <param name="SellBitCoin"></param>
+        /// <returns> Result</returns>
+        public static bool HaveEnoughBTC(decimal amountBTC, decimal SellBitCoin)
         {
             if (amountBTC < SellBitCoin)
             {

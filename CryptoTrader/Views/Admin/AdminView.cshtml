@@ -1,0 +1,75 @@
+﻿@model  CryptoTrader.Model.ViewModel.AdminViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script type="text/javascript">
+
+    $(function () {
+        var confirm_value = false;
+        $("#buttonID").click(function () {
+            $('<div role="Dialog"></div>').dialog({
+                open:
+                function (event, ui) {
+                    $(this).html("Yes or No question?");
+                },
+                close: function () {
+                    $(this).remove();
+                },
+
+                resizable: false,
+                height: 250,
+                width: 250,
+                modal: true,
+                buttons: {
+                    'Yes': function () {
+                        $(this).dialog('close');
+                        $.ajax({
+                            type: "POST",
+                            url: "/Admin/AdminView",
+                            data: confirm_value = true,
+                        });
+                    },
+                    'No': function () {
+                        $(this).dialog('close');
+                        $.post('Admin/AdminView');
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+
+
+<div class="container">
+    <table class="table well">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Verwendungszweck</th>
+                <th>Active</th>
+                <th>Geld betrag</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PersonList)
+            {
+                using (Html.BeginForm("AdminView", "Admin", new { id = @item.id }))
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.firstName</td>
+                        <td>@item.lastName</td>
+                        <td>@item.reference</td>
+                        <td>@Html.CheckBoxFor(a => item.active)@Html.ActionLink("Bestätigen", "Modify", new { id = item.id })</td>
+                        <td>@Html.EditorFor(a => a.Amount)</td>
+                        <td><input type="submit" id="buttonID"/>                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

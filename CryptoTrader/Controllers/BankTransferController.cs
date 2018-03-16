@@ -28,7 +28,7 @@
                     if (dbPerson.status == true)
                     {
                         PayInViewModel vm = Mapper.Map<PayInViewModel>(dbPerson);
-                        vm.BankHistoryList = db.BankTransferHistory.ToList();
+                        vm.BankHistoryList = db.BankTransferHistory.Where(a => a.person_id == dbPerson.id).ToList();
                         return View(vm);
                     }
                     else

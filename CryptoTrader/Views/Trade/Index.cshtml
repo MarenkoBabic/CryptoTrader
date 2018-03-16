@@ -1,48 +1,77 @@
-﻿@model CryptoTrader.Model.ViewModel.TradeViewModel
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
+<script src="~/Scripts/highstock/Test/highstock.js"></script>
+<script src="~/Scripts/highstock/2.1.8/themes/dark-unica.js"></script>
+<link href="~/Content/Custom/CardBootStrap.css" rel="stylesheet" />
+<link href="~/Content/Custom/TradeIndex.css" rel="stylesheet" />
 
-<h2>Handel</h2>
-
-<div class="container">
-    <div class="row">
-        <main class="col btn-lg 6 well">
-            <div class="col btn-lg 12">
-                @using (Html.BeginForm("Index", "Trade", new { id = 1 }))
-                {
-                    @Html.LabelFor(a => a.TradeAmountBTC, "Bitcoin kaufen")
-                    @Html.EditorFor(a => a.TradeAmountBTC)
-                    <input type="submit" value="Kaufen" />
-                }
-                @using (Html.BeginForm("Index", "Trade", new { id = 2 }))
-                {
-                    @Html.LabelFor(a => a.TradeAmountBTC, "Bitcoin verkaufen")
-                    @Html.EditorFor(a => a.TradeAmountBTC)
-                    <input type="submit" value="Kaufen" />
-                }
-
+<div class="row">
+    <!--Chart-->
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <main id="Chart" class="chartdiv col-lg-12 col-md-12 col-sm-12 col-xs-12"></main>
+    </div><!--EndChart-->
+    <!--Cards-->
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <!--Card for BuyCoins-->
+        <div class="card col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="card-header">Kaufen</div>
+            <div class="card-body">
+                @Html.Partial("~/Views/Trade/_TradeByBTC.cshtml")
             </div>
-        </main>
-        <main class="col col-lg-6 well">
-            @using (Html.BeginForm("Index", "Trade", new { id = 3 }))
-            {
-                @Html.LabelFor(a => a.TradeAmountBTC, "Per Euro Bitcoin kaufen")
-                @Html.EditorFor(a => a.TradeAmountBTC)
-                <input type="submit" value="Kaufen" />
-            }
-            @using (Html.BeginForm("Index", "Trade", new { id = 4 }))
-            {
-                @Html.LabelFor(a => a.TradeAmountBTC, "Per Euro Bitcoin verkaufen")
-                @Html.EditorFor(a => a.TradeAmountBTC)
-                <input type="submit" value="Kaufen" />
-            }
+        </div><!--EndBuyCoins-->
+        <!--Card for SellCoins-->
+        <div class="card col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="card-header">Verkaufen</div>
+            <div class="card-body">
+                @Html.Partial("~/Views/Trade/_TradeByEuro.cshtml")
+            </div>
+        </div><!--EndSellCoins-->
 
+    </div><!--EndCards-->
 
-
-        </main>
-    </div>
+</div>
+<div class="row" style="padding-left:100px;">
+    @Html.Action("TradeHistoryList","Trade");
 </div>
 
 
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        UpdateChart();
+    });
+
+    function UpdateChart() {
+        if ($("collapseExample").hasClass("in") == false) {
+            $.ajax({
+                url: '/Ticker/LoadChartData',
+                success: function (json) {
+                    CreateChart(json);
+                },
+                error: function (errorData) {
+                    console.log(errorData);
+                }
+            });
+            setTimeout(function () { UpdateChart(); }, 10000);
+        }
+    }
+
+    function CreateChart(jsonData) {
+        Highcharts.stockChart('Chart', {
+            title: {
+                text: 'Aktueller BitCoin Kurs'
+            },
+            rangeSelector: false,
+            series: [{
+                name: 'BTC/EUR',
+                data: jsonData,
+                //type: 'area',
+                tooltip: {
+                    valueDecimals: 2
+                }
+            }],
+        });
+    }
+
+</script>

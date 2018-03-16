@@ -3,6 +3,7 @@
 @media(min-width:768px) {
     body {
         margin-top: 50px;
+        background-image: url('../../Image/bitcoin-trans.jpg');
     }
     /*html, body, #wrapper, #page-wrapper {height: 100%; overflow: hidden;}*/
 }
@@ -146,7 +147,7 @@
     font-family: 'Facebook Letter Faces';
 }
 
-.my-span{
-    font-size:20px;
-    color:Highlight;
+.my-span {
+    font-size: 20px;
+    color: Highlight;
 }

@@ -1,0 +1,10 @@
+﻿.chartdiv {
+    width: 100%;
+    padding: 30px 0px 0px 20px;
+}
+
+.card {
+    min-height: 335px;
+    margin-top: 30px;
+    padding-left: 10px;
+}

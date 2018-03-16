@@ -29,8 +29,8 @@
                 }
                 else
                 {
-                    ViewBag.Message = "Fehlgeschlagen, entweder Benutzername oder Password falsch , oder ihr Konto ist gesperrt";
-                    return View();
+                    ViewBag.ErrorMessage = "Ihr Konto ist gesperrt melden sich beim Support";
+                    return RedirectToAction("Index", "Home");
                 }
 
             }

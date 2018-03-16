@@ -3,14 +3,11 @@
     ViewBag.Title = "PayOut";
 }
 
-<h2>Auszahlung</h2>
-
 @using (Html.BeginForm("PayOut", "BankTransfer", FormMethod.Post))
 {
     <main class="col-lg-5 well" style="height:600px;">
         <h2>Geld auszahlen</h2>
-        <br />
-        <br />
+
         <div class="row">
             <div class="col col-lg-6">
                 @Html.LabelFor(a => a.FirstName, "Vorname")
@@ -89,10 +86,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-9"></div>
-            <div class="col-lg-2">
                 <button type="submit" class="ui-button-icon-only btn-success">Auszahlen</button>
-            </div>
         </div>
 
 
