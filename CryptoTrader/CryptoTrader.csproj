@@ -264,8 +264,8 @@
     </Content>
     <Content Include="Content\toast\toastr.css" />
     <Content Include="Content\toast\toastr.min.css" />
-    <Content Include="Content\DefaultCss\bootstrap.css" />
-    <Content Include="Content\DefaultCss\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Custom\CardBootStrap.css" />
     <Content Include="Content\Custom\DashBoard.css" />
     <Content Include="Content\Custom\TradeBitCoin.css" />
@@ -315,7 +315,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\DefaultCss\Site.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Image\bitcoin-1.jpg" />
     <Content Include="Image\bitcoin-trans.jpg" />
     <Content Include="Model\DbModel\CryptoTrader.Context.tt">
@@ -338,6 +338,7 @@
       <DependentUpon>Jarosh.edmx</DependentUpon>
       <LastGenOutput>Jarosh.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Custom\GetResultBTCandEuro.js" />
     <Content Include="Scripts\JsDefault\bootstrap.js" />
     <Content Include="Scripts\JsDefault\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

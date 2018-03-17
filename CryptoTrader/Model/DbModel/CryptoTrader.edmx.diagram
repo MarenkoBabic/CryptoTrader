@@ -6,14 +6,14 @@
     <edmx:Diagrams>
       <Diagram DiagramId="757c2ea896ae41029b334767b68753b2" Name="Diagram1">
         <EntityTypeShape EntityType="CryptoTraderDBModel.Address" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Balance" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderDBModel.Balance" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderDBModel.BankAccount" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderDBModel.BankTransferHistory" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderDBModel.City" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderDBModel.Country" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Person" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Ticker" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.TradeHistory" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderDBModel.Person" Width="1.5" PointX="10.625" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderDBModel.Ticker" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderDBModel.TradeHistory" Width="1.5" PointX="10.375" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CryptoTraderDBModel.Upload" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
         <AssociationConnector Association="CryptoTraderDBModel.fk_Address_City" ManuallyRouted="false" />
         <AssociationConnector Association="CryptoTraderDBModel.fk_Address_Person" ManuallyRouted="false" />

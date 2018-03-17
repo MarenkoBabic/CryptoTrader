@@ -35,6 +35,7 @@
         public decimal BalanceAmount { get; set; }
 
         public List<TradeHistory> HistoryList { get; set; }
+        
 
         public TradeBitCoinViewModel()
         {
