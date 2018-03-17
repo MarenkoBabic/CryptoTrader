@@ -1,0 +1,66 @@
+﻿@model CryptoTrader.Model.ViewModel.TradeBitCoinViewModel
+<link href="~/Content/Custom/TradeBitCoin.css" rel="stylesheet" />
+
+<div class="container">
+    @using (Html.BeginForm("Trade", "Trade", FormMethod.Post))
+    {
+        <div class="formCard">
+            <div class="row">
+                <div class="col-lg-12">
+                    @Html.LabelFor(a => a.TradeAmountBTC, "Bitcoin", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    @Html.EditorFor(a => a.TradeAmountBTC, new { htmlAttributes = new { id = "BTC", @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="formCard">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    @Html.LabelFor(a => a.TradeAmountEuro, "Euro")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    @Html.EditorFor(a => a.TradeAmountEuro, new { htmlAttributes = new { id = "Euro", @class = "form-control" } })
+                    @Html.ValidationMessageFor(a => a.TradeAmountEuro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <input type="submit" name="submit" class="btn btn-success buttonBuy" value="Kaufen">
+        <input type="submit" name="submit" class="btn btn-danger buttonSell" value="Verkaufen" />
+
+    }
+
+</div>
+<script>
+    $("#BTC").keyup(function () {
+        $.ajax({
+            url: "Trade/GetEuro",
+            type: 'POST',
+            data: {
+                BTCAmount: $("#BTC").val()
+            },
+            success: function (data) {
+                $("#Euro").val(data);
+            }
+        });
+    });
+
+    $("#Euro").keyup(function () {
+        $.ajax({
+            url: "Trade/GetBTC",
+            type: 'POST',
+            data: {
+                EuroAmount: $("#Euro").val()
+            },
+            success: function (data) {
+                $("#BTC").val(data);
+            }
+        });
+    });
+
+</script>

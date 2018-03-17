@@ -1,41 +1,55 @@
-﻿@{
+﻿@model CryptoTrader.Model.ViewModel.TradeBitCoinViewModel
+@{
     ViewBag.Title = "Index";
 }
 <link href="~/Content/Custom/CardBootStrap.css" rel="stylesheet" />
 <link href="~/Content/Custom/TradeIndex.css" rel="stylesheet" />
-
-<div class="row divPadding">
+<div class="container">
     <!--Chart-->
-    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 divPadding">
+    <div class="row">
         @Html.Partial("~/Views/Trade/_ChartDiagramm.cshtml")
     </div>
     <!--EndChart-->
     <!--Cards-->
-    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 divPadding">
-
-        <!--Card for BuyCoins-->
-        <div class="card col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <div class="card-header">Kaufen</div>
-            <div class="card-body">
-                @Html.Partial("~/Views/Trade/_BuyBitCoin.cshtml")
-            </div>
-        </div>
-        <!--EndBuyCoins-->
-        <!--Card for SellCoins-->
-        <div class="card col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <div class="card-header">Verkaufen</div>
-            <div class="card-body">
-                @Html.Partial("~/Views/Trade/_SellBitCoin.cshtml")
-            </div>
-        </div>
-        <!--EndSellCoins-->
-
-    </div><!--EndCards-->
-
 </div>
-<div class="row" style="padding-left:100px;">
-    @Html.Action("TradeHistoryList", "Trade");
+<div class="container">
+    <div class="row">
+
+        <div class="card col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <!--Card for TradeBitCoin-->
+            <div class="card-header">Handeln</div>
+            <div class="card-body">
+                @Html.Partial("~/Views/Trade/_TradeBitCoin.cshtml")
+            </div>
+            <!--EndBuyCoins-->
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 tableScroll">
+            <table class="table well">
+                <thead>
+                    <tr>
+                        <th>Vorname</th>
+                        <th>Nachname</th>
+                        <th>Datum</th>
+                        <th>BitCoin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.HistoryList)
+                    {
+                        <tr>
+                            <td>@item.Person.firstName</td>
+                            <td>@item.Person.lastName</td>
+                            <td>@item.created</td>
+                            <td>@item.amount</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+
 
 
 

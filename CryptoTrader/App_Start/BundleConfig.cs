@@ -35,9 +35,9 @@ namespace CryptoTrader
                 "~/Scripts/JsDefault/respond.js") );
 
             bundles.Add( new StyleBundle( "~/Content/css" ).Include(
-                "~/Content/bootstrap.css",
-                "~/Content/site.css",
-                "~/Content/toastr.css" ) );
+                "~/Content/DefaultCss/bootstrap.css",
+                "~/Content/DefaultCss/site.css",
+                "~/Content/toast/toastr.css" ) );
             bundles.Add( new ScriptBundle( "~/bundles/highstock" ).Include(
                      "~/Scripts/JsDefault/Highstock/exporting.js",
                      "~/Scripts/JsDefault/Highstock/highstock.js") );

@@ -59,8 +59,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Highstock.Web.Mvc, Version=6.0.6646.24157, Culture=neutral, PublicKeyToken=90b74bd27a557bd3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Highsoft.Highstock.6.0.6646.24157\lib\net40\Highstock.Web.Mvc.dll</HintPath>
+    <Reference Include="Highstock.Web.Mvc, Version=6.0.6649.24168, Culture=neutral, PublicKeyToken=90b74bd27a557bd3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Highsoft.Highstock.6.0.6649.24168\lib\net40\Highstock.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock, Version=0.9.16530.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jayrock.0.9.16530.1\lib\net40\Jayrock.dll</HintPath>
@@ -245,14 +245,12 @@
     <Compile Include="Model\ViewModel\Helper\AutoMapperProfile.cs" />
     <Compile Include="Model\ViewModel\BankTransfer\PayOutViewModel.cs" />
     <Compile Include="Model\ViewModel\BankTransfer\PayInViewModel.cs" />
-    <Compile Include="Model\ViewModel\Trade\BuyBitCoinViewModel.cs" />
-    <Compile Include="Model\ViewModel\Trade\SellBitCoinViewModel.cs" />
+    <Compile Include="Model\ViewModel\Trade\TradeBitCoinViewModel.cs" />
     <Compile Include="Model\ViewModel\Helper\EmailSendViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\LoginViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\PersonVerificationViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\RegisterViewModel.cs" />
     <Compile Include="Model\ViewModel\Ticker\TickerChartViewModel.cs" />
-    <Compile Include="Model\ViewModel\Trade\TradeHistoryListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,59 +262,60 @@
     <Content Include="App_Data\CryptoTraderJarosh_log.ldf">
       <DependentUpon>CryptoTraderJarosh.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\toast\toastr.css" />
+    <Content Include="Content\toast\toastr.min.css" />
+    <Content Include="Content\DefaultCss\bootstrap.css" />
+    <Content Include="Content\DefaultCss\bootstrap.min.css" />
     <Content Include="Content\Custom\CardBootStrap.css" />
     <Content Include="Content\Custom\DashBoard.css" />
+    <Content Include="Content\Custom\TradeBitCoin.css" />
     <Content Include="Content\Custom\TradeIndex.css" />
     <Content Include="Content\Custom\UserVerification.css" />
-    <Content Include="Content\themes\base\accordion.css" />
-    <Content Include="Content\themes\base\all.css" />
-    <Content Include="Content\themes\base\autocomplete.css" />
-    <Content Include="Content\themes\base\base.css" />
-    <Content Include="Content\themes\base\button.css" />
-    <Content Include="Content\themes\base\core.css" />
-    <Content Include="Content\themes\base\datepicker.css" />
-    <Content Include="Content\themes\base\dialog.css" />
-    <Content Include="Content\themes\base\draggable.css" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Content\themes\base\jquery-ui.css" />
-    <Content Include="Content\themes\base\jquery-ui.min.css" />
-    <Content Include="Content\themes\base\menu.css" />
-    <Content Include="Content\themes\base\progressbar.css" />
-    <Content Include="Content\themes\base\resizable.css" />
-    <Content Include="Content\themes\base\selectable.css" />
-    <Content Include="Content\themes\base\selectmenu.css" />
-    <Content Include="Content\themes\base\slider.css" />
-    <Content Include="Content\themes\base\sortable.css" />
-    <Content Include="Content\themes\base\spinner.css" />
-    <Content Include="Content\themes\base\tabs.css" />
-    <Content Include="Content\themes\base\theme.css" />
-    <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="Content\toastr.css" />
-    <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\HighStock\themes\base\accordion.css" />
+    <Content Include="Content\HighStock\themes\base\all.css" />
+    <Content Include="Content\HighStock\themes\base\autocomplete.css" />
+    <Content Include="Content\HighStock\themes\base\base.css" />
+    <Content Include="Content\HighStock\themes\base\button.css" />
+    <Content Include="Content\HighStock\themes\base\core.css" />
+    <Content Include="Content\HighStock\themes\base\datepicker.css" />
+    <Content Include="Content\HighStock\themes\base\dialog.css" />
+    <Content Include="Content\HighStock\themes\base\draggable.css" />
+    <Content Include="Content\HighStock\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\HighStock\themes\base\jquery-ui.css" />
+    <Content Include="Content\HighStock\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\HighStock\themes\base\menu.css" />
+    <Content Include="Content\HighStock\themes\base\progressbar.css" />
+    <Content Include="Content\HighStock\themes\base\resizable.css" />
+    <Content Include="Content\HighStock\themes\base\selectable.css" />
+    <Content Include="Content\HighStock\themes\base\selectmenu.css" />
+    <Content Include="Content\HighStock\themes\base\slider.css" />
+    <Content Include="Content\HighStock\themes\base\sortable.css" />
+    <Content Include="Content\HighStock\themes\base\spinner.css" />
+    <Content Include="Content\HighStock\themes\base\tabs.css" />
+    <Content Include="Content\HighStock\themes\base\theme.css" />
+    <Content Include="Content\HighStock\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\DefaultCss\Site.css" />
     <Content Include="Image\bitcoin-1.jpg" />
     <Content Include="Image\bitcoin-trans.jpg" />
     <Content Include="Model\DbModel\CryptoTrader.Context.tt">
@@ -344,10 +343,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\toastr.scss" />
-    <Content Include="Content\toastr.less" />
-    <Content Include="Content\toastr.scss" />
-    <Content Include="Content\toastr.less" />
     <EntityDeploy Include="Model\DbModel\Jarosh.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Jarosh.Designer.cs</LastGenOutput>
@@ -362,6 +357,8 @@
     <Content Include="Model\DbModel\CryptoTrader.edmx.diagram">
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\toast\toastr.less" />
+    <Content Include="Content\toast\toastr.scss" />
     <None Include="Scripts\JsDefault\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\GetTickerRate.js" />
     <Content Include="Scripts\Custom\ShowBalance.js" />
@@ -453,10 +450,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\BankTransfer\PayOut.cshtml" />
-    <Content Include="Views\Trade\_SellBitCoin.cshtml" />
     <Content Include="Views\Trade\Index.cshtml" />
-    <Content Include="Views\Trade\_BuyBitCoin.cshtml" />
-    <Content Include="Views\Trade\_TradeHistoryList.cshtml" />
+    <Content Include="Views\Trade\_TradeBitCoin.cshtml" />
     <Content Include="Views\Trade\_ChartDiagramm.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -472,7 +467,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Scripts\JsDefault\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\JsDefault\jquery-3.3.1.min.map" />
   </ItemGroup>

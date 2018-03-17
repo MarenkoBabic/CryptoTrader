@@ -58,15 +58,25 @@
             }
         }
 
-        public ActionResult IsOnlyNumber(decimal TradeAmountBTC = 10.10m)
+        /// <summary>
+        /// Prüft ob der Wert größer 0 ist
+        /// </summary>
+        /// <param name="TradeAmountBTC"></param>
+        /// <returns></returns>
+        public ActionResult IsOnlyNumber(decimal? TradeAmountEuro)
         {
-            Regex regex = new Regex("^[0 - 9] + $");
-            if (regex.IsMatch(TradeAmountBTC.ToString()))
+            if (TradeAmountEuro > 0)
             {
-                return Json(regex.IsMatch(TradeAmountBTC.ToString()), JsonRequestBehavior.AllowGet);
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
             return Json(false, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// Prüft ob Benutzer eingeloggt ist
+        /// </summary>
+        /// <param name="result">Bool</param>
+        /// <returns>True or False</returns>
         public static bool IsUserAuthenticated(bool result)
         {
             if (result)

@@ -1,0 +1,31 @@
+﻿.form-control {
+    font-size: 30px;
+    text-align: center;
+    background-color: #3e3e40;
+    color:white;
+    height:50px;
+}
+.formCard {
+    font-size: 30px;
+    text-align: center;
+    border: double;  
+    border-bottom-color:white;
+    width:100%;
+    margin-bottom:15px;
+   
+}
+
+.buttonBuy {
+    width:50%;
+    position: absolute;
+    bottom: 0;
+    left:0;
+    padding:10px;
+}
+.buttonSell {
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+}

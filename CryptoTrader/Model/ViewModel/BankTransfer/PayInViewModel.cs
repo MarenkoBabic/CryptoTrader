@@ -17,6 +17,8 @@
 
         public string Iban { get; set; } = "AT34 1400 0001 2112 8475";
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Created { get; set; } = DateTime.Now;
 
         public string FirstName { get; set; }

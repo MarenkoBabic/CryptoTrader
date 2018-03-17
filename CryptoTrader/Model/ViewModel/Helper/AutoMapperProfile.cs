@@ -86,25 +86,16 @@
 
                 #region TradeBTC
 
-                CreateMap<TradeHistory, SellBitCoinViewModel>()
+                CreateMap<TradeHistory, TradeBitCoinViewModel>()
                     .ForMember(a => a.PersonId, opt => opt.MapFrom(a => a.person_id))
-                    .ForMember(a => a.SellTradeAmountBTC, opt => opt.MapFrom(a => a.amount))
+                    .ForMember(a => a.TradeAmountBTC, opt => opt.MapFrom(a => a.amount))
                     .ForMember(a => a.TickerId, opt => opt.MapFrom(a => a.ticker_id));
 
-                CreateMap<SellBitCoinViewModel, TradeHistory>()
+                CreateMap<TradeBitCoinViewModel, TradeHistory>()
                     .ForMember(a => a.person_id, opt => opt.MapFrom(a => a.PersonId))
-                    .ForMember(a => a.amount, opt => opt.MapFrom(a => a.SellTradeAmountBTC))
+                    .ForMember(a => a.amount, opt => opt.MapFrom(a => a.TradeAmountBTC))
                     .ForMember(a => a.ticker_id, opt => opt.MapFrom(a => a.TickerId));
 
-                CreateMap<TradeHistory, BuyBitCoinViewModel>()
-                    .ForMember(a => a.PersonId, opt => opt.MapFrom(a => a.person_id))
-                    .ForMember(a => a.BuyTradeAmountBTC, opt => opt.MapFrom(a => a.amount))
-                    .ForMember(a => a.TickerId, opt => opt.MapFrom(a => a.ticker_id));
-
-                CreateMap<BuyBitCoinViewModel, TradeHistory>()
-                    .ForMember(a => a.person_id, opt => opt.MapFrom(a => a.PersonId))
-                    .ForMember(a => a.amount, opt => opt.MapFrom(a => a.BuyTradeAmountBTC))
-                    .ForMember(a => a.ticker_id, opt => opt.MapFrom(a => a.TickerId));
 
 
                 CreateMap<Ticker, ApiViewModel>();
