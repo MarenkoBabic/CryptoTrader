@@ -240,22 +240,19 @@
     <Compile Include="Model\DbModel\Upload.cs">
       <DependentUpon>CryptoTrader.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ViewModel\AdminViewModel.cs" />
-    <Compile Include="Model\ViewModel\ApiViewModel.cs" />
-    <Compile Include="Model\ViewModel\AutoMapperProfile.cs" />
-    <Compile Include="Model\ViewModel\PayOutViewModel.cs" />
-    <Compile Include="Model\ViewModel\PayInViewModel.cs" />
-    <Compile Include="Model\ViewModel\TradeByBitCoinViewModel.cs" />
-    <Compile Include="Model\ViewModel\TradeByEuroViewModel.cs" />
-    <Compile Include="Model\ViewModel\EmailSendViewModel.cs" />
-    <Compile Include="Model\ViewModel\LoginViewModel.cs" />
-    <Compile Include="Model\ViewModel\PersonVerificationViewModel.cs" />
-    <Compile Include="Model\ViewModel\RegisterViewModel.cs" />
-    <Compile Include="Model\ViewModel\TickerChartViewModel.cs" />
-    <Compile Include="Model\ViewModel\TradeHistoryListViewModel.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Model\ViewModel\Helper\AdminViewModel.cs" />
+    <Compile Include="Model\ViewModel\Ticker\ApiViewModel.cs" />
+    <Compile Include="Model\ViewModel\Helper\AutoMapperProfile.cs" />
+    <Compile Include="Model\ViewModel\BankTransfer\PayOutViewModel.cs" />
+    <Compile Include="Model\ViewModel\BankTransfer\PayInViewModel.cs" />
+    <Compile Include="Model\ViewModel\Trade\BuyBitCoinViewModel.cs" />
+    <Compile Include="Model\ViewModel\Trade\SellBitCoinViewModel.cs" />
+    <Compile Include="Model\ViewModel\Helper\EmailSendViewModel.cs" />
+    <Compile Include="Model\ViewModel\Login_Register\LoginViewModel.cs" />
+    <Compile Include="Model\ViewModel\Login_Register\PersonVerificationViewModel.cs" />
+    <Compile Include="Model\ViewModel\Login_Register\RegisterViewModel.cs" />
+    <Compile Include="Model\ViewModel\Ticker\TickerChartViewModel.cs" />
+    <Compile Include="Model\ViewModel\Trade\TradeHistoryListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -342,8 +339,8 @@
       <DependentUpon>Jarosh.edmx</DependentUpon>
       <LastGenOutput>Jarosh.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\JsDefault\bootstrap.js" />
+    <Content Include="Scripts\JsDefault\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -351,14 +348,6 @@
     <Content Include="Content\toastr.less" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <Content Include="obj\Debug\CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\BBRZ.csdl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\BBRZ.msl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\BBRZ.ssdl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.csdl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.msl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DbModel\DataBaseModel.ssdl" />
     <EntityDeploy Include="Model\DbModel\Jarosh.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Jarosh.Designer.cs</LastGenOutput>
@@ -373,7 +362,12 @@
     <Content Include="Model\DbModel\CryptoTrader.edmx.diagram">
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <None Include="Scripts\JsDefault\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Custom\GetTickerRate.js" />
+    <Content Include="Scripts\Custom\ShowBalance.js" />
+    <Content Include="Scripts\Custom\ShowBitCoinAmount.js" />
+    <Content Include="Scripts\Custom\ToastR.js" />
+    <Content Include="Scripts\Custom\UpdateChart.js" />
     <Content Include="Scripts\highstock\2.1.8\adapters\standalone-framework.js" />
     <Content Include="Scripts\highstock\2.1.8\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\highstock\2.1.8\highcharts-3d.js" />
@@ -415,25 +409,25 @@
     <Content Include="Scripts\highstock\2.1.8\themes\skies.js" />
     <Content Include="Scripts\highstock\Test\exporting.js" />
     <Content Include="Scripts\highstock\Test\highstock.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\jquery-ui-1.12.1.js" />
-    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\toastr.js" />
-    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\JsDefault\jquery-3.3.1.js" />
+    <Content Include="Scripts\JsDefault\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\JsDefault\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\JsDefault\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\JsDefault\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\JsDefault\jquery-ui-1.12.1.min.js" />
+    <None Include="Scripts\JsDefault\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\JsDefault\jquery.validate.js" />
+    <Content Include="Scripts\JsDefault\jquery.validate.min.js" />
+    <Content Include="Scripts\JsDefault\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\JsDefault\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JsDefault\modernizr-2.6.2.js" />
+    <Content Include="Scripts\JsDefault\modernizr-2.8.3.js" />
+    <Content Include="Scripts\JsDefault\respond.js" />
+    <Content Include="Scripts\JsDefault\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\JsDefault\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\JsDefault\respond.min.js" />
+    <Content Include="Scripts\JsDefault\toastr.js" />
+    <Content Include="Scripts\JsDefault\toastr.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -459,14 +453,14 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\BankTransfer\PayOut.cshtml" />
-    <Content Include="Views\Trade\_TradeByEuro.cshtml" />
+    <Content Include="Views\Trade\_SellBitCoin.cshtml" />
     <Content Include="Views\Trade\Index.cshtml" />
-    <Content Include="Views\Trade\_TradeByBTC.cshtml" />
+    <Content Include="Views\Trade\_BuyBitCoin.cshtml" />
     <Content Include="Views\Trade\_TradeHistoryList.cshtml" />
+    <Content Include="Views\Trade\_ChartDiagramm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Image\UserImages\" />
-    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -479,8 +473,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Scripts\JsDefault\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\JsDefault\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

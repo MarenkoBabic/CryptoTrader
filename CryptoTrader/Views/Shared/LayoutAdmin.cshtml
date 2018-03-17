@@ -11,6 +11,10 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/toastr")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Custom/GetTickerRate.js"></script>
+    <script src="~/Scripts/Custom/ShowBalance.js"></script>
+    <script src="~/Scripts/Custom/ShowBitCoinAmount.js"></script>
+    <script src="~/Scripts/Custom/ToastR.js"></script>
     <link href="~/Content/Custom/DashBoard.css" rel="stylesheet" />
 
 </head>
@@ -39,9 +43,15 @@
 
             <!--Benutzer Dropdown-->
             <ul class="nav navbar-right top-nav">
+                <li>
+                    <a>
+                        <span id="balance" class="glyphicon glyphicon-euro"></span>
+                        <span id="bitCoin" class="glyphicon glyphicon-star"></span>
+                    </a>
+                </li>
+
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">
-                        <span id="balance"></span>
                         <span class="glyphicon glyphicon-user">@lastName</span>
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
@@ -123,8 +133,7 @@
                             <span class="my-span">Handeln</span>
                         </a>
                         <ul>
-                            <li>@Html.ActionLink("Bitcoin kaufen", "BuyBitcoin", "Trade")</li>
-                            <li>@Html.ActionLink("Bitcoin verkaufen", "SellBitCoin", "Trade")</li>
+                            <li>@Html.ActionLink("Bitcoin Handeln", "Index", "Trade")</li>
                         </ul>
                     </li>
                     <li>
@@ -152,87 +161,31 @@
 
 </body>
 </html>
-<script type="text/javascript">
+<script>
+    toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "positionClass": "toast-bottom-left",
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "3000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut",
+    "width": "100%"
+}
+$(document).ready(function () {
+    
+    @if (TempData["ErrorMessage"] != null) {
+        <text>toastr.error("", "@TempData["ErrorMessage"]").attr('style','width:500px');</text>
+    }
 
-        $(document).ready(function () {
-            GetRate();
-        });
-        $(document).ready(function () {
-            ShowBalance();
-        });
+    @if (TempData["ConfirmMessage"] != null) {
+        <text>toastr.success("", "@TempData["ConfirmMessage"]").attr('style', 'width:100%');</text>
+    }
 
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-            $(".side-nav .collapse").on("hide.bs.collapse", function () {
-                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-right").addClass("fa-angle-down");
-            });
-            $('.side-nav .collapse').on("show.bs.collapse", function () {
-                $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
-            });
-        })
+});
 
-        function ShowBalance() {
-            console.log("ShowBalance");
-            $.ajax({ url: "/BankTransfer/ShowBalance" }).done(function (response) {
-                $("#balance").html(response);
-            });
-        }
-        function GetRate() {
-            $.ajax({ url: "/Ticker/ShowRate" })
-                .done(function (response) {
-                    console.log("GetRate")
-                    var result = "";
-                    var rate_old = ($("#rate").html());
-                    var rate_current = (response);
-
-                    $("#rate").html(rate_current);
-
-                    if (rate_current > rate_old) {
-                        result = ($(".rate").html("▲"));
-                        $(".rate").css("color", "green");
-                        $("#rate").css("color", "green");
-                    }
-                    else if (rate_current < rate_old) {
-                        result = ($(".rate").html("▼"));
-                        $(".rate").css("color", "red");
-                        $("#rate").css("color", "red");
-                    }
-                    else if (rate_current == rate_old) {
-                        result = ($(".rate").html("-"));
-                        $(".rate").css("color", "goldenrod");
-                        $("#rate").css("color", "goldenrod");
-                    }
-
-                    setTimeout(function () { GetRate(); }, 10000);
-                });
-        }
-
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "positionClass": "toast-bottom-left",
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "3000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut",
-            "width":"100%"
-        }
-        $(document).ready(function () {
-
-            @if (TempData["ErrorMessage"] != null)
-            {
-                <text>toastr.error("", "@TempData["ErrorMessage"]").attr('style','width:500px');</text>
-            }
-
-            @if (TempData["ConfirmMessage"] != null)
-            {
-                <text>toastr.success("", "@TempData["ConfirmMessage"]").attr('style', 'width:100%');</text>
-            }
-
-            });
 </script>
-

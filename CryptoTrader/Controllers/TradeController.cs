@@ -18,18 +18,7 @@
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
             {
-                TradeHistoryListViewModel vm = new TradeHistoryListViewModel();
-                Ticker dbTicker = new Ticker();
-                using (var db = new CryptoTraderEntities())
-                {
-                    Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                    if (db.TradeHistory.Any())
-                    {
-                        vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
-                    }
-                }
                 return View();
-
             }
             else
             {
@@ -37,14 +26,15 @@
                 return RedirectToAction("Index", "Home");
             }
         }
+
         /// <summary>
-        /// Bitcoin kaufen
+        /// Bitcoin Handeln
         /// </summary>
         /// <param name="vm">ViewModel</param>
-        /// <param name="id">IdAuswahl ob per Anzahl Bitcoins oder Euro</param>
-        /// <returns>View mit neuen Kontostand</returns>
+        /// <param name="submit">Submit eingabe</param>
+        /// <returns>View</returns>
         [HttpPost]
-        public ActionResult TradeByBTC(TradeByBitCoinViewModel vm, string submit)
+        public ActionResult Trade(BuyBitCoinViewModel vm, string submit)
         {
             using (var db = new CryptoTraderEntities())
             {
@@ -67,13 +57,13 @@
                 //Bitcoin Kaufen
                 if (submit == "Kaufen")
                 {
-                    bool result = TradeManager.HaveEnoughMoney(vm.BalanceAmount, vm.TickerRate, vm.TradeAmountBTC);
+                    bool result = TradeManager.HaveEnoughMoney(vm.BalanceAmount, vm.TickerRate, vm.BuyTradeAmountBTC);
                     if (result)
                     {
-                        dbBalance.amount += TradeManager.TradeAmountByBTC(vm.TickerRate, vm.TradeAmountBTC);
+                        dbBalance.amount -= TradeManager.TradeAmountByBTC(vm.TickerRate, vm.BuyTradeAmountBTC);
 
                         dbTradeHistory.person_id = dbPerson.id;
-                        dbTradeHistory.amount = vm.TradeAmountBTC;
+                        dbTradeHistory.amount = vm.BuyTradeAmountBTC;
 
                         if (ModelState.IsValid)
                         {
@@ -89,12 +79,12 @@
                 //Bitcoin verkaufen
                 else
                 {
-                    bool result = TradeManager.HaveEnoughBTC(ShowBitCoin(), vm.TradeAmountBTC);
+                    bool result = TradeManager.HaveEnoughBTC(ShowBitCoin(), vm.BuyTradeAmountBTC);
                     if (result)
                     {
-                        dbBalance.amount -= TradeManager.TradeAmountByBTC(vm.TickerRate, vm.TradeAmountBTC);
+                        dbBalance.amount += TradeManager.TradeAmountByBTC(vm.TickerRate, vm.BuyTradeAmountBTC);
 
-                        dbTradeHistory.amount = vm.TradeAmountBTC * (-1);
+                        dbTradeHistory.amount = vm.BuyTradeAmountBTC * (-1);
                         dbTradeHistory.person_id = dbPerson.id;
 
                         if (ModelState.IsValid)
@@ -114,83 +104,12 @@
         }
 
         /// <summary>
-        /// Bitcoins verkaufen
-        /// </summary>
-        /// <param name="vm">Viewmodel</param>
-        /// <param name="id">IdAuswahl ob per Anzahl Bitcoins oder Euro</param>
-        /// <returns>View mit neuen Kontostand</returns>
-        [HttpPost]
-        public ActionResult TradeByEuro(TradeByEuroViewModel vm, int id)
-        {
-
-            using (var db = new CryptoTraderEntities())
-            {
-                vm.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
-                vm.TickerId = db.Ticker.OrderByDescending(a => a.created).Select(a => a.id).First();
-                Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
-                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-                TradeHistory dbTradeHistory = Mapper.Map<TradeHistory>(vm);
-
-                //Kaufe BitCoins
-                if (id == 1)
-                {
-                    bool result = TradeManager.HaveEnoughBTC(ShowBitCoin(), vm.TradeAmountEuro);
-                    if (result)
-                    {
-
-
-                        dbBalance.amount -= vm.TradeAmountEuro;
-
-                        dbTradeHistory.amount = TradeManager.GetBTCAmount(vm.TradeAmountEuro, vm.TickerRate);
-                        dbTradeHistory.person_id = dbPerson.id;
-
-                        if (ModelState.IsValid)
-                        {
-                            db.Entry(dbBalance).State = EntityState.Modified;
-                            db.TradeHistory.Add(dbTradeHistory);
-                            db.SaveChanges();
-                        }
-                        return RedirectToAction("Index");
-
-                    }
-                    TempData["ErrorMessage"] = "Nicht genug BitCoin vorhanden";
-                }
-
-                //Verkaufe Bitcoins
-                else
-                {
-                    if (dbBalance.amount >= vm.TradeAmountEuro)
-                    {
-                        dbTradeHistory.person_id = dbPerson.id;
-                        dbTradeHistory.amount = TradeManager.GetBTCAmount(vm.TradeAmountEuro, vm.TickerRate);
-
-                        dbBalance.amount -= vm.TradeAmountEuro;
-                        dbBalance.created = vm.Created;
-
-
-                        if (ModelState.IsValid)
-                        {
-                            db.Entry(dbBalance).State = EntityState.Modified;
-                            db.TradeHistory.Add(dbTradeHistory);
-                            db.SaveChanges();
-                        }
-                        return View(vm);
-                    }
-                    TempData["ErrorMessage"] = "Limit überschritten laden sie Ihr Konto auf";
-                    return RedirectToAction("Index");
-                }
-            }
-
-            return View("Index");
-        }
-
-        /// <summary>
         /// Zeigt die Anzahl wieviel der Kunde BitCoin hat
         /// </summary>
         /// <returns>Decimal BitCoin</returns>
         public decimal ShowBitCoin()
         {
-            TradeByBitCoinViewModel vm = new TradeByBitCoinViewModel();
+            BuyBitCoinViewModel vm = new BuyBitCoinViewModel();
             using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
@@ -207,6 +126,10 @@
             }
         }
 
+        /// <summary>
+        /// Befüllt die TradeHistorylist aus der Datenbank
+        /// </summary>
+        /// <returns>TradeHistoryList</returns>
         public ActionResult TradeHistoryList()
         {
             Ticker dbTicker = new Ticker();
@@ -222,11 +145,48 @@
                         item.ticker_id = dbTicker.id;
                         vm.HistoryList.Add(item);
                     }
-                    return PartialView(@"~/Views/Trade/_TradeHistoryList.cshtml",vm);
+                    return PartialView(@"~/Views/Trade/_TradeHistoryList.cshtml", vm);
                 }
                 return null;
             }
         }
+
+        /// <summary>
+        /// Berechnet den Euro Wert
+        /// </summary>
+        /// <param name="TradeAmountBTC">Anzahl Bitcoins</param>
+        /// <returns>Euro</returns>
+        public ActionResult GetEuro(decimal? TradeAmountBTC)
+        {
+            using (var db = new CryptoTraderEntities())
+            {
+                decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+
+                TradeAmountBTC = TradeAmountBTC * dbTicker;
+
+                return Json(TradeAmountBTC.ToString(), JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+        /// <summary>
+        /// Berechnet die Bitcoin Anzahl
+        /// </summary>
+        /// <param name="TradeAmountEuro">Euro</param>
+        /// <returns>BitCoin</returns>
+        public ActionResult GetBTC(decimal? TradeAmountEuro)
+        {
+            using (var db = new CryptoTraderEntities())
+            {
+                decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+
+                TradeAmountEuro = TradeAmountEuro / dbTicker;
+
+                return Json(TradeAmountEuro.ToString(), JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
 
     }
 }

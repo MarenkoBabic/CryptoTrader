@@ -1,11 +1,16 @@
-﻿
-body {
-    padding-left: 220px;
+﻿body {
+    padding-left: 230px;
+    padding-top: 30px;
 }
 
-.MyConfirmBox{
-    background-color:gray;
-    height:200px;
-    width:300px;
-    position:center;
+.MyConfirmBox {
+    background-color: gray;
+    height: 200px;
+    width: 300px;
+    position: center;
+}
+
+.container {
+    padding: 0px;
+    margin:30px;
 }

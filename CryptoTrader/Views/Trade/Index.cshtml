@@ -1,77 +1,41 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<script src="~/Scripts/highstock/Test/highstock.js"></script>
-<script src="~/Scripts/highstock/2.1.8/themes/dark-unica.js"></script>
 <link href="~/Content/Custom/CardBootStrap.css" rel="stylesheet" />
 <link href="~/Content/Custom/TradeIndex.css" rel="stylesheet" />
 
-<div class="row">
+<div class="row divPadding">
     <!--Chart-->
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-        <main id="Chart" class="chartdiv col-lg-12 col-md-12 col-sm-12 col-xs-12"></main>
-    </div><!--EndChart-->
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 divPadding">
+        @Html.Partial("~/Views/Trade/_ChartDiagramm.cshtml")
+    </div>
+    <!--EndChart-->
     <!--Cards-->
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 divPadding">
+
         <!--Card for BuyCoins-->
         <div class="card col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="card-header">Kaufen</div>
             <div class="card-body">
-                @Html.Partial("~/Views/Trade/_TradeByBTC.cshtml")
+                @Html.Partial("~/Views/Trade/_BuyBitCoin.cshtml")
             </div>
-        </div><!--EndBuyCoins-->
+        </div>
+        <!--EndBuyCoins-->
         <!--Card for SellCoins-->
         <div class="card col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="card-header">Verkaufen</div>
             <div class="card-body">
-                @Html.Partial("~/Views/Trade/_TradeByEuro.cshtml")
+                @Html.Partial("~/Views/Trade/_SellBitCoin.cshtml")
             </div>
-        </div><!--EndSellCoins-->
+        </div>
+        <!--EndSellCoins-->
 
     </div><!--EndCards-->
 
 </div>
 <div class="row" style="padding-left:100px;">
-    @Html.Action("TradeHistoryList","Trade");
+    @Html.Action("TradeHistoryList", "Trade");
 </div>
 
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        UpdateChart();
-    });
-
-    function UpdateChart() {
-        if ($("collapseExample").hasClass("in") == false) {
-            $.ajax({
-                url: '/Ticker/LoadChartData',
-                success: function (json) {
-                    CreateChart(json);
-                },
-                error: function (errorData) {
-                    console.log(errorData);
-                }
-            });
-            setTimeout(function () { UpdateChart(); }, 10000);
-        }
-    }
-
-    function CreateChart(jsonData) {
-        Highcharts.stockChart('Chart', {
-            title: {
-                text: 'Aktueller BitCoin Kurs'
-            },
-            rangeSelector: false,
-            series: [{
-                name: 'BTC/EUR',
-                data: jsonData,
-                //type: 'area',
-                tooltip: {
-                    valueDecimals: 2
-                }
-            }],
-        });
-    }
-
-</script>

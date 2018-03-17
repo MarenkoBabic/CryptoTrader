@@ -5,7 +5,7 @@
     using System.Web.Mvc;
     using CryptoTrader.Model.DbModel;
 
-    public class TradeByBitCoinViewModel
+    public class BuyBitCoinViewModel
     {
         public int PersonId { get; set; }
 
@@ -19,14 +19,10 @@
 
         public decimal TickerRate { get; set; }
 
-        [Remote("IsOnlyNumber", "Validation", ErrorMessage = "Nur Zahlen erlaubt")]
-        public string AHA { get; set; }
-
-
-        public decimal TradeAmountBTC { get; set; }
+        public decimal BuyTradeAmountBTC { get; set; }
 
         [Remote("IsOnlyNumber", "Validation", ErrorMessage = "Nur Zahlen erlaubt")]
-        public decimal TradeAmountEuro { get; set; }
+        public decimal BuyTradeAmountEuro { get; set; }
 
         public decimal BitCoinAmount { get; set; }
 
@@ -36,7 +32,7 @@
 
 
 
-        public TradeByBitCoinViewModel()
+        public BuyBitCoinViewModel()
         {
             HistoryList = new List<TradeHistory>();
         }
