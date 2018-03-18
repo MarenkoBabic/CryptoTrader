@@ -12,7 +12,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    @Html.EditorFor(a => a.TradeAmountBTC, new { htmlAttributes = new { id = "BTC", @class = "form-control" } })
+                    @Html.EditorFor(a => a.TradeAmountBTC, new { htmlAttributes = new { id = "BTC", @class = "form-control",maxlength="7" } })
                 </div>
             </div>
         </div>
@@ -25,8 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    @Html.EditorFor(a => a.TradeAmountEuro, new { htmlAttributes = new { id = "Euro", @class = "form-control" } })
-                    @Html.ValidationMessageFor(a => a.TradeAmountEuro, "", new { @class = "text-danger" })
+                    @Html.EditorFor(a => a.TradeAmountEuro, new { htmlAttributes = new { id = "Euro", @class = "form-control",maxlength= "7" } })
                 </div>
             </div>
         </div>

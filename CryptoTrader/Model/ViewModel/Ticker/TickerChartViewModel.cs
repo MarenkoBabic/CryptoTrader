@@ -10,6 +10,11 @@
         public string UnixTime { get; set; }
         public string Value { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<decimal[]> GetList(List<TickerChartViewModel> list)
         {
             List<decimal[]> result = new List<decimal[]>();

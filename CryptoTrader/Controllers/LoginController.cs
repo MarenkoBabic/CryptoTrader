@@ -16,7 +16,6 @@
         /// <param name="LoginViewModel">ViewModel Login</param>
         /// <returns>Startseite</returns>
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult Login(LoginViewModel vm)
         {
             using (var db = new CryptoTraderEntities())

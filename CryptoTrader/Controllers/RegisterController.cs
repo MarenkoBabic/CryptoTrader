@@ -10,17 +10,12 @@
 
     public class RegisterController : Controller
     {
-        public ActionResult Register()
-        {
-            return View();
-        }
-
         /// <summary>
         /// Speichert den Benutzer wenn die Daten stimmen
         /// </summary>
         /// <param name="vm">ViewModel</param>
         ///<return>ErrorSeite</return>
-        /// <returns>Index Home</returns>
+        /// <returns>Index bei erfolgreich Registrieren</returns>
         [HttpPost]
         public ActionResult ToRegister(RegisterViewModel vm)
         {
@@ -38,9 +33,7 @@
                     var personList = db.Person.ToList();
                     LoginManager.FromRegisterToLogin(dbPerson.email, dbPerson.password, personList);
                     return RedirectToAction("Index", "Home");
-
                 }
-
             }
             return View();
         }

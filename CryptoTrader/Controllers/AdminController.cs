@@ -33,6 +33,12 @@
             }
         }
 
+        /// <summary>
+        /// Befüllt die Datenbank aus dem ViewModel
+        /// </summary>
+        /// <param name="id">Person_Id</param>
+        /// <param name="vm">AdminViewModel</param>
+        /// <returns>GetView</returns>
         [HttpPost]
         public ActionResult AdminView(int? id, AdminViewModel vm)
         {
@@ -69,12 +75,11 @@
             return RedirectToAction("AdminView");
         }
 
-
         /// <summary>
         /// Setzt den User auf Inaktiv oder Activ
         /// </summary>
         /// <param name="id">Person_id</param>
-        /// <returns>Index View</returns>
+        /// <returns>Get View</returns>
         public ActionResult ChangeActive(int? id)
         {
             using (var db = new CryptoTraderEntities())
@@ -95,6 +100,12 @@
             return RedirectToAction("AdminView");
         }
 
+        /// <summary>
+        /// Filterd die PersonenListe
+        /// </summary>
+        /// <param name="submit">Input Button</param>
+        /// <param name="vm">AdminViewModel</param>
+        /// <returns>Get View</returns>
         public ActionResult FilterList(string submit, AdminViewModel vm)
         {
             using (var db = new CryptoTraderEntities())
@@ -124,6 +135,11 @@
             return View("AdminView", vm);
         }
 
+        /// <summary>
+        /// Validiert den mitgebenen String
+        /// </summary>
+        /// <param name="s">ViewModel property</param>
+        /// <returns>bool</returns>
         private bool HasValue(string s)
         {
             if (!string.IsNullOrEmpty(s))

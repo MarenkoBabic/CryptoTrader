@@ -11,7 +11,7 @@
     public class BankTransferController : Controller
     {
         /// <summary>
-        /// Kontodaten Anzeigen oder Verifiziern falls nicht vorhanden
+        /// CryptoTrader-Kontodaten Anzeigen oder Verifiziern falls nicht vorhanden
         /// </summary>
         /// <param name="vm">ViewModel Bankdaten</param>
         /// <returns>View Index</returns>
@@ -46,7 +46,10 @@
 
         }
 
-
+        /// <summary>
+        /// Person-Kontodaten angeben oder Nur betrag falls schon in der Datenbank vorhanden
+        /// </summary>
+        /// <returns>View mit ViewModel</returns>
         public ActionResult PayOut()
         {
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
@@ -145,6 +148,5 @@
                 return "00,00";
             }
         }
-
     }
 }

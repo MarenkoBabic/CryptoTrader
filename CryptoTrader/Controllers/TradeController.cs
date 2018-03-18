@@ -13,6 +13,11 @@
 
     public class TradeController : Controller
     {
+
+        /// <summary>
+        /// Befüllt die Historylist und gibt sie zum View mit
+        /// </summary>
+        /// <returns>View mit ViewModel</returns>
         public ActionResult Index()
         {
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
@@ -45,7 +50,7 @@
         /// Bitcoin Handeln
         /// </summary>
         /// <param name="vm">ViewModel</param>
-        /// <param name="submit">Submit eingabe</param>
+        /// <param name="submit">Button Submit</param>
         /// <returns>View</returns>
         [HttpPost]
         public ActionResult Trade(TradeBitCoinViewModel vm, string submit)
@@ -152,7 +157,7 @@
                     decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
 
                     BTCAmount = BTCAmount * dbTicker;
-                    return Json(BTCAmount, JsonRequestBehavior.AllowGet);
+                    return Json(Math.Round((decimal)BTCAmount,8), JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(0, JsonRequestBehavior.AllowGet);
@@ -162,10 +167,10 @@
         /// Berechnet die Bitcoin Anzahl
         /// </summary>
         /// <param name="TradeAmountEuro">Euro</param>
-        /// <returns>BitCoin</returns>
+        /// <returns>BitCoin Anzahl</returns>
         public ActionResult GetBTC(decimal? EuroAmount)
         {
-            Regex regex = new Regex("^[0 - 9]([.,][0 - 9]{ 1, 6 })?$");
+            Regex regex = new Regex(@"[\d]{1,4}([,\.[\d]{1,2})?");
 
             if (regex.IsMatch(EuroAmount.ToString()))
             {
@@ -174,13 +179,11 @@
                     decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
 
                     EuroAmount = EuroAmount / dbTicker;
-                    return Json(EuroAmount, JsonRequestBehavior.AllowGet);
+                    return Json(Math.Round((decimal)EuroAmount,8), JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(0, JsonRequestBehavior.AllowGet);
 
         }
-
-
     }
 }

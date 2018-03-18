@@ -1,16 +1,19 @@
 ﻿namespace CryptoTrader.Model.ViewModel
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
+    using System.ComponentModel.DataAnnotations;
 
     public class ApiViewModel
     {
-        public DateTime created { get; set; } = DateTime.Now;
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime Created { get; set; } = DateTime.Now;
+
         public decimal Rate { get; set; }
-        public string Currency_src { get; set; } = "Eur";
-        public string Currency_trg { get; set; } = "BTC";
+
+        public string Currency_src { get; set; } = "BTC";
+
+        public string Currency_trg { get; set; } = "Euro";
 
     }
 }

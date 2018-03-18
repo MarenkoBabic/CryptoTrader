@@ -3,9 +3,10 @@
     public class EmailSendViewModel
     {
         public string FromAddress { get; set; }
-        public string MailBody { get; set; }
-        public string Subject { get; set; }
 
+        public string MailBody { get; set; }
+
+        public string Subject { get; set; }
 
         public EmailSendViewModel()
         {

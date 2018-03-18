@@ -13,6 +13,10 @@
 
     public class TickerController : Controller
     {
+        /// <summary>
+        /// Holt sich den Tickerwert von der Api und speichert sie in die DatenBank
+        /// </summary>
+        /// <returns>null</returns>
         public ActionResult SaveTickertoDB()
         {
             ApiViewModel vm = new ApiViewModel();
@@ -32,25 +36,33 @@
                     db.SaveChanges();
                 }
             }
-
             return null;
         }
 
-
+        /// <summary>
+        /// Ruft die methode SaveTicker und GetTicker auf
+        /// </summary>
+        /// <returns>Tickerwert to View</returns>
         public string ShowRate()
         {
             SaveTickertoDB();
             return GetTicker().ToString();
         }
 
+        /// <summary>
+        /// Ladet die Tickerdaten in das Diagramm
+        /// </summary>
+        /// <returns>Json mit Tickerdaten</returns>
         public JsonResult LoadChartData()
         {
             List<TickerChartViewModel> result = TickerList();
             return Json(TickerChartViewModel.GetList(result), JsonRequestBehavior.AllowGet);
         }
 
-
-
+        /// <summary>
+        /// Holt sich den letzten Tickerkurs aus der Datenbank
+        /// </summary>
+        /// <returns>TickerKurs mit 2 Dezimalstellen</returns>
         private static decimal GetTicker()
         {
             using (var db = new CryptoTraderEntities())
@@ -60,6 +72,10 @@
             }
         }
 
+        /// <summary>
+        /// Befüllt die Liste mit Bitcoin kurs
+        /// </summary>
+        /// <returns>List </returns>
         private static List<TickerChartViewModel> TickerList()
         {
             using (var db = new CryptoTraderEntities())

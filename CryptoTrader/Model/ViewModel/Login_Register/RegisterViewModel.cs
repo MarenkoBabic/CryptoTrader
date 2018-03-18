@@ -7,7 +7,9 @@
     public class RegisterViewModel
     {
         public int Person_id { get; set; }
+
         public string Salt { get; set; }
+
         public bool Active { get; set; } = true;
 
         [DataType(DataType.DateTime)]

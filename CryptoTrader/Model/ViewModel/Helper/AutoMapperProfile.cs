@@ -2,7 +2,6 @@
 {
     using AutoMapper;
     using CryptoTrader.Model.DbModel;
-    using CryptoTrader.Model.ViewModel;
 
     public class AutoMapperProfile : Profile
     {
@@ -109,8 +108,6 @@
                 CreateMap<AdminViewModel, Balance>();
                 CreateMap<BankTransferHistory, AdminViewModel>();
                 #endregion
-
-
             }
         }
     }
