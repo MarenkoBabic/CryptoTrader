@@ -23,15 +23,12 @@
                 {
                     var list = new List<TradeBitCoinViewModel>();
                     Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                    TradeHistory dbHistory = db.TradeHistory.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+                    var dblist = db.TradeHistory.Where(a => a.person_id == dbPerson.id).ToList();
                     bool haveHistory = db.TradeHistory.Any(a => a.person_id == dbPerson.id);
-                    Ticker dbTicker = db.Ticker.Where(a => a.id == dbHistory.ticker_id).FirstOrDefault();
 
                     if (haveHistory)
                     {
-                        vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id &&
-                            a.ticker_id == dbTicker.id).ToList();
-
+                        vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id).Include(a => a.Ticker).ToList();
                         return View(vm);
                     }
                 }

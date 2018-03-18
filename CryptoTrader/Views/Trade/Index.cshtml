@@ -25,26 +25,25 @@
         <!--EndCard-->
         <!--HistoryList-->
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 tableScroll ">
-            <table class="table tableScroll">
-                <thead>
+            <table class="table tableScroll" id="header-fixed">
+                <thead >
                     <tr>
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>Datum</th>
                         <th>BitCoin</th>
-                        <th>Kurs</th>
+                        <th>BitCoinKurs</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.HistoryList)
                     {
                         <tr>
-                            <td class="col-lg-1">@item.Person.firstName</td>
-                            <td class="col-lg-1">@item.Person.lastName</td>
-                            <td class="col-lg-1">@item.created</td>
-                            <td class="col-lg-1">@item.amount</td>
-                            <td class="col-lg-1">@item.Ticker.rate</td>
-
+                            <td class="col-lg-2">@item.Person.firstName</td>
+                            <td class="col-lg-2">@item.Person.lastName</td>
+                            <td class="col-lg-6">@item.created</td>
+                            <td class="col-lg-2">@item.amount</td>
+                            <td class="col-lg-2">@item.Ticker.rate</td>
                         </tr>
                     }
                 </tbody>
