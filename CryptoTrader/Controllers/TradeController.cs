@@ -18,18 +18,20 @@
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
             {
-                Ticker dbTicker = new Ticker();
                 TradeBitCoinViewModel vm = new TradeBitCoinViewModel();
                 using (var db = new CryptoTraderEntities())
                 {
+                    var list = new List<TradeBitCoinViewModel>();
                     Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                    TradeHistory dbHistory = db.TradeHistory.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                     bool haveHistory = db.TradeHistory.Any(a => a.person_id == dbPerson.id);
+                    Ticker dbTicker = db.Ticker.Where(a => a.id == dbHistory.ticker_id).FirstOrDefault();
+
                     if (haveHistory)
                     {
-                        foreach (TradeHistory item in db.TradeHistory.Where(a => a.person_id == dbPerson.id))
-                        {
-                            vm.HistoryList.Add(item);
-                        }
+                        vm.HistoryList = db.TradeHistory.Where(a => a.person_id == dbPerson.id &&
+                            a.ticker_id == dbTicker.id).ToList();
+
                         return View(vm);
                     }
                 }
@@ -143,7 +145,7 @@
         /// <param name="TradeAmountBTC">Anzahl Bitcoins</param>
         /// <returns>Euro</returns>
         public ActionResult GetEuro(decimal? BTCAmount)
-       {
+        {
             Regex regex = new Regex(@"[\d]{1,4}([,\.[\d]{1,2})?");
 
             if (regex.IsMatch(BTCAmount.ToString()))

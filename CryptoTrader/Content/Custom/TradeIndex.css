@@ -1,11 +1,17 @@
 ﻿.chartdiv {
     width: 100%;
+    padding: 0;
 }
 
 .card {
     min-height: 335px;
 }
 
-/*.divPadding{
-    padding:0px;
-}*/
+.tableScroll {
+    overflow: auto;
+    max-height: 335px;
+    background-color: #3e3e40;
+    color: white;
+    margin-left:20px;
+    width:73%;
+}

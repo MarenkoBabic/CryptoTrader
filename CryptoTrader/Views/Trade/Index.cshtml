@@ -15,37 +15,43 @@
 <div class="container">
     <div class="row">
 
-        <div class="card col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <!--Card for TradeBitCoin-->
+        <!--Card for TradeBitCoin-->
+        <div class="card col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <div class="card-header">Handeln</div>
             <div class="card-body">
                 @Html.Partial("~/Views/Trade/_TradeBitCoin.cshtml")
             </div>
-            <!--EndBuyCoins-->
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 tableScroll">
-            <table class="table well">
+        <!--EndCard-->
+        <!--HistoryList-->
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 tableScroll ">
+            <table class="table tableScroll">
                 <thead>
                     <tr>
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>Datum</th>
                         <th>BitCoin</th>
+                        <th>Kurs</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.HistoryList)
                     {
                         <tr>
-                            <td>@item.Person.firstName</td>
-                            <td>@item.Person.lastName</td>
-                            <td>@item.created</td>
-                            <td>@item.amount</td>
+                            <td class="col-lg-1">@item.Person.firstName</td>
+                            <td class="col-lg-1">@item.Person.lastName</td>
+                            <td class="col-lg-1">@item.created</td>
+                            <td class="col-lg-1">@item.amount</td>
+                            <td class="col-lg-1">@item.Ticker.rate</td>
+
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
+        <!--EndHistoryList-->
+
     </div>
 </div>
 
