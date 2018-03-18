@@ -60,7 +60,6 @@
 
                 #endregion
 
-
                 #region BankTransfer
                 //PayIn    
                 CreateMap<PayInViewModel, Person>();
@@ -103,6 +102,13 @@
 
                 #endregion
 
+                #region Admin
+                CreateMap<AdminViewModel, BankTransferHistory>();
+                CreateMap<BankTransferHistory, AdminViewModel>();
+
+                CreateMap<AdminViewModel, Balance>();
+                CreateMap<BankTransferHistory, AdminViewModel>();
+                #endregion
 
 
             }

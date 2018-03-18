@@ -1,0 +1,30 @@
+﻿@model CryptoTrader.Model.ViewModel.SellBitCoinViewModel
+
+<script src="~/Scripts/Custom/GetBTCandEuroValue.js"></script>
+
+@using (Html.BeginForm("Trade", "Trade", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.LabelFor(a => a.SellTradeAmountBTC, "Bitcoin", new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.EditorFor(a => a.SellTradeAmountBTC, new { htmlAttributes = new { id = "BTC", @class = "form-control", } })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.LabelFor(a => a.SellTradeAmountEuro, "Euro")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.EditorFor(a => a.SellTradeAmountEuro, new { htmlAttributes = new { id = "Euro", @class = "form-control", } })
+        </div>
+    </div>
+    <input type="submit" name="submit" class="btn btn-danger" value="Verkaufen" style="width:100%;">
+
+}
+

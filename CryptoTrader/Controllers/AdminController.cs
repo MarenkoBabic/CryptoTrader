@@ -1,5 +1,6 @@
 ﻿namespace CryptoTrader.Controllers
 {
+    using AutoMapper;
     using CryptoTrader.Model.DbModel;
     using CryptoTrader.Model.ViewModel;
     using System.Data.Entity;
@@ -12,15 +13,14 @@
         [Authorize(Roles = "Admin")]
         public ActionResult AdminView()
         {
+            //Prüft ob er eingeloggt ist
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
             {
                 AdminViewModel vm = new AdminViewModel();
                 using (var db = new CryptoTraderEntities())
                 {
-                    var dbPerson = new Person();
                     vm.PersonList = db.Person.ToList();
-                    TempData["QuestionMessage"] = "Wirklich Geldbetrag überweisen";
                 }
                 return View(vm);
             }
@@ -32,48 +32,35 @@
         }
 
         [HttpPost]
-        public ActionResult AdminView(int? id, AdminViewModel vm, bool confirm_value = true)
+        public ActionResult AdminView(int? id, AdminViewModel vm)
         {
-            if (confirm_value == true)
+            ViewBag.Message = "Abgeschickt";
+            using (var db = new CryptoTraderEntities())
             {
-                ViewBag.Message = "Abgeschickt";
-                using (var db = new CryptoTraderEntities())
+                Person dbPerson = db.Person.Find(id);
+                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+
+                BankTransferHistory dbHistory = Mapper.Map<BankTransferHistory>(vm);
+                dbHistory.person_id = dbPerson.id;
+                db.BankTransferHistory.Add(dbHistory);
+
+                if (dbBalance == null)
                 {
-                    Person dbPerson = db.Person.Find(id);
-                    Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+                    Balance balance = Mapper.Map<Balance>(vm);
+                    balance.person_id = dbPerson.id;
+                    db.Balance.Add(balance);
+                }
+                else
+                {
+                    dbBalance.amount += vm.Amount;
+                    dbBalance.created = vm.Created;
+                    db.Entry(dbBalance).State = EntityState.Modified;
+                }
 
-                    BankTransferHistory dbHistory = new BankTransferHistory
-                    {
-                        created = vm.Created,
-                        person_id = dbPerson.id,
-                        amount = vm.Amount,
-                        currency = vm.Currency
-                    };
-                    db.BankTransferHistory.Add(dbHistory);
-
-                    if (dbBalance == null)
-                    {
-                        dbBalance = new Balance
-                        {
-                            currency = vm.Currency,
-                            amount = vm.Amount,
-                            created = vm.Created,
-                            person_id = dbPerson.id,
-                        };
-                        db.Balance.Add(dbBalance);
-                    }
-                    else
-                    {
-                        dbBalance.amount += vm.Amount;
-                        dbBalance.created = vm.Created;
-                        db.Entry(dbBalance).State = EntityState.Modified;
-                    }
-
-                    if (ModelState.IsValid)
-                    {
-                        db.SaveChanges();
-                        return RedirectToAction("AdminView");
-                    }
+                if (ModelState.IsValid)
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("AdminView");
                 }
             }
 

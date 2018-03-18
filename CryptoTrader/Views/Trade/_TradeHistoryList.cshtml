@@ -1,0 +1,30 @@
+﻿@model CryptoTrader.Model.ViewModel.TradeHistoryListViewModel
+
+<div class="container">
+    <table class="table well">
+        <thead>
+            <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Datum</th>
+                <th>BitCoin</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.HistoryList)
+            {
+                using (Html.BeginForm("AdminView", "Admin", new { id = @item.id }))
+                {
+            <tr>
+                <td>@item.Person.firstName</td>
+                <td>@item.Person.lastName</td>
+                <td>@item.created</td>
+                <td>@item.amount</td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
