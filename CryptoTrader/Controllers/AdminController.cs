@@ -3,6 +3,8 @@
     using AutoMapper;
     using CryptoTrader.Model.DbModel;
     using CryptoTrader.Model.ViewModel;
+    using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
@@ -34,7 +36,6 @@
         [HttpPost]
         public ActionResult AdminView(int? id, AdminViewModel vm)
         {
-            ViewBag.Message = "Abgeschickt";
             using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Find(id);
@@ -64,13 +65,17 @@
                 }
             }
 
-            ViewBag.Message = "Abgebrochen";
+            TempData["ErrorMessage"] = "Fehlgeschlagen bitte versuchen sie es erneut";
             return RedirectToAction("AdminView");
         }
 
 
-
-        public ActionResult Modify(int? id, AdminViewModel vm)
+        /// <summary>
+        /// Setzt den User auf Inaktiv oder Activ
+        /// </summary>
+        /// <param name="id">Person_id</param>
+        /// <returns>Index View</returns>
+        public ActionResult ChangeActive(int? id)
         {
             using (var db = new CryptoTraderEntities())
             {
@@ -87,7 +92,45 @@
                 db.Entry(dbPerson).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index", vm.PersonList);
+            return RedirectToAction("AdminView");
+        }
+
+        public ActionResult FilterList(string submit, AdminViewModel vm)
+        {
+            using (var db = new CryptoTraderEntities())
+            {
+                if (submit == "Filtern")
+                {
+                    vm.FilterList = db.Person.ToList();
+                    if (vm.PersonId > 0)
+                    {
+                        vm.FilterList = vm.FilterList.Where(a => a.id == vm.PersonId).ToList();
+                    }
+
+                    if (HasValue(vm.FirstName))
+                    {
+                        vm.FilterList = vm.FilterList.Where(a => a.firstName.StartsWith(vm.FirstName,StringComparison.CurrentCultureIgnoreCase)).ToList();
+                    }
+                    if (HasValue(vm.LastName))
+                    {
+                        vm.FilterList = vm.FilterList.Where(a => a.lastName.Equals(vm.LastName, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                    }
+                    if (HasValue(vm.Reference))
+                    {
+                        vm.FilterList = vm.FilterList.Where(a => a.reference.Equals(vm.Reference, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                    }
+                }
+            }
+            return View("AdminView", vm);
+        }
+
+        private bool HasValue(string s)
+        {
+            if (!string.IsNullOrEmpty(s))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

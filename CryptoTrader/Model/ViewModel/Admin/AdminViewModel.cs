@@ -21,12 +21,15 @@
 
         public bool Active { get; set; }
 
+        [Range(100,10000,ErrorMessage ="Min. 100 Euro")]
         public decimal Amount { get; set; }
 
         [StringLength(3)]
         public string Currency { get; set; } = "Eur";
 
         public List<Person> PersonList { get; set; }
+
+        public List<Person> FilterList { get; set; }
 
         public AdminViewModel()
         {

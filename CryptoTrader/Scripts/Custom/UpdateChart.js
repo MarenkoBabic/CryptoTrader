@@ -1,21 +1,21 @@
 ﻿$(document).ready(function () {
-    CreateChart();
+    UpdateChart();
 });
 
-//function UpdateChart() {
-//    if ($("collapseExample").hasClass("in") == false) {
-//        $.ajax({
-//            url: '/Ticker/LoadChartData',
-//            success: function (json) {
-//                CreateChart(json);
-//            },
-//            error: function (errorData) {
-//                console.log(errorData);
-//            }
-//        });
-//        setTimeout(function () { UpdateChart(); }, 10000);
-//    }
-//}
+function UpdateChart() {
+    if ($("collapseExample").hasClass("in") == false) {
+        $.ajax({
+            url: '/Ticker/LoadChartData',
+            success: function (json) {
+                CreateChart(json);
+            },
+            error: function (errorData) {
+                console.log(errorData);
+            }
+        });
+        setTimeout(function () { UpdateChart(); }, 10000);
+    }
+}
 
 function CreateChart(jsonData) {
     Highcharts.stockChart('Chart', {
