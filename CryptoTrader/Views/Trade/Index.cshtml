@@ -26,7 +26,7 @@
         <!--HistoryList-->
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 tableScroll ">
             <table class="table tableScroll" id="header-fixed">
-                <thead >
+                <thead>
                     <tr>
                         <th>Vorname</th>
                         <th>Nachname</th>
@@ -36,15 +36,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.HistoryList)
+                    @if (Model.HistoryList == null)
                     {
-                        <tr>
-                            <td class="col-lg-2">@item.Person.firstName</td>
-                            <td class="col-lg-2">@item.Person.lastName</td>
-                            <td class="col-lg-6">@item.created</td>
-                            <td class="col-lg-2">@item.amount</td>
-                            <td class="col-lg-2">@item.Ticker.rate</td>
-                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.HistoryList)
+                        {
+                            <tr>
+                                <td class="col-lg-2">@item.Person.firstName</td>
+                                <td class="col-lg-2">@item.Person.lastName</td>
+                                <td class="col-lg-6">@item.created</td>
+                                <td class="col-lg-2">@item.amount</td>
+                                <td class="col-lg-2">@item.Ticker.rate</td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>

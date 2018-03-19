@@ -1,6 +1,7 @@
 ﻿namespace CryptoTrader.Controllers
 {
     using AutoMapper;
+    using CryptoTrader.Manager;
     using CryptoTrader.Model.DbModel;
     using CryptoTrader.Model.ViewModel;
     using System;
@@ -124,11 +125,11 @@
                     }
                     if (HasValue(vm.LastName))
                     {
-                        vm.FilterList = vm.FilterList.Where(a => a.lastName.Equals(vm.LastName, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                        vm.FilterList = vm.FilterList.Where(a => a.lastName.StartsWith(vm.LastName, StringComparison.CurrentCultureIgnoreCase)).ToList();
                     }
                     if (HasValue(vm.Reference))
                     {
-                        vm.FilterList = vm.FilterList.Where(a => a.reference.Equals(vm.Reference, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                        vm.FilterList = vm.FilterList.Where(a => a.reference.StartsWith(vm.Reference, StringComparison.CurrentCultureIgnoreCase)).ToList();
                     }
                 }
             }
@@ -147,6 +148,21 @@
                 return true;
             }
             return false;
+        }
+
+        public ActionResult UserLogin(int? id)
+        {
+            using(var db = new CryptoTraderEntities())
+            {
+                var dbPerson = db.Person.Find(id);
+
+                var email = dbPerson.email;
+                var firstName = dbPerson.firstName;
+                var lastName = dbPerson.lastName;
+                var role = dbPerson.role;
+                Cookies.CreateCookies(email, role, firstName, lastName);
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

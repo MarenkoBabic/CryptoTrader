@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="vm">ViewModel Bankdaten</param>
         /// <returns>View Index</returns>
-        public ActionResult PayIn()
+        public ActionResult BankIndex()
         {
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
@@ -27,7 +27,7 @@
 
                     if (dbPerson.status == true)
                     {
-                        PayInViewModel vm = Mapper.Map<PayInViewModel>(dbPerson);
+                        BankTransferViewModel vm = Mapper.Map<BankTransferViewModel>(dbPerson);
                         vm.BankHistoryList = db.BankTransferHistory.Where(a => a.person_id == dbPerson.id).ToList();
                         return View(vm);
                     }
@@ -55,7 +55,7 @@
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
             {
-                PayOutViewModel vm = new PayOutViewModel();
+                BankTransferViewModel vm = new BankTransferViewModel();
                 using (var db = new CryptoTraderEntities())
                 {
                     Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
@@ -86,13 +86,13 @@
         /// <param name="vm">ViewModel Payout</param>
         /// <returns>View mit ViewModel</returns>
         [HttpPost]
-        public ActionResult PayOut(PayOutViewModel vm)
+        public ActionResult PayOut(BankTransferViewModel vm)
         {
             using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = new Person();
                 BankAccount BankAccountModel = Mapper.Map<BankAccount>(vm);
-                PayOutViewModel PersonModel = Mapper.Map<PayOutViewModel>(dbPerson);
+                BankTransferViewModel PersonModel = Mapper.Map<BankTransferViewModel>(dbPerson);
                 BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(vm);
 
 

@@ -3,7 +3,7 @@
         url: "Trade/GetEuro",
         type: 'POST',
         data: {
-            BTCAmount: $("#BTC").val()
+            BTCAmount: $("#BTC").val().replace(".", ",")
         },
         success: function (data) {
             $("#Euro").val(data);
@@ -16,7 +16,7 @@ $("#Euro").keyup(function () {
         url: "Trade/GetBTC",
         type: 'POST',
         data: {
-            EuroAmount: $("#Euro").val()
+            EuroAmount: $("#Euro").val().replace(".", ",")
         },
         success: function (data) {
             $("#BTC").val(data);

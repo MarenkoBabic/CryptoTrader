@@ -243,8 +243,7 @@
     <Compile Include="Model\ViewModel\Admin\AdminViewModel.cs" />
     <Compile Include="Model\ViewModel\Ticker\ApiViewModel.cs" />
     <Compile Include="Model\ViewModel\Helper\AutoMapperProfile.cs" />
-    <Compile Include="Model\ViewModel\BankTransfer\PayOutViewModel.cs" />
-    <Compile Include="Model\ViewModel\BankTransfer\PayInViewModel.cs" />
+    <Compile Include="Model\ViewModel\BankTransfer\BankTransferViewModel.cs" />
     <Compile Include="Model\ViewModel\Trade\TradeBitCoinViewModel.cs" />
     <Compile Include="Model\ViewModel\Helper\EmailSendViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\LoginViewModel.cs" />
@@ -319,6 +318,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="Image\bitcoin-1.jpg" />
     <Content Include="Image\bitcoin-trans.jpg" />
+    <Content Include="Image\UserImages\aa.jpg" />
+    <Content Include="Image\UserImages\placeImage.jpg" />
+    <Content Include="Image\UserImages\Untitled.png" />
+    <Content Include="Image\UserImages\WIN_20180201_19_49_49_Pro.jpg" />
     <Content Include="Model\DbModel\CryptoTrader.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
@@ -340,6 +343,7 @@
       <LastGenOutput>Jarosh.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\Custom\GetResultBTCandEuro.js" />
+    <Content Include="Scripts\Custom\PersonVerificationWizard.js" />
     <Content Include="Scripts\Custom\YesOrNoBox.js" />
     <Content Include="Scripts\JsDefault\bootstrap.js" />
     <Content Include="Scripts\JsDefault\bootstrap.min.js" />
@@ -438,7 +442,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Admin\AdminView.cshtml" />
-    <Content Include="Views\BankTransfer\PayIn.cshtml" />
+    <Content Include="Views\BankTransfer\BankIndex.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -452,14 +456,12 @@
     <Content Include="Views\Shared\_RegisterDialog.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\BankTransfer\PayOut.cshtml" />
     <Content Include="Views\Trade\Index.cshtml" />
     <Content Include="Views\Trade\_TradeBitCoin.cshtml" />
     <Content Include="Views\Trade\_ChartDiagramm.cshtml" />
+    <Content Include="Views\BankTransfer\_PayOut.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Image\UserImages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

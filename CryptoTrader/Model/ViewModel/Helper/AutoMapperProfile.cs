@@ -61,24 +61,21 @@
 
                 #region BankTransfer
                 //PayIn    
-                CreateMap<PayInViewModel, Person>();
-                CreateMap<Person, PayInViewModel>();
+                CreateMap<BankTransferViewModel, Person>();
+                CreateMap<Person, BankTransferViewModel>();
 
                 //PayOut
-                CreateMap<BankTransferHistory, PayOutViewModel>();
-                CreateMap<PayOutViewModel, BankTransferHistory>();
+                CreateMap<BankTransferHistory, BankTransferViewModel>();
+                CreateMap<BankTransferViewModel, BankTransferHistory>();
 
-                CreateMap<PayOutViewModel, Person>();
-                CreateMap<Person, PayOutViewModel>();
-
-                CreateMap<BankAccount, PayOutViewModel>()
+                CreateMap<BankAccount, BankTransferViewModel>()
                     .ForMember(a => a.PersonBic, opt => opt.MapFrom(a => a.bic))
                     .ForMember(a => a.PersonIban, opt => opt.MapFrom(a => a.iban));
-                CreateMap<PayOutViewModel, BankAccount>()
+                CreateMap<BankTransferViewModel, BankAccount>()
                     .ForMember(a => a.bic, opt => opt.MapFrom(a => a.PersonBic))
                     .ForMember(a => a.iban, opt => opt.MapFrom(a => a.PersonIban));
 
-                CreateMap<PayOutViewModel, Balance>();
+                CreateMap<BankTransferViewModel, Balance>();
 
                 #endregion
 

@@ -13,7 +13,7 @@ function UpdateChart() {
                 console.log(errorData);
             }
         });
-        setTimeout(function () { UpdateChart(); }, 10000);
+        setTimeout(function () { UpdateChart(); }, 500000);
     }
 }
 

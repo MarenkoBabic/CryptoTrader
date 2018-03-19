@@ -58,19 +58,6 @@
             }
         }
 
-        /// <summary>
-        /// Prüft ob der Wert größer 0 ist
-        /// </summary>
-        /// <param name="TradeAmountBTC"></param>
-        /// <returns></returns>
-        public ActionResult IsOnlyNumber(decimal? TradeAmountEuro)
-        {
-            if (TradeAmountEuro > 0)
-            {
-                return Json(true, JsonRequestBehavior.AllowGet);
-            }
-            return Json(false, JsonRequestBehavior.AllowGet);
-        }
 
         /// <summary>
         /// Prüft ob Benutzer eingeloggt ist

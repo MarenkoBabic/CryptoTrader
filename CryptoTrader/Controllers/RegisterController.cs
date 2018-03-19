@@ -63,6 +63,7 @@
                     City dbCity = db.City.Where(a => a.id == dbPerson.id).FirstOrDefault();
                     Country dbCountry = db.Country.Where(a => a.id == dbCity.country_id).FirstOrDefault();
                     Address dbAddress = db.Address.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+                    Upload dbUpload = db.Upload.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                     var countries = db.Country.ToList();
 
                     if (dbPerson.status == true)
@@ -72,7 +73,7 @@
                         personVerificationVM.CountryName = dbCountry.countryName;
                         personVerificationVM.Street = dbAddress.street;
                         personVerificationVM.Number = dbAddress.number;
-                        personVerificationVM.CountryList = FillList.FillCountryList(db.Country.ToList());
+                        personVerificationVM.CountryList = FillList.FillCountryList(countries);
 
                         return View(personVerificationVM);
                     }
@@ -108,7 +109,7 @@
                 if (dbPerson.status == true)
                 {
                     dbUpload.person_id = dbPerson.id;
-                    dbUpload.path = UploadImage.ImageUploadPath(vm, dbPerson.id);
+                    dbUpload.path = UploadImage.ImageUploadPath(vm);
                     db.Upload.Add(dbUpload);
 
                     if (ModelState.IsValid)
@@ -131,7 +132,7 @@
 
                     //dbUpload.created = vm.Created;
                     dbUpload.person_id = dbPerson.id;
-                    dbUpload.path = UploadImage.ImageUploadPath(vm, dbPerson.id);
+                    dbUpload.path = UploadImage.ImageUploadPath(vm);
                     db.Upload.Add(dbUpload);
 
                     if (ModelState.IsValid)

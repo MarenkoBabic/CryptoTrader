@@ -1,10 +1,12 @@
-﻿@model CryptoTrader.Model.ViewModel.PayInViewModel
+﻿@model CryptoTrader.Model.ViewModel.BankTransferViewModel
 @{
     ViewBag.Title = "PayIn";
 }
 
 <div class="container">
+
     <div class="row">
+        <!--KontoDaten-->
         <main class="col-lg-6 well">
             <h2>Kontodaten</h2>
             <div class="row">
@@ -71,29 +73,37 @@
             </div>
 
         </main>
+        <!--EndKontoDaten-->
+        <!--Diagramm-->
+        <div class="col-lg-6">
+            @Html.Partial("_PayOut")
+        </div>
+        <!--EndDiagramm-->
+    </div>
+    <div class="row">
 
-        <div class="col-lg-1"></div>
 
-        <main class="col-lg-5 well">
-            <div class="row"ö>
-                <div class="col-lg-2">Vorname</div>
-                <div class="col-lg-2">Nachname</div>
-                <div class="col-lg-2">Betrag</div>
-                <div class="col-lg-2">Währung</div>
-                <div class="col-lg-2">Datum</div>
-            </div>
-
-            @foreach (var item in Model.BankHistoryList)
-            {
-                <div class="row">
-                    <div class="col-lg-2">@item.Person.firstName</div>
-                    <div class="col-lg-2">@item.Person.lastName</div>
-                    <div class="col-lg-2">@item.amount</div>
-                    <div class="col-lg-2">@item.currency</div>
-                    <div class="col-lg-2">@item.created</div>
-                </div>
-            }
-        </main>
+        <div class="container">
+            <table class="table well">
+                <thead>
+                    <tr>
+                        <th>Betrag</th>
+                        <th>Währung</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.BankHistoryList)
+                    {
+                        <tr>
+                            <td>@item.amount</td>
+                            <td>@item.currency</td>
+                            <td>@item.created</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
     </div>
 </div>

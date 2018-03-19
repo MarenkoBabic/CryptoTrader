@@ -22,12 +22,10 @@
 
         public decimal TickerRate { get; set; }
 
-        [Required]
         [Display(Name ="BitCoin")]
         public decimal TradeAmountBTC { get; set; }
 
         [Display(Name ="Euro")]
-        [Remote("IsOnlyNumber", "Validation", ErrorMessage = "Der Wert darf nicht 0 sein")]
         public decimal TradeAmountEuro { get; set; }
 
         public decimal BitCoinAmount { get; set; }

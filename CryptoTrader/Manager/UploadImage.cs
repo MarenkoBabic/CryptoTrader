@@ -6,7 +6,7 @@
 
     public class UploadImage
     {
-        public static string ImageUploadPath(PersonVerificationViewModel vm, int id)
+        public static string ImageUploadPath(PersonVerificationViewModel vm)
         {
             if (vm.Upload != null && vm.Upload.ContentLength > 0)
             {
@@ -21,11 +21,9 @@
 
                 string userImagePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Image/UserImages"), vm.Path);
 
-
                 vm.Upload.SaveAs(userImagePath);
                 return userImagePath;
             }
-
             return null;
         }
     }

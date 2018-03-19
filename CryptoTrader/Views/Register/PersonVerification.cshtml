@@ -1,102 +1,15 @@
 ﻿@model CryptoTrader.Model.ViewModel.PersonVerificationViewModel
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        //Initialize tooltips
-        $('.nav-tabs > li a[title]').tooltip();
-
-        //Wizard
-        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-
-            var $target = $(e.target);
-
-            if ($target.parent().hasClass('disabled')) {
-                return false;
-            }
-        });
-
-        //Nächste Seite
-        $(".next-step").click(function (e) {
-
-            var $active = $('.wizard .nav-tabs li.active');
-            $active.next().removeClass('disabled');
-            nextTab($active);
-
-        });
-
-        //Vorige Seite
-        $(".prev-step").click(function (e) {
-
-            var $active = $('.wizard .nav-tabs li.active');
-            prevTab($active);
-
-        });
-    });
-
-    //Nächster Tab
-    function nextTab(elem) {
-        $(elem).next().find('a[data-toggle="tab"]').click();
-    }
-
-    //Voheriger Tab
-    function prevTab(elem) {
-        $(elem).prev().find('a[data-toggle="tab"]').click();
-    }
-
-
-    //Tabs öffen per Bilder
-    $(document).ready(function () {
-        //Add Inactive Class To All Accordion Headers
-        $('.accordion-header').toggleClass('inactive-header');
-
-        //Set The Accordion Content Width
-        var contentwidth = $('.accordion-header').width();
-        $('.accordion-content').css({});
-
-        //Open The First Accordion Section When Page Loads
-        $('.accordion-header').first().toggleClass('active-header').toggleClass('inactive-header');
-        $('.accordion-content').first().slideDown().toggleClass('open-content');
-
-        // The Accordion Effect
-        $('.accordion-header').click(function () {
-            if ($(this).is('.inactive-header')) {
-                $('.active-header').toggleClass('active-header').toggleClass('inactive-header').next().slideToggle().toggleClass('open-content');
-                $(this).toggleClass('active-header').toggleClass('inactive-header');
-                $(this).next().slideToggle().toggleClass('open-content');
-            }
-
-            else {
-                $(this).toggleClass('active-header').toggleClass('inactive-header');
-                $(this).next().slideToggle().toggleClass('open-content');
-            }
-        });
-
-        return false;
-    });
-
-    //Foto anzeigen nach hochladen
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#imgShow')
-                    .attr('src', e.target.result)
-                    .width(580)
-                    .height(400);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
 <link href="~/Content/Custom/UserVerification.css" rel="stylesheet" />
+<script src="~/Scripts/Custom/PersonVerificationWizard.js"></script>
+
 <div class="container">
     <div class="row">
         <section>
             <div class="wizard">
-                <div class="wizard-inner">
 
+                <!--Navigation-->
+                <div class="wizard-inner">
                     <div class="row">
                         <div class="connecting-line"></div>
                         <ul class="nav nav-tabs" role="tablist">
@@ -126,24 +39,25 @@
                                 </a>
                             </li>
 
-
                         </ul>
                     </div>
                 </div>
+                <!--EndNavigation-->
 
-                @using( Html.BeginForm( "PersonVerification","Register",FormMethod.Post,new { @enctype = "multipart/form-data" } ) )
+                @using (Html.BeginForm("PersonVerification", "Register", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                 {
                     <div class="tab-content">
 
+                        <!--Step 1-->
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             <div class="step1">
 
                                 <div class="row">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-6">
-                                        @Html.LabelFor( a => a.CountryName, "Land", new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.DropDownListFor( a => a.CountryName, Model.CountryList, new { @class = "form-control" } )
-                                        @Html.ValidationMessageFor( a => a.CountryName, null, new { @class = "text-danger" } )
+                                        @Html.LabelFor(a => a.CountryName, "Land", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.DropDownListFor(a => a.CountryName, Model.CountryList, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(a => a.CountryName, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="col-lg-3"></div>
                                 </div>
@@ -151,9 +65,9 @@
                                 <div class="row">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-6">
-                                        @Html.LabelFor( a => a.CityName, "Stadt", new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.EditorFor( a => a.CityName, new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.ValidationMessageFor( a => a.CityName, null, new { @class = "text-danger" } )
+                                        @Html.LabelFor(a => a.CityName, "Stadt", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(a => a.CityName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(a => a.CityName, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="col-lg-3"></div>
                                 </div>
@@ -161,9 +75,9 @@
                                 <div class="row">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-6">
-                                        @Html.LabelFor( a => a.Zip, "Postleitzahl", new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.EditorFor( a => a.Zip, new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.ValidationMessageFor( a => a.Zip, null, new { @class = "text-danger" } )
+                                        @Html.LabelFor(a => a.Zip, "Postleitzahl", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(a => a.Zip, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(a => a.Zip, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="col-lg-3"></div>
                                 </div>
@@ -171,9 +85,9 @@
                                 <div class="row">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-6">
-                                        @Html.LabelFor( a => a.Street, "Adresse", new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.EditorFor( a => a.Street, new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.ValidationMessageFor( a => a.Street, null, new { @class = "text-danger" } )
+                                        @Html.LabelFor(a => a.Street, "Adresse", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(a => a.Street, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(a => a.Street, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="col-lg-3"></div>
                                 </div>
@@ -181,9 +95,9 @@
                                 <div class="row">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-6">
-                                        @Html.LabelFor( a => a.Number, "Hausnummer", new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.EditorFor( a => a.Number, new { htmlAttributes = new { @class = "form-control" } } )
-                                        @Html.ValidationMessageFor( a => a.Number, null, new { @class = "text-danger" } )
+                                        @Html.LabelFor(a => a.Number, "Hausnummer", new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(a => a.Number, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(a => a.Number, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="col-lg-3"></div>
                                 </div>
@@ -194,20 +108,21 @@
                                 <div class="col-lg-3"></div>
                                 <div class="col-lg-6">
                                     <ul class="list-inline pull-right">
-                                        <li><button type="button" style="margin-top:10px" class="btn btn-default prev-step">Zurück</button></li>
-                                        <li><button type="button" style="margin-top:10px" class="btn btn-primary next-step">Speichern und Weiter</button></li>
+                                        <li><button type="button" style="margin-top:10px" class="btn btn-primary next-step">Weiter</button></li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-3"></div>
                             </div>
                         </div>
+                        <!--EndStep1-->
 
+                        <!--Step2-->
                         <div class="tab-pane" role="tabpanel" id="step2">
                             <div class="step2">
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <h5><strong>Ausweis hochladen</strong></h5>
-                                        @Html.TextBoxFor( m => m.Upload, new { type = "file",@id = "#imgShow", @onchange = "readURL(this);" })
+                                        @Html.TextBoxFor(m => m.Upload, new { type = "file", @id = "#imgShow", @onchange = "readURL(this);" })
                                     </div>
                                     <div class="col-lg-9">
                                         <img id="imgShow" />
@@ -219,14 +134,14 @@
                                 <div class="col-lg-3"></div>
                                 <div class="col-lg-6">
                                     <ul class="list-inline pull-right">
-                                        <li><button type="button" class="btn btn-default prev-step">Weiter</button></li>
-                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Speichern</button></li>
+                                        <li><button type="button" class="btn btn-default prev-step">Zurück</button></li>
+                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Weiter</button></li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-3"></div>
                             </div>
-
                         </div>
+                        <!--EndStep2-->
 
 
 
