@@ -19,9 +19,9 @@
 
                     <div class="input-group">
                         @Html.LabelFor( a => a.LoginPassword, " ", new { @class = "input-group-addon glyphicon glyphicon-lock" } )
-                        @Html.EditorFor( a => a.LoginPassword, new { htmlAttributes = new { @class = "form-control" } } )
+                                                @Html.EditorFor(a => a.LoginPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(a => a.LoginPassword, null, new { @class = "text-danger", })
                     </div>
-                    @Html.ValidationMessageFor( a => a.LoginPassword, null, new { @class = "text-danger", } )
 
                     <div class="checkbox">
                         <label>

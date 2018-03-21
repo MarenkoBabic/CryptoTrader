@@ -20,5 +20,11 @@ namespace CryptoTrader.Manager
             string reference = temp;
             return reference;
         }
+        public static string ReferencGenerator2()
+        {
+            Guid uid = Guid.NewGuid();
+
+            return uid.ToString();
+        }
     }
 }

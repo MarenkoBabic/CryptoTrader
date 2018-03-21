@@ -5,15 +5,15 @@
 
     public class ApiViewModel
     {
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Created { get; set; } = DateTime.Now;
 
         public decimal Rate { get; set; }
 
-        public string Currency_src { get; set; } = "BTC";
+        public string Currency_src { get; set; } = "Euro";
 
-        public string Currency_trg { get; set; } = "Euro";
+        public string Currency_trg { get; set; } = "BTC";
 
     }
 }

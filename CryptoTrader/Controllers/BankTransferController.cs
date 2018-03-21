@@ -126,7 +126,7 @@
                 }
             }
             TempData["ConfirmMessage"] = "Auftrag erteilt";
-            return View("PayOut", vm);
+            return RedirectToAction("BankIndex", vm);
         }
 
         /// <summary>

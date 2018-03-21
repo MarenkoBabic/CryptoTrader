@@ -3,10 +3,12 @@
         url: "Trade/GetEuro",
         type: 'POST',
         data: {
-            BTCAmount: $("#BTC").val().replace(".", ",")
+            BtcTrade: $("#BTC").val().replace(".", ",")
         },
         success: function (data) {
-            $("#Euro").val(data);
+            vm: {
+                EuroTrade: $('#Euro').val(data)
+            }
         }
     });
 });
@@ -16,10 +18,26 @@ $("#Euro").keyup(function () {
         url: "Trade/GetBTC",
         type: 'POST',
         data: {
-            EuroAmount: $("#Euro").val().replace(".", ",")
+            EuroTrade: $("#Euro").val().replace(".", ",")
         },
         success: function (data) {
-            $("#BTC").val(data);
+            BtcTrade: $("#BTC").val(data)
         }
     });
 });
+function SubmitCointrade(sellOrBuy) {
+    $.ajax({
+        url: "Trade/Trade",
+        type: 'POST',
+        data: {
+            vm: {
+                EuroTrade: $("#Euro").val().replace(".", ","),
+                BTCTrade: $("#BTC").val().replace(".", ",")
+            },
+            submit: sellOrBuy
+        },
+        success: function (data) {
+
+        }
+    });
+}

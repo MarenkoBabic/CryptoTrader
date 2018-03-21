@@ -79,7 +79,7 @@
           <Property Name="role" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="status" Type="bit" Nullable="false" />
-          <Property Name="reference" Type="varchar" MaxLength="40" />
+          <Property Name="reference" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="Ticker">
           <Key>

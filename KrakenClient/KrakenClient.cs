@@ -98,7 +98,7 @@
                         {
                             if (response.StatusCode != HttpStatusCode.InternalServerError)
                             {
-                                throw;
+                               // throw;
                             }
                             return (JsonObject)JsonConvert.Import(sr);
                         }

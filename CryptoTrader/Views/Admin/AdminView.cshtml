@@ -44,7 +44,7 @@
                             <td>@item.firstName</td>
                             <td>@item.lastName</td>
                             <td>@item.reference</td>
-                            <td>@Html.CheckBoxFor(a => item.active)@Html.ActionLink("Bestätigen", "ChangeActive",null,new { @class = "btn btn-primary", id = item.id })</td>
+                            <td>@Html.CheckBoxFor(a => item.active)@Html.ActionLink("Bestätigen", "ChangeActive",new { id = item.id },new { @class = "btn btn-primary"})</td>
                             <td>@Html.EditorFor(a => a.Amount,new { htmlAttributes = new { @placeholder = "Email Address" } })</td>
                             <td>@Html.ValidationMessageFor(a => a.Amount)</td>
                             <td><input type="submit" value="Gutschreiben" id="buttonID" class="btn btn-primary" /></td>
@@ -65,7 +65,7 @@
                             <td>@item.firstName</td>
                             <td>@item.lastName</td>
                             <td>@item.reference</td>
-                            <td>@Html.CheckBoxFor(a => item.active)@Html.ActionLink("Bestätigen", "ChangeActive", null, new { @class = "btn btn-primary", id = item.id })</td>
+                            <td>@Html.CheckBoxFor(a => item.active)@Html.ActionLink("Bestätigen", "ChangeActive", new { id = item.id }, new { @class = "btn btn-primary", id = item.id })</td>
                             <td>@Html.EditorFor(a => a.Amount)</td>
                             <td><input type="submit" value="Gutschreiben" id="buttonID" class="btn btn-primary"/></td>
                             <td>@Html.ActionLink("UserLogin", "UserLogin", new { id = item.id },new { @class = "btn btn-primary"})</td>

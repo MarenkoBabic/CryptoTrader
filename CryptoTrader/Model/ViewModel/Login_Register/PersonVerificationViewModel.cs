@@ -39,6 +39,7 @@
 
         public HttpPostedFileBase Upload { get; set; }
 
+        [StringLength(1000,MinimumLength =5,ErrorMessage ="Ausweis fehlt")]
         public string Path { get; set; }
 
         public string FileName { get; set; }

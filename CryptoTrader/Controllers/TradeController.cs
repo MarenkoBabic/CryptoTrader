@@ -1,15 +1,14 @@
 ﻿namespace CryptoTrader.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Linq;
-    using System.Text.RegularExpressions;
-    using System.Web.Mvc;
     using AutoMapper;
     using CryptoTrader.Manager;
     using CryptoTrader.Model.DbModel;
     using CryptoTrader.Model.ViewModel;
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Web.Mvc;
 
     public class TradeController : Controller
     {
@@ -57,7 +56,7 @@
         [HttpPost]
         public ActionResult Trade(TradeBitCoinViewModel vm, string submit)
         {
-            if (vm.TradeAmountEuro > 0 || vm.TradeAmountBTC > 0)
+            if (vm.EuroTrade > 0 || vm.BtcTrade > 0)
             {
                 using (var db = new CryptoTraderEntities())
                 {
@@ -66,9 +65,9 @@
                     Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
                     Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                     TradeHistory dbTradeHistory = Mapper.Map<TradeHistory>(vm);
-
+                    bool haveBalanceData = db.Balance.Any(a => a.person_id == dbPerson.id);
                     //Kontostand
-                    if (db.Balance.Any())
+                    if (haveBalanceData)
                     {
                         vm.BalanceAmount = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault().amount;
                     }
@@ -78,16 +77,14 @@
                     }
 
                     //Bitcoin Kaufen
-                    if (submit == "Kaufen")
+                    if (submit == "buy")
                     {
-                        bool result = TradeManager.HaveEnoughMoney(vm.BalanceAmount, vm.TickerRate, vm.TradeAmountBTC);
+                        bool result = TradeManager.HaveEnoughMoney(vm.BalanceAmount, vm.TickerRate, vm.BtcTrade);
                         if (result)
                         {
-                            dbBalance.amount -= TradeManager.TradeAmountByBTC(vm.TickerRate, vm.TradeAmountBTC);
+                            dbBalance.amount -= TradeManager.TradeAmountByBTC(vm.TickerRate, vm.BtcTrade);
 
                             dbTradeHistory.person_id = dbPerson.id;
-                            dbTradeHistory.amount = vm.TradeAmountBTC;
-
                             if (ModelState.IsValid)
                             {
                                 db.Entry(dbBalance).State = EntityState.Modified;
@@ -102,12 +99,11 @@
                     //Bitcoin verkaufen
                     else
                     {
-                        bool result = TradeManager.HaveEnoughBTC(ShowBitCoin(), vm.TradeAmountBTC);
+                        bool result = TradeManager.HaveEnoughBTC(ShowBitCoin(), vm.BtcTrade);
                         if (result)
                         {
-                            dbBalance.amount += TradeManager.TradeAmountByBTC(vm.TickerRate, vm.TradeAmountBTC);
+                            dbBalance.amount += TradeManager.TradeAmountByBTC(vm.TickerRate, vm.BtcTrade);
 
-                            dbTradeHistory.amount = vm.TradeAmountBTC * (-1);
                             dbTradeHistory.person_id = dbPerson.id;
                             db.Entry(dbBalance).State = EntityState.Modified;
                             db.TradeHistory.Add(dbTradeHistory);
@@ -156,39 +152,40 @@
         /// </summary>
         /// <param name="TradeAmountBTC">Anzahl Bitcoins</param>
         /// <returns>Euro</returns>
-        public ActionResult GetEuro(decimal? BTCAmount)
+        public ActionResult GetEuro(TradeBitCoinViewModel vm)
         {
-            Regex regex = new Regex(@"[\d]{1,4}([,\.[\d]{1,2})?");
-            if (regex.IsMatch(BTCAmount.ToString().Replace(".",",")))
+            Regex regex = new Regex(@"[\d]{1,4}([.\,[\d]{1,2})?");
+            if (regex.IsMatch(vm.EuroTrade.ToString()))
             {
                 using (var db = new CryptoTraderEntities())
                 {
                     decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
 
-                    BTCAmount = BTCAmount * dbTicker;
-                    
-                    return Json(Math.Round((decimal)BTCAmount, 8).ToString(), JsonRequestBehavior.AllowGet);
+                    vm.EuroTrade = dbTicker * vm.BtcTrade;
+                    return Json(vm.EuroTrade, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(0, JsonRequestBehavior.AllowGet);
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
         }
-
         /// <summary>
         /// Berechnet die Bitcoin Anzahl
         /// </summary>
         /// <param name="TradeAmountEuro">Euro</param>
         /// <returns>BitCoin Anzahl</returns>
-        public ActionResult GetBTC(decimal? EuroAmount)
+        public ActionResult GetBTC(decimal? EuroTrade)
         {
             Regex regex = new Regex(@"[\d]{1,4}([.\,[\d]{1,2})?");
-            if (regex.IsMatch(EuroAmount.ToString().Replace(".", ",")))
+            if (regex.IsMatch(EuroTrade.ToString()))
             {
                 using (var db = new CryptoTraderEntities())
                 {
                     decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
 
-                    EuroAmount = EuroAmount / dbTicker;
-                    return Json(Math.Round((decimal)EuroAmount, 8), JsonRequestBehavior.AllowGet);
+                    EuroTrade = EuroTrade / dbTicker;
+                    return Json(EuroTrade, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(0, JsonRequestBehavior.AllowGet);

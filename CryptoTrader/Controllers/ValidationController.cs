@@ -3,7 +3,6 @@
     using CryptoTrader.Manager;
     using CryptoTrader.Model.DbModel;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
     public class ValidationController : Controller

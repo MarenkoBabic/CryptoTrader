@@ -4,7 +4,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
 
     public class TradeBitCoinViewModel
     {
@@ -22,11 +21,9 @@
 
         public decimal TickerRate { get; set; }
 
-        [Display(Name ="BitCoin")]
-        public decimal TradeAmountBTC { get; set; }
+        public decimal EuroTrade { get; set; }
 
-        [Display(Name ="Euro")]
-        public decimal TradeAmountEuro { get; set; }
+        public decimal BtcTrade { get; set; }
 
         public decimal BitCoinAmount { get; set; }
 

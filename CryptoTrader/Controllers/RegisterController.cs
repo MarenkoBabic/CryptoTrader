@@ -7,6 +7,7 @@
     using CryptoTrader.Manager;
     using CryptoTrader.Model.DbModel;
     using CryptoTrader.Model.ViewModel;
+    using System.Data.Entity;
 
     public class RegisterController : Controller
     {
@@ -21,15 +22,15 @@
         {
             vm.Salt = Hashen.SaltErzeugen();
             vm.RegisterPassword = Hashen.HashBerechnen(vm.RegisterPassword + vm.Salt);
-
             Person dbPerson = Mapper.Map<Person>(vm);
+            dbPerson.reference = GeneratorReference.ReferencGenerator2();
             if (ModelState.IsValid)
             {
                 using (var db = new CryptoTraderEntities())
                 {
                     db.Person.Add(dbPerson);
                     db.SaveChanges();
-                    TempData["ConfirmMessage"] = "Erfolgreich Regestiert";
+                    TempData["ConfirmMessage"] = "Erfolgreich Registiert";
                     var personList = db.Person.ToList();
                     LoginManager.FromRegisterToLogin(dbPerson.email, dbPerson.password, personList);
                     return RedirectToAction("Index", "Home");
@@ -60,14 +61,15 @@
                 using (var db = new CryptoTraderEntities())
                 {
                     Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-                    City dbCity = db.City.Where(a => a.id == dbPerson.id).FirstOrDefault();
-                    Country dbCountry = db.Country.Where(a => a.id == dbCity.country_id).FirstOrDefault();
-                    Address dbAddress = db.Address.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-                    Upload dbUpload = db.Upload.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                     var countries = db.Country.ToList();
 
                     if (dbPerson.status == true)
                     {
+                        City dbCity = db.City.Where(a => a.id == dbPerson.id).FirstOrDefault();
+                        Country dbCountry = db.Country.Where(a => a.id == dbCity.country_id).FirstOrDefault();
+                        Address dbAddress = db.Address.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+                        Upload dbUpload = db.Upload.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+
                         personVerificationVM.CityName = dbCity.cityName;
                         personVerificationVM.Zip = dbCity.zip;
                         personVerificationVM.CountryName = dbCountry.countryName;
@@ -105,24 +107,28 @@
             {
                 Country dbCountry = db.Country.Where(a => a.countryName.Equals(vm.CountryName)).FirstOrDefault();
                 Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
+                dbPerson.status = vm.Status;
+
+
 
                 if (dbPerson.status == true)
                 {
-                    dbUpload.person_id = dbPerson.id;
-                    dbUpload.path = UploadImage.ImageUploadPath(vm);
-                    db.Upload.Add(dbUpload);
+                    var city = db.City.Where(a => a.country_id == dbCountry.id).FirstOrDefault();
+                    dbUpload = db.Upload.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
 
-                    if (ModelState.IsValid)
-                    {
-                        db.SaveChanges();
-                    }
+
+                    dbAddress.city_id = city.id;
+                    dbAddress.person_id = dbPerson.id;
+
+
+                    db.Entry(dbAddress).State = EntityState.Modified;
+                    db.Entry(dbCity).State = EntityState.Modified;
+                    db.Entry(dbUpload).State = EntityState.Modified;
+
+                    //db.Upload.Add(dbUpload);
                 }
                 else
                 {
-
-                    dbPerson.status = vm.Status;
-                    dbPerson.reference = GeneratorReference.ReferencGenerator();
-
                     dbCity.country_id = dbCountry.id;
                     db.City.Add(dbCity);
 
@@ -130,23 +136,21 @@
                     dbAddress.person_id = dbPerson.id;
                     db.Address.Add(dbAddress);
 
-                    //dbUpload.created = vm.Created;
+                    //dbUpload.created = vm.Created;  
+                    dbUpload.path = UploadImage.ImageUploadPath(vm, dbPerson.id);
                     dbUpload.person_id = dbPerson.id;
-                    dbUpload.path = UploadImage.ImageUploadPath(vm);
                     db.Upload.Add(dbUpload);
-
-                    if (ModelState.IsValid)
-                    {
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        TempData["ErrorMessage"] = "Fehlgeschlagen";
-                        return RedirectToAction("PersonVerification");
-                    }
+                }
+                if (ModelState.IsValid)
+                {
+                    db.SaveChanges();
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Fehlgeschlagen";
+                    return RedirectToAction("PersonVerification");
                 }
             }
-
             return RedirectToAction("Index", "Home");
         }
     }

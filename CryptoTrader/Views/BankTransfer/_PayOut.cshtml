@@ -2,10 +2,10 @@
 @{
     ViewBag.Title = "PayOut";
 }
-
+<link href="~/Content/Custom/_payOut.css" rel="stylesheet" />
 @using (Html.BeginForm("PayOut", "BankTransfer", FormMethod.Post))
 {
-    <main class="col-lg-5 well" style="height:600px;">
+    <main class="col-lg-6 wellPayOut well">
         <h2>Geld auszahlen</h2>
 
         <div class="row">
@@ -33,11 +33,11 @@
             <div class="col col-lg-6">
                 @if (Model.PersonIban == null)
                 {
-                    @Html.EditorFor(a => a.PersonIban, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(a => a.PersonIban, new { htmlAttributes = new { @class = "form-control" } })
                 }
                 else
                 {
-                    @Html.LabelFor(a => a.PersonIban, Model.PersonIban)
+                @Html.LabelFor(a => a.PersonIban, Model.PersonIban)
                 }
             </div>
         </div>
@@ -49,11 +49,11 @@
             <div class="col col-lg-6">
                 @if (Model.PersonBic == null)
                 {
-                    @Html.EditorFor(a => a.PersonBic, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(a => a.PersonBic, new { htmlAttributes = new { @class = "form-control" } })
                 }
                 else
                 {
-                    @Html.LabelFor(a => a.PersonBic, Model.PersonBic)
+                @Html.LabelFor(a => a.PersonBic, Model.PersonBic)
                 }
             </div>
         </div>
@@ -75,21 +75,19 @@
             <div class="col col-lg-6">
                 @if (Model.Currency == null)
                 {
-                    @Html.EditorFor(a => a.Currency, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(a => a.Currency, "", new { htmlAttributes = new { @class = "text-danger" } })
+                @Html.EditorFor(a => a.Currency, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(a => a.Currency, "", new { htmlAttributes = new { @class = "text-danger" } })
                 }
                 else
                 {
-                    @Html.LabelFor(a => a.Currency, Model.Currency)
+                @Html.LabelFor(a => a.Currency, Model.Currency)
                 }
             </div>
         </div>
 
-        <div class="row">
+        <div class="row buttonPayOut">
             <button type="submit" class="ui-button-icon-only btn-success">Auszahlen</button>
         </div>
-
-
     </main>
 }
 

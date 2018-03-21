@@ -6,7 +6,7 @@
 
     public class UploadImage
     {
-        public static string ImageUploadPath(PersonVerificationViewModel vm)
+        public static string ImageUploadPath(PersonVerificationViewModel vm,int id)
         {
             if (vm.Upload != null && vm.Upload.ContentLength > 0)
             {
@@ -19,7 +19,7 @@
                     Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Image/UserImages"));
 
 
-                string userImagePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Image/UserImages"), vm.Path);
+                string userImagePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Image/UserImages"), vm.Path + id);
 
                 vm.Upload.SaveAs(userImagePath);
                 return userImagePath;

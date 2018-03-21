@@ -262,6 +262,8 @@
       <DependentUpon>CryptoTraderJarosh.mdf</DependentUpon>
     </Content>
     <Content Include="Content\Custom\AdminView.css" />
+    <Content Include="Content\Custom\LayoutIndex.css" />
+    <Content Include="Content\Custom\_payOut.css" />
     <Content Include="Content\toast\toastr.css" />
     <Content Include="Content\toast\toastr.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -457,9 +459,9 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Trade\Index.cshtml" />
-    <Content Include="Views\Trade\_TradeBitCoin.cshtml" />
     <Content Include="Views\Trade\_ChartDiagramm.cshtml" />
     <Content Include="Views\BankTransfer\_PayOut.cshtml" />
+    <Content Include="Views\Trade\_Trade.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

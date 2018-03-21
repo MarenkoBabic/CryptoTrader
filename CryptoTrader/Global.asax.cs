@@ -9,7 +9,7 @@
     using System.Web.Routing;
     using System.Web.Security;
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {

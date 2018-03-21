@@ -21,6 +21,43 @@
         <div class="row">
             <main id="Chart" class="chartdiv col-lg-12 col-md-12 col-sm-12 col-xs-12"></main>
         </div>
+        <script>
+            $(document).ready(function () {
+                UpdateChart();
+            });
+            function UpdateChart() {
+                if ($("collapseExample").hasClass("in") == false) {
+                    $.ajax({
+                        url: '/Ticker/LoadChartData',
+                        success: function (json) {
+                            CreateChart(json);
+                        },
+                        error: function (errorData) {
+                            console.log(errorData);
+                        }
+                    });
+                    setTimeout(function () { UpdateChart(); }, 10000);
+
+                }
+            }
+
+            function CreateChart(jsonData) {
+                Highcharts.stockChart('Chart', {
+                    title: {
+                        text: 'Aktueller BitCoin Kurs'
+                    },
+                    rangeSelector: false,
+                    series: [{
+                        name: 'BTC/EUR',
+                        data: jsonData,
+                        //type: 'area',
+                        tooltip: {
+                            valueDecimals: 2
+                        }
+                    }],
+                });
+            }
+        </script>
 }
 else
 {
@@ -43,44 +80,3 @@ else
     </body>
 
 }
-
-
-<script>
-    $(document).ready(function () {
-        UpdateChart();
-    });
-
-    function UpdateChart() {
-        if ($("collapseExample").hasClass("in") == false) {
-            $.ajax({
-                url: '/Ticker/LoadChartData',
-                success: function (json) {
-                    CreateChart(json);
-                },
-                error: function (errorData) {
-                    console.log(errorData);
-                }
-            });
-            setTimeout(function () { UpdateChart(); }, 10000);
-
-        }
-    }
-
-    function CreateChart(jsonData) {
-        Highcharts.stockChart('Chart', {
-            title: {
-                text: 'Aktueller BitCoin Kurs'
-            },
-            rangeSelector: false,
-            series: [{
-                name: 'BTC/EUR',
-                data: jsonData,
-                //type: 'area',
-                tooltip: {
-                    valueDecimals: 2
-                }
-            }],
-        });
-    }
-
-</script>
