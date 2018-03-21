@@ -56,7 +56,9 @@
         [HttpPost]
         public ActionResult Trade(TradeBitCoinViewModel vm, string submit)
         {
-            if (vm.EuroTrade > 0 || vm.BtcTrade > 0)
+            decimal Euro = decimal.Parse(vm.EuroTrade);
+            decimal BTC = decimal.Parse(vm.BtcTrade);
+            if (Euro > 0.0m || BTC > 0)
             {
                 using (var db = new CryptoTraderEntities())
                 {
@@ -79,10 +81,11 @@
                     //Bitcoin Kaufen
                     if (submit == "buy")
                     {
-                        bool result = TradeManager.HaveEnoughMoney(vm.BalanceAmount, vm.TickerRate, vm.BtcTrade);
+                        bool result = TradeManager.HaveEnoughMoney(vm.BalanceAmount, vm.TickerRate, BTC);
                         if (result)
                         {
-                            dbBalance.amount -= TradeManager.TradeAmountByBTC(vm.TickerRate, vm.BtcTrade);
+                            dbBalance.amount -= TradeManager.TradeAmountByBTC(vm.TickerRate, BTC);
+                            dbTradeHistory.amount = BTC;
 
                             dbTradeHistory.person_id = dbPerson.id;
                             if (ModelState.IsValid)
@@ -99,12 +102,13 @@
                     //Bitcoin verkaufen
                     else
                     {
-                        bool result = TradeManager.HaveEnoughBTC(ShowBitCoin(), vm.BtcTrade);
+                        bool result = TradeManager.HaveEnoughBTC(dbTradeHistory.amount, BTC);
                         if (result)
                         {
-                            dbBalance.amount += TradeManager.TradeAmountByBTC(vm.TickerRate, vm.BtcTrade);
+                            dbBalance.amount += TradeManager.TradeAmountByBTC(vm.TickerRate, BTC);
 
                             dbTradeHistory.person_id = dbPerson.id;
+                            dbTradeHistory.amount = BTC * (-1);
                             db.Entry(dbBalance).State = EntityState.Modified;
                             db.TradeHistory.Add(dbTradeHistory);
                             db.SaveChanges();
@@ -154,20 +158,13 @@
         /// <returns>Euro</returns>
         public ActionResult GetEuro(TradeBitCoinViewModel vm)
         {
-            Regex regex = new Regex(@"[\d]{1,4}([.\,[\d]{1,2})?");
-            if (regex.IsMatch(vm.EuroTrade.ToString()))
-            {
-                using (var db = new CryptoTraderEntities())
-                {
-                    decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+            decimal BTC = decimal.Parse(vm.BtcTrade);
 
-                    vm.EuroTrade = dbTicker * vm.BtcTrade;
-                    return Json(vm.EuroTrade, JsonRequestBehavior.AllowGet);
-                }
-            }
-            else
+            using (var db = new CryptoTraderEntities())
             {
-                return Json(null, JsonRequestBehavior.AllowGet);
+                decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+                vm.EuroTrade = (dbTicker * BTC).ToString();
+                return Json(vm.EuroTrade, JsonRequestBehavior.AllowGet);
             }
         }
         /// <summary>
@@ -175,20 +172,17 @@
         /// </summary>
         /// <param name="TradeAmountEuro">Euro</param>
         /// <returns>BitCoin Anzahl</returns>
-        public ActionResult GetBTC(decimal? EuroTrade)
+        public ActionResult GetBTC(TradeBitCoinViewModel vm)
         {
-            Regex regex = new Regex(@"[\d]{1,4}([.\,[\d]{1,2})?");
-            if (regex.IsMatch(EuroTrade.ToString()))
-            {
-                using (var db = new CryptoTraderEntities())
-                {
-                    decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+            decimal Euro = decimal.Parse(vm.EuroTrade);
 
-                    EuroTrade = EuroTrade / dbTicker;
-                    return Json(EuroTrade, JsonRequestBehavior.AllowGet);
-                }
+            using (var db = new CryptoTraderEntities())
+            {
+                decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
+
+                vm.BtcTrade = (Euro / dbTicker).ToString();
+                return Json(vm.BtcTrade, JsonRequestBehavior.AllowGet);
             }
-            return Json(0, JsonRequestBehavior.AllowGet);
         }
     }
 }

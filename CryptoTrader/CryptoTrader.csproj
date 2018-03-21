@@ -172,6 +172,7 @@
     <Compile Include="Manager\ApiKraken.cs" />
     <Compile Include="Manager\Authenticated.cs" />
     <Compile Include="Manager\Cookies.cs" />
+    <Compile Include="Manager\DecimalParser.cs" />
     <Compile Include="Manager\FillList.cs" />
     <Compile Include="Manager\DateTimeHelper.cs" />
     <Compile Include="Manager\GeneratorReference.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Manager\SendMail.cs" />
     <Compile Include="Manager\TradeManager.cs" />
     <Compile Include="Manager\UploadImage.cs" />
+    <Compile Include="ModelMapper\AdminMapper.cs" />
     <Compile Include="Model\DbModel\Address.cs">
       <DependentUpon>CryptoTrader.tt</DependentUpon>
     </Compile>
@@ -242,7 +244,7 @@
     </Compile>
     <Compile Include="Model\ViewModel\Admin\AdminViewModel.cs" />
     <Compile Include="Model\ViewModel\Ticker\ApiViewModel.cs" />
-    <Compile Include="Model\ViewModel\Helper\AutoMapperProfile.cs" />
+    <Compile Include="ModelMapper\AutoMapperProfile.cs" />
     <Compile Include="Model\ViewModel\BankTransfer\BankTransferViewModel.cs" />
     <Compile Include="Model\ViewModel\Trade\TradeBitCoinViewModel.cs" />
     <Compile Include="Model\ViewModel\Helper\EmailSendViewModel.cs" />

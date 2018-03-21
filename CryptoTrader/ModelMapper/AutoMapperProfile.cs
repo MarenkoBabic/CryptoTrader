@@ -104,6 +104,11 @@
 
                 CreateMap<AdminViewModel, Balance>();
                 CreateMap<BankTransferHistory, AdminViewModel>();
+
+                CreateMap<AdminViewModel, Person>()
+                    .ForMember(a => a.id, opt => opt.MapFrom(a => a.PersonId));
+                CreateMap<Person, AdminViewModel>()
+                    .ForMember(a => a.PersonId, opt => opt.MapFrom(a => a.id));
                 #endregion
             }
         }

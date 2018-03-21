@@ -25,19 +25,19 @@ $("#Euro").keyup(function () {
         }
     });
 });
-function SubmitCointrade(sellOrBuy) {
-    $.ajax({
-        url: "Trade/Trade",
-        type: 'POST',
-        data: {
-            vm: {
-                EuroTrade: $("#Euro").val().replace(".", ","),
-                BTCTrade: $("#BTC").val().replace(".", ",")
-            },
-            submit: sellOrBuy
-        },
-        success: function (data) {
+//function SubmitCointrade(sellOrBuy) {
+//    $.ajax({
+//        url: "Trade/Trade",
+//        type: 'POST',
+//        data: {
+//            vm: {
+//                EuroTrade: $("#Euro").val().replace(".", ","),
+//                BTCTrade: $("#BTC").val().replace(".", ",")
+//            },
+//            submit: sellOrBuy
+//        },
+//        success: function (data) {
 
-        }
-    });
-}
+//        }
+//    });
+//}

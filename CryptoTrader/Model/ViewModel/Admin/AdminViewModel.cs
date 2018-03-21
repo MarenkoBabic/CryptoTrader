@@ -27,13 +27,14 @@
         [StringLength(3)]
         public string Currency { get; set; } = "Eur";
 
-        public List<Person> PersonList { get; set; }
+        public List<AdminViewModel> PersonList { get; set; }
 
-        public List<Person> FilterList { get; set; }
+        public List<AdminViewModel> FilterList { get; set; }
 
         public AdminViewModel()
         {
-            PersonList = new List<Person>();
+            PersonList = new List<AdminViewModel>();
+            FilterList = new List<AdminViewModel>();
         }
     }
 }

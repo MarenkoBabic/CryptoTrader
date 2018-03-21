@@ -37,7 +37,6 @@
 
         [Required]
         [Display(Name = "Betrag")]
-        [Range(100, 1000000, ErrorMessage = "Min. 100 Euro")]
         public decimal Amount { get; set; }
 
         [DataType(DataType.Currency)]

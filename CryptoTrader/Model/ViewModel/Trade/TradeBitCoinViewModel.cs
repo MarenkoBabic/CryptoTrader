@@ -21,9 +21,9 @@
 
         public decimal TickerRate { get; set; }
 
-        public decimal EuroTrade { get; set; }
+        public string EuroTrade { get; set; }
 
-        public decimal BtcTrade { get; set; }
+        public string BtcTrade { get; set; }
 
         public decimal BitCoinAmount { get; set; }
 

@@ -4,6 +4,7 @@
     using CryptoTrader.Manager;
     using CryptoTrader.Model.DbModel;
     using CryptoTrader.Model.ViewModel;
+    using CryptoTrader.ModelMapper;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -20,12 +21,11 @@
             bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
             if (result)
             {
-                AdminViewModel vm = new AdminViewModel();
-                using (var db = new CryptoTraderEntities())
+                AdminViewModel adminVM = new AdminViewModel
                 {
-                    vm.PersonList = db.Person.ToList();
-                }
-                return View(vm);
+                    PersonList = AdminMapper.PersonList()
+                };
+                return View(adminVM);
             }
             else
             {
@@ -81,23 +81,9 @@
         /// </summary>
         /// <param name="id">Person_id</param>
         /// <returns>Get View</returns>
-        public ActionResult ChangeActive(int? id)
+        public ActionResult ChangeActive(int id)
         {
-            using (var db = new CryptoTraderEntities())
-            {
-                Person dbPerson = db.Person.Find(id);
-
-                if (dbPerson.active == true)
-                {
-                    dbPerson.active = false;
-                }
-                else
-                {
-                    dbPerson.active = true;
-                }
-                db.Entry(dbPerson).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            AdminMapper.ChangeActiveStatus(id);
             return RedirectToAction("AdminView");
         }
 
@@ -107,59 +93,26 @@
         /// <param name="submit">Input Button</param>
         /// <param name="vm">AdminViewModel</param>
         /// <returns>Get View</returns>
-        public ActionResult FilterList(string submit, AdminViewModel vm)
+        public ActionResult FilterList(string submit,AdminViewModel adminVM)
         {
             using (var db = new CryptoTraderEntities())
             {
-                if (submit == "Filtern")
-                {
-                    vm.FilterList = db.Person.ToList();
-                    if (vm.PersonId > 0)
-                    {
-                        vm.FilterList = vm.FilterList.Where(a => a.id == vm.PersonId).ToList();
-                    }
-
-                    if (HasValue(vm.FirstName))
-                    {
-                        vm.FilterList = vm.FilterList.Where(a => a.firstName.StartsWith(vm.FirstName,StringComparison.CurrentCultureIgnoreCase)).ToList();
-                    }
-                    if (HasValue(vm.LastName))
-                    {
-                        vm.FilterList = vm.FilterList.Where(a => a.lastName.StartsWith(vm.LastName, StringComparison.CurrentCultureIgnoreCase)).ToList();
-                    }
-                    if (HasValue(vm.Reference))
-                    {
-                        vm.FilterList = vm.FilterList.Where(a => a.reference.StartsWith(vm.Reference, StringComparison.CurrentCultureIgnoreCase)).ToList();
-                    }
-                }
+                adminVM.FilterList = AdminMapper.FilterThePersonList(adminVM.PersonId, adminVM.FirstName, adminVM.LastName, adminVM.Reference);
+                return View("AdminView", adminVM);
             }
-            return View("AdminView", vm);
         }
 
-        /// <summary>
-        /// Validiert den mitgebenen String
-        /// </summary>
-        /// <param name="s">ViewModel property</param>
-        /// <returns>bool</returns>
-        private bool HasValue(string s)
-        {
-            if (!string.IsNullOrEmpty(s))
-            {
-                return true;
-            }
-            return false;
-        }
 
         public ActionResult UserLogin(int? id)
         {
-            using(var db = new CryptoTraderEntities())
+            using (var db = new CryptoTraderEntities())
             {
-                var dbPerson = db.Person.Find(id);
+                Person dbPerson = db.Person.Find(id);
 
-                var email = dbPerson.email;
-                var firstName = dbPerson.firstName;
-                var lastName = dbPerson.lastName;
-                var role = dbPerson.role;
+                string email = dbPerson.email;
+                string firstName = dbPerson.firstName;
+                string lastName = dbPerson.lastName;
+                string role = dbPerson.role;
                 Cookies.CreateCookies(email, role, firstName, lastName);
                 return RedirectToAction("Index", "Home");
             }
