@@ -17,8 +17,6 @@ namespace CryptoTrader.Model.DbModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
-            this.role = "User";
-            this.status = false;
             this.Address = new HashSet<Address>();
             this.Balance = new HashSet<Balance>();
             this.BankAccount = new HashSet<BankAccount>();

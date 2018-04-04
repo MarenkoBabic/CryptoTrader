@@ -171,16 +171,13 @@
     </Compile>
     <Compile Include="Manager\AdminManager.cs" />
     <Compile Include="Manager\ApiKraken.cs" />
-    <Compile Include="Manager\Authenticated.cs" />
     <Compile Include="Manager\BankTransferManager.cs" />
     <Compile Include="Manager\Cookies.cs" />
-    <Compile Include="Manager\DecimalParser.cs" />
     <Compile Include="Manager\FillList.cs" />
     <Compile Include="Manager\DateTimeHelper.cs" />
     <Compile Include="Manager\GeneratorReference.cs" />
     <Compile Include="Manager\Hashen.cs" />
     <Compile Include="Manager\LoginManager.cs" />
-    <Compile Include="Manager\SendMail.cs" />
     <Compile Include="Manager\TradeManager.cs" />
     <Compile Include="Manager\UploadImage.cs" />
     <Compile Include="Model\DbModel\Address.cs">
@@ -216,21 +213,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\DbModel\Jarosh.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Jarosh.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DbModel\Jarosh.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Jarosh.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DbModel\Jarosh.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Jarosh.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Model\DbModel\Person.cs">
       <DependentUpon>CryptoTrader.tt</DependentUpon>
     </Compile>
@@ -247,7 +229,6 @@
     <Compile Include="Model\ViewModel\Ticker\ApiViewModel.cs" />
     <Compile Include="ModelMapper\AutoMapperProfile.cs" />
     <Compile Include="Model\ViewModel\BankTransfer\BankTransferViewModel.cs" />
-    <Compile Include="Model\ViewModel\Helper\EmailSendViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\LoginViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\PersonVerificationViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\RegisterViewModel.cs" />
@@ -256,14 +237,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\CryptoTraderDB.mdf" />
-    <Content Include="App_Data\CryptoTraderDB_log.ldf">
-      <DependentUpon>CryptoTraderDB.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\CryptoTraderJarosh.mdf" />
-    <Content Include="App_Data\CryptoTraderJarosh_log.ldf">
-      <DependentUpon>CryptoTraderJarosh.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\Custom\AdminView.css" />
     <Content Include="Content\Custom\LayoutIndex.css" />
     <Content Include="Content\Custom\_payOut.css" />
@@ -337,16 +310,6 @@
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
       <LastGenOutput>CryptoTrader.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\DbModel\Jarosh.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Jarosh.edmx</DependentUpon>
-      <LastGenOutput>Jarosh.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\DbModel\Jarosh.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Jarosh.edmx</DependentUpon>
-      <LastGenOutput>Jarosh.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\Custom\GetResultBTCandEuro.js" />
     <Content Include="Scripts\Custom\PersonVerificationWizard.js" />
     <Content Include="Scripts\JsDefault\bootstrap.js" />
@@ -354,13 +317,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Model\DbModel\Jarosh.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Jarosh.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model\DbModel\Jarosh.edmx.diagram">
-      <DependentUpon>Jarosh.edmx</DependentUpon>
-    </Content>
+    <Content Include="Content\toastr.less" />
+    <Content Include="Content\toastr.scss" />
     <EntityDeploy Include="Model\DbModel\CryptoTrader.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CryptoTrader.Designer.cs</LastGenOutput>
@@ -368,8 +326,6 @@
     <Content Include="Model\DbModel\CryptoTrader.edmx.diagram">
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\toastr.less" />
-    <Content Include="Content\toastr.scss" />
     <None Include="Scripts\JsDefault\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\GetTickerRate.js" />
     <Content Include="Scripts\Custom\ShowBalance.js" />
@@ -464,7 +420,9 @@
     <Content Include="Views\BankTransfer\_PayOut.cshtml" />
     <Content Include="Views\Trade\_Trade.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

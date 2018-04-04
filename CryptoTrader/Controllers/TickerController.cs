@@ -45,7 +45,6 @@
         /// <returns>Tickerwert to View</returns>
         public string ShowRate()
         {
-
             SaveTickertoDB();
             return GetTicker().ToString();
         }

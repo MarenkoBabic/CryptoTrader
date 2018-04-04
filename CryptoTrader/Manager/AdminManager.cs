@@ -74,7 +74,7 @@ namespace CryptoTrader.Manager
         {
             using (var db = new CryptoTraderEntities())
             {
-                var dbPerson = db.Person.Find(id);
+                Person dbPerson = db.Person.Find(id);
                 string email = dbPerson.email;
                 string firstName = dbPerson.firstName;
                 string lastName = dbPerson.lastName;

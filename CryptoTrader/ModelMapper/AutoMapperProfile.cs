@@ -7,7 +7,7 @@
     {
         public AutoMapperProfile()
         {
-            using (var db = new JaroshEntities())
+            using (var db = new CryptoTraderEntities())
             {
                 #region Register / Login
                 //RegisterViewModel

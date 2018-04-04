@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="757c2ea896ae41029b334767b68753b2" Name="Diagram1">
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Address" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Balance" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.BankAccount" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.BankTransferHistory" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.City" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Country" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Person" Width="1.5" PointX="12.625" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Ticker" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.TradeHistory" Width="1.5" PointX="9.5" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CryptoTraderDBModel.Upload" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_Address_City" ManuallyRouted="false" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_Address_Person" ManuallyRouted="false" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_Balance_User" ManuallyRouted="false" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_BankAccount_User" ManuallyRouted="false" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_BankTransferHistory_User" ManuallyRouted="false" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_City_Country" ManuallyRouted="false" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_TradeHistory_User" ManuallyRouted="false" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_Upload_User" ManuallyRouted="false" />
-        <AssociationConnector Association="CryptoTraderDBModel.fk_TradeHistory_Ticker" ManuallyRouted="false" />
+      <Diagram DiagramId="d3a5567c0bb24668b1c2b41b8cddb2df" Name="Diagram1">
+        <EntityTypeShape EntityType="CryptoTraderModel.Address" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.Balance" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.BankAccount" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.BankTransferHistory" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.City" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.Country" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.Person" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.Ticker" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.TradeHistory" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CryptoTraderModel.Upload" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <AssociationConnector Association="CryptoTraderModel.fk_Address_City" ManuallyRouted="false" />
+        <AssociationConnector Association="CryptoTraderModel.fk_Address_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="CryptoTraderModel.fk_Balance_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CryptoTraderModel.fk_BankAccount_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CryptoTraderModel.fk_BankTransferHistory_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CryptoTraderModel.fk_City_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="CryptoTraderModel.fk_TradeHistory_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CryptoTraderModel.fk_Upload_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CryptoTraderModel.fk_TradeHistory_Ticker" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

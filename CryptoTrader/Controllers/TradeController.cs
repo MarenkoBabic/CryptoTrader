@@ -120,7 +120,7 @@
             else
             {
                 TempData["ErrorMessage"] = "Betrag eingeben";
-                return RedirectToAction("Index", decimal.Parse(tradeVM.BtcTrade));
+                return RedirectToAction("Index");
             }
         }
 
@@ -161,7 +161,7 @@
                 {
                     decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
                     vm.EuroTrade = (dbTicker * BTC).ToString();
-                    return Json(vm.EuroTrade, JsonRequestBehavior.AllowGet);
+                    return Json(Math.Round(decimal.Parse(vm.EuroTrade), 6).ToString(), JsonRequestBehavior.AllowGet);
                 }
             }
             return Json("0,0", JsonRequestBehavior.AllowGet);
@@ -182,7 +182,7 @@
                     decimal dbTicker = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
 
                     vm.BtcTrade = (Euro / dbTicker).ToString();
-                    return Json(vm.BtcTrade, JsonRequestBehavior.AllowGet);
+                    return Json(Math.Round(decimal.Parse(vm.BtcTrade),6).ToString(), JsonRequestBehavior.AllowGet);
                 }
             }
             return Json("0,0", JsonRequestBehavior.AllowGet);

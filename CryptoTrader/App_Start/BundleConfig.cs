@@ -37,10 +37,10 @@ namespace CryptoTrader
             bundles.Add( new StyleBundle( "~/Content/css" ).Include(
                 "~/Content/bootstrap.css",
                 "~/Content/site.css",
-                "~/Content/toast/toastr.css" ) );
+                "~/Content/toastr.css" ) );
             bundles.Add( new ScriptBundle( "~/bundles/highstock" ).Include(
-                     "~/Scripts/JsDefault/Highstock/exporting.js",
-                     "~/Scripts/JsDefault/Highstock/highstock.js") );
+                "~/Scripts/JsDefault/Highstock/exporting.js",
+                "~/Scripts/JsDefault/Highstock/highstock.js") );
 
 
         }

@@ -6,25 +6,25 @@
 function GetRate() {
     $.ajax({ url: "/Ticker/ShowRate" })
         .done(function (response) {
-            console.log("GetRate")
+            console.log("GetRate");
             var result = "";
-            var rate_old = ($("#rate").html());
-            var rate_current = (response);
+            var rate_old = $("#rate").html();
+            var rate_current =response;
 
             $("#rate").html(rate_current);
 
             if (rate_current > rate_old) {
-                result = ($(".rate").html("▲"));
+                result = $(".rate").html("▲");
                 $(".rate").css("color", "green");
                 $("#rate").css("color", "green");
             }
             else if (rate_current < rate_old) {
-                result = ($(".rate").html("▼"));
+                result = $(".rate").html("▼");
                 $(".rate").css("color", "red");
                 $("#rate").css("color", "red");
             }
-            else if (rate_current == rate_old) {
-                result = ($(".rate").html("-"));
+            else if (rate_current === rate_old) {
+                result = $(".rate").html("-");
                 $(".rate").css("color", "goldenrod");
                 $("#rate").css("color", "goldenrod");
             }

@@ -28,7 +28,7 @@
 
                     if (dbPerson.status == true)
                     {
-                        var bankTransferVM = Mapper.Map<BankTransferViewModel>(dbBankAccount);
+                        BankTransferViewModel bankTransferVM = Mapper.Map<BankTransferViewModel>(dbBankAccount);
 
                         bankTransferVM.FirstName = dbPerson.firstName;
                         bankTransferVM.LastName = dbPerson.lastName;

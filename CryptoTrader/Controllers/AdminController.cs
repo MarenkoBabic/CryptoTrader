@@ -71,7 +71,6 @@
                     db.SaveChanges();
                     TempData["ConfirmMessage"] = "Oke";
                     return View("AdminView");
-
                 }
                 else
                 {

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CryptoTraderDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CryptoTraderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="id" />
@@ -218,7 +218,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CryptoTraderDBModelStoreContainer">
+        <EntityContainer Name="CryptoTraderModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Balance" EntityType="Self.Balance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankAccount" EntityType="Self.BankAccount" Schema="dbo" store:Type="Tables" />
@@ -266,10 +266,11 @@
             <End Role="Upload" EntitySet="Upload" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CryptoTraderDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CryptoTraderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="id" />
@@ -349,9 +350,9 @@
           <Property Name="salt" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="firstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="role" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" DefaultValue="User" />
+          <Property Name="role" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="active" Type="Boolean" Nullable="false" />
-          <Property Name="status" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
           <Property Name="reference" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="Self.fk_Address_Person" FromRole="Person" ToRole="Address" />
           <NavigationProperty Name="Balance" Relationship="Self.fk_Balance_User" FromRole="Person" ToRole="Balance" />
@@ -554,9 +555,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CryptoTraderDBModelStoreContainer" CdmEntityContainer="CryptoTraderEntities">
+        <EntityContainerMapping StorageEntityContainer="CryptoTraderModelStoreContainer" CdmEntityContainer="CryptoTraderEntities">
           <EntitySetMapping Name="Address">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.Address">
+            <EntityTypeMapping TypeName="CryptoTraderModel.Address">
               <MappingFragment StoreEntitySet="Address">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -568,7 +569,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Balance">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.Balance">
+            <EntityTypeMapping TypeName="CryptoTraderModel.Balance">
               <MappingFragment StoreEntitySet="Balance">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -579,7 +580,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BankAccount">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.BankAccount">
+            <EntityTypeMapping TypeName="CryptoTraderModel.BankAccount">
               <MappingFragment StoreEntitySet="BankAccount">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -590,7 +591,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BankTransferHistory">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.BankTransferHistory">
+            <EntityTypeMapping TypeName="CryptoTraderModel.BankTransferHistory">
               <MappingFragment StoreEntitySet="BankTransferHistory">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -601,7 +602,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="City">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.City">
+            <EntityTypeMapping TypeName="CryptoTraderModel.City">
               <MappingFragment StoreEntitySet="City">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -612,7 +613,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Country">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.Country">
+            <EntityTypeMapping TypeName="CryptoTraderModel.Country">
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -622,7 +623,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Person">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.Person">
+            <EntityTypeMapping TypeName="CryptoTraderModel.Person">
               <MappingFragment StoreEntitySet="Person">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -639,7 +640,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ticker">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.Ticker">
+            <EntityTypeMapping TypeName="CryptoTraderModel.Ticker">
               <MappingFragment StoreEntitySet="Ticker">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -650,7 +651,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TradeHistory">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.TradeHistory">
+            <EntityTypeMapping TypeName="CryptoTraderModel.TradeHistory">
               <MappingFragment StoreEntitySet="TradeHistory">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />
@@ -661,7 +662,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Upload">
-            <EntityTypeMapping TypeName="CryptoTraderDBModel.Upload">
+            <EntityTypeMapping TypeName="CryptoTraderModel.Upload">
               <MappingFragment StoreEntitySet="Upload">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="created" ColumnName="created" />

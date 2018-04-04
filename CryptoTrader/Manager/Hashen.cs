@@ -56,7 +56,5 @@ namespace CryptoTrader.Manager
             }
             return hashSB.ToString();
         }
-
-
     }
 }
