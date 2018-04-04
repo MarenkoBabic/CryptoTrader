@@ -8,6 +8,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrakenClient", "KrakenClient\KrakenClient.csproj", "{6FD7A9D6-CE6D-4B57-BEBB-FAAF2490811E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlScripts", "SqlScripts", "{BD299A1E-A117-463C-82C1-7C97C9EF953D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Sql\CryptoTrader Mit Insert.sql = ..\..\Sql\CryptoTrader Mit Insert.sql
+		C:\Users\marin\Documents\SQL Server Management Studio\Insert TradeHistory.sql = C:\Users\marin\Documents\SQL Server Management Studio\Insert TradeHistory.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
