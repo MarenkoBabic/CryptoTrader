@@ -1,4 +1,4 @@
-﻿@model CryptoTrader.Model.ViewModel.TradeBitCoinViewModel
+﻿@model CryptoTrader.Model.ViewModel.TradeViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -10,29 +10,29 @@
         @Html.Partial("~/Views/Trade/_ChartDiagramm.cshtml")
     </div>
     <!--EndChart-->
+
     <!--Cards-->
 </div>
 <div class="container">
     <div class="row">
 
         <!--Card for TradeBitCoin-->
-        <div class="card col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="card col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <div class="card-header">Handeln</div>
             <div class="card-body">
                 @Html.Partial("~/Views/Trade/_Trade.cshtml")
             </div>
         </div>
         <!--EndCard-->
+
         <!--HistoryList-->
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 tableScroll ">
-            <table class="table tableScroll" id="header-fixed">
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Vorname</th>
-                        <th>Nachname</th>
-                        <th>Datum</th>
-                        <th>BitCoin</th>
-                        <th>BitCoinKurs</th>
+                        <th class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Datum</th>
+                        <th class="col-lg-3 col-md-3 col-sm-3 col-xs-3">BitCoin</th>
+                        <th class="col-lg-3 col-md-3 col-sm-3 col-xs-3">BitCoinKurs</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,11 +44,9 @@
                         foreach (var item in Model.HistoryList)
                         {
                             <tr>
-                                <td class="col-lg-2">@item.Person.firstName</td>
-                                <td class="col-lg-2">@item.Person.lastName</td>
-                                <td class="col-lg-6">@item.created</td>
-                                <td class="col-lg-2">@item.amount</td>
-                                <td class="col-lg-2">@item.Ticker.rate</td>
+                                <td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">@item.Created</td>
+                                <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3">@item.BtcTrade</td>
+                                <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3">@item.TickerRate</td>
                             </tr>
                         }
                     }

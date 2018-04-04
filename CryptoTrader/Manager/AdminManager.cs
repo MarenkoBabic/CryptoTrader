@@ -1,25 +1,20 @@
-﻿namespace CryptoTrader.ModelMapper
+﻿using AutoMapper;
+using CryptoTrader.Model.DbModel;
+using CryptoTrader.Model.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+
+namespace CryptoTrader.Manager
 {
-    using AutoMapper;
-    using CryptoTrader.Model.DbModel;
-    using CryptoTrader.Model.ViewModel;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Linq;
-
-    public class AdminMapper
+    public class AdminManager
     {
-        AdminViewModel adminVM = new AdminViewModel();
-        public static List<AdminViewModel> PersonList()
-        {
-            using (var db = new CryptoTraderEntities())
-            {
-                List<Person> dbPerson = db.Person.ToList();
-                List<AdminViewModel> list = Mapper.Map<List<Person>, List<AdminViewModel>>(dbPerson);
-                return list;
-            }
-        }
-
+        /// <summary>
+        /// Ändert den Aktivierungstatus des Users
+        /// </summary>
+        /// <param name="id">Person_id</param>
         public static void ChangeActiveStatus(int id)
         {
             using (var db = new CryptoTraderEntities())
@@ -39,9 +34,17 @@
             }
         }
 
-        public static List<AdminViewModel> FilterThePersonList(int id,string firstName,string lastName,string reference)
+        /// <summary>
+        /// Filterd die PersonenListe
+        /// </summary>
+        /// <param name="id">adminVM_PersonId</param>
+        /// <param name="firstName">adminVM_Vorname</param>
+        /// <param name="lastName">adminVM_Nachname</param>
+        /// <param name="reference">adminVM_Verwendungszweck</param>
+        /// <returns>Gefilterte PersonenListe</returns>
+        public static List<AdminViewModel> FilterThePersonList(int id, string firstName, string lastName, string reference)
         {
-            List<AdminViewModel> list = PersonList();
+            List<AdminViewModel> list = FillList.GetPersonList();
 
             if (id > 0)
             {
@@ -62,6 +65,24 @@
             return list;
         }
 
+
+        /// <summary>
+        /// Admin übernimmt das UserKonto
+        /// </summary>
+        /// <param name="id">Person_id</param>
+        public static void GetUserLogin(int id)
+        {
+            using (var db = new CryptoTraderEntities())
+            {
+                var dbPerson = db.Person.Find(id);
+                string email = dbPerson.email;
+                string firstName = dbPerson.firstName;
+                string lastName = dbPerson.lastName;
+                string role = dbPerson.role;
+                Cookies.CreateCookies(email, role, firstName, lastName);
+            }
+        }
+
         /// <summary>
         /// Validiert den mitgebenen String
         /// </summary>
@@ -75,6 +96,5 @@
             }
             return false;
         }
-
     }
 }

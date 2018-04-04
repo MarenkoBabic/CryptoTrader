@@ -32,7 +32,7 @@
                     try
                     {
                         //Welchen Client er verwenden soll
-                        using (var smtpClient = new SmtpClient("smtp-live.com", 25))
+                        using (var smtpClient = new SmtpClient("smtp.gmail.com", 465))
                         {
                             //Ob die verbindung verschlüsst sein soll
                             //smtpClient.EnableSsl = true;

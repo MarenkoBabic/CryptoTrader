@@ -5,32 +5,32 @@
 <link href="~/Content/Custom/_payOut.css" rel="stylesheet" />
 @using (Html.BeginForm("PayOut", "BankTransfer", FormMethod.Post))
 {
-    <main class="col-lg-6 wellPayOut well">
+    <main class="col-lg-6 col-md-6 col-sm-6 col-xs-6 wellPayOut well" style="height:306px;">
         <h2>Geld auszahlen</h2>
 
         <div class="row">
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.LabelFor(a => a.FirstName, "Vorname")
             </div>
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.LabelFor(a => a.FirstName, Model.FirstName)
             </div>
         </div>
 
         <div class="row">
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.LabelFor(a => a.LastName, "Nachname")
             </div>
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.LabelFor(a => a.LastName, Model.LastName)
             </div>
         </div>
 
         <div class="row">
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.LabelFor(a => a.PersonIban, "Iban")
             </div>
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @if (Model.PersonIban == null)
                 {
                 @Html.EditorFor(a => a.PersonIban, new { htmlAttributes = new { @class = "form-control" } })
@@ -43,10 +43,10 @@
         </div>
 
         <div class="row">
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.LabelFor(a => a.PersonBic, "BIC")
             </div>
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @if (Model.PersonBic == null)
                 {
                 @Html.EditorFor(a => a.PersonBic, new { htmlAttributes = new { @class = "form-control" } })
@@ -59,20 +59,20 @@
         </div>
 
         <div class="row">
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.LabelFor(a => a.Amount, "Betrag")
             </div>
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.EditorFor(a => a.Amount, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(a => a.Amount, "", new { htmlAttributes = new { @class = "text-danger" } })
             </div>
         </div>
 
         <div class="row">
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @Html.LabelFor(a => a.Currency, "Währung")
             </div>
-            <div class="col col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @if (Model.Currency == null)
                 {
                 @Html.EditorFor(a => a.Currency, new { htmlAttributes = new { @class = "form-control" } })

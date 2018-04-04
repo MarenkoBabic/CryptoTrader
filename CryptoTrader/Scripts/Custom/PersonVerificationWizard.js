@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     //Initialize tooltips
     $('.nav-tabs > li a[title]').tooltip();
 
@@ -86,3 +87,15 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+//EnterTaste deaktivieren
+$(document).ready(function () {
+    $('#enterKey').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+

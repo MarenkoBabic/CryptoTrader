@@ -35,5 +35,7 @@
         [DataType(DataType.Password)]
         public string RegisterPassword { get; set; }
 
+        public bool Status { get; set; } = false;
+
     }
 }

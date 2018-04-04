@@ -7,67 +7,67 @@
 
     <div class="row">
         <!--KontoDaten-->
-        <main class="col-lg-6 well" style="height:306px;">
+        <main class="col-lg-6 col-md-6 col-sm-6 col-xs-6 well" style="height:306px;">
             <h2>Kontodaten</h2>
             <div class="row">
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.BankName, "Bank")
                 </div>
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.BankName, Model.BankName)
                 </div>
             </div>
 
             <div class="row ">
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.ZipBank, "Postleitzahl")
                 </div>
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.ZipBank, Model.ZipBank)
                 </div>
             </div>
 
             <div class="row">
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.Bic, "BIC")
                 </div>
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.Bic, Model.Bic)
                 </div>
             </div>
 
             <div class="row">
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.Iban, "Kontonummer")
                 </div>
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.Iban, Model.Iban)
                 </div>
             </div>
 
             <div class="row">
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.FirstName, "Vorname")
                 </div>
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.FirstName, Model.FirstName)
                 </div>
             </div>
 
             <div class="row">
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.LastName, "Nachname")
                 </div>
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.LastName, Model.LastName)
                 </div>
             </div>
 
             <div class="row">
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.Reference, "Verwendungszweck")
                 </div>
-                <div class="col col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     @Html.LabelFor(a => a.Reference, Model.Reference)
                 </div>
             </div>
@@ -75,7 +75,7 @@
         </main>
         <!--EndKontoDaten-->
         <!--Diagramm-->
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             @Html.Partial("_PayOut")
         </div>
         <!--EndDiagramm-->
@@ -84,7 +84,7 @@
 
 
         <div class="container" style="padding-left:0px;">
-            <table class="table well">
+            <table class="table well col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <thead>
                     <tr>
                         <th>Betrag</th>
@@ -96,9 +96,9 @@
                     @foreach (var item in Model.BankHistoryList)
                     {
                         <tr>
-                            <td>@item.amount</td>
-                            <td>@item.currency</td>
-                            <td>@item.created</td>
+                            <td>@item.Amount</td>
+                            <td>@item.Currency</td>
+                            <td>@item.Created</td>
                         </tr>
                     }
                 </tbody>

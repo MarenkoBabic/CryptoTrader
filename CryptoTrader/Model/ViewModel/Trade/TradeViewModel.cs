@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class TradeBitCoinViewModel
+    public class TradeViewModel
     {
         public int PersonId { get; set; }
 
@@ -29,11 +29,11 @@
 
         public decimal BalanceAmount { get; set; }
 
-        public List<TradeHistory> HistoryList { get; set; }
+        public List<TradeViewModel> HistoryList { get; set; }
 
-        public TradeBitCoinViewModel()
+        public TradeViewModel()
         {
-            HistoryList = new List<TradeHistory>();
+            HistoryList = new List<TradeViewModel>();
         }
     }
 }

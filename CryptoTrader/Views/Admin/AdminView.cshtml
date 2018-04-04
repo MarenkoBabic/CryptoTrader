@@ -5,75 +5,77 @@
 <link href="~/Content/Custom/AdminView.css" rel="stylesheet" />
 
 <div class="container">
-    <table class="table well">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Vorname</th>
-                <th>Nachname</th>
-                <th>Verwendungszweck</th>
-                <th>Active</th>
-                <th>Geld betrag</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @using (Html.BeginForm("FilterList", "Admin", FormMethod.Post))
-            {
-
-                <tr style="border:2px double wheat;">
-                    <td>@Html.EditorFor(a => a.PersonId)</td>
-                    <td>@Html.EditorFor(a => a.FirstName)</td>
-                    <td>@Html.EditorFor(a => a.LastName)</td>
-                    <td>@Html.EditorFor(a => a.Reference)</td>
-                    <td><input type="submit" name="submit" value="Filtern" class="btn btn-primary" style="width:100%" /></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+    <div class="row">
+        <table class="table well col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Vorname</th>
+                    <th>Nachname</th>
+                    <th>Verwendungszweck</th>
+                    <th>Active</th>
+                    <th>Geld betrag</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            }
-            @if (Model.FilterList.Count >= 1)
-            {
-                foreach (var item in Model.FilterList)
+            </thead>
+            <tbody>
+                @using (Html.BeginForm("FilterList", "Admin", FormMethod.Post))
                 {
-                    using (Html.BeginForm("AdminView", "Admin", new { id = @item.PersonId }))
-                    {
-                        <tr>
-                            <td>@item.PersonId</td>
-                            <td>@item.FirstName</td>
-                            <td>@item.LastName</td>
-                            <td>@item.Reference</td>
-                            <td>@Html.CheckBoxFor(a => item.Active)@Html.ActionLink("Bestätigen", "ChangeActive", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
-                            <td>@Html.EditorFor(a => a.Amount, new { htmlAttributes = new { @placeholder = "Email Address" } })</td>
-                            <td>@Html.ValidationMessageFor(a => a.Amount)</td>
-                            <td><input type="submit" value="Gutschreiben" id="buttonID" class="btn btn-primary" /></td>
-                            <td>@Html.ActionLink("UserLogin", "UserLogin", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
-                        </tr>
-                    }
-                }
 
-            }
-            else
-            {
-                foreach (var item in Model.PersonList)
+                    <tr style="border:2px double wheat;">
+                        <td>@Html.EditorFor(a => a.PersonId)</td>
+                        <td>@Html.EditorFor(a => a.FirstName)</td>
+                        <td>@Html.EditorFor(a => a.LastName)</td>
+                        <td>@Html.EditorFor(a => a.Reference)</td>
+                        <td><input type="submit" name="submit" value="Filtern" class="btn btn-primary" style="width:100%" /></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+                @if (Model.FilterList.Count >= 1)
                 {
-                    using (Html.BeginForm("AdminView", "Admin", new { id = @item.PersonId }))
+                    foreach (var item in Model.FilterList)
                     {
-                        <tr>
-                            <td>@item.PersonId</td>
-                            <td>@item.FirstName</td>
-                            <td>@item.LastName</td>
-                            <td>@item.Reference</td>
-                            <td>@Html.CheckBoxFor(a => item.Active)@Html.ActionLink("Bestätigen", "ChangeActive", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
-                            <td>@Html.EditorFor(a => a.Amount)</td>
-                            <td><input type="submit" value="Gutschreiben" id="buttonID" class="btn btn-primary" /></td>
-                            <td>@Html.ActionLink("UserLogin", "UserLogin", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
-                        </tr>
+                        using (Html.BeginForm("AdminView", "Admin", new { id = @item.PersonId }))
+                        {
+                            <tr>
+                                <td>@item.PersonId</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Reference</td>
+                                <td>@Html.CheckBoxFor(a => item.Active)@Html.ActionLink("Bestätigen", "ChangeActive", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
+                                <td>@Html.EditorFor(a => a.Amount, new { htmlAttributes = new { @placeholder = "Email Address" } })</td>
+                                <td>@Html.ValidationMessageFor(a => a.Amount)</td>
+                                <td><input type="submit" value="Gutschreiben" id="buttonID" class="btn btn-primary" /></td>
+                                <td>@Html.ActionLink("UserLogin", "UserLogin", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
+                            </tr>
+                        }
                     }
 
                 }
-            }
-        </tbody>
-    </table>
+                else
+                {
+                    foreach (var item in Model.PersonList)
+                    {
+                        using (Html.BeginForm("AdminView", "Admin", new { id = @item.PersonId }))
+                        {
+                            <tr>
+                                <td>@item.PersonId</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Reference</td>
+                                <td>@Html.CheckBoxFor(a => item.Active)@Html.ActionLink("Bestätigen", "ChangeActive", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
+                                <td>@Html.EditorFor(a => a.Amount)</td>
+                                <td><input type="submit" value="Gutschreiben" id="buttonID" class="btn btn-primary" /></td>
+                                <td>@Html.ActionLink("UserLogin", "UserLogin", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
+                            </tr>
+                        }
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

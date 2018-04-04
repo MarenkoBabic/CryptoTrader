@@ -24,7 +24,7 @@
                 vm.Upload.SaveAs(userImagePath);
                 return userImagePath;
             }
-            return null;
+            return "";
         }
     }
 }

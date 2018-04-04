@@ -169,8 +169,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Manager\AdminManager.cs" />
     <Compile Include="Manager\ApiKraken.cs" />
     <Compile Include="Manager\Authenticated.cs" />
+    <Compile Include="Manager\BankTransferManager.cs" />
     <Compile Include="Manager\Cookies.cs" />
     <Compile Include="Manager\DecimalParser.cs" />
     <Compile Include="Manager\FillList.cs" />
@@ -181,7 +183,6 @@
     <Compile Include="Manager\SendMail.cs" />
     <Compile Include="Manager\TradeManager.cs" />
     <Compile Include="Manager\UploadImage.cs" />
-    <Compile Include="ModelMapper\AdminMapper.cs" />
     <Compile Include="Model\DbModel\Address.cs">
       <DependentUpon>CryptoTrader.tt</DependentUpon>
     </Compile>
@@ -246,12 +247,12 @@
     <Compile Include="Model\ViewModel\Ticker\ApiViewModel.cs" />
     <Compile Include="ModelMapper\AutoMapperProfile.cs" />
     <Compile Include="Model\ViewModel\BankTransfer\BankTransferViewModel.cs" />
-    <Compile Include="Model\ViewModel\Trade\TradeBitCoinViewModel.cs" />
     <Compile Include="Model\ViewModel\Helper\EmailSendViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\LoginViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\PersonVerificationViewModel.cs" />
     <Compile Include="Model\ViewModel\Login_Register\RegisterViewModel.cs" />
     <Compile Include="Model\ViewModel\Ticker\TickerChartViewModel.cs" />
+    <Compile Include="Model\ViewModel\Trade\TradeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -266,8 +267,6 @@
     <Content Include="Content\Custom\AdminView.css" />
     <Content Include="Content\Custom\LayoutIndex.css" />
     <Content Include="Content\Custom\_payOut.css" />
-    <Content Include="Content\toast\toastr.css" />
-    <Content Include="Content\toast\toastr.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Custom\CardBootStrap.css" />
@@ -316,6 +315,8 @@
     <Content Include="Content\HighStock\themes\base\tabs.css" />
     <Content Include="Content\HighStock\themes\base\theme.css" />
     <Content Include="Content\HighStock\themes\base\tooltip.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -348,7 +349,6 @@
     </Content>
     <Content Include="Scripts\Custom\GetResultBTCandEuro.js" />
     <Content Include="Scripts\Custom\PersonVerificationWizard.js" />
-    <Content Include="Scripts\Custom\YesOrNoBox.js" />
     <Content Include="Scripts\JsDefault\bootstrap.js" />
     <Content Include="Scripts\JsDefault\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -368,13 +368,12 @@
     <Content Include="Model\DbModel\CryptoTrader.edmx.diagram">
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\toast\toastr.less" />
-    <Content Include="Content\toast\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="Content\toastr.scss" />
     <None Include="Scripts\JsDefault\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\GetTickerRate.js" />
     <Content Include="Scripts\Custom\ShowBalance.js" />
     <Content Include="Scripts\Custom\ShowBitCoinAmount.js" />
-    <Content Include="Scripts\Custom\ToastR.js" />
     <Content Include="Scripts\Custom\UpdateChart.js" />
     <Content Include="Scripts\highstock\2.1.8\adapters\standalone-framework.js" />
     <Content Include="Scripts\highstock\2.1.8\adapters\standalone-framework.src.js" />

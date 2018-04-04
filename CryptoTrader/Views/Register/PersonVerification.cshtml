@@ -11,7 +11,7 @@
                 <!--Navigation-->
                 <div class="wizard-inner">
                     <div class="row">
-                        <div class="connecting-line"></div>
+                        <div class="connecting-line col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
                         <ul class="nav nav-tabs" role="tablist">
 
 
@@ -44,9 +44,9 @@
                 </div>
                 <!--EndNavigation-->
 
-                @using (Html.BeginForm("PersonVerification", "Register", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("PersonVerification", "Register", new { }, FormMethod.Post, new { @id = "enterKey" , @enctype = "multipart/form-data" }))
                 {
-                    <div class="tab-content">
+                    <div class="tab-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                         <!--Step 1-->
                         <div class="tab-pane active" role="tabpanel" id="step1">
@@ -115,7 +115,6 @@
                             </div>
                         </div>
                         <!--EndStep1-->
-
                         <!--Step2-->
                         <div class="tab-pane" role="tabpanel" id="step2">
                             <div class="step2">
@@ -149,7 +148,7 @@
                         <div class="tab-pane" role="tabpanel" id="complete">
                             <div class="step3">
                                 <h5>Completed</h5>
-                                <input type="submit" />
+                                <input type="submit" value="Abschicken" />
 
                             </div>
                         </div>
@@ -161,3 +160,4 @@
         </section>
     </div>
 </div>
+

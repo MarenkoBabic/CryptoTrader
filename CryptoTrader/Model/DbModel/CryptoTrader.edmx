@@ -351,7 +351,7 @@
           <Property Name="lastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="role" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" DefaultValue="User" />
           <Property Name="active" Type="Boolean" Nullable="false" />
-          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" DefaultValue="False" />
           <Property Name="reference" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="Self.fk_Address_Person" FromRole="Person" ToRole="Address" />
           <NavigationProperty Name="Balance" Relationship="Self.fk_Balance_User" FromRole="Person" ToRole="Balance" />

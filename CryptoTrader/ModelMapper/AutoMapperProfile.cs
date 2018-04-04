@@ -81,12 +81,12 @@
 
                 #region TradeBTC
 
-                CreateMap<TradeHistory, TradeBitCoinViewModel>()
+                CreateMap<TradeHistory, TradeViewModel>()
                     .ForMember(a => a.PersonId, opt => opt.MapFrom(a => a.person_id))
                     .ForMember(a => a.BtcTrade, opt => opt.MapFrom(a => a.amount))
                     .ForMember(a => a.TickerId, opt => opt.MapFrom(a => a.ticker_id));
 
-                CreateMap<TradeBitCoinViewModel, TradeHistory>()
+                CreateMap<TradeViewModel, TradeHistory>()
                     .ForMember(a => a.person_id, opt => opt.MapFrom(a => a.PersonId))
                     .ForMember(a => a.amount, opt => opt.MapFrom(a => a.BtcTrade))
                     .ForMember(a => a.ticker_id, opt => opt.MapFrom(a => a.TickerId));

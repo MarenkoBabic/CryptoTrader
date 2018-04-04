@@ -1,6 +1,7 @@
 ﻿namespace CryptoTrader.Controllers
 {
     using AutoMapper;
+    using CryptoTrader.Manager;
     using CryptoTrader.Model.DbModel;
     using CryptoTrader.Model.ViewModel;
     using System;
@@ -27,9 +28,14 @@
 
                     if (dbPerson.status == true)
                     {
-                        BankTransferViewModel vm = Mapper.Map<BankTransferViewModel>(dbPerson);
-                        vm.BankHistoryList = db.BankTransferHistory.Where(a => a.person_id == dbPerson.id).ToList();
-                        return View(vm);
+                        var bankTransferVM = Mapper.Map<BankTransferViewModel>(dbBankAccount);
+
+                        bankTransferVM.FirstName = dbPerson.firstName;
+                        bankTransferVM.LastName = dbPerson.lastName;
+                        bankTransferVM.Reference = dbPerson.reference;
+                        bankTransferVM.BankHistoryList = FillList.GetBankHistoryList(dbPerson.id);
+
+                        return View(bankTransferVM);
                     }
                     else
                     {
@@ -40,41 +46,7 @@
             }
             else
             {
-                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
-                return RedirectToAction("Index", "Home");
-            }
-
-        }
-
-        /// <summary>
-        /// Person-Kontodaten angeben oder Nur betrag falls schon in der Datenbank vorhanden
-        /// </summary>
-        /// <returns>View mit ViewModel</returns>
-        public ActionResult PayOut()
-        {
-            bool result = ValidationController.IsUserAuthenticated(User.Identity.IsAuthenticated);
-            if (result)
-            {
-                BankTransferViewModel vm = new BankTransferViewModel();
-                using (var db = new CryptoTraderEntities())
-                {
-                    Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
-                    BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-                    bool checkBankAccount = db.BankAccount.Any(a => a.person_id == dbPerson.id);
-                    vm.FirstName = dbPerson.firstName;
-                    vm.LastName = dbPerson.lastName;
-                    if (checkBankAccount)
-                    {
-                        vm.PersonIban = dbBankAccount.iban;
-                        vm.PersonBic = dbBankAccount.bic;
-                    }
-                }
-                return View(vm);
-
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
+                TempData["ErrorMessage"] = "Sie müssen eingeloggt sein";
                 return RedirectToAction("Index", "Home");
             }
 
@@ -90,34 +62,18 @@
         {
             using (var db = new CryptoTraderEntities())
             {
-                Person dbPerson = new Person();
-                BankAccount BankAccountModel = Mapper.Map<BankAccount>(vm);
-                BankTransferViewModel PersonModel = Mapper.Map<BankTransferViewModel>(dbPerson);
                 BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(vm);
+                Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
+                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).First();
 
 
-                dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                BankAccount dbBankAccount = db.BankAccount.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
-                if (dbBankAccount == null)
-                {
-                    BankAccountModel.person_id = dbPerson.id;
-                    db.BankAccount.Add(BankAccountModel);
-                }
-                else
-                {
-                    vm.FirstName = dbPerson.firstName;
-                    vm.LastName = dbPerson.lastName;
-                    vm.PersonBic = dbBankAccount.bic;
-                    vm.PersonIban = dbBankAccount.iban;
-                }
 
                 dbBankTransferHistory.person_id = dbPerson.id;
-                dbBankTransferHistory.amount = vm.Amount * (-1);
+                dbBankTransferHistory.amount = decimal.Parse(vm.Amount) * (-1);
                 dbBankTransferHistory.currency = "Eur";
                 db.BankTransferHistory.Add(dbBankTransferHistory);
 
-                dbBalance.amount -= dbBankTransferHistory.amount * (-1);
+                dbBalance.amount -= decimal.Parse(vm.Amount);
                 db.Entry(dbBalance).State = EntityState.Modified;
 
                 if (ModelState.IsValid)

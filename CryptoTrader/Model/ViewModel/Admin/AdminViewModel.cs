@@ -21,7 +21,7 @@
 
         public bool Active { get; set; }
 
-        [Range(100,99999999,ErrorMessage ="Min. 100 Euro")]
+        [MinLength(1,ErrorMessage ="Min. 1 Euro")]
         public decimal Amount { get; set; }
 
         [StringLength(3)]

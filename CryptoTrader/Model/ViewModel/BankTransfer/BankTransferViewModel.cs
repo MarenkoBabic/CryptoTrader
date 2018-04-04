@@ -25,19 +25,16 @@
 
         public string Reference { get; set; }
 
-        public List<BankTransferHistory> BankHistoryList { get; set; }
+        public List<BankTransferViewModel> BankHistoryList { get; set; }
 
-        [Required]
         [Display(Name = "Iban")]
         public string PersonIban { get; set; }
 
-        [Required]
         [Display(Name = "Bic")]
         public string PersonBic { get; set; }
 
-        [Required]
         [Display(Name = "Betrag")]
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
 
         [DataType(DataType.Currency)]
         public string Currency { get; set; } = "Eur";
@@ -45,7 +42,7 @@
 
         public BankTransferViewModel()
         {
-            BankHistoryList = new List<BankTransferHistory>();
+            BankHistoryList = new List<BankTransferViewModel>();
         }
     }
 }

@@ -21,14 +21,14 @@
         [Required]
         public string Street { get; set; }
 
-        [Required()]
+        [Required]
         public string Number { get; set; }
 
 
-        [Required()]
+        [Required]
         public string Zip { get; set; }
 
-        [Required()]
+        [Required]
         public string CityName { get; set; }
 
         public string CountryName { get; set; }
@@ -39,7 +39,7 @@
 
         public HttpPostedFileBase Upload { get; set; }
 
-        [StringLength(1000,MinimumLength =5,ErrorMessage ="Ausweis fehlt")]
+        [StringLength(1000,MinimumLength =20,ErrorMessage ="Ausweis fehlt")]
         public string Path { get; set; }
 
         public string FileName { get; set; }

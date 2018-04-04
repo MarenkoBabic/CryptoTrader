@@ -4,16 +4,16 @@
     using CryptoTrader.Manager;
     using CryptoTrader.Model.DbModel;
     using CryptoTrader.Model.ViewModel;
-    using CryptoTrader.ModelMapper;
-    using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
 
     public class AdminController : Controller
     {
-        // GET: Admin
+        /// <summary>
+        /// Gibt die Personenliste an den View weiter
+        /// </summary>
+        /// <returns>Personenliste</returns>
         [Authorize(Roles = "Admin")]
         public ActionResult AdminView()
         {
@@ -23,13 +23,13 @@
             {
                 AdminViewModel adminVM = new AdminViewModel
                 {
-                    PersonList = AdminMapper.PersonList()
+                    PersonList = FillList.GetPersonList()
                 };
                 return View(adminVM);
             }
             else
             {
-                TempData["ErrorMessage"] = "Sie müssen ein einloggen";
+                TempData["ErrorMessage"] = "Sie müssen eingeloggt sein";
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -41,8 +41,9 @@
         /// <param name="vm">AdminViewModel</param>
         /// <returns>GetView</returns>
         [HttpPost]
-        public ActionResult AdminView(int? id, AdminViewModel vm)
+        public ActionResult AdminView(int id, AdminViewModel vm)
         {
+
             using (var db = new CryptoTraderEntities())
             {
                 Person dbPerson = db.Person.Find(id);
@@ -68,12 +69,16 @@
                 if (ModelState.IsValid)
                 {
                     db.SaveChanges();
+                    TempData["ConfirmMessage"] = "Oke";
+                    return View("AdminView");
+
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Fehlgeschlagen bitte versuchen sie es erneut";
                     return RedirectToAction("AdminView");
                 }
             }
-
-            TempData["ErrorMessage"] = "Fehlgeschlagen bitte versuchen sie es erneut";
-            return RedirectToAction("AdminView");
         }
 
         /// <summary>
@@ -83,7 +88,7 @@
         /// <returns>Get View</returns>
         public ActionResult ChangeActive(int id)
         {
-            AdminMapper.ChangeActiveStatus(id);
+            AdminManager.ChangeActiveStatus(id);
             return RedirectToAction("AdminView");
         }
 
@@ -92,30 +97,25 @@
         /// </summary>
         /// <param name="submit">Input Button</param>
         /// <param name="vm">AdminViewModel</param>
-        /// <returns>Get View</returns>
-        public ActionResult FilterList(string submit,AdminViewModel adminVM)
+        /// <returns>View</returns>
+        public ActionResult FilterList(string submit, AdminViewModel adminVM)
         {
             using (var db = new CryptoTraderEntities())
             {
-                adminVM.FilterList = AdminMapper.FilterThePersonList(adminVM.PersonId, adminVM.FirstName, adminVM.LastName, adminVM.Reference);
+                adminVM.FilterList = AdminManager.FilterThePersonList(adminVM.PersonId, adminVM.FirstName, adminVM.LastName, adminVM.Reference);
                 return View("AdminView", adminVM);
             }
         }
 
-
-        public ActionResult UserLogin(int? id)
+        /// <summary>
+        /// Übernimmt den User
+        /// </summary>
+        /// <param name="id">User_id</param>
+        /// <returns>View mit Userdaten</returns>
+        public ActionResult UserLogin(int id)
         {
-            using (var db = new CryptoTraderEntities())
-            {
-                Person dbPerson = db.Person.Find(id);
-
-                string email = dbPerson.email;
-                string firstName = dbPerson.firstName;
-                string lastName = dbPerson.lastName;
-                string role = dbPerson.role;
-                Cookies.CreateCookies(email, role, firstName, lastName);
-                return RedirectToAction("Index", "Home");
-            }
+            AdminManager.GetUserLogin(id);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

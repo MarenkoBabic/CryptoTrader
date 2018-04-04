@@ -85,10 +85,9 @@
             }
             else
             {
-                TempData["ErrorMessage"] = "Sie müssen sich einloggen";
+                TempData["ErrorMessage"] = "Sie müssen eingeloggt sein";
                 return RedirectToAction("Index", "Home");
             }
-
         }
 
         /// <summary>
@@ -99,7 +98,6 @@
         [HttpPost]
         public ActionResult PersonVerification(PersonVerificationViewModel vm)
         {
-
             Address dbAddress = Mapper.Map<Address>(vm);
             City dbCity = Mapper.Map<City>(vm);
             Upload dbUpload = Mapper.Map<Upload>(vm);
@@ -107,19 +105,14 @@
             {
                 Country dbCountry = db.Country.Where(a => a.countryName.Equals(vm.CountryName)).FirstOrDefault();
                 Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
-                dbPerson.status = vm.Status;
-
-
 
                 if (dbPerson.status == true)
                 {
                     var city = db.City.Where(a => a.country_id == dbCountry.id).FirstOrDefault();
                     dbUpload = db.Upload.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
 
-
                     dbAddress.city_id = city.id;
                     dbAddress.person_id = dbPerson.id;
-
 
                     db.Entry(dbAddress).State = EntityState.Modified;
                     db.Entry(dbCity).State = EntityState.Modified;
@@ -143,6 +136,7 @@
                 }
                 if (ModelState.IsValid)
                 {
+                    dbPerson.status = true;
                     db.SaveChanges();
                 }
                 else
