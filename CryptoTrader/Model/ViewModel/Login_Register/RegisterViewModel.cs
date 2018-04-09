@@ -37,5 +37,7 @@
 
         public bool Status { get; set; } = false;
 
+        [Required]
+        public string Role { get; set; } = "User";
     }
 }

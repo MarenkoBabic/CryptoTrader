@@ -41,7 +41,7 @@
         /// <param name="vm">AdminViewModel</param>
         /// <returns>GetView</returns>
         [HttpPost]
-        public ActionResult AdminView(int id, AdminViewModel vm)
+        public ActionResult AdminView(int id, AdminViewModel adminVM)
         {
 
             using (var db = new CryptoTraderEntities())
@@ -49,28 +49,28 @@
                 Person dbPerson = db.Person.Find(id);
                 Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
 
-                BankTransferHistory dbHistory = Mapper.Map<BankTransferHistory>(vm);
+                BankTransferHistory dbHistory = Mapper.Map<BankTransferHistory>(adminVM);
                 dbHistory.person_id = dbPerson.id;
                 db.BankTransferHistory.Add(dbHistory);
 
                 if (dbBalance == null)
                 {
-                    Balance balance = Mapper.Map<Balance>(vm);
+                    Balance balance = Mapper.Map<Balance>(adminVM);
                     balance.person_id = dbPerson.id;
                     db.Balance.Add(balance);
                 }
                 else
                 {
-                    dbBalance.amount += vm.Amount;
-                    dbBalance.created = vm.Created;
+                    dbBalance.amount += adminVM.Amount;
+                    dbBalance.created = adminVM.Created;
                     db.Entry(dbBalance).State = EntityState.Modified;
                 }
 
                 if (ModelState.IsValid)
                 {
                     db.SaveChanges();
-                    TempData["ConfirmMessage"] = "Oke";
-                    return View("AdminView");
+                    TempData["ConfirmMessage"] = "Der Betrag wurde Gutgeschrieben ";
+                    return RedirectToAction("AdminView");
                 }
                 else
                 {

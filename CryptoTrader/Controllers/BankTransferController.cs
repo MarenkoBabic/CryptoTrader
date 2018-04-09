@@ -28,12 +28,24 @@
 
                     if (dbPerson.status == true)
                     {
-                        BankTransferViewModel bankTransferVM = Mapper.Map<BankTransferViewModel>(dbBankAccount);
+                        BankTransferViewModel bankTransferVM = new BankTransferViewModel();
 
-                        bankTransferVM.FirstName = dbPerson.firstName;
-                        bankTransferVM.LastName = dbPerson.lastName;
-                        bankTransferVM.Reference = dbPerson.reference;
-                        bankTransferVM.BankHistoryList = FillList.GetBankHistoryList(dbPerson.id);
+                        if (db.BankAccount.Any(a => a.person_id == dbPerson.id))
+                        {
+                            bankTransferVM = Mapper.Map<BankTransferViewModel>(dbBankAccount);
+
+                            bankTransferVM.FirstName = dbPerson.firstName;
+                            bankTransferVM.LastName = dbPerson.lastName;
+                            bankTransferVM.Reference = dbPerson.reference;
+                            bankTransferVM.BankHistoryList = FillList.GetBankHistoryList(dbPerson.id);
+                        }
+                        else
+                        {
+
+                            bankTransferVM.FirstName = dbPerson.firstName;
+                            bankTransferVM.LastName = dbPerson.lastName;
+                            bankTransferVM.Reference = dbPerson.reference;
+                        }
 
                         return View(bankTransferVM);
                     }
@@ -58,31 +70,42 @@
         /// <param name="vm">ViewModel Payout</param>
         /// <returns>View mit ViewModel</returns>
         [HttpPost]
-        public ActionResult PayOut(BankTransferViewModel vm)
+        public ActionResult PayOut(BankTransferViewModel bankTransferVM)
         {
             using (var db = new CryptoTraderEntities())
             {
-                BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(vm);
+                BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(bankTransferVM);
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
                 Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).First();
-
-
+                if (!db.BankAccount.Any(a => a.person_id == dbPerson.id))
+                {
+                    BankAccount dbBankAccount = new BankAccount()
+                    {
+                        created = DateTime.Now,
+                        person_id = dbPerson.id,
+                        iban = bankTransferVM.PersonIban,
+                        bic = bankTransferVM.PersonBic
+                    };
+                    db.BankAccount.Add(dbBankAccount);
+                }
 
                 dbBankTransferHistory.person_id = dbPerson.id;
-                dbBankTransferHistory.amount = decimal.Parse(vm.Amount) * (-1);
+                dbBankTransferHistory.amount = decimal.Parse(bankTransferVM.Amount) * (-1);
                 dbBankTransferHistory.currency = "Eur";
-                db.BankTransferHistory.Add(dbBankTransferHistory);
 
-                dbBalance.amount -= decimal.Parse(vm.Amount);
-                db.Entry(dbBalance).State = EntityState.Modified;
+
+
+                dbBalance.amount -= decimal.Parse(bankTransferVM.Amount);
 
                 if (ModelState.IsValid)
                 {
+                    db.BankTransferHistory.Add(dbBankTransferHistory);
+                    db.Entry(dbBalance).State = EntityState.Modified;
                     db.SaveChanges();
                 }
             }
             TempData["ConfirmMessage"] = "Auftrag erteilt";
-            return RedirectToAction("BankIndex", vm);
+            return RedirectToAction("BankIndex", bankTransferVM);
         }
 
         /// <summary>

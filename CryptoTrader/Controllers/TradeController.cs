@@ -60,7 +60,7 @@
                     Person dbPerson = db.Person.Where(a => a.email.Equals(User.Identity.Name)).FirstOrDefault();
                     Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
                     TradeHistory dbTradeHistory = Mapper.Map<TradeHistory>(tradeVM);
-
+                    dbTradeHistory.ticker_id = db.Ticker.OrderByDescending(a => a.id).Select(a => a.id).First();
                     tradeVM.TickerRate = db.Ticker.OrderByDescending(a => a.id).Select(a => a.rate).First();
 
                     bool haveBalanceData = db.Balance.Any(a => a.person_id == dbPerson.id);
