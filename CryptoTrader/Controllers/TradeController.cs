@@ -75,7 +75,7 @@
                     }
 
                     //Bitcoin Kaufen
-                    if (submit == "buy")
+                    if (submit == "Kaufen")
                     {
                         bool result = TradeManager.HaveEnoughMoney(tradeVM.BalanceAmount, tradeVM.TickerRate, decimal.Parse(tradeVM.BtcTrade));
                         if (result)
@@ -98,7 +98,7 @@
                     //Bitcoin verkaufen
                     else
                     {
-                        bool result = TradeManager.HaveEnoughBTC(dbTradeHistory.amount, decimal.Parse(tradeVM.BtcTrade));
+                        bool result = TradeManager.HaveEnoughBTC(ShowBitCoin(), decimal.Parse(tradeVM.BtcTrade));
                         if (result)
                         {
                             dbBalance.amount += TradeManager.TradeAmountByBTC(tradeVM.TickerRate, decimal.Parse(tradeVM.BtcTrade));

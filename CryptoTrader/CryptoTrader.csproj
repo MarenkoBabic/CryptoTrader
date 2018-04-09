@@ -59,8 +59,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Highstock.Web.Mvc, Version=6.0.6649.24168, Culture=neutral, PublicKeyToken=90b74bd27a557bd3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Highsoft.Highstock.6.0.6649.24168\lib\net40\Highstock.Web.Mvc.dll</HintPath>
+    <Reference Include="Highstock.Web.Mvc, Version=6.0.6672.4353, Culture=neutral, PublicKeyToken=90b74bd27a557bd3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Highsoft.Highstock.6.0.6672.4353\lib\net40\Highstock.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock, Version=0.9.16530.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jayrock.0.9.16530.1\lib\net40\Jayrock.dll</HintPath>
@@ -89,15 +89,15 @@
     <Reference Include="Microsoft.ApplicationInsights, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.1\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -312,13 +312,13 @@
     </Content>
     <Content Include="Scripts\Custom\GetResultBTCandEuro.js" />
     <Content Include="Scripts\Custom\PersonVerificationWizard.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\JsDefault\bootstrap.js" />
     <Content Include="Scripts\JsDefault\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\toastr.less" />
-    <Content Include="Content\toastr.scss" />
     <EntityDeploy Include="Model\DbModel\CryptoTrader.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CryptoTrader.Designer.cs</LastGenOutput>
@@ -326,6 +326,8 @@
     <Content Include="Model\DbModel\CryptoTrader.edmx.diagram">
       <DependentUpon>CryptoTrader.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\JsDefault\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\GetTickerRate.js" />
     <Content Include="Scripts\Custom\ShowBalance.js" />
@@ -391,6 +393,8 @@
     <Content Include="Scripts\JsDefault\respond.min.js" />
     <Content Include="Scripts\JsDefault\toastr.js" />
     <Content Include="Scripts\JsDefault\toastr.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
