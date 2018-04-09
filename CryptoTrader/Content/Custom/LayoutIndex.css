@@ -1,11 +1,11 @@
-﻿
-
-.top-nav {
+﻿.top-nav {
     padding: 0 15px;
 }
+
     .top-nav > li {
         display: inline-block;
     }
+
         .top-nav > li > a {
             padding-top: 20px;
             padding-bottom: 20px;
@@ -13,3 +13,11 @@
             color: #fff;
         }
 
+            .top-nav > li > a:hover,
+            .top-nav > li > a:focus,
+            .top-nav > .open > a,
+            .top-nav > .open > a:hover,
+            .top-nav > .open > a:focus {
+                color: #fff;
+                background-color: #1a242f;
+            }
