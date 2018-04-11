@@ -84,7 +84,7 @@
 
                 var dbTickerList = db.Ticker.Where(x => x.currency_trg == "BTC").ToList();
 
-                foreach (Ticker x in dbTickerList.OrderBy(a => a.created).ToList())
+                foreach (Ticker x in dbTickerList.OrderBy(a => a.created).ToList().Take(20))
                 {
                     getTickerList.Add(new TickerChartViewModel
                     {

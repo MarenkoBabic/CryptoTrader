@@ -181,49 +181,49 @@
     <Compile Include="Manager\TradeManager.cs" />
     <Compile Include="Manager\UploadImage.cs" />
     <Compile Include="Model\DbModel\Address.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Balance.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\BankAccount.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\BankTransferHistory.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\City.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Country.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DbModel\CryptoTrader.Context.cs">
+    <Compile Include="Model\DbModel\Crypto.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoTrader.Context.tt</DependentUpon>
+      <DependentUpon>Crypto.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DbModel\CryptoTrader.cs">
+    <Compile Include="Model\DbModel\Crypto.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DbModel\CryptoTrader.Designer.cs">
+    <Compile Include="Model\DbModel\Crypto.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CryptoTrader.edmx</DependentUpon>
+      <DependentUpon>Crypto.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Person.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Ticker.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\TradeHistory.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DbModel\Upload.cs">
-      <DependentUpon>CryptoTrader.tt</DependentUpon>
+      <DependentUpon>Crypto.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ViewModel\Admin\AdminViewModel.cs" />
     <Compile Include="Model\ViewModel\Ticker\ApiViewModel.cs" />
@@ -237,6 +237,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Database1.mdf" />
+    <Content Include="App_Data\Database1_log.ldf">
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\Custom\AdminView.css" />
     <Content Include="Content\Custom\LayoutIndex.css" />
     <Content Include="Content\Custom\_payOut.css" />
@@ -300,17 +304,18 @@
     <Content Include="Image\UserImages\placeImage.jpg" />
     <Content Include="Image\UserImages\Untitled.png" />
     <Content Include="Image\UserImages\WIN_20180201_19_49_49_Pro.jpg" />
-    <Content Include="Model\DbModel\CryptoTrader.Context.tt">
+    <Content Include="Model\DbModel\Crypto.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CryptoTrader.edmx</DependentUpon>
-      <LastGenOutput>CryptoTrader.Context.cs</LastGenOutput>
+      <DependentUpon>Crypto.edmx</DependentUpon>
+      <LastGenOutput>Crypto.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\DbModel\CryptoTrader.tt">
+    <Content Include="Model\DbModel\Crypto.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CryptoTrader.edmx</DependentUpon>
-      <LastGenOutput>CryptoTrader.cs</LastGenOutput>
+      <DependentUpon>Crypto.edmx</DependentUpon>
+      <LastGenOutput>Crypto.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\Custom\GetResultBTCandEuro.js" />
+    <Content Include="Scripts\Custom\GetValidate.js" />
     <Content Include="Scripts\Custom\PersonVerificationWizard.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
@@ -319,15 +324,15 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Model\DbModel\CryptoTrader.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CryptoTrader.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model\DbModel\CryptoTrader.edmx.diagram">
-      <DependentUpon>CryptoTrader.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <EntityDeploy Include="Model\DbModel\Crypto.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Crypto.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model\DbModel\Crypto.edmx.diagram">
+      <DependentUpon>Crypto.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\JsDefault\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\GetTickerRate.js" />
     <Content Include="Scripts\Custom\ShowBalance.js" />
@@ -424,9 +429,7 @@
     <Content Include="Views\BankTransfer\_PayOut.cshtml" />
     <Content Include="Views\Trade\_Trade.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿// Die T4-Codegenerierung ist für Modell 'D:\Neuer Ordner\Lap BackUp\CryptoTrader\Model\DbModel\CryptoTrader.edmx' aktiviert. 
+﻿// Die T4-Codegenerierung ist für Modell 'E:\Neuer Ordner\Lap\CryptoTrader\Model\DbModel\Crypto.edmx' aktiviert. 
 // Um die Generierung von Legacycode zu aktivieren, ändern Sie den Wert der Designer-Eigenschaft 'Code Generation Strategy'
 // in 'Legacy ObjectContext'. Diese Eigenschaft wird im Eigenschaftenfenster angezeigt, wenn das Modell
 // im Designer geöffnet ist.

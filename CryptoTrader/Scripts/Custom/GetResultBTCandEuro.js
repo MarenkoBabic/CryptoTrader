@@ -7,7 +7,7 @@
         },
         success: function (data) {
             vm: {
-                EuroTrade: $('#Euro').val(data)
+                EuroTrade: $('#Euro').val(data - '0.1')
             }
         }
     });
@@ -21,23 +21,7 @@ $("#Euro").keyup(function () {
             EuroTrade: $("#Euro").val().replace(".", ",")
         },
         success: function (data) {
-            BtcTrade: $("#BTC").val(data)
+            BtcTrade: $("#BTC").val(data - '0.1')
         }
     });
 });
-//function SubmitCointrade(sellOrBuy) {
-//    $.ajax({
-//        url: "Trade/Trade",
-//        type: 'POST',
-//        data: {
-//            vm: {
-//                EuroTrade: $("#Euro").val().replace(".", ","),
-//                BTCTrade: $("#BTC").val().replace(".", ",")
-//            },
-//            submit: sellOrBuy
-//        },
-//        success: function (data) {
-
-//        }
-//    });
-//}

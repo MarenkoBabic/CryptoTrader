@@ -7,7 +7,13 @@
 <div class="container">
     <!--Chart-->
     <div class="row">
-        @Html.Partial("~/Views/Trade/_ChartDiagramm.cshtml")
+
+        <div id="Chart" class="chartdiv col-lg-12 col-md-12 col-sm-12 col-xs-12 divPadding"></div>
+
+        <script src="~/Scripts/highstock/Test/highstock.js"></script>
+        <script src="~/Scripts/highstock/2.1.8/themes/dark-unica.js"></script>
+        <script src="~/Scripts/Custom/UpdateChart.js"></script>
+
     </div>
     <!--EndChart-->
 

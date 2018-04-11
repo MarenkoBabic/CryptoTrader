@@ -33,7 +33,7 @@
         /// <returns>Result</returns>
         public static bool HaveEnoughMoney(decimal amount, decimal rate, decimal BuyBitCoin)
         {
-            if (amount < (rate * BuyBitCoin))
+            if (amount <= (rate * BuyBitCoin) -0.1m)
             {
                 return false;
             }

@@ -33,11 +33,11 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @if (Model.PersonIban == null)
                 {
-                @Html.EditorFor(a => a.PersonIban, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(a => a.PersonIban, new { htmlAttributes = new { @class = "form-control" } })
                 }
                 else
                 {
-                @Html.LabelFor(a => a.PersonIban, Model.PersonIban)
+                    @Html.LabelFor(a => a.PersonIban, Model.PersonIban)
                 }
             </div>
         </div>
@@ -49,11 +49,11 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @if (Model.PersonBic == null)
                 {
-                @Html.EditorFor(a => a.PersonBic, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(a => a.PersonBic, new { htmlAttributes = new { @class = "form-control" } })
                 }
                 else
                 {
-                @Html.LabelFor(a => a.PersonBic, Model.PersonBic)
+                    @Html.LabelFor(a => a.PersonBic, Model.PersonBic)
                 }
             </div>
         </div>
@@ -63,7 +63,7 @@
                 @Html.LabelFor(a => a.Amount, "Betrag")
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                @Html.EditorFor(a => a.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(a => a.Amount, new { htmlAttributes = new { @class = "form-control", onKeyUp = "validate(this)" } })
                 @Html.ValidationMessageFor(a => a.Amount, "", new { htmlAttributes = new { @class = "text-danger" } })
             </div>
         </div>
@@ -75,12 +75,12 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 @if (Model.Currency == null)
                 {
-                @Html.EditorFor(a => a.Currency, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(a => a.Currency, "", new { htmlAttributes = new { @class = "text-danger" } })
+                    @Html.EditorFor(a => a.Currency, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(a => a.Currency, "", new { htmlAttributes = new { @class = "text-danger" } })
                 }
                 else
                 {
-                @Html.LabelFor(a => a.Currency, Model.Currency)
+                    @Html.LabelFor(a => a.Currency, Model.Currency)
                 }
             </div>
         </div>
@@ -90,4 +90,10 @@
         </div>
     </main>
 }
-
+<script>
+    function validate(that) {
+        console.log("test");
+        that.value = that.value.replace(/[^\d,]/g, "").replace(/[,+]/g,",");
+        
+    }
+</script>

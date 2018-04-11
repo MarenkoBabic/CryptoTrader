@@ -74,37 +74,67 @@
         {
             using (var db = new CryptoTraderEntities())
             {
-                BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(bankTransferVM);
                 Person dbPerson = db.Person.Where(a => a.email == User.Identity.Name).FirstOrDefault();
-                Balance dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).First();
-                if (!db.BankAccount.Any(a => a.person_id == dbPerson.id))
+                var dbBalance = new Balance();
+                decimal.TryParse(bankTransferVM.Amount, out decimal tempAmount);
+                if ( tempAmount > 0 && !string.IsNullOrEmpty(bankTransferVM.PersonBic) && !string.IsNullOrEmpty(bankTransferVM.PersonIban))
                 {
-                    BankAccount dbBankAccount = new BankAccount()
+                    BankTransferHistory dbBankTransferHistory = Mapper.Map<BankTransferHistory>(bankTransferVM);
+
+                    //Prüfen ob Konto vorhanden 
+                    if (!db.Balance.Any(a => a.person_id == dbPerson.id))
                     {
-                        created = DateTime.Now,
-                        person_id = dbPerson.id,
-                        iban = bankTransferVM.PersonIban,
-                        bic = bankTransferVM.PersonBic
-                    };
-                    db.BankAccount.Add(dbBankAccount);
+                        dbBalance.amount = 0;
+                        dbBalance.created = DateTime.Now;
+                        dbBalance.currency = "Eur";
+                        dbBalance.person_id = dbPerson.id;
+                        db.Balance.Add(dbBalance);
+                    }
+                    else
+                    {
+                        dbBalance = db.Balance.Where(a => a.person_id == dbPerson.id).FirstOrDefault();
+                    }
+                    // Kontostand abfragen 
+                    if (dbBalance.amount > decimal.Parse(bankTransferVM.Amount))
+                    {
+                        //Falls kein Bankaccount vorhanden erstelle ein neuen
+                        if (!db.BankAccount.Any(a => a.person_id == dbPerson.id))
+                        {
+                            BankAccount dbBankAccount = new BankAccount()
+                            {
+                                created = DateTime.Now,
+                                person_id = dbPerson.id,
+                                iban = bankTransferVM.PersonIban,
+                                bic = bankTransferVM.PersonBic
+                            };
+                            db.BankAccount.Add(dbBankAccount);
+                        }
+
+                        dbBankTransferHistory.person_id = dbPerson.id;
+                        dbBankTransferHistory.amount = decimal.Parse(bankTransferVM.Amount) * (-1);
+                        dbBankTransferHistory.currency = "Eur";
+
+                        dbBalance.amount -= decimal.Parse(bankTransferVM.Amount);
+                        db.Entry(dbBalance).State = EntityState.Modified;
+                        TempData["ConfirmMessage"] = "Auftrag erteilt";
+
+                        if (ModelState.IsValid)
+                        {
+                            db.BankTransferHistory.Add(dbBankTransferHistory);
+                            db.SaveChanges();
+                        }
+
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Limit überschritten";
+                    }
                 }
-
-                dbBankTransferHistory.person_id = dbPerson.id;
-                dbBankTransferHistory.amount = decimal.Parse(bankTransferVM.Amount) * (-1);
-                dbBankTransferHistory.currency = "Eur";
-
-
-
-                dbBalance.amount -= decimal.Parse(bankTransferVM.Amount);
-
-                if (ModelState.IsValid)
+                else
                 {
-                    db.BankTransferHistory.Add(dbBankTransferHistory);
-                    db.Entry(dbBalance).State = EntityState.Modified;
-                    db.SaveChanges();
+                    TempData["ErrorMessage"] = "Bitte alle Felder ausfüllen";
                 }
             }
-            TempData["ConfirmMessage"] = "Auftrag erteilt";
             return RedirectToAction("BankIndex", bankTransferVM);
         }
 

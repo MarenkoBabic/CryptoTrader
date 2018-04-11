@@ -118,7 +118,7 @@
                     db.Entry(dbCity).State = EntityState.Modified;
                     db.Entry(dbUpload).State = EntityState.Modified;
 
-                    //db.Upload.Add(dbUpload);
+                    db.Upload.Add(dbUpload);
                 }
                 else
                 {
@@ -129,7 +129,7 @@
                     dbAddress.person_id = dbPerson.id;
                     db.Address.Add(dbAddress);
 
-                    //dbUpload.created = vm.Created;  
+                    dbUpload.created = vm.Created;
                     dbUpload.path = UploadImage.ImageUploadPath(vm, dbPerson.id);
                     dbUpload.person_id = dbPerson.id;
                     db.Upload.Add(dbUpload);

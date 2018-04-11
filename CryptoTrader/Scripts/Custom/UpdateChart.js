@@ -3,7 +3,7 @@
 });
 
 function UpdateChart() {
-    if ($("collapseExample").hasClass("in") == false) {
+    if ($("collapseExample").hasClass("in") === false) {
         $.ajax({
             url: '/Ticker/LoadChartData',
             success: function (json) {
@@ -30,6 +30,6 @@ function CreateChart(jsonData) {
             tooltip: {
                 valueDecimals: 2
             }
-        }],
+        }]
     });
 }

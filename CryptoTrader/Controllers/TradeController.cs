@@ -7,7 +7,6 @@
     using System;
     using System.Data.Entity;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
     public class TradeController : Controller
@@ -53,7 +52,9 @@
         [HttpPost]
         public ActionResult Trade(TradeViewModel tradeVM, string submit)
         {
-            if (decimal.Parse(tradeVM.EuroTrade) > 0.0m || decimal.Parse(tradeVM.BtcTrade) > 0)
+            decimal.TryParse(tradeVM.BtcTrade, out decimal bitcoin);
+            decimal.TryParse(tradeVM.EuroTrade, out decimal euro);
+            if (bitcoin > 0 || euro > 0)
             {
                 using (var db = new CryptoTraderEntities())
                 {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2e1e910562644b93b57ef0df92be844d" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.Address" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Balance" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.BankAccount" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.BankTransferHistory" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.City" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Country" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Person" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Ticker" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.TradeHistory" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Upload" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <AssociationConnector Association="Database1Model.fk_Address_City" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.fk_Address_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.fk_Balance_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.fk_BankAccount_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.fk_BankTransferHistory_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.fk_City_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.fk_TradeHistory_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.fk_Upload_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.fk_TradeHistory_Ticker" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
